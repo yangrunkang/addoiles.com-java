@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN" "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+<classPathEntry location="/home/gunny/gunnytest/software/apache-maven-3.3.9/repository/mysql/mysql-connector-java/5.1.25/mysql-connector-java-5.1.25.jar"/>
+  <context id="context">
+    <jdbcConnection connectionURL="jdbc:mysql://192.168.0.102:3306/shishuocms?characterEncoding=UTF-8" driverClass="com.mysql.jdbc.Driver" password="123456" userId="root" />
+    <javaModelGenerator targetPackage="com.shamrock.cms.entity" targetProject="cms/src/main/java" />
+    <sqlMapGenerator targetPackage="com.shamrock.cms.dao" targetProject="cms/src/main/java" />
+    <javaClientGenerator targetPackage="com.shamrock.cms.dao" targetProject="cms/src/main/java" type="XMLMAPPER" />
+    <table schema="mybatis" tableName="admin" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    	<property name="useActualColumnNames" value="true" />
+    </table>
+    
+     <table schema="mybatis" tableName="admin_folder" domainObjectName="AdminFolder" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    	<property name="useActualColumnNames" value="true" />
+    </table>
+    
+      <table schema="mybatis" tableName="article" domainObjectName="Article" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    	<property name="useActualColumnNames" value="true" />
+    </table>
+    
+    <table schema="mybatis" tableName="comment"  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    	<property name="useActualColumnNames" value="true" />
+    </table>
+    
+    <table schema="mybatis" tableName="config"  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    	<property name="useActualColumnNames" value="true" />
+    </table>
+    
+    <table schema="mybatis" tableName="guestbook"  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    	<property name="useActualColumnNames" value="true" />
+    </table>
+    
+    <table schema="mybatis" tableName="headline" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    	<property name="useActualColumnNames" value="true" />
+    </table>
+    
+    <table schema="mybatis" tableName="media"  enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    	<property name="useActualColumnNames" value="true" />
+    </table>
+    
+    <table schema="mybatis" tableName="user" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    	<property name="useActualColumnNames" value="true" />
+    </table>
+    
+   
+    <table schema="mybatis" tableName="article" domainObjectName="Article" enableCountByExample="false" enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
+    	<property name="useActualColumnNames" value="true" />
+    </table>
+  </context>
+</generatorConfiguration>
