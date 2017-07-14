@@ -2,10 +2,6 @@ package com.addoiles.vo;
 
 import java.util.List;
 
-import com.addoiles.entity.Admin;
-import com.addoiles.entity.Article;
-import com.addoiles.entity.Folder;
-import com.addoiles.util.SSUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class ArticleVo extends Article {

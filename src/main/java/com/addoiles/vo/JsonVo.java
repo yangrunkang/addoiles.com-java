@@ -2,8 +2,6 @@ package com.addoiles.vo;
 
 import java.util.HashMap;
 
-import com.addoiles.exception.ValidateException;
-
 public class JsonVo<T> {
 	/**
 	 * 结果

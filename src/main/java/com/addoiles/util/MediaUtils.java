@@ -1,5 +1,11 @@
 package com.addoiles.util;
 
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.geometry.Positions;
+import org.apache.log4j.Logger;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -8,18 +14,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-import javax.imageio.ImageIO;
-
-import net.coobird.thumbnailator.Thumbnails;
-import net.coobird.thumbnailator.geometry.Positions;
-
-import org.apache.log4j.Logger;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.addoiles.constant.SystemConstant;
-
 /**
- * @author GunnyZeng
+ *
  * 
  */
 public class MediaUtils {

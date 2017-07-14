@@ -1,25 +1,17 @@
 package com.addoiles.filter;
 
-import java.io.IOException;
+import org.apache.log4j.Logger;
 
-import javax.servlet.Filter;
-import javax.servlet.FilterChain;
-import javax.servlet.FilterConfig;
-import javax.servlet.ServletException;
-import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
+import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.addoiles.util.HttpUtils;
-import org.apache.log4j.Logger;
+import java.io.IOException;
 
 public class FtlFilter implements Filter{
 	protected final Logger logger = Logger.getLogger(this.getClass());
 	@Override
 	public void destroy() {
-		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -33,8 +25,7 @@ public class FtlFilter implements Filter{
 
 	@Override
 	public void init(FilterConfig arg0) throws ServletException {
-		// TODO Auto-generated method stub
-		
+
 	}
 	
 }

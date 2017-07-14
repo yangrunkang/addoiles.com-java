@@ -3,8 +3,6 @@ package com.addoiles.vo;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.addoiles.entity.Folder;
-
 public class FolderVo extends Folder {
 	private String pathName;
 	private List<FolderVo> folderList = new ArrayList<FolderVo>();

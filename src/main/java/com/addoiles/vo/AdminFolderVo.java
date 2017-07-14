@@ -1,7 +1,5 @@
 package com.addoiles.vo;
 
-import com.addoiles.entity.AdminFolder;
-
 public class AdminFolderVo extends AdminFolder{
 	private FolderVo folder;
 

@@ -38,7 +38,7 @@
   <!-- 对后缀为.ftl请求进行拦截隔离，防止不安全的ftl被显示到前端页面 -->
   <filter>
   	<filter-name>ftlFilter</filter-name>
-  	<filter-class>com.shamrock.cms.filter.FtlFilter</filter-class>
+  	<filter-class>com.addoiles.filter.FtlFilter</filter-class>
   </filter>
   
   <filter-mapping>
@@ -48,7 +48,7 @@
   <!-- 验证是否用户登陆 -->
   <filter>
   	<filter-name>manage</filter-name>
-  	<filter-class>com.shamrock.cms.filter.ManageFilter</filter-class>
+  	<filter-class>com.addoiles.filter.ManageFilter</filter-class>
   </filter>
   <filter-mapping>
   	<filter-name>manage</filter-name>

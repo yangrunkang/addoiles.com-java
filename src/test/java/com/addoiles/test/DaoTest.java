@@ -1,25 +1,14 @@
 package com.addoiles.test;
 
 
-import java.util.Date;
-
-import javax.annotation.Resource;
-
+import com.addoiles.dao.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.shamrock.cms.dao.AdminDao;
-import com.shamrock.cms.dao.AdminFolderDao;
-import com.shamrock.cms.dao.AdminMapper;
-import com.shamrock.cms.dao.ArticleDao;
-import com.shamrock.cms.dao.ConfigDao;
-import com.shamrock.cms.dao.FolderDao;
-import com.shamrock.cms.dao.GuestbookDao;
-import com.shamrock.cms.dao.HeadlineDao;
-import com.shamrock.cms.dao.MediaDao;
-import com.shamrock.cms.entity.Admin;
+import javax.annotation.Resource;
+import java.util.Date;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("classpath:applicationContext.xml")

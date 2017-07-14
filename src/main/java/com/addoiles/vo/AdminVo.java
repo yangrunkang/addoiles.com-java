@@ -1,7 +1,5 @@
 package com.addoiles.vo;
 
-import com.addoiles.entity.Admin;
-
 public class AdminVo extends Admin {
 	private boolean isAdmin;
 	public boolean getIsAdmin(){
