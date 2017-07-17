@@ -36,7 +36,7 @@
   	<url-pattern>/*</url-pattern>
   </filter-mapping>
   <!-- 对后缀为.ftl请求进行拦截隔离，防止不安全的ftl被显示到前端页面 -->
-  <filter>
+<!--  <filter>
   	<filter-name>ftlFilter</filter-name>
   	<filter-class>com.addoiles.filter.FtlFilter</filter-class>
   </filter>
@@ -44,16 +44,16 @@
   <filter-mapping>
   	<filter-name>ftlFilter</filter-name>
   	<url-pattern>*.ftl</url-pattern>
-  </filter-mapping>
+  </filter-mapping>-->
   <!-- 验证是否用户登陆 -->
-  <filter>
+<!--  <filter>
   	<filter-name>manage</filter-name>
   	<filter-class>com.addoiles.filter.ManageFilter</filter-class>
   </filter>
   <filter-mapping>
   	<filter-name>manage</filter-name>
   	<url-pattern>/manage/*</url-pattern>
-  </filter-mapping>
+  </filter-mapping>-->
   <!-- web启动时自动加载文件 -->
   <context-param>
   	<param-name>log4jConfigLocation</param-name>
@@ -70,7 +70,7 @@
   
   <context-param>
   	<param-name>webAppRootKey</param-name>
-  	<param-value>shamrock.cms.root</param-value>
+  	<param-value>addoiles.com</param-value>
   </context-param>
   
   <listener>
@@ -83,17 +83,5 @@
   
   <welcome-file-list>
   	<welcome-file>index.html</welcome-file>
-  	<welcome-file>index.jsp</welcome-file>
-    <welcome-file>index.htm</welcome-file>
   </welcome-file-list>
-  
-  <error-page>
-  	<error-code>404</error-code>
-  	<location>/404.htm</location>
-  </error-page>
-  
-  <error-page>
-  	<error-code>500</error-code>
-  	<location>/500.htm</location>
-  </error-page>
 </web-app>
