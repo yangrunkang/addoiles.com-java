@@ -1167,7 +1167,7 @@ Drupal.flagAnonymousLinkTemplates = function(context) {
       // don't swap out the link when it's already in the correct state.
       if (templates[flagName + '_' + contentId]) {
         $('.flag-' + flagName.flagNameToCSS() + '-' + contentId, context).each(function() {
-          if ($(this).find('.' + flagState + '-action').size()) {
+          if ($(this).find('.' + flagState + '-controller').size()) {
             $(this).after(templates[flagName + '_' + contentId]).remove();
           }
         });

@@ -441,7 +441,7 @@ vjs.fixEvent = function(event) {
       event.toElement :
       event.fromElement;
 
-    // Stop the default browser action
+    // Stop the default browser controller
     event.preventDefault = function () {
       if (old.preventDefault) {
         old.preventDefault();
@@ -534,15 +534,15 @@ vjs.trigger = function(elem, event) {
     if (parent && !event.isPropagationStopped() && event.bubbles !== false) {
     vjs.trigger(parent, event);
 
-  // If at the top of the DOM, triggers the default action unless disabled.
+  // If at the top of the DOM, triggers the default controller unless disabled.
   } else if (!parent && !event.isDefaultPrevented()) {
     var targetData = vjs.getData(event.target);
 
-    // Checks if the target has a default action for this event.
+    // Checks if the target has a default controller for this event.
     if (event.target[event.type]) {
       // Temporarily disables event dispatching on the target as we have already executed the handler.
       targetData.disabled = true;
-      // Executes the default action.
+      // Executes the default controller.
       if (typeof event.target[event.type] === 'function') {
         event.target[event.type]();
       }

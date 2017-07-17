@@ -193,7 +193,7 @@ Drupal.attachBehaviors = function (context, settings) {
  *     do anything simply in response to the element being moved, but because
  *     IFRAME elements reload their "src" when being moved within the DOM,
  *     behaviors bound to IFRAME elements (like WYSIWYG editors) may need to
- *     take some action.
+ *     take some controller.
  *   - serialize: When an Ajax form is submitted, this is called with the
  *     form as the context. This provides every behavior within the form an
  *     opportunity to ensure that the field elements have correct content

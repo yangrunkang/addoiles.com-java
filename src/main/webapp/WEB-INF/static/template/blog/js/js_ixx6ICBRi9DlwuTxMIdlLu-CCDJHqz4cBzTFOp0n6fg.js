@@ -155,12 +155,12 @@ Drupal.behaviors.AJAX = {
       Drupal.ajax[base] = new Drupal.ajax(base, this, element_settings);
     });
 
-    // This class means to submit the form to the action using Ajax.
+    // This class means to submit the form to the controller using Ajax.
     $('.use-ajax-submit:not(.ajax-processed)').addClass('ajax-processed').each(function () {
       var element_settings = {};
 
       // Ajax submits specified in this manner automatically submit to the
-      // normal form action.
+      // normal form controller.
       element_settings.url = $(this.form).attr('action');
       // Form submit button clicks need to tell the form what was clicked so
       // it gets passed in the POST request.
@@ -309,15 +309,15 @@ Drupal.ajax = function (base, element, element_settings) {
 
   // If necessary, enable keyboard submission so that Ajax behaviors
   // can be triggered through keyboard input as well as e.g. a mousedown
-  // action.
+  // controller.
   if (element_settings.keypress) {
     $(ajax.element).keypress(function (event) {
       return ajax.keypressResponse(this, event);
     });
   }
 
-  // If necessary, prevent the browser default action of an additional event.
-  // For example, prevent the browser default action of a click, even if the
+  // If necessary, prevent the browser default controller of an additional event.
+  // For example, prevent the browser default controller of a click, even if the
   // AJAX behavior binds to mousedown.
   if (element_settings.prevent) {
     $(ajax.element).bind(element_settings.prevent, false);

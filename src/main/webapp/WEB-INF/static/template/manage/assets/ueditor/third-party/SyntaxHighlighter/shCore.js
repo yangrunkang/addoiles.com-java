@@ -3521,7 +3521,7 @@ typeof(exports) != 'undefined' ? exports.SyntaxHighlighter = SyntaxHighlighter :
 						'current_user day isnull left lower month nullif replace right ' +
 						'session_user space substring sum system_user upper user year';
 
-		var keywords =	'absolute action add after alter as asc at authorization begin bigint ' +
+		var keywords =	'absolute controller add after alter as asc at authorization begin bigint ' +
 						'binary bit by cascade char character check checkpoint close collate ' +
 						'column commit committed connect connection constraint contains continue ' +
 						'create cube current current_date current_time cursor database date ' +

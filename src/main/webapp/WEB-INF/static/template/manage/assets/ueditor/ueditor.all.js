@@ -7991,10 +7991,10 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
          * @param { String } action action名称
          * @example
          * ```javascript
-         * editor.getActionUrl('config'); //返回 "/ueditor/php/controller.php?action=config"
-         * editor.getActionUrl('image'); //返回 "/ueditor/php/controller.php?action=uplaodimage"
-         * editor.getActionUrl('scrawl'); //返回 "/ueditor/php/controller.php?action=uplaodscrawl"
-         * editor.getActionUrl('imageManager'); //返回 "/ueditor/php/controller.php?action=listimage"
+         * editor.getActionUrl('config'); //返回 "/ueditor/php/controller.php?controller=config"
+         * editor.getActionUrl('image'); //返回 "/ueditor/php/controller.php?controller=uplaodimage"
+         * editor.getActionUrl('scrawl'); //返回 "/ueditor/php/controller.php?controller=uplaodscrawl"
+         * editor.getActionUrl('imageManager'); //返回 "/ueditor/php/controller.php?controller=listimage"
          * ```
          */
         getActionUrl: function(action){
@@ -8007,7 +8007,7 @@ var fillCharReg = new RegExp(domUtils.fillChar, 'g');
             }
 
             if(serverUrl) {
-                serverUrl = serverUrl + (serverUrl.indexOf('?') == -1 ? '?':'&') + 'action=' + (actionName || '');
+                serverUrl = serverUrl + (serverUrl.indexOf('?') == -1 ? '?':'&') + 'controller=' + (actionName || '');
                 return utils.formatUrl(serverUrl);
             } else {
                 return '';
@@ -19810,7 +19810,7 @@ UE.plugins['video'] = function (){
     }
 })();
 
-// plugins/table.action.js
+// plugins/table.controller.js
 /**
  * Created with JetBrains PhpStorm.
  * User: taoqili
@@ -20594,7 +20594,7 @@ UE.plugins['table'] = function () {
                     clearTableDragTimer();
                     isInResizeBuffer = false;
                     singleClickState = 0;
-                    //drag action
+                    //drag controller
                     tableBorderDrag(evt);
                 }
             }
@@ -24424,7 +24424,7 @@ UE.plugin.register('simpleupload', function (){
             btnIframeBody = btnIframeDoc.body;
             wrapper = btnIframeDoc.createElement('div');
 
-            wrapper.innerHTML = '<form id="edui_form_' + timestrap + '" target="edui_iframe_' + timestrap + '" method="POST" enctype="multipart/form-data" action="' + me.getOpt('serverUrl') + '" ' +
+            wrapper.innerHTML = '<form id="edui_form_' + timestrap + '" target="edui_iframe_' + timestrap + '" method="POST" enctype="multipart/form-data" controller="' + me.getOpt('serverUrl') + '" ' +
             'style="' + btnStyle + '">' +
             '<input id="edui_input_' + timestrap + '" type="file" accept="image/*" name="' + me.options.imageFieldName + '" ' +
             'style="' + btnStyle + '">' +

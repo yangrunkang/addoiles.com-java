@@ -12861,7 +12861,7 @@ Series.prototype = {
 			points = series.points,
 			pointsLength = points.length;
 
-		if (pointsLength) { // no action required for []
+		if (pointsLength) { // no controller required for []
 			
 			// if connect nulls, just remove null points
 			if (series.options.connectNulls) {

@@ -149,7 +149,7 @@ $(function(){
 										+"<div class=\"views-field views-field-ops-1\">"     
 											+"<span class=\"field-content\">"
 												+"<span class=\"flag-wrapper flag-blog-flag-c flag-blog-flag-c-231\">"
-  													+"<span class=\"flag flag-action flag-link-toggle\">"
+  													+"<span class=\"flag flag-controller flag-link-toggle\">"
   														+"<a href=\"${BASE_PATH}/sign-in\">F</a>"
   													+"</span>"
 												+"</span>"
