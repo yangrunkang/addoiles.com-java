@@ -19,7 +19,7 @@ public class FtlFilter implements Filter{
 			FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request2 = (HttpServletRequest) request;
 		HttpServletResponse response2 = (HttpServletResponse) response;
-		response2.sendRedirect(HttpUtils.getBasePath(request2)+"/404.htm");
+//		response2.sendRedirect(HttpUtils.getBasePath(request2)+"/404.htm");
 		
 	}
 

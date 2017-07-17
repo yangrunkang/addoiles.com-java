@@ -23,11 +23,11 @@ public class GlobalInterceptor implements HandlerInterceptor{
 		if(null == modelAndView){
 			return;
 		}
-		String basePath = HttpUtils.getBasePath(request);
-		modelAndView.addObject("BASE_PATH",basePath);
-		modelAndView.addObject("UPLOAD_BASE_PATH",basePath+"/upload");
-		modelAndView.addObject("TEMPLATE_MANAGE_PATH",basePath+"/static/template/manage");
-		MDC.put("ip", HttpUtils.getIp(request));
+//		String basePath = HttpUtils.getBasePath(request);
+//		modelAndView.addObject("BASE_PATH",basePath);
+//		modelAndView.addObject("UPLOAD_BASE_PATH",basePath+"/upload");
+//		modelAndView.addObject("TEMPLATE_MANAGE_PATH",basePath+"/static/template/manage");
+//		MDC.put("ip", HttpUtils.getIp(request));
 	}
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,

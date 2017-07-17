@@ -41,10 +41,10 @@
      	<property name="caches">
      		<set>
      			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="default"></bean>
-     			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="config"></bean>
+<!--     			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="config"></bean>
      			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="folder"></bean>
      			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="article"></bean>
-     			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="media"></bean>
+     			<bean class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" p:name="media"></bean>-->
      		</set>
      	</property>
      </bean> 
