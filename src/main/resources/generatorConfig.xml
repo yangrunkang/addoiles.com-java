@@ -4,34 +4,30 @@
 <generatorConfiguration>
 
     <classPathEntry
-            location="C:\GitHub\maven_jars\mysql\mysql-connector-java\5.1.25\mysql-connector-java-5.1.25.jar"/>
+            location="D:\apache-tomcat\webapps\cms\WEB-INF\lib\mysql-connector-java-5.1.25.jar"/>
     <context id="context">
-        <jdbcConnection connectionURL="jdbc:mysql://127.0.0.1:3306/addoiles?characterEncoding=UTF-8"
-                        driverClass="com.mysql.jdbc.Driver" password="root" userId="root"/>
-        <javaModelGenerator targetPackage="com.addoiles.entity" targetProject="C:\GitHub\addoiles.com\src\main\java\com\addoiles\entity"/>
-        <sqlMapGenerator targetPackage="com.addoiles.dao" targetProject="C:\GitHub\addoiles.com\src\main\java\com\addoiles\dao"/>
-        <javaClientGenerator targetPackage="com.addoiles.dao" targetProject="C:\GitHub\addoiles.com\src\main\java\com\addoiles\dao" type="XMLMAPPER"/>
+        <jdbcConnection connectionURL="jdbc:mysql://120.77.150.58:3306/addoiles?characterEncoding=UTF-8"
+                        driverClass="com.mysql.jdbc.Driver" password="aliyunmysql" userId="root"/>
+        <javaModelGenerator targetPackage="com.addoiles.entity" targetProject="src\main\java\com\addoiles\entity"/>
+        <sqlMapGenerator targetPackage="com.addoiles.dao" targetProject="src\main\java\com\addoiles\dao"/>
+        <javaClientGenerator targetPackage="com.addoiles.dao" targetProject="src\main\java\com\addoiles\dao" type="XMLMAPPER"/>
 
         <table schema="mybatis" tableName="oil_article"  domainObjectName="OilArticle" enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
-            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table schema="mybatis" tableName="oil_comment" domainObjectName="OilComment" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
-            <property name="useActualColumnNames" value="true"/>
         </table>
 
         <table schema="mybatis" tableName="oil_share" domainObjectName="OilShare" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
-            <property name="useActualColumnNames" value="true"/>
         </table>
         <table schema="mybatis" tableName="oil_user" domainObjectName="OilUser" enableCountByExample="false"
                enableUpdateByExample="false" enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false">
-            <property name="useActualColumnNames" value="true"/>
         </table>
 
 
