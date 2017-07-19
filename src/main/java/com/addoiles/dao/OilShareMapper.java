@@ -2,6 +2,8 @@ package com.addoiles.dao;
 
 import com.addoiles.entity.OilShare;
 
+import java.util.List;
+
 public interface OilShareMapper {
 
     int deleteByPrimaryKey(String id);
@@ -14,6 +16,8 @@ public interface OilShareMapper {
 
 
     OilShare selectByPrimaryKey(String id);
+
+    List<OilShare> selectHotShare();
 
 
     int updateByPrimaryKeySelective(OilShare record);

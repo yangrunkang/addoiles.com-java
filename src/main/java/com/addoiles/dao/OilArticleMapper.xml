@@ -24,6 +24,14 @@
     from oil_article
     where id = #{id,jdbcType=VARCHAR}
   </select>
+  <select id="selectsLatest" resultMap="BaseResultMap" >
+
+    select
+    <include refid="Base_Column_List" />
+    from oil_article
+    order by create_time desc limit 4
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
 
     delete from oil_article

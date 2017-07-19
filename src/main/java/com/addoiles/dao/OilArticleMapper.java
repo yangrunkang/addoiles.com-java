@@ -2,6 +2,8 @@ package com.addoiles.dao;
 
 import com.addoiles.entity.OilArticle;
 
+import java.util.List;
+
 public interface OilArticleMapper {
 
     int deleteByPrimaryKey(String id);
@@ -14,6 +16,8 @@ public interface OilArticleMapper {
 
 
     OilArticle selectByPrimaryKey(String id);
+
+    List<OilArticle> selectsLatest();
 
 
     int updateByPrimaryKeySelective(OilArticle record);

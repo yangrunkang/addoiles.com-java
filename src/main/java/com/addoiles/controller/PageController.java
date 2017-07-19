@@ -1,7 +1,15 @@
 package com.addoiles.controller;
 
+import com.addoiles.dao.OilArticleMapper;
+import com.addoiles.dao.OilShareMapper;
+import com.addoiles.entity.OilArticle;
+import com.addoiles.entity.OilShare;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import java.util.List;
 
 @Controller
 public class PageController {
@@ -15,9 +23,26 @@ public class PageController {
     private static final String DREAMS_PAGE = "dreams";
 
 
+    @Autowired
+    private OilShareMapper oilShareMapper;
+
+
+    @Autowired
+    private OilArticleMapper oilArticleMapper;
+
     @RequestMapping
-    public String home() {
-        return HOME_PAGE;
+    public ModelAndView home(ModelAndView modelAndView) {
+
+        modelAndView.setViewName(HOME_PAGE);
+
+        List<OilShare> oilShares = oilShareMapper.selectHotShare();
+        List<OilArticle> oilArticles = oilArticleMapper.selectsLatest();
+
+
+        modelAndView.addObject("oilShares",oilShares);
+        modelAndView.addObject("oilArticles",oilArticles);
+
+        return modelAndView;
     }
 
     @RequestMapping("addoil")

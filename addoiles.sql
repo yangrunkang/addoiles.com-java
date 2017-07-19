@@ -59,6 +59,8 @@ CREATE TABLE `oil_share` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='无需注册所有人都可以';
 
+alter table oil_share add create_time int(11) DEFAULT NULL COMMENT '创建时间';
+
 -- ----------------------------
 -- Table structure for oil_user
 -- ----------------------------

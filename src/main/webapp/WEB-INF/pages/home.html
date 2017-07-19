@@ -12,12 +12,12 @@
 		<meta name="author" content="yangrunkang">
 		<!--<link rel="icon" href="../../favicon.ico">-->
 		<title>addoiles.com</title>
-		<#include "components/head.ftl">
-		<style>
-			body {
-				min-height: 2000px;
-			}
-		</style>
+		<#include "components/head.ftl" />
+			<style>
+				body {
+					min-height: 2000px;
+				}
+			</style>
 	</head>
 	<!-- NAVBAR -->
 
@@ -26,26 +26,50 @@
 			<div class="row clearfix">
 				<div class="col-md-12 column">
 					<!--导航栏开始-->
-					<#include "components/navbar.ftl">
+					<#include "components/navbar.ftl" />
 						<!--导航栏开始-->
 						<!--内容开始-->
 						<div class="row clearfix">
 							<div class="col-md-12 column">
 								<div class="row clearfix">
 									<div class="col-md-8 column">
+										<!--文章-->
+										<#list oilArticles as oilArticle>
+										<h2>
+											${oilArticle.title}
+										</h2>
+										<p>
+											${oilArticle.content}
+										</p>
+										<!--<p>
+											<a class="btn" href="#">View details »</a>
+										</p>-->
+										</#list>
+										
 
 									</div>
 									<div class="col-md-4 column">
+										<!--热门-->
 										<h2>热门动弹</h2>
 										<div class="panel panel-primary">
 											<div class="panel-heading">
-												<h3 class="panel-title">小明</h3>
+												发表热门<input type="button" class="btn btn-success btn-sm pull-right " style="padding-top: -100px;margin-top: -4px;" value="发表" />
 											</div>
 											<div class="panel-body">
-												我抢到沙发啦，哈哈
+												标题:<input class="form-control required" type="text" name="username" /> 
+												内容:<textarea class="form-control" rows="3"></textarea>
 											</div>
 										</div>
-
+										<#list oilShares as oilShare>
+											<div class="panel panel-primary">
+												<div class="panel-heading">
+													<h3 class="panel-title">${oilShare.title}</h3>
+												</div>
+												<div class="panel-body">
+													${oilShare.content}
+												</div>
+											</div>
+										</#list>
 									</div>
 								</div>
 							</div>
@@ -55,49 +79,11 @@
 				</div>
 			</div>
 			<!--下一个布局开始-->
-			<!--内容开始-->
-			<!-- /.row clearfix -->
-			<div class="row clearfix">
-				<div class="col-md-4 column">
-					<h2>
-                王胜强：自己成功创业不忘帮助他人
-            </h2>
-					<p>
-						70后的王胜强是兴宁市黄槐镇宝丰村人，原来在镇上的煤矿厂工作。1988年，一场煤矿事故让他失去了左小腿，造成肢体三级残疾。意外事故曾让王胜强极度消沉，然而坚强的意志和对未来生活的渴望让他走出低谷，开始......
-					</p>
-					<p>
-						<a class="btn" href="#">View details »</a>
-					</p>
-				</div>
-				<div class="col-md-4 column">
-					<h2>
-                杨加昌：既是按摩师又是软件开发师
-            </h2>
-					<p>
-						记者近日来到梅城裕安路旁的梅州市振天实业发展有限公司采访获悉，该公司老板杨加昌不仅是一名高级盲人按摩师，还是一名软件开发师，同时他还受聘为市残联盲人电脑和按摩培训师。杨加昌并非天生盲人，12岁......
-					</p>
-					<p>
-						<a class="btn" href="#">View details »</a>
-					</p>
-				</div>
-				<div class="col-md-4 column">
-					<h2>
-                世上最美味的泡面
-            </h2>
-					<p>
-						他是个单亲爸爸，独自抚养一个七岁的小男孩。每当孩子和朋友玩耍受伤回来，他对过世妻子留下的缺憾，便感受尤深，心底不免传来阵阵悲凉的低鸣。 这是他留下孩子出差当天发生的事。因为要赶火车，没时间陪孩子吃早......
-					</p>
-					<p>
-						<a class="btn" href="#">View details »</a>
-					</p>
-				</div>
-			</div>
-			<!-- /.row clearfix -->
-			<!--内容结束-->
+
 		</div>
 		<!-- /.container -->
 
-		<#include "components/footer.ftl">
+		<#include "components/footer.ftl" />
 	</body>
 
 </html>

@@ -32,6 +32,11 @@ public class OilShare {
      */
     private Integer deleteStatus;
 
+    /**
+     * 创建时间
+     */
+    private Integer createTime;
+
     public String getId() {
         return id;
     }
@@ -78,5 +83,13 @@ public class OilShare {
 
     public void setDeleteStatus(Integer deleteStatus) {
         this.deleteStatus = deleteStatus;
+    }
+
+    public Integer getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Integer createTime) {
+        this.createTime = createTime;
     }
 }
