@@ -45,139 +45,58 @@
 			<div class="row clearfix">
 				<div class="col-md-12 column">
 					<!--导航栏开始-->
-					<nav class="navbar navbar-inverse" role="navigation">
-						<div class="navbar-header">
-							<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"> <span class="sr-only">Toggle navigation</span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
-							<a class="navbar-brand" href="#"><span class="glyphicon glyphicon-home">AddOiles</span></a>
-						</div>
+					<#include "../navbar.ftl">
+						<!--导航栏开始-->
 
-						<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-							<ul class="nav navbar-nav">
-								<li>
-									<a href="fourm.html">论坛</a>
-								</li>
-								<li>
-									<a href="dreams.html">梦想墙</a>
-								</li>
-								<li  class="active">
-									<a href="experence.html">经历分享</a>
-								</li>
-								<li>
-									<a href="addoil.html">鼓劲打气</a>
-								</li>
-								<li>
-									<a href="difficult.html">最近难点</a>
-								</li>
-								<li>
-									<a href="complaint.html">吐槽</a>
-								</li>
-							</ul>
-
-							<ul class="nav navbar-nav navbar-right">
-								<li>
-									<a href="javascript::" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in">登录</span></a>
-								</li>
-							</ul>
-						</div>
-					</nav>
-					<!--导航栏开始-->
-
-					<!--内容开始-->
-					<div class="container">
-						<div class="panel panel-primary">
-							<div class="panel-heading">
-								<h3 class="panel-title">小明</h3>
+						<!--内容开始-->
+						<div class="container">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<h3 class="panel-title">小明</h3>
+								</div>
+								<div class="panel-body">
+									Goods,this website is good!!!
+								</div>
 							</div>
-							<div class="panel-body">
-								Goods,this website is good!!!
+							<div class="panel panel-success">
+								<div class="panel-heading">
+									<h3 class="panel-title">Tom</h3>
+								</div>
+								<div class="panel-body">
+									Hi,Today is Friday!!!
+								</div>
 							</div>
-						</div>
-						<div class="panel panel-success">
-							<div class="panel-heading">
-								<h3 class="panel-title">Tom</h3>
+							<div class="panel panel-info">
+								<div class="panel-heading">
+									<h3 class="panel-title">Kite</h3>
+								</div>
+								<div class="panel-body">
+									On,I hava no friends.
+								</div>
 							</div>
-							<div class="panel-body">
-								Hi,Today is Friday!!!
+							<div class="panel panel-warning">
+								<div class="panel-heading">
+									<h3 class="panel-title">Papa</h3>
+								</div>
+								<div class="panel-body">
+									Let's do it !
+								</div>
+							</div>
+							<div class="panel panel-danger">
+								<div class="panel-heading">
+									<h3 class="panel-title">Master</h3>
+								</div>
+								<div class="panel-body">
+									Master Kongku!!
+								</div>
 							</div>
 						</div>
-						<div class="panel panel-info">
-							<div class="panel-heading">
-								<h3 class="panel-title">Kite</h3>
-							</div>
-							<div class="panel-body">
-								On,I hava no friends.
-							</div>
-						</div>
-						<div class="panel panel-warning">
-							<div class="panel-heading">
-								<h3 class="panel-title">Papa</h3>
-							</div>
-							<div class="panel-body">
-								Let's do it !
-							</div>
-						</div>
-						<div class="panel panel-danger">
-							<div class="panel-heading">
-								<h3 class="panel-title">Master</h3>
-							</div>
-							<div class="panel-body">
-								Master Kongku!!
-							</div>
-						</div>
-					</div>
-					<!--内容结束-->
+						<!--内容结束-->
 
 				</div>
 				<!-- /.container -->
 
-				<!--登录模态框-->
-				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-keyboard="true">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-								<h4 class="modal-title" id="myModalLabel">用户登录</h4>
-								<div class="modal-body">
-									<form class="form-horizontal">
-										<div class="form-group">
-											<input type="email" class="form-control" id="inputEmail3" placeholder="用户名或电子邮件">
-											<i class="fa fa-user"></i>
-										</div>
-										<div class="form-group help">
-											<input type="password" class="form-control" id="inputPassword3" placeholder="密　码">
-											<i class="fa fa-lock"></i>
-											<a href="#" class="fa fa-question-circle"></a>
-										</div>
-										<div class="form-group">
-											<div class="main-checkbox">
-												<input type="checkbox" value="None" id="checkbox1" name="check" />
-												<label for="checkbox1"></label>
-											</div>
-											<span class="text">Remember me</span>
-											<button type="submit" class="btn btn-default">登录</button>
-										</div>
-									</form>
-								</div>
-								<div class="modal-footer">
-									<!--Nothing-->
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<!--登录模态框结束-->
-
-				<!-- Bootstrap core JavaScript -->
-				<!-- Placed at the end of the document so the pages load faster -->
-				<script src="sources/jquery/jquery-3.2.0.min.js"></script>
-				<script>
-					window.jQuery || document.write('<script src="assets/js/vendor/jquery.min.js"><\/script>')
-				</script>
-				<script src="sources/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-				<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-				<script src="assets/js/vendor/jquery.min.js"></script>
-				<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-				<script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+				<#include "components/footer.ftl">
 	</body>
 
 </html>
