@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
 	         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-     <bean id="propertyConfigurer" class="com.addoiles.util.PropertyUtils">
-     	<property name="locations">
-     		<list>
-     			<value>classpath:configure.properties</value>
-     		</list>
-     	</property>
-     </bean>
-     <!-- 配置数据源 -->
-     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-     	<property name="driverClassName" value="${jdbc.driverClass}"></property>
-     	<property name="url" value="${jdbc.url}"></property>
-     	<property name="username" value="${jdbc.username}"></property>
-     	<property name="password" value="${jdbc.password}"></property>
-     </bean>
-     <!-- 创建SessionFactory -->
-     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-     	<property name="dataSource" ref="dataSource"></property>
-     </bean>
-     <!-- 配置事务管理 -->
-      <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
-      	<property name="dataSource" ref="dataSource"></property>
-      </bean>
-      <!-- 创建数据映射器 -->
-      <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-      	<property name="annotationClass" value="org.springframework.stereotype.Repository"></property>
-      	<property name="basePackage" value="com.addoiles.dao"></property>
-      </bean>
+    <bean id="propertyConfigurer" class="com.addoiles.util.PropertyUtils">
+        <property name="locations">
+            <list>
+                <value>classpath:configure.properties</value>
+            </list>
+        </property>
+    </bean>
+    <!-- 配置数据源 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+        <property name="driverClassName" value="${jdbc.driverClass}"></property>
+        <property name="url" value="${jdbc.url}"></property>
+        <property name="username" value="${jdbc.username}"></property>
+        <property name="password" value="${jdbc.password}"></property>
+    </bean>
 
 
-      
+    <!-- 从整合包里找，org.mybatis:mybatis-spring:1.2.4 -->
+    <!-- sqlSessionFactory -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 数据库连接池 -->
+        <property name="dataSource" ref="dataSource" />
+        <!-- 加载mybatis的全局配置文件 -->
+        <property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml" />
+    </bean>
+    <!-- mapper扫描器 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
+        <property name="basePackage" value="com.addoiles.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
+        <!-- <property name="sqlSessionFactory" ref="sqlSessionFactory" />
+        会导致数据源配置不管用，数据库连接不上。
+        且spring 4弃用
+        -->
+    </bean>
+
+
 
 </beans>

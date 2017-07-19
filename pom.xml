@@ -273,12 +273,13 @@
                 </includes>
             </resource>
             <resource>
-                <directory>src/main/resources</directory>
+                <directory>src/main/resources/*</directory>
                 <includes>
                     <include>applicationContext.xml</include>
+                    <include>application-datasource.xml</include>
+                    <include>application-freemarker.xml</include>
                     <include>log4j.properties</include>
                     <include>configure.properties</include>
-                    <include>ueditor.config.json</include>
                 </includes>
             </resource>
         </resources>

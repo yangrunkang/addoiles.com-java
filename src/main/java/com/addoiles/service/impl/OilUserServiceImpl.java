@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
  * author:      Yangrunkang
  * Createdate:  2017/7/18 17:37
  */
-@Service("oilUserService")
+@Service
 public class OilUserServiceImpl implements OilUserService {
 
     @Autowired
@@ -35,6 +35,6 @@ public class OilUserServiceImpl implements OilUserService {
 
     @Override
     public Integer register(OilUser oilUser) {
-        return null;
+        return oilUserMapper.insert(oilUser);
     }
 }
