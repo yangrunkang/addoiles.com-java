@@ -1,5 +1,6 @@
 package com.addoiles.service.impl;
 
+import com.addoiles.dao.OilUserMapper;
 import com.addoiles.entity.OilUser;
 import com.addoiles.service.OilUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +14,7 @@ import org.springframework.stereotype.Service;
  * author:      Yangrunkang
  * Createdate:  2017/7/18 17:37
  */
-@Service
+@Service("oilUserService")
 public class OilUserServiceImpl implements OilUserService {
 
     @Autowired

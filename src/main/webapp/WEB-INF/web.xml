@@ -10,7 +10,7 @@
   <!-- 如果此次没有配置xml位置，则默认为[servlet-name].xml即spring.xml -->
   	<init-param>
   		<param-name>ContextConfigLocation</param-name>
-  		<param-value>classpath:applicationContext.xml</param-value>
+  		<param-value>classpath*:application*.xml</param-value>
   	</init-param>
   	
   	<load-on-startup>1</load-on-startup>

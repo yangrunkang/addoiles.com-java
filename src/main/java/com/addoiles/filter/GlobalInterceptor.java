@@ -1,6 +1,5 @@
 package com.addoiles.filter;
 
-import org.apache.log4j.MDC;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,6 +27,8 @@ public class GlobalInterceptor implements HandlerInterceptor{
 //		modelAndView.addObject("UPLOAD_BASE_PATH",basePath+"/upload");
 //		modelAndView.addObject("TEMPLATE_MANAGE_PATH",basePath+"/static/template/manage");
 //		MDC.put("ip", HttpUtils.getIp(request));
+
+		System.out.println("POST HANDLE ");
 	}
 
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,

@@ -39,14 +39,5 @@ public class PropertyUtils extends PropertyPlaceholderConfigurer{
 		}
 	}
 	
-	public static String getRoot(){
-		String rootKey = "shamrock.cms.root";
-		String cmsRootString = System.getProperty(rootKey);
-		Enumeration<?> enu = System.getProperties().propertyNames();
-		if(cmsRootString.endsWith(java.io.File.separatorChar+"")){
-			cmsRootString = cmsRootString.substring(0,cmsRootString.length()-1);
-		}
-		logger.info(cmsRootString);
-		return cmsRootString;
-	}
+
 }
