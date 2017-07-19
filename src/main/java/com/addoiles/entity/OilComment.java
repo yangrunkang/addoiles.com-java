@@ -1,15 +1,30 @@
 package com.addoiles.entity;
 
+/**
+ * 所有评论相关
+ */
 public class OilComment {
 
     private String id;
 
+    /**
+     * 评论ID
+     */
     private String commentId;
 
+    /**
+     * 0-删除 1-正常
+     */
     private Integer deleteStatus;
 
+    /**
+     * 用户ID
+     */
     private String userId;
 
+    /**
+     * 创建时间
+     */
     private Integer createTime;
 
     public String getId() {

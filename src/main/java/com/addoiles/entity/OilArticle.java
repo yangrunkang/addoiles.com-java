@@ -1,23 +1,50 @@
 package com.addoiles.entity;
 
+/**
+ * 文章
+ */
 public class OilArticle {
 
     private String id;
 
+    /**
+     * 文章ID
+     */
     private String articleId;
 
+    /**
+     * 用户ID
+     */
     private String userId;
 
+    /**
+     * 标题
+     */
     private String title;
 
+    /**
+     * 内容
+     */
     private String content;
 
+    /**
+     * 1-梦想 2-经历 3-最近难点 4-吐槽
+     */
     private Integer type;
 
+    /**
+     * 0-删除 1-正常
+     */
     private Integer deleteStatus;
 
+    /**
+     * 喜爱
+     */
     private Integer favourite;
 
+    /**
+     * 创建时间
+     */
     private Integer createTime;
 
     public String getId() {

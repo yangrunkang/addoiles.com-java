@@ -1,17 +1,35 @@
 package com.addoiles.entity;
 
+/**
+ * 无需注册所有人都可以
+ */
 public class OilShare {
 
     private String id;
 
+    /**
+     * 标题
+     */
     private String title;
 
+    /**
+     * 内容
+     */
     private String content;
 
+    /**
+     * 喜爱
+     */
     private Integer favorite;
 
+    /**
+     * 厌恶
+     */
     private Integer dislike;
 
+    /**
+     * 0-删除 1-正常
+     */
     private Integer deleteStatus;
 
     public String getId() {

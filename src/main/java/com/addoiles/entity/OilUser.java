@@ -4,16 +4,34 @@ public class OilUser {
 
     private String id;
 
+    /**
+     * 用户ID
+     */
     private String userId;
 
+    /**
+     * 用户名
+     */
     private String userName;
 
+    /**
+     * 密码
+     */
     private String password;
 
+    /**
+     * 0-删除 1-正常
+     */
     private Integer deleteStatus;
 
+    /**
+     * 邮箱
+     */
     private String email;
 
+    /**
+     * 创建时间
+     */
     private Integer createTime;
 
     public String getId() {
