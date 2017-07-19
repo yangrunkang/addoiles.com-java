@@ -10,29 +10,21 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Description:
+ * All rights Reserved, Designed By HQYG
+ * Copyright:   Copyright(C) 2017
+ * Company:     HQYG.
+ * author:      Yangrunkang
+ * Createdate:  2017/7/19 14:03
+ */
 @Controller
-public class IndexAction{
+public class OilUserController {
 
     @Autowired
     private OilUserService oilUserService;
 
-	@RequestMapping("index.html")
-    public void test(){
-        System.out.println("###########");
-    }
 
-    @RequestMapping
-    public ModelAndView index(ModelAndView modelAndView){
-        modelAndView.setViewName("index");
-
-        Map<String,String> map = new HashMap<String, String>();
-        map.put("messageOne","你成功了！！！！！");
-
-        modelAndView.addAllObjects(map);
-
-        System.out.println("Default Mapping");
-        return modelAndView;
-    }
 
     @RequestMapping("register")
     public ModelAndView register(ModelAndView modelAndView){
@@ -53,5 +45,6 @@ public class IndexAction{
 
         return modelAndView;
     }
+
 
 }

@@ -1,7 +1,4 @@
-<!--页脚-->
-<script>
-    window.jQuery || document.write('<script src="../static/bootstrap-3.3.7/js/jquery.min.jsq"><\/script>')
-</script>
-<script src="../static/bootstrap-3.3.7/js/bootstrap.min.js"></script>
-<!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-<script src="../static/bootstrap-3.3.7/js/jquery.min.js"></script>
+<!-- 在bootstrap.min.js 之前引入 -->
+<script src="http://apps.bdimg.com/libs/jquery/2.0.0/jquery.min.js"></script>
+<!-- Bootstrap 核心 JavaScript 文件 -->
+<script src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>

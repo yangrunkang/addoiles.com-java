@@ -11,32 +11,13 @@
 		<meta name="description" content="">
 		<meta name="author" content="yangrunkang">
 		<!--<link rel="icon" href="../../favicon.ico">-->
-
 		<title>addoiles.com</title>
-
-		<!-- Bootstrap core CSS -->
-		<link href="sources/bootstrap-3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
-		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-		<link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
-
-		<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-		<!--[if lt IE 9]>
-		<script src="assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-		<script src="assets/js/ie-emulation-modes-warning.js"></script>
-
-		<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-		<!--[if lt IE 9]>
-		<script src="assets/js/html5shiv.min.js"></script>
-		<script src="assets/js/respond.min.js"></script>
-		<![endif]-->
+		<#include "components/head.ftl">
 		<style>
 			body {
 				min-height: 2000px;
 			}
 		</style>
-		<!--登录CSS-->
-		<link rel="stylesheet" type="text/css" href="pages/common/css/login.css">
 	</head>
 	<!-- NAVBAR -->
 
@@ -45,49 +26,17 @@
 			<div class="row clearfix">
 				<div class="col-md-12 column">
 					<!--导航栏开始-->
-					<#include "../navbar.ftl">
+					<#include "components/navbar.ftl">
 						<!--导航栏开始-->
 
 						<!--内容开始-->
 						<div class="container">
 							<div class="panel panel-primary">
 								<div class="panel-heading">
-									<h3 class="panel-title">小明</h3>
+									<h3 class="panel-title">困难</h3>
 								</div>
 								<div class="panel-body">
-									Goods,this website is good!!!
-								</div>
-							</div>
-							<div class="panel panel-success">
-								<div class="panel-heading">
-									<h3 class="panel-title">Tom</h3>
-								</div>
-								<div class="panel-body">
-									Hi,Today is Friday!!!
-								</div>
-							</div>
-							<div class="panel panel-info">
-								<div class="panel-heading">
-									<h3 class="panel-title">Kite</h3>
-								</div>
-								<div class="panel-body">
-									On,I hava no friends.
-								</div>
-							</div>
-							<div class="panel panel-warning">
-								<div class="panel-heading">
-									<h3 class="panel-title">Papa</h3>
-								</div>
-								<div class="panel-body">
-									Let's do it !
-								</div>
-							</div>
-							<div class="panel panel-danger">
-								<div class="panel-heading">
-									<h3 class="panel-title">Master</h3>
-								</div>
-								<div class="panel-body">
-									Master Kongku!!
+									我是困难
 								</div>
 							</div>
 						</div>

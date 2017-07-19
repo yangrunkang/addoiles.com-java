@@ -8,22 +8,22 @@
 	<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 		<ul class="nav navbar-nav">
 			<li>
-				<a href="../fourm.html">论坛</a>
+				<a href="${base_url}/fourm">论坛</a>
 			</li>
 			<li>
-				<a href="../dreams.html">梦想墙</a>
+				<a href="${base_url}/dreams">梦想墙</a>
 			</li>
 			<li>
-				<a href="../experence.html">经历分享</a>
+				<a href="${base_url}/experence">经历分享</a>
 			</li>
 			<li>
-				<a href="../addoil.html">鼓劲打气</a>
+				<a href="${base_url}/addoil">鼓劲打气</a>
 			</li>
 			<li>
-				<a href="../difficult.html">最近难点</a>
+				<a href="${base_url}/difficult">最近难点</a>
 			</li>
 			<li>
-				<a href="../complaint.html">抱怨一下</a>
+				<a href="${base_url}/complaint">抱怨一下</a>
 			</li>
 		</ul>
 
