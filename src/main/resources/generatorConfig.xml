@@ -10,9 +10,11 @@
                         driverClass="com.mysql.jdbc.Driver" password="aliyunmysql" userId="root"/>
         <javaModelGenerator targetPackage="com.addoiles.entity" targetProject="src\main\java\com\addoiles\entity"/>
         <sqlMapGenerator targetPackage="com.addoiles.dao" targetProject="src\main\java\com\addoiles\dao"/>
-        <javaClientGenerator targetPackage="com.addoiles.dao" targetProject="src\main\java\com\addoiles\dao" type="XMLMAPPER"/>
+        <javaClientGenerator targetPackage="com.addoiles.dao" targetProject="src\main\java\com\addoiles\dao"
+                             type="XMLMAPPER"/>
 
-        <table schema="mybatis" tableName="oil_article"  domainObjectName="OilArticle" enableCountByExample="false" enableUpdateByExample="false"
+        <table schema="mybatis" tableName="oil_article" domainObjectName="OilArticle" enableCountByExample="false"
+               enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false" selectByExampleQueryId="false">
         </table>
 

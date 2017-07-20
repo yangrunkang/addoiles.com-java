@@ -1,37 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
 	         http://www.springframework.org/schema/beans/spring-beans.xsd">
-      <!-- 配置FreeMarker -->
-      <bean id="freeMarkerConfigrer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPaths" value="/WEB-INF/pages/"></property>
-		<property name="defaultEncoding" value="UTF-8"></property>
-		<property name="freemarkerSettings">
-			<props>
-				<prop key="template_update_delay">10</prop>
-				<prop key="defaultEncoding">UTF-8</prop>
-				<prop key="url_escaping_charset">UTF-8</prop>
-				<prop key="locale">zh_CN</prop>
-				<prop key="boolean_format">true,false</prop>
-				<prop key="time_format">HH:mm:ss</prop>
-				<prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
-				<prop key="date_format">yyyy-MM-dd</prop>
-				<prop key="number_format">#.##</prop>
-				<prop key="whitespace_stripping">true</prop>
-			</props>
-		</property>
-      </bean>
+    <!-- 配置FreeMarker -->
+    <bean id="freeMarkerConfigrer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+        <property name="templateLoaderPaths" value="/WEB-INF/pages/"></property>
+        <property name="defaultEncoding" value="UTF-8"></property>
+        <property name="freemarkerSettings">
+            <props>
+                <prop key="template_update_delay">10</prop>
+                <prop key="defaultEncoding">UTF-8</prop>
+                <prop key="url_escaping_charset">UTF-8</prop>
+                <prop key="locale">zh_CN</prop>
+                <prop key="boolean_format">true,false</prop>
+                <prop key="time_format">HH:mm:ss</prop>
+                <prop key="datetime_format">yyyy-MM-dd HH:mm:ss</prop>
+                <prop key="date_format">yyyy-MM-dd</prop>
+                <prop key="number_format">#.##</prop>
+                <prop key="whitespace_stripping">true</prop>
+            </props>
+        </property>
+    </bean>
 
-      <!-- 用FreeMarker解析视图 -->
-      <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-      	<property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
-      	<property name="cache" value="false"></property>
-      	<property name="prefix" value=""></property>
-      	<property name="suffix" value=".html"></property>
-      	<property name="contentType" value="text/html;charset=utf-8"></property>
-      	<property name="exposeRequestAttributes" value="true"></property>
-      	<property name="exposeSessionAttributes" value="true"></property>
-      	<property name="exposeSpringMacroHelpers" value="true"></property>
-      </bean>
+    <!-- 用FreeMarker解析视图 -->
+    <bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+        <property name="viewClass" value="org.springframework.web.servlet.view.freemarker.FreeMarkerView"></property>
+        <property name="cache" value="false"></property>
+        <property name="prefix" value=""></property>
+        <property name="suffix" value=".html"></property>
+        <property name="contentType" value="text/html;charset=utf-8"></property>
+        <property name="exposeRequestAttributes" value="true"></property>
+        <property name="exposeSessionAttributes" value="true"></property>
+        <property name="exposeSpringMacroHelpers" value="true"></property>
+    </bean>
 </beans>
