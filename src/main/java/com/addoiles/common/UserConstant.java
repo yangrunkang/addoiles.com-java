@@ -1,4 +1,4 @@
-package com.addoiles.constant;
+package com.addoiles.common;
 
 public class UserConstant {
 	//每页数

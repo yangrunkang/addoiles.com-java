@@ -11,14 +11,35 @@
 		<meta name="description" content="">
 		<meta name="author" content="yangrunkang">
 		<!--<link rel="icon" href="../../favicon.ico">-->
+
 		<title>addoiles.com</title>
-		<#include "components/head.ftl" />
+
+		<head>
+			<meta charset="utf-8">
+			<meta http-equiv="X-UA-Compatible" content="IE=edge">
+			<!--为了让 Bootstrap 开发的网站对移动设备友好，确保适当的绘制和触屏缩放-->
+			<meta name="viewport" content="width=device-width, initial-scale=1">
+			<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+			<meta name="description" content="">
+			<meta name="author" content="yangrunkang">
+			<!--<link rel="icon" href="../../favicon.ico">-->
+			<title>addoiles.com</title>
+			<#include "components/head.ftl" />
+			<style>
+				body {
+					min-height: 2000px;
+				}
+			</style>
+		</head>
+
 		<style>
 			body {
 				min-height: 2000px;
 			}
 		</style>
+
 	</head>
+
 	<!-- NAVBAR -->
 
 	<body>
@@ -33,10 +54,10 @@
 						<div class="container">
 							<div class="panel panel-primary">
 								<div class="panel-heading">
-									<h3 class="panel-title">抱怨</h3>
+									<h3 class="panel-title">加油</h3>
 								</div>
 								<div class="panel-body">
-									我是抱怨
+									我是加油
 								</div>
 							</div>
 						</div>
@@ -44,7 +65,8 @@
 
 				</div>
 				<!-- /.container -->
-
+			</div>
+		</div>
 				<#include "components/footer.ftl" />
 	</body>
 

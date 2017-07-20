@@ -13,11 +13,11 @@
 		<!--<link rel="icon" href="../../favicon.ico">-->
 		<title>addoiles.com</title>
 		<#include "components/head.ftl" />
-			<style>
-				body {
-					min-height: 2000px;
-				}
-			</style>
+		<style>
+			body {
+				min-height: 2000px;
+			}
+		</style>
 	</head>
 	<!-- NAVBAR -->
 
@@ -27,14 +27,14 @@
 				<div class="col-md-12 column">
 					<!--导航栏开始-->
 					<#include "components/navbar.ftl" />
-						<!--导航栏开始-->
-						<!--内容开始-->
-						<div class="row clearfix">
-							<div class="col-md-12 column">
-								<div class="row clearfix">
-									<div class="col-md-8 column">
-										<!--文章-->
-										<#list oilArticles as oilArticle>
+					<!--导航栏开始-->
+					<!--内容开始-->
+					<div class="row clearfix">
+						<div class="col-md-12 column">
+							<div class="row clearfix">
+								<div class="col-md-8 column">
+									<!--文章-->
+									<#list oilArticles as oilArticle>
 										<h2>
 											${oilArticle.title}
 										</h2>
@@ -44,38 +44,39 @@
 										<!--<p>
 											<a class="btn" href="#">View details »</a>
 										</p>-->
-										</#list>
-										
+									</#list>
 
-									</div>
-									<div class="col-md-4 column">
-										<!--热门-->
-										<h2>热门动弹</h2>
-										<div class="panel panel-primary">
+								</div>
+								<div class="col-md-4 column">
+									<!--热门-->
+									<h2>热门动弹</h2>
+									<div class="panel panel-primary">
+										<form id="share_form" method="post" class="form-horizontal" autocomplete="off" action="${BASE_PATH}/manage/config/edit.json" enctype="multipart/form-data">
 											<div class="panel-heading">
-												发表热门<input type="button" class="btn btn-success btn-sm pull-right " style="padding-top: -100px;margin-top: -4px;" value="发表" />
+												发表热门<input type="button" id="share_btn" class="btn btn-success btn-sm pull-right " style="padding-top: -100px;margin-top: -4px;" value="发表" />
 											</div>
 											<div class="panel-body">
-												标题:<input class="form-control required" type="text" name="username" /> 
-												内容:<textarea class="form-control" rows="3"></textarea>
+												标题:<input class="form-control required" type="text" name="username" /> 内容:
+												<textarea class="form-control" rows="3"></textarea>
+											</div>
+										</form>
+									</div>
+									<#list oilShares as oilShare>
+										<div class="panel panel-primary">
+											<div class="panel-heading">
+												<h3 class="panel-title">${oilShare.title}</h3>
+											</div>
+											<div class="panel-body">
+												${oilShare.content}
 											</div>
 										</div>
-										<#list oilShares as oilShare>
-											<div class="panel panel-primary">
-												<div class="panel-heading">
-													<h3 class="panel-title">${oilShare.title}</h3>
-												</div>
-												<div class="panel-body">
-													${oilShare.content}
-												</div>
-											</div>
-										</#list>
-									</div>
+									</#list>
 								</div>
 							</div>
 						</div>
+					</div>
 
-						<!--内容结束-->
+					<!--内容结束-->
 				</div>
 			</div>
 			<!--下一个布局开始-->
@@ -84,6 +85,8 @@
 		<!-- /.container -->
 
 		<#include "components/footer.ftl" />
+
+		<script src="${base_url}/js/oil_share.js"></script>
 	</body>
 
 </html>

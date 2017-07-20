@@ -1,6 +1,11 @@
 package com.addoiles.controller;
 
+import com.addoiles.dao.OilShareMapper;
+import com.addoiles.entity.OilShare;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  * Description: 热门动弹
@@ -13,7 +18,14 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class OilShareController {
 
+    @Autowired
+    private OilShareMapper oilShareMapper;
 
+    @RequestMapping("share")
+    @ResponseBody
+    private Object share(){
 
+        return null;
+    }
 
 }
