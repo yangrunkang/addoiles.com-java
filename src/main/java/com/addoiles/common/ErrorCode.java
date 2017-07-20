@@ -24,7 +24,6 @@ public enum  ErrorCode {
      */
     SYSTEM_ERROR(30002, "系统繁忙"),
 
-
     ;
 
     /**

@@ -51,15 +51,13 @@
 									<!--热门-->
 									<h2>热门动弹</h2>
 									<div class="panel panel-primary">
-										<form id="share_form" method="post" class="form-horizontal" autocomplete="off" action="${BASE_PATH}/manage/config/edit.json" enctype="multipart/form-data">
-											<div class="panel-heading">
-												发表热门<input type="button" id="share_btn" class="btn btn-success btn-sm pull-right " style="padding-top: -100px;margin-top: -4px;" value="发表" />
-											</div>
-											<div class="panel-body">
-												标题:<input class="form-control required" type="text" name="username" /> 内容:
-												<textarea class="form-control" rows="3"></textarea>
-											</div>
-										</form>
+										<div class="panel-heading">
+											发表热门<input type="button" id="share_btn" class="btn btn-success btn-sm pull-right " style="padding-top: -100px;margin-top: -4px;" value="发表" />
+										</div>
+										<div class="panel-body">
+											标题:<input class="form-control required" type="text" name="title" /> 内容:
+											<textarea class="form-control" rows="3" name="content"></textarea>
+										</div>
 									</div>
 									<#list oilShares as oilShare>
 										<div class="panel panel-primary">
