@@ -45,18 +45,18 @@
 											<a class="btn" href="#">View details »</a>
 										</p>-->
 									</#list>
-
 								</div>
 								<div class="col-md-4 column">
 									<!--热门-->
 									<h2>热门动弹</h2>
-									<div class="panel panel-primary">
+									<div class="panel panel-primary" id="id_share">
 										<div class="panel-heading">
 											发表热门<input type="button" id="share_btn" class="btn btn-success btn-sm pull-right " style="padding-top: -100px;margin-top: -4px;" value="发表" />
 										</div>
 										<div class="panel-body">
-											标题:<input class="form-control required" type="text" name="title" /> 内容:
-											<textarea class="form-control" rows="3" name="content"></textarea>
+											<input class="form-control" placeholder="输入标题" type="text" name="title" />
+											<br />
+											<textarea class="form-control" placeholder="输入内容" rows="3" name="content"></textarea>
 										</div>
 									</div>
 									<#list oilShares as oilShare>

@@ -38,7 +38,7 @@ public class OilShareController {
             oilShare.setCreateTime(TimeUtil.currentTime());
             oilShare.setDeleteStatus(OilShareConstant.NORMAL.getValue());
             oilShareMapper.insert(oilShare);
-            oilResponse.setData(oilShare);
+            oilResponse.setData(oilShare); //返回到页面
         } catch (Exception e) {
             oilResponse.setCode(ErrorCode.SYSTEM_ERROR.getCode());
             oilResponse.setMessage(JsonUtils.toJson(e));
