@@ -1,6 +1,5 @@
 $(function() {
-	var base_url = window.location.origin;
-	
+	console.log(base_url);
 	/**
 	 * 发表热门功能
 	 */

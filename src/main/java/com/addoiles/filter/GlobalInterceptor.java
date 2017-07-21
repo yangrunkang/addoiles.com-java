@@ -9,26 +9,27 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @Component("globalInterceptor")
-public class GlobalInterceptor implements HandlerInterceptor{
+public class GlobalInterceptor implements HandlerInterceptor {
 
-	public void afterCompletion(HttpServletRequest arg0,
-			HttpServletResponse arg1, Object arg2, Exception arg3)
-			throws Exception {
+    public void afterCompletion(HttpServletRequest arg0,
+                                HttpServletResponse arg1, Object arg2, Exception arg3)
+            throws Exception {
 
-		
-	}
 
-	public void postHandle(HttpServletRequest request, HttpServletResponse response,
-			Object handler, ModelAndView modelAndView) throws Exception {
-		if(null == modelAndView){
-			return;
-		}
-		modelAndView.addObject("base_url",HttpUtils.getBasePath(request));
-	}
+    }
 
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
-			Object handler) throws Exception {
-		return true;
-	}
+    public void postHandle(HttpServletRequest request, HttpServletResponse response,
+                           Object handler, ModelAndView modelAndView) throws Exception {
+        if (null == modelAndView) {
+            return;
+        }
+        modelAndView.addObject("base_url", HttpUtils.getBasePath(request));
+        modelAndView.addObject("project_name", request.getContextPath()); // eg. /path
+    }
+
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
+                             Object handler) throws Exception {
+        return true;
+    }
 
 }
