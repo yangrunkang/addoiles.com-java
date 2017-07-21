@@ -1,34 +1,100 @@
 <!DOCTYPE html>
 <!-- HTML5 文档类型-->
 <html lang="en">
+	<#include "components/head.ftl" />
+	<style>
+	
+		/*div换行处理*/
+		div {
+			white-space: normal;
+			word-break: break-all;
+			word-wrap: break-word;
+		}
+		
+		/* ---- grid ---- */
+		.grid {
+			max-width: 1200px;
+		}
+		/* clearfix */
+		
+		.grid:after {
+			content: '';
+			display: none;
+			clear: both;
+		}
+		/* ---- grid-item ---- */
+		
+		.grid-item {
+			width: 160px;
+			height: 120px;
+			float: left;
+			background: #D26;
+			border: 2px solid #333;
+			border-color: hsla(0, 0%, 0%, 0.5);
+			border-radius: 5px;
+		}
+		
+		.grid-item--width2 {
+			width: 320px;
+		}
+		
+		.grid-item--width3 {
+			width: 480px;
+		}
+		
+		.grid-item--width4 {
+			width: 640px;
+		}
+		
+		.grid-item--height2 {
+			height: 200px;
+		}
+		
+		.grid-item--height3 {
+			height: 260px;
+		}
+		
+		.grid-item--height4 {
+			height: 360px;
+		}
+	</style>
 
-<#include "components/head.ftl" />
 	<body>
 		<div class="container">
-			<div class="row clearfix">
-				<div class="col-md-12 column">
-					<!--导航栏开始-->
-					<#include "components/navbar.ftl" />
-						<!--导航栏开始-->
-
-						<!--内容开始-->
-						<div class="container">
-							<div class="panel panel-primary">
-								<div class="panel-heading">
-									<h3 class="panel-title">梦想</h3>
-								</div>
-								<div class="panel-body">
-									我是梦想
-								</div>
-							</div>
-						</div>
-						<!--内容结束-->
-
+			<div class="panel-body">
+				<div class="grid"  data-masonry="{’columnWidth': 80}">
+					<div class="grid-item">3413234534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235235</div>
+					<div class="grid-item grid-item--width2 grid-item--height2">153452345wer</div>
+					<div class="grid-item grid-item--height3">asdfadfafadfasfdfsdf</div>
+					<div class="grid-item grid-item--height2">sdfqehgdfasfasfasdfa</div>
+					<div class="grid-item grid-item--width3">12351351355</div>
+					<div class="grid-item">1353345 345 4</div>
+					<div class="grid-item">qrqwerqwerwrq</div>
+					<div class="grid-item grid-item--height2">qwerqwerq3sdfsdfsfa</div>
+					<div class="grid-item grid-item--width2 grid-item--height3"></div>
+					<div class="grid-item">ggrdgasfsfafsdwetewtasfdasd</div>
+					<div class="grid-item grid-item--height2">qwrqwrqwrqwefsfsdffeafsdfa</div>
+					<div class="grid-item">qwerqwfadgyrqeherehre</div>
+					<div class="grid-item grid-item--width2 grid-item--height2">qettertteqt</div>
+					<div class="grid-item grid-item--width2">lafsknfklfhkjlkdsf wefcsac</div>
+					<div class="grid-item">3e5657890-0987654321ertfdscxvbghytt</div>
+					<div class="grid-item grid-item--height2">dfasshjklj;kjhgbfvcxzcvcbnhgtref</div>
+					<div class="grid-item">dfasdfasdfasfdasdfa</div>
+					<div class="grid-item">asdxcvasgdadfasd</div>
+					<div class="grid-item grid-item--height3">6666666666666</div>
+					<div class="grid-item grid-item--height2">8888888888888888</div>
+					<div class="grid-item">8888888888888888</div>
+					<div class="grid-item">999999999999999</div>
+					<div class="grid-item grid-item--height2">3453453454dfgdfg</div>
 				</div>
 				<!-- /.container -->
 			</div>
 		</div>
-				<#include "components/footer.ftl" />
+
+		<#include "components/footer.ftl" />
+		<!--放到下面,jQuery就好了-->
+		<script type="text/javascript" src="${base_url}/static/waterfull/masonry.pkgd.min.js"></script>
+		<script type="text/javascript" src="${base_url}/js/oil_dream.js"></script>
 	</body>
 
 </html>
