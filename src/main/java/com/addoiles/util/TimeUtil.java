@@ -3,9 +3,9 @@ package com.addoiles.util;
 /**
  * 时间与时区工具类
  *
- * All rights Reserved, Designed By HQYG
+ * All rights Reserved, Designed By
  * Copyright:   Copyright(C) 2016
- * Company:     HQYG.
+ * Company:     .
  * author:      liubing
  * Createdate:  2016年9月9日上午11:13:29
  */

@@ -2,9 +2,9 @@ package com.addoiles.common;
 
 /**
  * Description:
- * All rights Reserved, Designed By HQYG
+ * All rights Reserved, Designed By
  * Copyright:   Copyright(C) 2017
- * Company:     HQYG.
+ * Company:     .
  * author:      Yangrunkang
  * Createdate:  2017/7/20 9:35
  */
