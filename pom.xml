@@ -343,10 +343,75 @@
         </dependency>
     </dependencies>
 
-
     <build>
         <defaultGoal>compile</defaultGoal>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                    <meminitial>512m</meminitial>
+                    <maxmem>1024m</maxmem>
+                    <fork>true</fork>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.6</version>
+                <configuration>
+                    <encoding>UTF-8</encoding>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>copy-resources</id>
+                        <phase>process-resources</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <encoding>UTF-8</encoding>
+                            <outputDirectory>${project.build.directory}/classes</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>.</directory>
+                                    <includes>
+                                        <include>configure.properties</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources/</directory>
+                <includes>
+                    <include>applicationContext.xml</include>
+                    <include>application-datasource.xml</include>
+                    <include>application-freemarker.xml</include>
+                    <include>mybatis/sqlMapConfig.xml</include>
+                    <include>log4j.properties</include>
+                    <include>configure.properties</include>
+                    <include>ueditor.config.json</include>
+                </includes>
+            </resource>
+        </resources>
+    </build>
+
            <!--<plugin>
                 <groupId>org.mybatis.generator</groupId>
                 <artifactId>mybatis-generator-maven-plugin</artifactId>
@@ -374,24 +439,4 @@
             </plugin>
 -->
 
-        </plugins>
-        <resources>
-            <resource>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**/*.xml</include>
-                </includes>
-            </resource>
-            <resource>
-                <directory>src/main/resources/*</directory>
-                <includes>
-                    <include>applicationContext.xml</include>
-                    <include>application-datasource.xml</include>
-                    <include>application-freemarker.xml</include>
-                    <include>log4j.properties</include>
-                    <include>configure.properties</include>
-                </includes>
-            </resource>
-        </resources>
-    </build>
 </project>
