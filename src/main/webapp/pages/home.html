@@ -14,18 +14,25 @@
 					<div class="row clearfix">
 						<div class="col-md-12 column">
 							<div class="row clearfix">
-								<div class="col-md-8 column">
-									<!--文章-->
-									<#list oilArticles as oilArticle>
-										<h2>
-											${oilArticle.title}
-										</h2>
-										<p>
-											${oilArticle.content}
-										</p>
-									</#list>
+								<div class="col-xs-12 col-sm-9">
+									<p class="pull-right visible-xs">
+										<button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
+									</p>
+									<div class="jumbotron">
+										<h1>(｡･∀･)ﾉﾞ嗨！你好！</h1>
+										<p>在这里，你可以尽情的展现你的内心世界！</p>
+									</div>
+									<div class="row">
+										<#list oilArticles as oilArticle>
+											<div class="row-margin-top">
+												<h2>${oilArticle.title}</h2>
+												<p>${oilArticle.content}</p>
+												<p class="pull-right"><a class="btn btn-default" href="#" role="button">View details »</a></p>
+											</div><!--/.col-xs-6.col-lg-4-->
+										</#list>
+									</div><!--/row-->
 								</div>
-								<div class="col-md-4 column">
+								<div class="col-xs-6 col-sm-3 sidebar-offcanvas">
 									<!--热门-->
 									<h2>热门动弹</h2>
 									<div class="panel panel-primary" id="id_share">
@@ -60,7 +67,11 @@
 
 		</div>
 		<!-- /.container -->
-
+		<style type="text/css">
+			.row-margin-top {
+				margin-top: 40px;
+			}
+		</style>
 		<#include "components/footer.ftl" />
 
 		<script src="${base_url}/js/oil_share.js"></script>

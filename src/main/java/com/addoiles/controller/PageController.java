@@ -21,7 +21,7 @@ public class PageController {
     private static final String EXPERENCE_PAGE = "experence";
     private static final String FOURM_PAGE = "fourm";
     private static final String DREAMS_PAGE = "dreams";
-
+    private static final String LOGIN_PAGE = "login";
 
     @Autowired
     private OilShareMapper oilShareMapper;
@@ -75,5 +75,9 @@ public class PageController {
         return DREAMS_PAGE;
     }
 
+    @RequestMapping(LOGIN_PAGE)
+    public String login() {
+        return LOGIN_PAGE;
+    }
 
 }
