@@ -21,7 +21,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
-            <bean class="com.addoiles.filter.GlobalInterceptor"></bean>
+            <bean class="com.addoiles.filter.GlobalInterceptor" />
         </mvc:interceptor>
     </mvc:interceptors>
 
