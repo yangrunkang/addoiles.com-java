@@ -45,32 +45,32 @@ public class PageController {
         return modelAndView;
     }
 
-    @RequestMapping("addoil")
+    @RequestMapping(ADDOIL_PAGE)
     public String addoil() {
         return ADDOIL_PAGE;
     }
 
-    @RequestMapping("complaint")
+    @RequestMapping(COMPLAINT_PAGE)
     public String complaint() {
         return COMPLAINT_PAGE;
     }
 
-    @RequestMapping("difficult")
+    @RequestMapping(DIFFICULT_PAGE)
     public String difficult() {
         return DIFFICULT_PAGE;
     }
 
-    @RequestMapping("experence")
+    @RequestMapping(EXPERENCE_PAGE)
     public String experence() {
         return EXPERENCE_PAGE;
     }
 
-    @RequestMapping("fourm")
+    @RequestMapping(FOURM_PAGE)
     public String fourm() {
         return FOURM_PAGE;
     }
 
-    @RequestMapping("dreams")
+    @RequestMapping(DREAMS_PAGE)
     public String dreams() {
         return DREAMS_PAGE;
     }
