@@ -8,10 +8,11 @@ target/
 .settings/
 .classpath
 .project
-bin/
 /addoiles.iml
 *.idea
 .idea/
 .idea
 addoiles.com.iml
 /addoiles.com.iml
+addoiles.com.iml
+bin/
