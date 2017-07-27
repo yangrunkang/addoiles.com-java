@@ -77,7 +77,7 @@ public class PageController {
 
     @RequestMapping(LOGIN_PAGE)
     public String login() {
-        return LOGIN_PAGE;
+        return "components/login/" + LOGIN_PAGE;
     }
 
 }
