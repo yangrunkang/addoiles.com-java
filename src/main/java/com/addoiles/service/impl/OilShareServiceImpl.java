@@ -1,6 +1,5 @@
 package com.addoiles.service.impl;
 
-import com.addoiles.dao.OilArticleMapper;
 import com.addoiles.dao.OilShareMapper;
 import com.addoiles.entity.OilShare;
 import com.addoiles.service.OilShareService;

@@ -1,15 +1,11 @@
 package com.addoiles.controller;
 
-import com.addoiles.entity.OilArticle;
-import com.addoiles.entity.OilShare;
 import com.addoiles.service.OilArticleService;
 import com.addoiles.service.OilShareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 @Controller
 public class PageController {
@@ -35,12 +31,8 @@ public class PageController {
 
         modelAndView.setViewName(HOME_PAGE);
 
-        List<OilShare> oilShares = oilShareService.selectHotShare();
-        List<OilArticle> oilArticles = oilArticleService.selectsLatest();
-
-
-        modelAndView.addObject("oilShares",oilShares);
-        modelAndView.addObject("oilArticles",oilArticles);
+        modelAndView.addObject("oilShares",oilShareService.selectHotShare());
+        modelAndView.addObject("oilArticles",oilArticleService.selectsLatest());
 
         return modelAndView;
     }
