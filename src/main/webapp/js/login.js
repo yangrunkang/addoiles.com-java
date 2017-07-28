@@ -47,7 +47,11 @@ $().ready(function() {
                 required: "请输入邮箱",  
                 email: "请输入有效邮箱"  
             }  
-        }  
+        },
+        submitHandler: function(form)
+        {
+            var result = $(form).ajaxSubmit();
+        }
     });
     
     /*登录*/

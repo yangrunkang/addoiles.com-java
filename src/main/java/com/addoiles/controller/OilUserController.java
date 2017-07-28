@@ -1,5 +1,6 @@
 package com.addoiles.controller;
 
+import com.addoiles.common.ErrorCode;
 import com.addoiles.common.OilResponse;
 import com.addoiles.entity.OilUser;
 import com.addoiles.service.OilUserService;
@@ -31,12 +32,20 @@ public class OilUserController {
     private OilUserService oilUserService;
 
 
-    @RequestMapping("register")
+    @RequestMapping("userRegister")
+    @ResponseBody
     public Object register(ModelAndView modelAndView, OilUser oilUser) {
+        OilResponse oilResponse = new OilResponse();
+
         modelAndView.setViewName(PageConstant.HOME_PAGE);
 
         Integer register = oilUserService.register(OilUserBuilder.buildDefaultOilUser(oilUser));
         // TODO: 2017/7/28 回显到导航栏上,在过滤器中写 暂时session存储
+        if(register > 0){
+            oilResponse.setData(oilUser);
+        }else {
+            oilResponse.setErrorCode(ErrorCode.REGISTER_FAILED);
+        }
 
         return new OilResponse(register > 0);
     }

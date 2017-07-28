@@ -14,4 +14,5 @@ public class PageConstant {
     public static final String FOURM_PAGE = "fourm";
     public static final String DREAMS_PAGE = "dreams";
     public static final String LOGIN_PAGE = "login";
+    public static final String REGISTER_PAGE = "register";
 }

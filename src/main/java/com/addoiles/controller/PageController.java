@@ -66,4 +66,11 @@ public class PageController {
         return "components/login/" + LOGIN_PAGE;
     }
 
+    @RequestMapping(REGISTER_PAGE)
+    public String register() {
+        return "components/login/" + REGISTER_PAGE;
+    }
+
+
+
 }

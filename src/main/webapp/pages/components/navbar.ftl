@@ -48,11 +48,8 @@
         	</ul>
     	<#else>
         	<ul class="nav navbar-nav navbar-right">
-            	<li><a href="#" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-user"></span> 注册</a>
-				</li>
-				<li>
-					<a href="${base_url}/login"><span class="glyphicon glyphicon-log-in"></span> 登录</a>
-				</li>
+            	<li><a href="${base_url}/register"><span class="glyphicon glyphicon-user"></span> 注册</a></li>
+				<li><a href="${base_url}/login"><span class="glyphicon glyphicon-log-in"></span> 登录</a></li>
 			</ul>
 		</#if>
 

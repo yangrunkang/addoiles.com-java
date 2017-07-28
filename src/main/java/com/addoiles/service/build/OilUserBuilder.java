@@ -19,9 +19,9 @@ public class OilUserBuilder {
      * @return
      */
     public static OilUser buildDefaultOilUser(OilUser oilUser){
+        oilUser.setUserId(OilUtils.generateID());
         oilUser.setCreateTime(TimeUtil.currentTime());
         oilUser.setDeleteStatus(OilUserConstant.NORMAL.getValue());
-        oilUser.setUserId(OilUtils.generateID());
         return oilUser;
     }
 

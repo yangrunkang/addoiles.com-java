@@ -29,6 +29,11 @@ public class OilResponse implements Serializable{
         this.message = message;
     }
 
+    public void setErrorCode(ErrorCode errorCode){
+        this.code = errorCode.getCode();
+        this.message = errorCode.getMessage();
+    }
+
     public OilResponse(ErrorCode errorCode){
         this.code = errorCode.getCode();
         this.message = errorCode.getMessage();
@@ -67,4 +72,6 @@ public class OilResponse implements Serializable{
     public void setData(Object data) {
         this.data = data;
     }
+
+
 }

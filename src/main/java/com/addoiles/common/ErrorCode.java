@@ -9,26 +9,11 @@ package com.addoiles.common;
  * Createdate:  2017/7/20 9:35
  */
 public enum  ErrorCode {
-    /**
-     * 成功
-     */
     SUCCESS(0, "success"),
-
-    /**
-     * 参数错误
-     */
     PARAMETER_ERROR(1, "参数错误"),
-
-    /**
-     * 系统异常
-     */
     SYSTEM_ERROR(2, "系统繁忙"),
-
-    /**
-     * 登录失败
-     */
     LOGIN_FAILED(3,"登录失败"),
-
+    REGISTER_FAILED(4,"注册失败"),
     ;
 
     /**
