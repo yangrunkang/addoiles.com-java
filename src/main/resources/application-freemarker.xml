@@ -31,8 +31,9 @@
         <property name="cache" value="true" />
         <property name="suffix" value=".html" />
         <property name="contentType" value="text/html;charset=utf-8" />
-        <property name="exposeRequestAttributes" value="true" />
-        <property name="exposeSessionAttributes" value="true" />
-        <property name="exposeSpringMacroHelpers" value="true" />
+        <property name="exposeRequestAttributes" value="false" />
+        <property name="exposeSessionAttributes" value="false" />
+        <property name="exposeSpringMacroHelpers" value="false" />
+        <property name="allowSessionOverride" value="false" />
     </bean>
 </beans>
