@@ -1,14 +1,20 @@
 package com.addoiles.controller;
 
+import com.addoiles.common.OilResponse;
 import com.addoiles.entity.OilUser;
 import com.addoiles.service.OilUserService;
+import com.addoiles.service.build.OilUserBuilder;
+import com.addoiles.service.build.PageConstant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Objects;
+
+import static com.addoiles.service.build.PageConstant.HOME_PAGE;
+import static com.addoiles.service.build.PageConstant.LOGIN_PAGE;
 
 /**
  * Description:
@@ -25,23 +31,30 @@ public class OilUserController {
     private OilUserService oilUserService;
 
 
-
     @RequestMapping("register")
-    public ModelAndView register(ModelAndView modelAndView){
-        modelAndView.setViewName("index");
+    public Object register(ModelAndView modelAndView, OilUser oilUser) {
+        modelAndView.setViewName(PageConstant.HOME_PAGE);
 
-        OilUser oilUser = new OilUser();
-        oilUser.setId("12341234");
-        oilUser.setEmail("ashdha@qq.com");
-        oilUser.setUserName("232");
+        Integer register = oilUserService.register(OilUserBuilder.buildDefaultOilUser(oilUser));
+        // TODO: 2017/7/28 回显到导航栏上,在过滤器中写 暂时session存储
 
-        Integer register = oilUserService.register(oilUser);
+        return new OilResponse(register > 0);
+    }
 
-        Map<String,String> map = new HashMap<>();
-        map.put("messageOne","注册成功" + register);
+    @RequestMapping("userLogin")
+    @ResponseBody
+    public ModelAndView userLogin(String email, String password,ModelAndView modelAndView) {
+        OilResponse oilResponse;
 
-        modelAndView.addAllObjects(map);
+        OilUser oilUser = oilUserService.login(email, password);
 
+        if (Objects.isNull(oilUser)) {
+            modelAndView.setViewName("components/login/" + LOGIN_PAGE);
+        } else {
+            modelAndView.setViewName(HOME_PAGE);
+            modelAndView.addObject("oilUser",oilUser);
+            // TODO: 2017/7/28 后期隐藏url账户密码信息 
+        }
 
         return modelAndView;
     }

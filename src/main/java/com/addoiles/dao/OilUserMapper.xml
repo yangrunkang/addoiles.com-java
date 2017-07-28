@@ -122,4 +122,8 @@
       create_time = #{createTime,jdbcType=INTEGER}
     where id = #{id,jdbcType=VARCHAR}
   </update>
+
+  <select id="login" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from oil_user where email = #{email,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
 </mapper>

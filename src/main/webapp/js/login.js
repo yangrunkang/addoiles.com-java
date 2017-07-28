@@ -13,9 +13,13 @@ $().ready(function() {
                 required: "请输入密码",  
                 minlength: jQuery.format("密码不能小于{0}个字 符")  
             },  
-        }  
+        },
+        submitHandler: function(form)
+        {
+            var result = $(form).ajaxSubmit();
+        }
     });  
-    $("#register_form").validate({  
+    $("#register_form").validate({
         rules: {  
             username: "required",  
             password: {  
@@ -44,7 +48,10 @@ $().ready(function() {
                 email: "请输入有效邮箱"  
             }  
         }  
-    });  
+    });
+    
+    /*登录*/
+    
 });  
 $(function() {  
     $("#register_btn").click(function() {  

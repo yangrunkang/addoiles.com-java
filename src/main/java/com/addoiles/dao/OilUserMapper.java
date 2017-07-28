@@ -1,6 +1,7 @@
 package com.addoiles.dao;
 
 import com.addoiles.entity.OilUser;
+import org.apache.ibatis.annotations.Param;
 
 public interface OilUserMapper {
 
@@ -20,4 +21,7 @@ public interface OilUserMapper {
 
 
     int updateByPrimaryKey(OilUser record);
+
+    OilUser login(@Param("email")String email,@Param("password")String password);
+
 }

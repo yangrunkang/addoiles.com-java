@@ -29,6 +29,11 @@ public class OilResponse implements Serializable{
         this.message = message;
     }
 
+    public OilResponse(ErrorCode errorCode){
+        this.code = errorCode.getCode();
+        this.message = errorCode.getMessage();
+    }
+
     public OilResponse(Integer code, String message, Object data) {
         this.code = code;
         this.message = message;

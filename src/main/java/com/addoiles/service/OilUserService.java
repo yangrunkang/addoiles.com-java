@@ -20,7 +20,7 @@ public interface OilUserService {
     /**
      * 登录
      */
-    Integer login(String email, String password);
+    OilUser login(String email, String password);
 
     /**
      * 登出

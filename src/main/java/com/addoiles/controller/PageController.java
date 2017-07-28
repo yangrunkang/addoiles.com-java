@@ -1,5 +1,4 @@
 package com.addoiles.controller;
-
 import com.addoiles.service.OilArticleService;
 import com.addoiles.service.OilShareService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,17 +6,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import static com.addoiles.service.build.PageConstant.*;
+
 @Controller
 public class PageController {
 
-    private static final String HOME_PAGE = "home";
-    private static final String ADDOIL_PAGE = "addoil";
-    private static final String COMPLAINT_PAGE = "complaint";
-    private static final String DIFFICULT_PAGE = "difficult";
-    private static final String EXPERENCE_PAGE = "experence";
-    private static final String FOURM_PAGE = "fourm";
-    private static final String DREAMS_PAGE = "dreams";
-    private static final String LOGIN_PAGE = "login";
+
 
     @Autowired
     private OilArticleService oilArticleService;

@@ -17,12 +17,17 @@ public enum  ErrorCode {
     /**
      * 参数错误
      */
-    PARAMETER_ERROR(30001, "参数错误"),
+    PARAMETER_ERROR(1, "参数错误"),
 
     /**
      * 系统异常
      */
-    SYSTEM_ERROR(30002, "系统繁忙"),
+    SYSTEM_ERROR(2, "系统繁忙"),
+
+    /**
+     * 登录失败
+     */
+    LOGIN_FAILED(3,"登录失败"),
 
     ;
 

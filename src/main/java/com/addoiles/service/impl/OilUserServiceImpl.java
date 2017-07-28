@@ -6,6 +6,8 @@ import com.addoiles.service.OilUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 /**
  * Description:
  * All rights Reserved, Designed By
@@ -28,9 +30,12 @@ public class OilUserServiceImpl implements OilUserService {
     }
 
     @Override
-    public Integer login(String email, String password) {
-
-        return null;
+    public OilUser login(String email, String password) {
+        OilUser oilUser = oilUserMapper.login(email, password);
+        if(Objects.nonNull(oilUser)){
+            oilUser.setPassword("********");
+        }
+        return oilUser;
     }
 
     @Override
