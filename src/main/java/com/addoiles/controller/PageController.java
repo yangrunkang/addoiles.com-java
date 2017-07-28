@@ -1,9 +1,9 @@
 package com.addoiles.controller;
 
-import com.addoiles.dao.OilArticleMapper;
-import com.addoiles.dao.OilShareMapper;
 import com.addoiles.entity.OilArticle;
 import com.addoiles.entity.OilShare;
+import com.addoiles.service.OilArticleService;
+import com.addoiles.service.OilShareService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,19 +24,19 @@ public class PageController {
     private static final String LOGIN_PAGE = "login";
 
     @Autowired
-    private OilShareMapper oilShareMapper;
-
+    private OilArticleService oilArticleService;
 
     @Autowired
-    private OilArticleMapper oilArticleMapper;
+    private OilShareService oilShareService;
+
 
     @RequestMapping
     public ModelAndView home(ModelAndView modelAndView) {
 
         modelAndView.setViewName(HOME_PAGE);
 
-        List<OilShare> oilShares = oilShareMapper.selectHotShare();
-        List<OilArticle> oilArticles = oilArticleMapper.selectsLatest();
+        List<OilShare> oilShares = oilShareService.selectHotShare();
+        List<OilArticle> oilArticles = oilArticleService.selectsLatest();
 
 
         modelAndView.addObject("oilShares",oilShares);

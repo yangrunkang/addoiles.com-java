@@ -37,7 +37,7 @@ public class OilUserController {
 
         Integer register = oilUserService.register(oilUser);
 
-        Map<String,String> map = new HashMap<String, String>();
+        Map<String,String> map = new HashMap<>();
         map.put("messageOne","注册成功" + register);
 
         modelAndView.addAllObjects(map);
