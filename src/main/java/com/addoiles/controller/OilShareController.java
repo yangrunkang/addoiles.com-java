@@ -3,8 +3,8 @@ package com.addoiles.controller;
 import com.addoiles.common.ErrorCode;
 import com.addoiles.common.OilResponse;
 import com.addoiles.common.enums.OilShareConstant;
-import com.addoiles.dao.OilShareMapper;
 import com.addoiles.entity.OilShare;
+import com.addoiles.service.OilShareService;
 import com.addoiles.util.JsonUtils;
 import com.addoiles.util.TimeUtil;
 import org.slf4j.Logger;
@@ -28,7 +28,7 @@ public class OilShareController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
-    private OilShareMapper oilShareMapper;
+    private OilShareService oilShareService;
 
     @RequestMapping("share")
     @ResponseBody
@@ -37,7 +37,7 @@ public class OilShareController {
         try {
             oilShare.setCreateTime(TimeUtil.currentTime());
             oilShare.setDeleteStatus(OilShareConstant.NORMAL.getValue());
-            oilShareMapper.insert(oilShare);
+            oilShareService.insert(oilShare);
             oilResponse.setData(oilShare); //返回到页面
         } catch (Exception e) {
             oilResponse.setCode(ErrorCode.SYSTEM_ERROR.getCode());

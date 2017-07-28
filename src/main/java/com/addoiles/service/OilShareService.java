@@ -17,4 +17,11 @@ public interface OilShareService {
      */
     List<OilShare> selectHotShare();
 
+    /**
+     * 新增动弹
+     * @param oilShare
+     * @return
+     */
+    int insert(OilShare oilShare);
+
 }

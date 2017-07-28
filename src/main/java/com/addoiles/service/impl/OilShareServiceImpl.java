@@ -25,4 +25,8 @@ public class OilShareServiceImpl implements OilShareService {
         return oilShareMapper.selectHotShare();
     }
 
+    @Override
+    public int insert(OilShare oilShare) {
+        return oilShareMapper.insert(oilShare);
+    }
 }
