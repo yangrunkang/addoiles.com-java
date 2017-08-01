@@ -1,37 +1,38 @@
 <!DOCTYPE html>
 <!-- HTML5 文档类型-->
 <html lang="en">
+	<#include "components/head.ftl" />
+	</head>
 
-<#include "components/head.ftl" />
-</head>
-<body>
-<div class="container">
-    <div class="row clearfix">
-        <div class="col-md-12 column">
-            <!--导航栏开始-->
-            <#include "components/navbar.ftl" />
-            <!--导航栏开始-->
+	<body>
+		<div class="container">
+			<div class="row clearfix">
+				<div class="col-md-12 column">
+					<!--导航栏开始-->
+					<#include "components/navbar.ftl" />
+					<!--导航栏开始-->
 
-            <!--内容开始-->
-            <div class="container">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h3 class="panel-title">经历</h3>
-                    </div>
-                    <div class="panel-body">
-                        我是经历
-                    </div>
-                </div>
+					<!--内容开始-->
+					<div class="container">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h3 class="panel-title">经历</h3>
+							</div>
+							<div class="panel-body">
+								我是经历
+							</div>
+						</div>
 
-            </div>
-            <!--内容结束-->
+					</div>
+					<!--内容结束-->
+				    <#include "components/cfeditor/cfeditor.ftl" />
 
-        </div>
-    </div>
-</div>
-<!-- /.container -->
+				</div>
+			</div>
+		</div>
+		<!-- /.container -->
 
-<#include "components/footer.ftl" />
-</body>
+		<#include "components/footer.ftl" />
+	</body>
 
 </html>
