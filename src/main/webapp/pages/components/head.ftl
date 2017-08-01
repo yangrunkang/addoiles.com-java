@@ -18,4 +18,3 @@
             min-height: 2000px;
         }
     </style>
-</head>
