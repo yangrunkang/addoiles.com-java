@@ -71,6 +71,11 @@ public class PageController {
         return "components/login/" + REGISTER_PAGE;
     }
 
+    @RequestMapping("getCfeditor")
+    public String tes() {
+        return "components/cfeditor/cfeditor";
+    }
+
 
 
 }

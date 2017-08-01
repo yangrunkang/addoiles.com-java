@@ -4,13 +4,11 @@
 	<#include "components/head.ftl" />
 	</head>
 
-	<body>
+	<body onload="loadCFEditor()">
 		<div class="container">
 			<div class="row clearfix">
 				<div class="col-md-12 column">
-					<!--导航栏开始-->
 					<#include "components/navbar.ftl" />
-					<!--导航栏开始-->
 
 					<!--内容开始-->
 					<div class="container">
@@ -25,7 +23,8 @@
 
 					</div>
 					<!--内容结束-->
-				    <#include "components/cfeditor/cfeditor.ftl" />
+					<!---->
+					<div id="load_cfeditor"></div>
 
 				</div>
 			</div>
@@ -33,6 +32,18 @@
 		<!-- /.container -->
 
 		<#include "components/footer.ftl" />
+		<script type="text/javascript">
+			function loadCFEditor() {
+				console.log("加载CFEditor：" + base_url + "/getCfeditor");
+				$.ajax({
+					url: base_url + "/getCfeditor",
+					success: function(result) {
+						//console.log(result);
+                        $("#load_cfeditor").html(result);
+					}
+				});
+			}
+		</script>
 	</body>
 
 </html>
