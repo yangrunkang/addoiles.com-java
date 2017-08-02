@@ -57,7 +57,7 @@
 			.change-label .label {
 				font-size: 100%
 			}
-			
+
 			.cf-toolbar .tb-bg ul li a,
 			.cf-toolbar .tb-alert ul li a {
 				padding: 0px 0px
@@ -102,28 +102,11 @@
 			.cf-toolbar .extra-part.open {
 				overflow-x: visible
 			}
-			
-			.bg-primary,
-			.bg-success,
-			.bg-info,
-			.bg-warning,
-			.bg-danger {
-				padding: 8px 10px
-			}
 		</style>
 	<body class="wysihtml5-supported">
-
-		<div class="container">
-
-			<div class="row">
 				<!--############ content_left ############-->
-				<div class="col-lg-9">
-
-					<div class="section well cf">
-
+					<div class="section well cf" style="width: 1000px;"><!--设置编辑器宽度-->
 						<div id="form-container-a794381c">
-							<form method="post" class="do-page-edit" action="/ccby/create/article">
-
 								<div class="row">
 									<div class="col-md-12">
 										<div class="btn-toolbar cf-toolbar" id="page-toolbar-a794381c" style="margin-bottom:4px;">
@@ -146,8 +129,8 @@
 											</div>
 
 											<div class="btn-group">
-												<a class="btn btn-default" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="blockquote" title=" 引用 " target="_blank" unselectable="on"><i class="fa fa-quote-left"></i></a>
-												<a class="btn btn-default" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="pre" title=" 代码块 " target="_blank" unselectable="on"><i class="fa fa-code"></i></a>
+												<a class="btn btn-default" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="blockquote" title="标题" target="_blank" unselectable="on">标题</a>
+												<a class="btn btn-default" data-wysihtml5-command="formatBlock" data-wysihtml5-command-value="pre" title="代码块" target="_blank" unselectable="on"><i class="fa fa-code"></i></a>
 												<a class="btn btn-default" data-wysihtml5-command="insertUnorderedList" title=" 无序列表 " target="_blank" unselectable="on"><i class="fa fa-list"></i></a>
 												<a class="btn btn-default" data-wysihtml5-command="insertOrderedList" title=" 有序列表 " target="_blank" unselectable="on"><i class="fa fa-list-ol"></i></a>
 
@@ -162,7 +145,11 @@
 											</div>
 
 											<div class="btn-group">
-												<a dialog="#addoiles_modal" class="btn btn-default" href="javascript:void(0);" title="点我，打发无聊时间，哈哈" >要加油哦</a>
+												<a id="saveContent" class="btn btn-default" title="编辑完成请点我,哈哈" >Show出去</a>
+											</div>
+
+											<div class="btn-group">
+												<a id="saveTempContent" class="btn btn-default" title="临时保存一下,稍后编辑" >临时保存^v^</a>
 											</div>
 											<!-- btn-group-->
 											<script>
@@ -180,14 +167,12 @@
 								</div>
 								<div class="row">
 									<div class="col-md-12">
-										<textarea name="content" id="id-page-editor-a794381c" class="cfeditor" placeholder="第一章节"></textarea>
+										<textarea name="content" id="id-page-editor-a794381c" class="cfeditor" placeholder="人生需要很多次的加油和相互鼓励，也需要沟通交流和理解,做你想做的,加油!"></textarea>
 									</div>
 								</div>
 
 						</div>
 					</div>
-					</form>
-				</div>
 				<script>
 					var href = '${base_url}/static/CFEditor/bootstrap/css/bootstrap-2014-10-23-e2373d4a.min.css'
 
@@ -205,8 +190,8 @@
 			</div>
 			<!--########## content_left_end ##########-->
 
-		</div>
-		</div>
+	
+
 		<div class="modal fade noautofocus" id="page-toolbar-a794381cLMID" tabindex="-1" role="dialog" aria-labelledby="page-toolbar-a794381cLMIDLabel" aria-hidden="true" style="display:none" data-wysihtml5-dialog="createLink">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -217,19 +202,16 @@
 
 					</div>
 					<div class="modal-body">
-
 						<input class="form-control" data-wysihtml5-dialog-field="href" value="http://">
-
 					</div>
 					<div class="modal-footer">
-
 						<button type="button" class="btn btn-default" data-dismiss="modal" data-wysihtml5-dialog-action="cancel">取消</button>
 						<button type="button" class="btn btn-primary" data-dismiss="modal" data-wysihtml5-dialog-action="save">确定（Enter）</button>
-
 					</div>
 
 				</div>
 			</div>
 		</div>
-
+		<!--哪个页面加载了编辑器,就引用哪个页面的js-->
+		<script type="text/javascript" src="${base_url}/js/oil_${pageName}.js"></script>
 	</body>

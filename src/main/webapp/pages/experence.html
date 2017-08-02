@@ -9,29 +9,16 @@
 			<div class="row clearfix">
 				<div class="col-md-12 column">
 					<#include "components/navbar.ftl" />
-
-					<!--内容开始-->
-					<div class="container">
-						<div class="panel panel-primary">
-							<div class="panel-heading">
-								<h3 class="panel-title">经历</h3>
-							</div>
-							<div class="panel-body">
-								我是经历
-							</div>
-						</div>
-
-					</div>
-					<!--内容结束-->
-					<!---->
+					<!--加载编辑器-->
 					<div id="load_cfeditor"></div>
-
+					
 				</div>
 			</div>
 		</div>
 		<!-- /.container -->
 
 		<#include "components/footer.ftl" />
+		<!--加载编辑器-->
 		<script type="text/javascript">
 			function loadCFEditor() {
 				console.log("加载CFEditor：" + base_url + "/getCfeditor");
@@ -39,11 +26,13 @@
 					url: base_url + "/getCfeditor",
 					success: function(result) {
 						//console.log(result);
-                        $("#load_cfeditor").html(result);
+						$("#load_cfeditor").html(result);
 					}
 				});
 			}
 		</script>
+		<!--引入oli_experence js-->
+		<script type="text/javascript" src="${base_url}/js/oil_experence.js"></script>
 	</body>
 
 </html>

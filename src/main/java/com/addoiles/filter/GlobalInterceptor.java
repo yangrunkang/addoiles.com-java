@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 @Component("globalInterceptor")
 public class GlobalInterceptor implements HandlerInterceptor {
 
+    private String pageName;
+
     public void afterCompletion(HttpServletRequest arg0,
                                 HttpServletResponse arg1, Object arg2, Exception arg3)
             throws Exception {
@@ -23,8 +25,16 @@ public class GlobalInterceptor implements HandlerInterceptor {
         if (null == modelAndView) {
             return;
         }
+        String viewName = modelAndView.getViewName();
         modelAndView.addObject("base_url", HttpUtils.getBasePath(request));
         modelAndView.addObject("project_name", request.getContextPath()); // eg. /path
+
+        if(SourceNameFilter.filterSourceUrls.contains(viewName)) {
+           //url在过滤器里面
+        }else{
+            pageName = viewName;
+        }
+        modelAndView.addObject("pageName",pageName);
     }
 
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response,
