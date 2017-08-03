@@ -9,29 +9,13 @@
 			<div class="row clearfix">
 				<div class="col-md-12 column">
 					<#include "components/navbar.ftl" />
-					<!--加载编辑器-->
-					<div id="load_cfeditor"></div>
-					
+					我是经历
 				</div>
 			</div>
 		</div>
 		<!-- /.container -->
 
 		<#include "components/footer.ftl" />
-		<!--加载编辑器-->
-		<script type="text/javascript">
-			//TODO 要异步加载,否则页面加载太慢
-			function loadCFEditor() {
-				console.log("加载CFEditor：" + base_url + "/getCfeditor");
-				$.ajax({
-					url: base_url + "/getCfeditor",
-					success: function(result) {
-						//console.log(result);
-						$("#load_cfeditor").html(result);
-					}
-				});
-			}
-		</script>
 		<!--引入oli_experence js-->
 		<script type="text/javascript" src="${base_url}/js/oil_experence.js"></script>
 	</body>
