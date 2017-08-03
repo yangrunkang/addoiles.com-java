@@ -23,4 +23,9 @@ public class OilArticleServiceImpl implements OilArticleService {
     public List<OilArticle> selectsLatest() {
         return oilArticleMapper.selectsLatest();
     }
+
+    @Override
+    public List<OilArticle> selectsByType(Integer type, Integer limitSize) {
+        return oilArticleMapper.selectsByType(type,limitSize);
+    }
 }

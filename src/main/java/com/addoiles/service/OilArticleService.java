@@ -16,4 +16,12 @@ public interface OilArticleService {
      */
     List<OilArticle> selectsLatest();
 
+    /**
+     * 根据类型查询文章
+     * @param type  1-梦想 2-经历 3-最近难点 4-吐槽
+     * @param limitSize 查询数量
+     * @return
+     */
+    List<OilArticle> selectsByType(Integer type,Integer limitSize);
+
 }

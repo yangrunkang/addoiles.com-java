@@ -3,102 +3,93 @@
 <html lang="en">
 	<#include "components/head.ftl" />
 
-	<style>
-	
-		/*div换行处理*/
-		div {
-			white-space: normal;
-			word-break: break-all;
-			word-wrap: break-word;
-		}
-		
-		/* ---- grid ---- */
-		.grid {
-			margin: 0 auto;
-		}
-		/* clearfix */
-		
-		.grid:after {
-			content: '';
-			display: none;
-			clear: both;
-		}
-		/* ---- grid-item ---- */
-		
-		.grid-item {
-			width: 160px;
-			height: 120px;
-			float: left;
-			background: #D26;
-			border: 2px solid #333;
-			border-color: hsla(0, 0%, 0%, 0.5);
-			border-radius: 5px;
-		}
-		
-		.grid-item--width2 {
-			width: 320px;
-		}
-		
-		.grid-item--width3 {
-			width: 480px;
-		}
-		
-		.grid-item--width4 {
-			width: 640px;
-		}
-		
-		.grid-item--height2 {
-			height: 200px;
-		}
-		
-		.grid-item--height3 {
-			height: 260px;
-		}
-		
-		.grid-item--height4 {
-			height: 360px;
-		}
-	</style>
+	<!--	<link rel="stylesheet" href="${base_url}/static/waterfull/css/bootstrap-2014-10-23-e2373d4a.min.css">
+	<link href="${base_url}/static/waterfull/css/font-awesome.min.css" rel="stylesheet">
+	<link rel="stylesheet" href="${base_url}/static/waterfull/css/app-2015-04-08-7f22b563.min.css">-->
 	</head>
-	<body>
-		<div class="container">
-			<!--导航栏开始-->
-			<#include "components/navbar.ftl" />
-			<!--导航栏结束-->
-			<div class="panel-body">
-				<div class="grid">
-					<div class="grid-item">3413234534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235341323452353413234523534132345235235</div>
-					<div class="grid-item grid-item--width2 grid-item--height2">153452345wer</div>
-					<div class="grid-item grid-item--height3">asdfadfafadfasfdfsdf</div>
-					<div class="grid-item grid-item--height2">sdfqehgdfasfasfasdfa</div>
-					<div class="grid-item grid-item--width3">12351351355</div>
-					<div class="grid-item">1353345 345 4</div>
-					<div class="grid-item">qrqwerqwerwrq</div>
-					<div class="grid-item grid-item--height2">qwerqwerq3sdfsdfsfa</div>
-					<div class="grid-item grid-item--width2 grid-item--height3"></div>
-					<div class="grid-item">ggrdgasfsfafsdwetewtasfdasd</div>
-					<div class="grid-item grid-item--height2">qwrqwrqwrqwefsfsdffeafsdfa</div>
-					<div class="grid-item">qwerqwfadgyrqeherehre</div>
-					<div class="grid-item grid-item--width2 grid-item--height2">qettertteqt</div>
-					<div class="grid-item grid-item--width2">lafsknfklfhkjlkdsf wefcsac</div>
-					<div class="grid-item">3e5657890-0987654321ertfdscxvbghytt</div>
-					<div class="grid-item grid-item--height2">dfasshjklj;kjhgbfvcxzcvcbnhgtref</div>
-					<div class="grid-item">dfasdfasdfasfdasdfa</div>
-					<div class="grid-item">asdxcvasgdadfasd</div>
-					<div class="grid-item grid-item--height3">6666666666666</div>
-					<div class="grid-item grid-item--height2">8888888888888888</div>
-					<div class="grid-item">8888888888888888</div>
-					<div class="grid-item">999999999999999</div>
-					<div class="grid-item grid-item--height2">3453453454dfgdfg</div>
-				</div>
-				<!-- /.container -->
-			</div>
-		</div>
 
-		<#include "components/footer.ftl" />
+	<body>
+
+		<div class="container">
+			<#include "components/navbar.ftl" />
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					Our Dream
+				</div>
+				<div class="panel-body panel-default">
+					<!--右边-->
+					<div class="col-md-4 col-sm-6">
+						<div class="panel panel-danger">
+							<div class="panel-heading text-info">
+								<h4 class="text-info"><strong>写下你的梦想</strong></h4>
+							</div>
+							<div class="panel-body">
+								<textarea class="form-control" placeholder="我的梦想是实现自己的价值，做自己喜欢做的事情" rows="5" name="dreamContent"></textarea>
+							</div>
+						</div>
+						<#list leftDreams as leftDream>
+							<div class="panel panel-success">
+								<div class="panel-heading text-info">
+									<h3><strong>${leftDream.title}</strong></h3>
+								</div>
+								<div class="panel-body">
+									<!--<p><span class="ftb18">Redis 虚拟内存方式无法启动</span><i class="fa fa-file-text-o" title="这是一篇文章"></i> 发布了！</p>
+										<p>该<span class="ftb18">文章</span>最早创建于 <span class="text-light" title="2015-04-04 00:35">04-04</span></p>-->
+									${leftDream.content}
+								</div>
+								<div class="panel-footer panel-success text-right">创建时间:<span class="text-light" title="${leftDream.createTime}">${leftDream.createTime}</span></div>
+							</div>
+						</#list>
+					</div>
+					<!--/.col-md-4 col-sm-6-->
+					<!--中间-->
+					<div class="col-md-4 col-sm-6">
+						<#list midDreams as midDream>
+							<div class="panel panel-warning">
+								<div class="panel-heading text-info">
+									<h3><strong>${midDream.title}</strong></h3>
+								</div>
+								<div class="panel-body">
+									${midDream.content}
+								</div>
+								<div class="panel-footer  panel-warning text-right">创建时间:<span class="text-light" title="${midDream.createTime}">${midDream.createTime}</span></div>
+							</div>
+						</#list>
+					</div>
+					<!--/.col-md-4 col-sm-6-->
+					<div class="clearfix visible-sm-block"></div>
+
+					<!--左边-->
+					<div class="col-md-4 col-sm-12">
+
+						<#list rightDreams as rightDream>
+							<div class="panel panel-danger">
+								<div class="panel-heading text-info">
+									<h3><strong>${rightDream.title}</strong></h3>
+								</div>
+								<div class="panel-body">
+									${rightDream.content}
+								</div>
+								<div class="panel-footer panel-danger text-right">创建时间:<span class="text-light" title="${rightDream.createTime}">${rightDream.createTime}</span></div>
+							</div>
+						</#list>
+					</div>
+					<!--/.col-md-4 col-sm-12-->
+				</div>
+				<div class="panel-footer">
+					<h5 class="text-center text-info">只显示最近 100 条</h5>
+				</div>
+			</div>
+
+			<#include "components/footer.ftl" />
+
+		</div>
 		<!--放到下面,jQuery就好了-->
-		<script type="text/javascript" src="${base_url}/static/waterfull/masonry.pkgd.min.js"></script>
 		<script type="text/javascript" src="${base_url}/js/oil_dream.js"></script>
+		<!---->
+		<!--		<script src="${base_url}/static/waterfull/jquery/jquery-1.11.1.min.js"></script>
+		<script src="${base_url}/static/waterfull/js/bootstrap-2015-02-14-44483d6f.min.js"></script>-->
+		<!--<script src="${base_url}/static/waterfull/js/app-2015-02-26-33e9bc3e.min.js"></script>-->
 	</body>
 
 </html>
