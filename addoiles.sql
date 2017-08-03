@@ -75,3 +75,11 @@ CREATE TABLE `oil_user` (
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `oil_text`;
+CREATE TABLE `oil_text` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `article_id` varchar(32) DEFAULT NULL COMMENT '文章ID',
+  `content` mediumtext COMMENT '存储超长文章',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
