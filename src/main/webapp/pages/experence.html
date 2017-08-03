@@ -2,21 +2,29 @@
 <!-- HTML5 文档类型-->
 <html lang="en">
 	<#include "components/head.ftl" />
+	<#include "components/sources/summernote.ftl" />
 	</head>
 
-	<body onload="loadCFEditor()">
+	<body>
 		<div class="container">
 			<div class="row clearfix">
 				<div class="col-md-12 column">
 					<#include "components/navbar.ftl" />
-					我是经历
+					<!--summernote编辑器-->
+					<div id="summernote"></div>
+					
+					
 				</div>
 			</div>
 		</div>
 		<!-- /.container -->
-
 		<#include "components/footer.ftl" />
 		<!--引入oli_experence js-->
+		<script>
+		    $(document).ready(function() {
+		       // $('#summernote').summernote();
+		    });
+		</script>
 		<script type="text/javascript" src="${base_url}/js/oil_experence.js"></script>
 	</body>
 
