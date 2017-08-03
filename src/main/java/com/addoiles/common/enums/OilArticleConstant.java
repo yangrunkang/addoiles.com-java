@@ -43,7 +43,9 @@ public class OilArticleConstant {
         DREAM(1),
         EXPERENCE(2),
         DIFFICULT(3),
-        COMPLAINT(4),;
+        COMPLAINT(4),
+        NEWS(5),
+        ;
 
         private final int value;
 

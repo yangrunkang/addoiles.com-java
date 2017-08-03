@@ -25,7 +25,7 @@ CREATE TABLE `oil_article` (
   `user_id` varchar(32) DEFAULT NULL COMMENT '用户ID',
   `title` varchar(10) DEFAULT NULL COMMENT '标题',
   `content` varchar(800) DEFAULT NULL COMMENT '内容',
-  `type` int(2) DEFAULT NULL COMMENT '1-梦想 2-经历 3-最近难点 4-吐槽',
+  `type` int(2) DEFAULT NULL COMMENT '1-梦想 2-经历 3-最近难点 4-吐槽 5-新闻',
   `delete_status` int(1) DEFAULT '1' COMMENT '0-删除 1-正常',
   `favourite` int(10) DEFAULT NULL COMMENT '喜爱',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',

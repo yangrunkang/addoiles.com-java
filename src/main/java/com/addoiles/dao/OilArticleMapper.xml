@@ -29,6 +29,7 @@
     select
     <include refid="Base_Column_List" />
     from oil_article
+    where delete_status = 1 and type = 5
     order by create_time desc limit 4
   </select>
 

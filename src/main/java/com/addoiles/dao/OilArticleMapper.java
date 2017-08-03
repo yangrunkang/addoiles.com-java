@@ -23,7 +23,7 @@ public interface OilArticleMapper {
 
     /**
      * 根据类型查询文章
-     * @param type  1-梦想 2-经历 3-最近难点 4-吐槽
+     * @param type  1-梦想 2-经历 3-最近难点 4-吐槽 5-新闻
      * @param limitSize 查询数量
      * @return
      */
