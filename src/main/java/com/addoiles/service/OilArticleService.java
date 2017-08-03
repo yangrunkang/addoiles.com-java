@@ -24,4 +24,6 @@ public interface OilArticleService {
      */
     List<OilArticle> selectsByType(Integer type,Integer limitSize);
 
+    Integer insert(OilArticle oilArticle);
+
 }

@@ -28,4 +28,9 @@ public class OilArticleServiceImpl implements OilArticleService {
     public List<OilArticle> selectsByType(Integer type, Integer limitSize) {
         return oilArticleMapper.selectsByType(type,limitSize);
     }
+
+    @Override
+    public Integer insert(OilArticle oilArticle) {
+        return oilArticleMapper.insert(oilArticle);
+    }
 }

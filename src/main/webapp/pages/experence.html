@@ -20,6 +20,7 @@
 		<#include "components/footer.ftl" />
 		<!--加载编辑器-->
 		<script type="text/javascript">
+			//TODO 要异步加载,否则页面加载太慢
 			function loadCFEditor() {
 				console.log("加载CFEditor：" + base_url + "/getCfeditor");
 				$.ajax({

@@ -21,10 +21,13 @@
 					<div class="col-md-4 col-sm-6">
 						<div class="panel panel-danger">
 							<div class="panel-heading text-info">
-								<h4 class="text-info"><strong>写下你的梦想</strong></h4>
+								<div class="input-group input-group-sm">
+									<input id="dreamTitle" class="form-control input-lg" placeholder="写下你的梦想" type="text" name="title" />
+									<span class="input-group-btn"><button id="showDreamBtn" class="btn btn-success" type="button">分享梦想</button></span>
+								</div>
 							</div>
 							<div class="panel-body">
-								<textarea class="form-control" placeholder="我的梦想是实现自己的价值，做自己喜欢做的事情" rows="5" name="dreamContent"></textarea>
+								<textarea class="form-control" placeholder="我的梦想是实现自己的价值，做自己喜欢做的事情" rows="5" id="dreamContent"></textarea>
 							</div>
 						</div>
 						<#list leftDreams as leftDream>
@@ -37,7 +40,11 @@
 										<p>该<span class="ftb18">文章</span>最早创建于 <span class="text-light" title="2015-04-04 00:35">04-04</span></p>-->
 									${leftDream.content}
 								</div>
-								<div class="panel-footer panel-success text-right">创建时间:<span class="text-light" title="${leftDream.createTime}">${leftDream.createTime}</span></div>
+								<div class="panel-footer panel-success text-right">创建时间:<span class="text-light" title="${leftDream.createTime}">
+									    <#if (leftDream.createTime) ?? && (leftDream.createTime != 0 ) >
+                                        	${leftDream.createTime?number?number_to_datetime}
+                                	    </#if>
+								</span></div>
 							</div>
 						</#list>
 					</div>
@@ -52,7 +59,11 @@
 								<div class="panel-body">
 									${midDream.content}
 								</div>
-								<div class="panel-footer  panel-warning text-right">创建时间:<span class="text-light" title="${midDream.createTime}">${midDream.createTime}</span></div>
+								<div class="panel-footer  panel-warning text-right">创建时间:<span class="text-light" title="${midDream.createTime}">
+										<#if (midDream.createTime) ?? && (midDream.createTime != 0 ) >
+                                        	${midDream.createTime?number?number_to_datetime}
+                                	    </#if>
+								</span></div>
 							</div>
 						</#list>
 					</div>
@@ -70,7 +81,10 @@
 								<div class="panel-body">
 									${rightDream.content}
 								</div>
-								<div class="panel-footer panel-danger text-right">创建时间:<span class="text-light" title="${rightDream.createTime}">${rightDream.createTime}</span></div>
+								<div class="panel-footer panel-danger text-right">创建时间:<span class="text-light" title="${rightDream.createTime}">
+										<#if (rightDream.createTime) ?? && (rightDream.createTime != 0 ) >
+                                        	${rightDream.createTime?number?number_to_datetime}
+                                	    </#if></span></div>
 							</div>
 						</#list>
 					</div>

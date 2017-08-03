@@ -1,4 +1,6 @@
 package com.addoiles.controller;
+
+import com.addoiles.common.enums.OilArticleConstant;
 import com.addoiles.entity.OilArticle;
 import com.addoiles.service.OilArticleService;
 import com.addoiles.service.OilShareService;
@@ -18,7 +20,6 @@ import static com.addoiles.service.build.PageConstant.*;
 public class PageController {
 
 
-
     @Autowired
     private OilArticleService oilArticleService;
 
@@ -31,8 +32,8 @@ public class PageController {
 
         modelAndView.setViewName(HOME_PAGE);
 
-        modelAndView.addObject("oilShares",oilShareService.selectHotShare());
-        modelAndView.addObject("oilArticles",oilArticleService.selectsLatest());
+        modelAndView.addObject("oilShares", oilShareService.selectHotShare());
+        modelAndView.addObject("oilArticles", oilArticleService.selectsLatest());
 
         return modelAndView;
     }
@@ -65,17 +66,17 @@ public class PageController {
     @RequestMapping(DREAMS_PAGE)
     public ModelAndView dreams(ModelAndView modelAndView) {
 
-        List<OilArticle> oilArticles = oilArticleService.selectsByType(1, 100);
+        List<OilArticle> oilArticles = oilArticleService.selectsByType(OilArticleConstant.DeleteStatus.NORMAL.getValue(), 100);
         //均分
         Integer articleSize = oilArticles.size();
         Integer columnSize = 3; //左-中-右 3栏
 
         Integer avgPerColumn = articleSize / columnSize;
-        Integer modNum = articleSize%columnSize;
-        if(modNum>=0){ //取余大于0,余数放在最后一栏
-            modelAndView.addObject("leftDreams",oilArticles.subList(0,avgPerColumn));
-            modelAndView.addObject("midDreams",oilArticles.subList(avgPerColumn,avgPerColumn*2));
-            modelAndView.addObject("rightDreams",oilArticles.subList(avgPerColumn*2,avgPerColumn*3 + modNum));
+        Integer modNum = articleSize % columnSize;
+        if (modNum >= 0) { //取余大于0,余数放在最后一栏
+            modelAndView.addObject("leftDreams", oilArticles.subList(0, avgPerColumn));
+            modelAndView.addObject("midDreams", oilArticles.subList(avgPerColumn, avgPerColumn * 2));
+            modelAndView.addObject("rightDreams", oilArticles.subList(avgPerColumn * 2, avgPerColumn * 3 + modNum));
             // TODO: 2017/8/3 余数应该均分到三列,否则会导致最后一列过长,稍后解决
         }
         modelAndView.setViewName(DREAMS_PAGE);
@@ -91,9 +92,6 @@ public class PageController {
     public String register() {
         return "components/login/" + REGISTER_PAGE;
     }
-
-
-
 
 
 }
