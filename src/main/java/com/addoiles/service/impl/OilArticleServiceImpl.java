@@ -20,8 +20,8 @@ public class OilArticleServiceImpl implements OilArticleService {
     private OilArticleMapper oilArticleMapper;
 
     @Override
-    public List<OilArticle> selectsLatest() {
-        return oilArticleMapper.selectsLatest();
+    public List<OilArticle> selectsLatest(Integer type) {
+        return oilArticleMapper.selectsLatest(type);
     }
 
     @Override

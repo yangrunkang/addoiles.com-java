@@ -11,7 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Objects;
 
-import static com.addoiles.service.build.PageConstant.LOGIN_PAGE;
+import static com.addoiles.common.PageConstant.LOGIN_PAGE;
 
 /**
  * Description:

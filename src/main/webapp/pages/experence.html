@@ -10,21 +10,28 @@
 			<div class="row clearfix">
 				<div class="col-md-12 column">
 					<#include "components/navbar.ftl" />
+					<button id="experenceBtn" type="button" class="btn btn-success btn-lg btn-block">开始书写我的经历</button>
+					<br>
 					<!--summernote编辑器-->
 					<div id="summernote"></div>
 					
-					
+					<br>
+					<!--内容-->
+					<#list oilExperenceList as oilExperence>
+						<!--TO-DO 遍历的时候，颜色变幻-->
+						<div class="experences panel panel-default">
+								<div class="panel-heading">
+									${oilExperence.oilText.content}
+								</div>
+						</div>
+					</#list>
+				
 				</div>
 			</div>
 		</div>
 		<!-- /.container -->
 		<#include "components/footer.ftl" />
 		<!--引入oli_experence js-->
-		<script>
-		    $(document).ready(function() {
-		       // $('#summernote').summernote();
-		    });
-		</script>
 		<script type="text/javascript" src="${base_url}/js/oil_experence.js"></script>
 	</body>
 

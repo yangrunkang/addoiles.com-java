@@ -1,12 +1,11 @@
 package com.addoiles.service.impl;
 
-import com.addoiles.dao.OilArticleMapper;
-import com.addoiles.entity.OilArticle;
-import com.addoiles.service.OilArticleService;
+import com.addoiles.dao.OilTextMapper;
+import com.addoiles.entity.OilText;
+import com.addoiles.service.OilTextService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * Description:
@@ -14,23 +13,19 @@ import java.util.List;
  * DateTime:  2017/7/28 9:28
  */
 @Service
-public class OilTextServiceImpl implements OilArticleService {
+public class OilTextServiceImpl implements OilTextService {
 
     @Autowired
-    private OilArticleMapper oilArticleMapper;
+    private OilTextMapper oilTextMapper;
+
 
     @Override
-    public List<OilArticle> selectsLatest(Integer type) {
-        return oilArticleMapper.selectsLatest(type);
+    public OilText selectByArticleId(String articleId) {
+        return oilTextMapper.selectByArticleId(articleId);
     }
 
     @Override
-    public List<OilArticle> selectsByType(Integer type, Integer limitSize) {
-        return oilArticleMapper.selectsByType(type,limitSize);
-    }
-
-    @Override
-    public Integer insert(OilArticle oilArticle) {
-        return oilArticleMapper.insert(oilArticle);
+    public Integer insert(OilText oilText) {
+        return oilTextMapper.insert(oilText);
     }
 }

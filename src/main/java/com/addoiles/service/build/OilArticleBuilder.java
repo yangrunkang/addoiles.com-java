@@ -2,6 +2,7 @@ package com.addoiles.service.build;
 
 import com.addoiles.common.enums.OilArticleConstant;
 import com.addoiles.entity.OilArticle;
+import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
 
 /**
@@ -13,14 +14,15 @@ public class OilArticleBuilder {
 
 
     /**
-     * 默认文章
+     * 梦想
      * @param oilArticle
      * @return
      */
-    public static void buildDefaultOilArticle(OilArticle oilArticle){
+    public static void buildOilArticle(OilArticle oilArticle, Integer type){
+        oilArticle.setArticleId(OilUtils.generateID());
         oilArticle.setCreateTime(TimeUtil.currentTime());
         oilArticle.setDeleteStatus(OilArticleConstant.DeleteStatus.NORMAL.getValue());
-        oilArticle.setType(OilArticleConstant.Type.DREAM.getValue());
+        oilArticle.setType(type);
     }
 
 

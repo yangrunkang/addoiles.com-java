@@ -2,19 +2,22 @@ package com.addoiles.controller;
 
 import com.addoiles.common.enums.OilArticleConstant;
 import com.addoiles.entity.OilArticle;
+import com.addoiles.entity.OilText;
 import com.addoiles.service.OilArticleService;
 import com.addoiles.service.OilShareService;
+import com.addoiles.service.OilTextService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
+import java.util.Objects;
 
-import static com.addoiles.service.build.PageConstant.*;
+import static com.addoiles.common.PageConstant.*;
 
 /**
- * 点击导航栏第一次进入时
+ * 点击导航栏第一次进入时,主要做初始化显示的
  */
 @Controller
 public class PageController {
@@ -26,6 +29,9 @@ public class PageController {
     @Autowired
     private OilShareService oilShareService;
 
+    @Autowired
+    private OilTextService oilTextService;
+
 
     @RequestMapping
     public ModelAndView home(ModelAndView modelAndView) {
@@ -33,7 +39,7 @@ public class PageController {
         modelAndView.setViewName(HOME_PAGE);
 
         modelAndView.addObject("oilShares", oilShareService.selectHotShare());
-        modelAndView.addObject("oilArticles", oilArticleService.selectsLatest());
+        modelAndView.addObject("oilArticles", oilArticleService.selectsLatest(OilArticleConstant.Type.NEWS.getValue()));
 
         return modelAndView;
     }
@@ -54,8 +60,18 @@ public class PageController {
     }
 
     @RequestMapping(EXPERENCE_PAGE)
-    public String experence() {
-        return EXPERENCE_PAGE;
+    public ModelAndView experence(ModelAndView modelAndView) {
+        modelAndView.setViewName(EXPERENCE_PAGE);
+        List<OilArticle> oilArticles = oilArticleService.selectsLatest(OilArticleConstant.Type.EXPERENCE.getValue());
+        oilArticles.forEach(oilArticle -> {
+            //OilArticleConstant.Type.EXPERENCE这个类型的,都会关联 oil_text表
+            OilText oilText = oilTextService.selectByArticleId(oilArticle.getArticleId());
+            if(Objects.nonNull(oilText)){
+                oilArticle.setOilText(oilText);
+            }
+        });
+        modelAndView.addObject("oilExperenceList",oilArticles);
+        return modelAndView;
     }
 
     @RequestMapping(FOURM_PAGE)

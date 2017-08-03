@@ -47,6 +47,12 @@ public class OilArticle {
      */
     private Integer createTime;
 
+    /**
+     * 文章关联的大文本
+     */
+    private OilText oilText;
+
+
     public String getId() {
         return id;
     }
@@ -123,5 +129,14 @@ public class OilArticle {
 
     public void setCreateTime(Integer createTime) {
         this.createTime = createTime;
+    }
+
+
+    public OilText getOilText() {
+        return oilText;
+    }
+
+    public void setOilText(OilText oilText) {
+        this.oilText = oilText;
     }
 }

@@ -14,7 +14,7 @@ public interface OilArticleService {
      * 最近文章
      * @return
      */
-    List<OilArticle> selectsLatest();
+    List<OilArticle> selectsLatest(Integer type);
 
     /**
      * 根据类型查询文章

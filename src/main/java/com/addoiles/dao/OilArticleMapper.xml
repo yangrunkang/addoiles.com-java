@@ -24,12 +24,12 @@
     from oil_article
     where id = #{id,jdbcType=VARCHAR}
   </select>
-  <select id="selectsLatest" resultMap="BaseResultMap" >
+  <select id="selectsLatest" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
 
     select
-    <include refid="Base_Column_List" />
+    <include refid="Base_Column_List"/>
     from oil_article
-    where delete_status = 1 and type = 5
+    where delete_status = 1 and type = ${type}
     order by create_time desc limit 4
   </select>
 

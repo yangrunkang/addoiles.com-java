@@ -18,7 +18,7 @@ public interface OilArticleMapper {
 
     OilArticle selectByPrimaryKey(String id);
 
-    List<OilArticle> selectsLatest();
+    List<OilArticle> selectsLatest(@Param("type")Integer type);
 
 
     /**
