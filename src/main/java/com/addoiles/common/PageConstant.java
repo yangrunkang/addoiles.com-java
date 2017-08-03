@@ -1,4 +1,4 @@
-package com.addoiles.service.build;
+package com.addoiles.common;
 
 /**
  * Description:
