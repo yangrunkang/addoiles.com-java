@@ -6,7 +6,7 @@ $(function() {
 		var dreamTitle = $("#dreamTitle").val();
 		var dreamContent = $("#dreamContent").val();
 		
-		if(checkParam(dreamTitle, "请输入你的梦想") && checkParam(dreamContent, "请输入你美好的梦想内容")) {
+		if(checkParam(dreamTitle, "写下你疯狂的梦想") && checkParam(dreamContent, "你的梦想是啥?丢失了吗?")) {
 			$.ajax({
 				url: base_url + "/addDream",
 				dataType: "json",
@@ -41,7 +41,15 @@ $(function() {
 	 */
 	function checkParam(data, msg) {
 		if(data == null || data == undefined || data == '') {
-			alert(msg);
+			$.confirm({
+				icon: 'fa fa-question',
+				theme: 'modern',
+				closeIcon: true,
+				animation: 'scale',
+				type: 'blue',
+				title: msg,
+				content: "不放弃,不抛弃,追梦之路,不孤单",
+			});
 			return false;
 		}
 		return true;

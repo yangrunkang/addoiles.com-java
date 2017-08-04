@@ -1,0 +1,4 @@
+1.引入css[注意加rel="stylesheet"]
+<link  rel="stylesheet" href="*****.css" />
+2.引入js[不用写type]
+<script src="****.js" ></script>

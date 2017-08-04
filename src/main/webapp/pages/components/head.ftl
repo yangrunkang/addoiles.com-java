@@ -6,20 +6,14 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="yangrunkang">
-    <!--<link rel="icon" href="../../favicon.ico">-->
     <title>addoiles.com</title>
     <!-- Bootstrap 核心 CSS 文件 -->
     <link href="${base_url}/static/bootstrap-3.3.7/css/bootstrap.css" rel="stylesheet">
     <!--font-awesome 核心我CSS 文件-->
     <link href="${base_url}/static/bootstrap-3.3.7/css/font-awesome.min.css" rel="stylesheet">
+    <link  rel="stylesheet" href="${base_url}/static/jquery-confirm-v3.2.3/jquery-confirm.min.css" />
 	<!--下面2个script放到head部分就不会有Cannot read property 'fn' of undefined这个错误了-->	
 	<!-- 在bootstrap.min.js 之前引入 -->
 	<script src="${base_url}/static/bootstrap-3.3.7/js/jquery.min.js"></script>
 	<!-- Bootstrap 核心 JavaScript 文件 -->
 	<script src="${base_url}/static/bootstrap-3.3.7/js/bootstrap.js"></script>
-	
-    <style>
-        body {
-            min-height: 2000px;
-        }
-    </style>

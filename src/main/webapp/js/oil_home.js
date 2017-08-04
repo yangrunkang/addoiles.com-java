@@ -6,8 +6,8 @@ $(function() {
 	$("#share_btn").click(function() {
 		var title = $("input[name='title']").val();
 		var content = $("textarea[name='content']").val();
-		
-		if(checkParam(title, "请输入标题") && checkParam(content, "请输入内容")) {
+
+		if(checkParam(title, "请输入动弹标题") && checkParam(content, "请输入动弹内容")) {
 			$.ajax({
 				url: base_url + "/share",
 				dataType: "json",
@@ -46,7 +46,15 @@ $(function() {
 	 */
 	function checkParam(data, msg) {
 		if(data == null || data == undefined || data == '') {
-			alert(msg);
+			$.confirm({
+				icon: 'fa fa-question',
+				theme: 'modern',
+				closeIcon: true,
+				animation: 'scale',
+				type: 'blue',
+				title: msg,
+				content: "不放弃,不抛弃,追梦之路,不孤单",
+			});
 			return false;
 		}
 		return true;

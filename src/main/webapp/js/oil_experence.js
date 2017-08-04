@@ -15,6 +15,19 @@ $(function() {
 		}else if(btnText == '保存'){
 			//1.调用接口保存文章并追加到下面
 			var content = $('#summernote').summernote('code');
+			if(content == null || content == undefined || content == '' || content =='<p><br></p>'){
+				$.confirm({
+					icon: 'fa fa-question',
+					theme: 'modern',
+					closeIcon: true,
+					animation: 'scale',
+					type: 'blue',
+					title: "我想知道你的精彩经历",
+					content: "不放弃,不抛弃,追梦之路,不孤单",
+				});
+				return;
+			}
+			
 			
 			$.ajax({
 				url: base_url + "/addExperence",
