@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import java.util.Objects;
 
 import static com.addoiles.common.PageConstant.LOGIN_PAGE;
@@ -30,13 +31,13 @@ public class OilUserController {
 
     @RequestMapping("userRegister")
     @ResponseBody
-    public ModelAndView register(ModelAndView modelAndView, OilUser oilUser) {
+    public ModelAndView register(ModelAndView modelAndView, OilUser oilUser, HttpSession session) {
         Integer register = oilUserService.register(OilUserBuilder.buildDefaultOilUser(oilUser));
-        if(register > 0){
-            modelAndView.addObject("tips","注册成功,请登录~O(∩_∩)O哈哈~");
+        if (register > 0) {
+            modelAndView.addObject("tips", "注册成功,请登录~O(∩_∩)O哈哈~");
             //注册成功重定向到登录
             modelAndView.setViewName("components/login/" + LOGIN_PAGE);
-        }else {
+        } else {
             //重定向到首页
             modelAndView.setViewName("redirect:/");
         }
@@ -44,14 +45,15 @@ public class OilUserController {
     }
 
     @RequestMapping("userLogin")
-    public ModelAndView userLogin(String email, String password,ModelAndView modelAndView) {
+    public ModelAndView userLogin(String email, String password, ModelAndView modelAndView, HttpSession session) {
 
         OilUser oilUser = oilUserService.login(email, password);
 
         if (Objects.isNull(oilUser)) {
             modelAndView.setViewName("redirect:components/login/" + LOGIN_PAGE);
         } else {
-            modelAndView.addObject("oilUser",oilUser);
+            session.setAttribute("user",oilUser); //保存到session
+            session.setMaxInactiveInterval(30*60); //存活30分钟
             modelAndView.setViewName("forward:");
         }
         return modelAndView;

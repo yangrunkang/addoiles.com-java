@@ -8,7 +8,8 @@
 		<!--jquery.validate-->
 		<script type="text/javascript" src="${base_url}/static/bootstrap-3.3.7/js/jquery.validate.min.js"></script>
 		<style type="text/css">
-			body, html {
+			body,
+			html {
 				position: absolute;
 				top: 0;
 				bottom: 0;
@@ -17,14 +18,14 @@
 				margin: 0;
 				padding: 0;
 			}
+			
 			#background {
 				position: fixed;
 				top: 0;
 				left: 0;
-
 				z-index: -100;
 			}
-
+			
 			#login_form {
 				display: block;
 			}
@@ -53,25 +54,15 @@
 	</head>
 
 	<body>
-	<canvas id="background"></canvas>
-		<!--  
-            基础知识：  
-            网格系统:通过行和列布局  
-            行必须放在container内  
-            手机用col-xs-*  
-            平板用col-sm-*  
-            笔记本或普通台式电脑用col-md-*  
-            大型设备台式电脑用col-lg-*  
-            为了兼容多个设备，可以用多个col-*-*来控制；  
-        -->
+		<canvas id="background"></canvas>
 		<div class="container">
 			<div class="form row">
 				<form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="login_form" action="${base_url}/userLogin" method="post">
 
-					<#if tips == null>
+					<#if tips== null>
 						<h3 class="form-title" style="color: white">登录</h3>
-					<#else>
-						<h1 class="form-title" style="color: #28a4c9">${tips}</h1>
+						<#else>
+							<h1 class="form-title" style="color: #28a4c9">${tips}</h1>
 					</#if>
 					<div class="col-sm-9 col-md-9">
 						<div class="form-group">
@@ -88,7 +79,7 @@
                         </label>
 							<#if tips == null>
 								<hr />
-								<a href="javascript:;" id="register_btn" class="" >创建一个账户</a>
+								<a href="javascript:;" id="register_btn" class="">创建一个账户</a>
 							</#if>
 						</div>
 						<div class="form-group">
@@ -100,7 +91,7 @@
 			</div>
 
 			<div class="form row">
-				<form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="register_form" action="${base_url}/userRegister"  method="post">
+				<form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="register_form" action="${base_url}/userRegister" method="post">
 					<h3 class="form-title">创建账户</h3>
 					<div class="col-sm-9 col-md-9">
 						<div class="form-group">

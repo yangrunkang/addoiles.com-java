@@ -38,22 +38,7 @@
 							</div>
 						</form>
 				
-						<#if oilUser != null>
-							<ul class="nav navbar-nav navbar-right">
-								<li>
-									<a href="#"><span class="glyphicon glyphicon-user"></span> ${oilUser.userName}</a>
-								</li>
-							</ul>
-							<#else>
-								<ul class="nav navbar-nav navbar-right">
-									<li>
-										<a href="${base_url}/register"><span class="glyphicon glyphicon-user"></span> 注册</a>
-									</li>
-									<li>
-										<a href="${base_url}/login"><span class="glyphicon glyphicon-log-in"></span> 登录</a>
-									</li>
-								</ul>
-						</#if>
+						${user_bar}
 				
 					</div>
 				</nav>
