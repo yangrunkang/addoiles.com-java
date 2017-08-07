@@ -60,7 +60,7 @@ CREATE TABLE `oil_share` (
   `delete_status` int(1) DEFAULT '1' COMMENT '0-删除 1-正常',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='无需注册所有人都可以';
---添加创建时间
+-- 添加创建时间
 alter table oil_share add create_time int(11) DEFAULT NULL COMMENT '创建时间';
 
 -- ----------------------------
