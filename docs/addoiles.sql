@@ -25,18 +25,18 @@ CREATE TABLE `oil_article` (
   `user_id` varchar(32) DEFAULT NULL COMMENT '用户ID',
   `title` varchar(10) DEFAULT NULL COMMENT '标题',
   `content` varchar(800) DEFAULT NULL COMMENT '内容',
-  `type` int(2) DEFAULT NULL COMMENT '1-梦想 2-经历 3-最近难点 4-吐槽 5-新闻',
+  `type` int(2) DEFAULT NULL COMMENT '1-梦想 2-经历 3-最近难点 4-吐槽',
   `delete_status` int(1) DEFAULT '1' COMMENT '0-删除 1-正常',
   `favourite` int(10) DEFAULT NULL COMMENT '喜爱',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文章';
--- 添加讨论次数
+-- 添加讨论次数并调整顺序
 alter table `oil_article` add `commit_times` int(10) DEFAULT NULL COMMENT '讨论次数';
--- 调整顺序
-ALTER TABLE `oil_article` CHANGE `commit_times` `commit_times` int(10) AFTER `favourite` ;
+ALTER TABLE `oil_article` CHANGE `commit_times` `commit_times` int(10) COMMENT '讨论次数' AFTER `favourite` ;
+
 -- 调整title长度
-alter table `oil_article`  modify column `title` varchar(30);
+alter table `oil_article`  modify column `title` varchar(30) COMMENT '标题';
 
 -- ----------------------------
 -- Table structure for oil_comment
@@ -50,6 +50,9 @@ CREATE TABLE `oil_comment` (
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='所有评论相关';
+-- 添加内容
+alter table `oil_comment` add `content` varchar(60) DEFAULT NULL COMMENT '内容';
+ALTER TABLE `oil_comment` CHANGE `content` `content` varchar(60) COMMENT '内容' AFTER `comment_id`;
 
 -- ----------------------------
 -- Table structure for oil_share
