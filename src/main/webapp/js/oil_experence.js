@@ -3,6 +3,9 @@ $(function() {
 	var experenceTitle = "无标题:题主很任性,经历很精彩";
 	var content = "";
 
+	/**
+	 * 保存经历按钮
+	 */
 	$("#experenceBtn").click(function() {
 		//1.改变按钮文字
 		var btnText = $("#experenceBtn").html();
@@ -95,21 +98,48 @@ $(function() {
 			},
 			success: function(result) {
 				if(result.code == 0) {
-					$(".experences:first").before("<div class='experences panel panel-default'>" +
-						"<div class='panel-heading'>" + experenceTitle + "</div>"+
-						"<div class='panel-body'>" + content + "</div></div>");
-					//2.销毁编辑器和改变按钮文字为'开始书写我的经历' {后期做，继续书写我的另一段奇妙的经历}
-					$("#experenceBtn").html("开始书写我的经历");
-					//3.清空内容并销毁编辑器
-					$('#summernote').summernote('code', '');
-					experenceTitle = "无标题:题主很任性,经历很精彩";
-					content = "";
-					$('#summernote').summernote('destroy');
+					var data = result.data;
+					var experenceHtml = "<div class='experences panel panel-default'>" +
+										"<div class='panel-heading'>" + data.title + "</div>"+
+										"<div class='panel-body'>" + data.content + "</div>"+
+									    "<div class='panel-footer'>"+
+											"<div class='input-group'>"+
+												"<input type='text' class='form-control' placeholder='Search for...'>"+
+												"<span class='input-group-btn'>"+
+											        "<a class='btn btn-default' href='#'>评论</a>"+
+										     	"</span>"+
+											"</div>"+
+										"</div>"+
+									"</div>";
+					
+					//修复网站初始化时,没有数据的Bug
+					if($(".experences:first").length == 0){ //TO-DO 可以根据length做不同的背景颜色设置
+						$("#exp_guo").after(experenceHtml);
+						initExperence();
+						return;
+					}
+					$(".experences:first").before(experenceHtml);
+					initExperence();
 				} else {
 					alert("保存失败");
 				}
 			}
 		});
 	}
+	/**
+	 * 初始化编辑器
+	 * 	成员变量初始化
+	 *  编辑器初始化
+	 */
+	function initExperence(){
+		//2.销毁编辑器和改变按钮文字为'开始书写我的经历' {后期做，继续书写我的另一段奇妙的经历}
+		$("#experenceBtn").html("开始书写我的经历");
+		//3.清空内容并销毁编辑器
+		$('#summernote').summernote('code', '');
+		experenceTitle = "无标题:题主很任性,经历很精彩";
+		content = "";
+		$('#summernote').summernote('destroy');
+	}
+	
 
 });

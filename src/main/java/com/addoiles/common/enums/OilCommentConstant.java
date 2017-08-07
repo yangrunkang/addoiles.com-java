@@ -8,7 +8,7 @@ package com.addoiles.common.enums;
  * author:      Yangrunkang
  * Createdate:  2017/7/20 14:59
  */
-public class OilArticleConstant {
+public class OilCommentConstant {
 
     /**
      * 删除状态
@@ -18,12 +18,12 @@ public class OilArticleConstant {
         /**
          * 正常
          */
-        NORMAL(1),
+        NORMAL(0),
 
         /**
          * 删除
          */
-        DELETED(0),;
+        DELETED(1),;
 
         private final int value;
 
@@ -34,28 +34,6 @@ public class OilArticleConstant {
         public int getValue() {
             return value;
         }
-    }
-
-    /**
-     * 类型
-     */
-    public enum Type {
-        DREAM(1),
-        EXPERENCE(2),
-        DIFFICULT(3),
-        COMPLAINT(4),
-        ;
-
-        private final int value;
-
-        Type(int value) {
-            this.value = value;
-        }
-
-        public int getValue() {
-            return value;
-        }
-
     }
 
 }

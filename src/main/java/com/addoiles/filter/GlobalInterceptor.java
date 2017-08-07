@@ -80,7 +80,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
      */
     private String loginOk(String userName) {
         //TODO 超链接做注销功能
-        return "<ul class='nav navbar-nav navbar-right'><li><a href='#'><span class='glyphicon glyphicon-user'></span>" + userName + "</a></li><li><a href='#注销功能'><span class='glyphicon glyphicon-user'></span>注销</a></li></ul>";
+        return "<ul class='nav navbar-nav navbar-right'><li><a href='#'><span class='glyphicon glyphicon-log-in'></span>" + userName + "</a></li><li><a href='#注销功能'><span class='glyphicon glyphicon-user'></span>注销</a></li></ul>";
     }
 
     private String noUser(){

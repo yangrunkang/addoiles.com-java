@@ -42,7 +42,7 @@ public class OilShareController {
         } catch (Exception e) {
             oilResponse.setCode(ErrorCode.SYSTEM_ERROR.getCode());
             oilResponse.setMessage(JsonUtils.toJson(e));
-            logger.info("{}", JsonUtils.toJson(e));
+            logger.error("{}", e.getMessage());
         }
         return oilResponse;
     }

@@ -14,21 +14,34 @@
 					<br>
 					<!--summernote编辑器-->
 					<div id="summernote"></div>
-					
-					<br>
+
+					<br id="exp_guo"><!--锅-->
 					<!--内容-->
+					<!--TO-DO 遍历的时候，颜色变幻-->
 					<#list oilExperenceList as oilExperence>
-						<!--TO-DO 遍历的时候，颜色变幻-->
 						<div class="experences panel panel-default">
-								<div class="panel-heading">
-									${oilExperence.title}
+							<div class="panel-heading">
+								${oilExperence.title}
+							</div>
+							<div class="panel-body">
+								${oilExperence.oilText.content}
+								<br>
+								javascript:commit(' + ${oilExperence.userId} + ',' + ${oilExperence.articleId} +',' + getExperenceComment(${oilExperence.id}) + ')
+							</div>
+							
+							<div class="panel-footer">
+								<!--这个动态是个循环-->
+								<span class="label label-danger">SpanTest</span>
+								<div class="input-group">
+									<input id="${oilExperence.articleId}" type="text" class="form-control" placeholder="写下你此时的感受">
+									<span class="input-group-btn">
+							        	<a class="btn btn-default ${oilExperence.articleId}" href="javascript:commit('${oilExperence.userId}','${oilExperence.articleId}','${oilExperence.articleId}')">评论</a>
+							     	</span>
 								</div>
-								<div class="panel-body">
-									${oilExperence.oilText.content}
-								</div>
+							</div>
 						</div>
 					</#list>
-				
+
 				</div>
 			</div>
 		</div>
@@ -36,6 +49,35 @@
 		<#include "components/footer.ftl" />
 		<!--引入oli_experence js-->
 		<script type="text/javascript" src="${base_url}/js/oil_experence.js"></script>
+		<script>
+			function commit(userId, articleId, inputId){
+				var content = $("#"+inputId).val();
+				if(content == null || content == undefined || content == '') {
+					$.alert("评论内容不能为空");
+					return;
+				}
+				$.ajax({
+					url: base_url + "/commit",
+					dataType: "json",
+					type: "post",
+					data: {
+						"userId": userId,
+						"articleId": articleId,
+						"content": content
+					},
+					success: function(result) {
+						if(result.code == 0){
+							$("#"+inputId).val(''); //清空评论框
+							$(".btn.btn-default" + articleId).parents().parents("span.label").val(result.data.content);
+							console.log($(".btn.btn-default" + articleId).parents());
+							console.log($(".btn.btn-default" + articleId).parents().parents("span.label"));
+							$(".btn.btn-default" + articleId).parents().parents("span.label").val('234535234523453453');
+						}
+					}
+				});
+			}
+	
+		</script>
 	</body>
 
 </html>

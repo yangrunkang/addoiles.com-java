@@ -4,13 +4,15 @@
   <resultMap id="BaseResultMap" type="com.addoiles.entity.OilComment" >
 
     <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="article_id" property="articleId" jdbcType="VARCHAR" />
     <result column="comment_id" property="commentId" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
     <result column="delete_status" property="deleteStatus" jdbcType="INTEGER" />
     <result column="user_id" property="userId" jdbcType="VARCHAR" />
     <result column="create_time" property="createTime" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, comment_id, delete_status, user_id, create_time
+    id, article_id,comment_id,content, delete_status, user_id, create_time
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select 
@@ -25,9 +27,9 @@
   </delete>
   <insert id="insert" parameterType="com.addoiles.entity.OilComment" >
 
-    insert into oil_comment (id, comment_id, delete_status, 
+    insert into oil_comment (id,article_id, comment_id,content, delete_status,
       user_id, create_time)
-    values (#{id,jdbcType=VARCHAR}, #{commentId,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=VARCHAR},#{articleId,jdbcType=VARCHAR},#{commentId,jdbcType=VARCHAR},#{content,jdbcType=VARCHAR},#{deleteStatus,jdbcType=INTEGER},
       #{userId,jdbcType=VARCHAR}, #{createTime,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.addoiles.entity.OilComment" >
@@ -37,8 +39,14 @@
       <if test="id != null" >
         id,
       </if>
+      <if test="articleId != null" >
+        article_id,
+      </if>
       <if test="commentId != null" >
         comment_id,
+      </if>
+      <if test="content != null" >
+        content,
       </if>
       <if test="deleteStatus != null" >
         delete_status,
@@ -54,8 +62,14 @@
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
+      <if test="articleId != null" >
+        articleId,
+      </if>
       <if test="commentId != null" >
         #{commentId,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null" >
+        content,
       </if>
       <if test="deleteStatus != null" >
         #{deleteStatus,jdbcType=INTEGER},

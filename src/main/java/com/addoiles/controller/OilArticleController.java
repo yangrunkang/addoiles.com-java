@@ -73,10 +73,9 @@ public class OilArticleController {
 
             oilResponse.setData(oilText);
         } catch (Exception e) {
-            e.printStackTrace();
             oilResponse.setCode(ErrorCode.SYSTEM_ERROR.getCode());
             oilResponse.setMessage(JsonUtils.toJson(e));
-            logger.error("{}", JsonUtils.toJson(e));
+            logger.error("{}", e.getMessage());
         }
         return oilResponse;
     }

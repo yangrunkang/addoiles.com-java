@@ -4,3 +4,6 @@
 
 new features:
 # http://www.bootcss.com/p/jquery.pin/ 钉在右下角,用于用户反馈
+# 第三方登录
+# 支付宝
+# 首页可以考虑增加美文

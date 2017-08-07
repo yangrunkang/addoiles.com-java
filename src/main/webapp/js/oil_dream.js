@@ -17,21 +17,31 @@ $(function() {
 				},
 				success: function(result) {
 					if(result.code == 0) {
+						var data = result.data;
+						var dreamHtml = "<div class='panel panel-success'>"+
+											"<div class='panel-heading text-info'><h3><strong>" + data.title + "</strong></h3></div>"+
+											"<div class='panel-body'>" + data.content + "</div>"+
+											"<div class='panel-footer panel-success text-right'>创建时间:<span class='text-light' title='${leftDream.createTime}'>"+ new Date().Format('yyyy-MM-dd hh:mm:ss')+"</span></div>"+
+										"</div>";
+						
 						//追加内容
-						var oilDream = result.data;
-						$(".panel.panel-success:first").before("<div class='panel panel-success'>"
-						+"<div class='panel-heading text-info'><h3><strong>" + oilDream.title + "</strong></h3></div>"
-						+"<div class='panel-body'>" + oilDream.content + "</div>"
-						+"<div class='panel-footer panel-success text-right'>创建时间:<span class='text-light' title='${leftDream.createTime}'>"+ new Date().Format('yyyy-MM-dd hh:mm:ss')+"</span></div></div>");
-						//清空输入框内容
-						$("#dreamTitle").val('');
-						$("#dreamContent").val('');
+						$(".panel.panel-success:first").before(dreamHtml);
+						initDream();
+						
 					}
 				}
 			});
 		}
 	});
 	
+	/**
+	 * 初始化梦想墙相关元素
+	 */
+	function initDream(){
+		//清空输入框内容
+		$("#dreamTitle").val('');
+		$("#dreamContent").val('');
+	}
 	
 	/**
 	 * 参数检查,提示内容
@@ -56,7 +66,10 @@ $(function() {
 	}
 	
 	
-	
+	/**
+	 * 格式化时间戳
+	 * @param {Object} fmt
+	 */
 	Date.prototype.Format = function(fmt) { //author: meizz 
 		var o = {
 			"M+": this.getMonth() + 1, //月份 
@@ -72,4 +85,7 @@ $(function() {
 			if(new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
 		return fmt;
 	}
+	
+	
+	
 });

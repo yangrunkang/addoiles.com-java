@@ -39,7 +39,7 @@ public class PageController {
         modelAndView.setViewName(HOME_PAGE);
 
         modelAndView.addObject("oilShares", oilShareService.selectHotShare());
-        modelAndView.addObject("oilArticles", oilArticleService.selectsLatest(OilArticleConstant.Type.NEWS.getValue()));
+        modelAndView.addObject("oilArticles", oilArticleService.selectsLatest(OilArticleConstant.Type.EXPERENCE.getValue()));
 
         return modelAndView;
     }
@@ -62,15 +62,15 @@ public class PageController {
     @RequestMapping(EXPERENCE_PAGE)
     public ModelAndView experence(ModelAndView modelAndView) {
         modelAndView.setViewName(EXPERENCE_PAGE);
-        List<OilArticle> oilArticles = oilArticleService.selectsLatest(OilArticleConstant.Type.EXPERENCE.getValue());
-        oilArticles.forEach(oilArticle -> {
+        List<OilArticle> experenceArticles = oilArticleService.selectsLatest(OilArticleConstant.Type.EXPERENCE.getValue());
+        experenceArticles.forEach(oilArticle -> {
             //OilArticleConstant.Type.EXPERENCE这个类型的,都会关联 oil_text表
             OilText oilText = oilTextService.selectByArticleId(oilArticle.getArticleId());
             if(Objects.nonNull(oilText)){
                 oilArticle.setOilText(oilText);
             }
         });
-        modelAndView.addObject("oilExperenceList",oilArticles);
+        modelAndView.addObject("oilExperenceList",experenceArticles);
         return modelAndView;
     }
 

@@ -49,10 +49,13 @@ CREATE TABLE `oil_comment` (
   `user_id` varchar(32) DEFAULT NULL COMMENT '用户ID',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='所有评论相关';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='所有评论相关 此表只做oil_article表涉及到的几个类型评论';
 -- 添加内容
 alter table `oil_comment` add `content` varchar(60) DEFAULT NULL COMMENT '内容';
 ALTER TABLE `oil_comment` CHANGE `content` `content` varchar(60) COMMENT '内容' AFTER `comment_id`;
+-- 添加文章ID
+alter table `oil_comment` add `article_id` varchar(32) DEFAULT NULL COMMENT '文章ID';
+ALTER TABLE `oil_comment` CHANGE `article_id` `article_id` varchar(32) COMMENT '文章ID' AFTER `id`;
 
 -- ----------------------------
 -- Table structure for oil_share
