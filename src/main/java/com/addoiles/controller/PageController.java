@@ -44,20 +44,20 @@ public class PageController {
         return modelAndView;
     }
 
-    @RequestMapping(ADDOIL_PAGE)
-    public String addoil() {
-        return ADDOIL_PAGE;
-    }
-
-    @RequestMapping(COMPLAINT_PAGE)
-    public String complaint() {
-        return COMPLAINT_PAGE;
-    }
-
-    @RequestMapping(DIFFICULT_PAGE)
-    public String difficult() {
-        return DIFFICULT_PAGE;
-    }
+//    @RequestMapping(ADDOIL_PAGE)
+//    public String addoil() {
+//        return ADDOIL_PAGE;
+//    }
+//
+//    @RequestMapping(COMPLAINT_PAGE)
+//    public String complaint() {
+//        return COMPLAINT_PAGE;
+//    }
+//
+//    @RequestMapping(DIFFICULT_PAGE)
+//    public String difficult() {
+//        return DIFFICULT_PAGE;
+//    }
 
     @RequestMapping(EXPERENCE_PAGE)
     public ModelAndView experence(ModelAndView modelAndView) {

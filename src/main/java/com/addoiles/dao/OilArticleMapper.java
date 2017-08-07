@@ -7,19 +7,15 @@ import java.util.List;
 
 public interface OilArticleMapper {
 
-    int deleteByPrimaryKey(String id);
-
+    int deleteByPrimaryKey(String articleId);
 
     int insert(OilArticle record);
 
-
     int insertSelective(OilArticle record);
 
-
-    OilArticle selectByPrimaryKey(String id);
+    OilArticle selectByPrimaryKey(String articleId);
 
     List<OilArticle> selectsLatest(@Param("type")Integer type);
-
 
     /**
      * 根据类型查询文章
@@ -29,9 +25,7 @@ public interface OilArticleMapper {
      */
     List<OilArticle> selectsByType(@Param("type") Integer type, @Param("limitSize") Integer limitSize);
 
-
     int updateByPrimaryKeySelective(OilArticle record);
-
 
     int updateByPrimaryKey(OilArticle record);
 }

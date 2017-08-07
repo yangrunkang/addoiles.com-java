@@ -35,6 +35,8 @@ CREATE TABLE `oil_article` (
 alter table `oil_article` add `commit_times` int(10) DEFAULT NULL COMMENT '讨论次数';
 -- 调整顺序
 ALTER TABLE `oil_article` CHANGE `commit_times` `commit_times` int(10) AFTER `favourite` ;
+-- 调整title长度
+alter table `oil_article`  modify column `title` varchar(30);
 
 -- ----------------------------
 -- Table structure for oil_comment

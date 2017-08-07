@@ -18,25 +18,25 @@
 							<li>
 								<a href="${base_url}/experence">经历分享</a>
 							</li>
-							<li>
+<!--						<li>
 								<a href="${base_url}/addoil">鼓劲打气</a>
-							</li>
-							<li>
+							</li>-->
+							<!--<li>
 								<a href="${base_url}/difficult">最近难点</a>
-							</li>
-							<li>
+							</li>-->
+							<!--<li>
 								<a href="${base_url}/complaint">抱怨一下</a>
-							</li>
+							</li>-->
 						</ul>
 				
-						<form class="navbar-form navbar-right" role="search">
+						<!--<form class="navbar-form navbar-right" role="search">
 							<div class="input-group input-group-sm">
 								<input type="text" class="form-control" placeholder="搜索..">
 								<span class="input-group-btn">
 				                    <button class="btn btn-default" type="button">Go!</button>
 				                </span>
 							</div>
-						</form>
+						</form>-->
 				
 						${user_bar}
 				

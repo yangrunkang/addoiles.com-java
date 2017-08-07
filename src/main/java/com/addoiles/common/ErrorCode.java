@@ -1,5 +1,7 @@
 package com.addoiles.common;
 
+import com.addoiles.exception.BusinessException;
+
 /**
  * Description:
  * All rights Reserved, Designed By

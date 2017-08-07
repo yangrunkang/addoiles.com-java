@@ -35,7 +35,7 @@ public class OilArticleController {
 
     @RequestMapping("addDream")
     @ResponseBody
-    public OilResponse addDream(String dreamTitle,String dreamContent){
+    public OilResponse addDream(String dreamTitle, String dreamContent) {
         OilResponse oilResponse = new OilResponse();
         try {
             OilArticle oilArticle = new OilArticle();
@@ -44,10 +44,11 @@ public class OilArticleController {
             oilArticle.setContent(dreamContent);
             oilArticleService.insert(oilArticle);
             oilResponse.setData(oilArticle);
-        }catch (Exception e){
+        } catch (Exception e) {
+            e.printStackTrace();
             oilResponse.setCode(ErrorCode.SYSTEM_ERROR.getCode());
             oilResponse.setMessage(JsonUtils.toJson(e));
-            logger.info("{}", JsonUtils.toJson(e));
+            logger.error("{}", JsonUtils.toJson(e));
         }
 
         return oilResponse;
@@ -55,11 +56,14 @@ public class OilArticleController {
 
     @RequestMapping("addExperence")
     @ResponseBody
-    public OilResponse addExperence(String content){
+    public OilResponse addExperence(String content, String title) {
         OilResponse oilResponse = new OilResponse();
         try {
             OilArticle oilArticle = new OilArticle();
-            OilArticleBuilder.buildOilArticle(oilArticle,OilArticleConstant.Type.EXPERENCE.getValue());
+            OilArticleBuilder.buildOilArticle(oilArticle, OilArticleConstant.Type.EXPERENCE.getValue());
+            oilArticle.setTitle(title);
+            oilArticle.setContent(content.substring(0, content.length() >= 50 ? 50 : content.length()).concat("..."));
+
             //关联到oil_text
             OilText oilText = new OilText();
             oilText.setArticleId(oilArticle.getArticleId());
@@ -68,14 +72,14 @@ public class OilArticleController {
             oilTextService.insert(oilText);
 
             oilResponse.setData(oilText);
-        }catch (Exception e){
+        } catch (Exception e) {
+            e.printStackTrace();
             oilResponse.setCode(ErrorCode.SYSTEM_ERROR.getCode());
             oilResponse.setMessage(JsonUtils.toJson(e));
-            logger.info("{}", JsonUtils.toJson(e));
+            logger.error("{}", JsonUtils.toJson(e));
         }
         return oilResponse;
     }
-
 
 
 }

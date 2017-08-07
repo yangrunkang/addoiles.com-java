@@ -1,4 +1,6 @@
-package com.addoiles.common;
+package com.addoiles.exception;
+
+import com.addoiles.common.ErrorCode;
 
 /**
  * Description:
