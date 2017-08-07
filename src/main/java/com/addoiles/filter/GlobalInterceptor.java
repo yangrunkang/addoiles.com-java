@@ -60,6 +60,9 @@ public class GlobalInterceptor implements HandlerInterceptor {
      * 处理session
      */
     private void handleSession(HttpSession session, ModelAndView modelAndView) {
+
+        if(modelAndView == null) return; //解决ajax请求,modelAndView为空,导致ajax无返回结果的问题
+
         OilUser user = (OilUser)session.getAttribute("user");
         //user_bar主要负责用户登录注销状态工作
         if(Objects.nonNull(user)){
