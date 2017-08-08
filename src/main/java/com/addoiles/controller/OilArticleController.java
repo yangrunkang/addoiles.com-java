@@ -71,7 +71,7 @@ public class OilArticleController {
             oilArticleService.insert(oilArticle);
             oilTextService.insert(oilText);
 
-            oilResponse.setData(oilText);
+            oilResponse.setData(oilArticle);
         } catch (Exception e) {
             oilResponse.setCode(ErrorCode.SYSTEM_ERROR.getCode());
             oilResponse.setMessage(JsonUtils.toJson(e));
