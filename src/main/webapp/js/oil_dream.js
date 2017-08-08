@@ -6,7 +6,7 @@ $(function() {
 		var dreamTitle = $("#dreamTitle").val();
 		var dreamContent = $("#dreamContent").val();
 		
-		if(checkParam(dreamTitle, "写下你疯狂的梦想") && checkParam(dreamContent, "你的梦想是啥?丢失了吗?")) {
+		if(checkParam(dreamTitle, "写下你疯狂的梦想",null) && checkParam(dreamContent, "你的梦想是啥?丢失了吗?",null)) {
 			$.ajax({
 				url: base_url + "/addDream",
 				dataType: "json",
@@ -27,7 +27,8 @@ $(function() {
 						//追加内容
 						$(".panel.panel-success:first").before(dreamHtml);
 						initDream();
-						
+					}else{
+						oilAlert("抱歉,服务器故障,给您带来麻烦了")
 					}
 				}
 			});
@@ -42,50 +43,5 @@ $(function() {
 		$("#dreamTitle").val('');
 		$("#dreamContent").val('');
 	}
-	
-	/**
-	 * 参数检查,提示内容
-	 * TODO: 后期改进提示方式，更加友好点
-	 * @param {Object} data
-	 * @param {Object} msg
-	 */
-	function checkParam(data, msg) {
-		if(data == null || data == undefined || data == '') {
-			$.confirm({
-				icon: 'fa fa-question',
-				theme: 'modern',
-				closeIcon: true,
-				animation: 'scale',
-				type: 'blue',
-				title: msg,
-				content: "不放弃,不抛弃,追梦之路,不孤单",
-			});
-			return false;
-		}
-		return true;
-	}
-	
-	
-	/**
-	 * 格式化时间戳
-	 * @param {Object} fmt
-	 */
-	Date.prototype.Format = function(fmt) { //author: meizz 
-		var o = {
-			"M+": this.getMonth() + 1, //月份 
-			"d+": this.getDate(), //日 
-			"h+": this.getHours(), //小时 
-			"m+": this.getMinutes(), //分 
-			"s+": this.getSeconds(), //秒 
-			"q+": Math.floor((this.getMonth() + 3) / 3), //季度 
-			"S": this.getMilliseconds() //毫秒 
-		};
-		if(/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-		for(var k in o)
-			if(new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
-		return fmt;
-	}
-	
-	
-	
+
 });

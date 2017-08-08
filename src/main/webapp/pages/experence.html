@@ -26,7 +26,6 @@
 							<div class="panel-body">
 								${oilExperence.oilText.content}
 								<br>
-								javascript:commit(' + ${oilExperence.userId} + ',' + ${oilExperence.articleId} +',' + getExperenceComment(${oilExperence.id}) + ')
 							</div>
 							
 							<div class="panel-footer">
@@ -49,11 +48,12 @@
 		<#include "components/footer.ftl" />
 		<!--引入oli_experence js-->
 		<script type="text/javascript" src="${base_url}/js/oil_experence.js"></script>
+		<script type="text/javascript" src="${base_url}/js/common.js"></script>
 		<script>
 			function commit(userId, articleId, inputId){
 				var content = $("#"+inputId).val();
 				if(content == null || content == undefined || content == '') {
-					$.alert("评论内容不能为空");
+					oilAlert("评论内容不能为空");
 					return;
 				}
 				$.ajax({

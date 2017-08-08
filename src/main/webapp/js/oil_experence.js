@@ -23,20 +23,11 @@ $(function() {
 			//1.验证内容
 			content = $('#summernote').summernote('code');
 			if(content == null || content == undefined || content == '' || content == '<p><br></p>') {
-				$.confirm({
-					icon: 'fa fa-question',
-					theme: 'modern',
-					closeIcon: true,
-					animation: 'scale',
-					type: 'blue',
-					title: "我想知道你的精彩经历",
-					content: "不放弃,不抛弃,追梦之路,不孤单",
-				});
+				oilConfirm("我想知道你的精彩经历","不放弃,不抛弃,追梦之路,不孤单");
 				return;
 			}
-			//2.填写经历标题
-			var experenceName = "题主很任性,精力很精彩"
-			$.confirm({
+			//2.保存内容(需要填写标题,所以搞个确认框)
+			$.confirm({ //插件使用
 				title: '总结下吧',
 				content: '' +
 					'<form action="" class="formName">' +
@@ -50,12 +41,13 @@ $(function() {
 						text: '我写好了',
 						btnClass: 'btn-blue',
 						action: function() {
-							var name = this.$content.find('.name').val();
+							var name = this.$content.find('.name').val();//经历标题
 							if(!name) {
-								$.alert('呜呜呜,没有名字啊,我读书少,不要骗我啊');
+								oilAlert('呜呜呜,没有名字啊,我读书少,不要骗我啊')
 								return false;
 							}
 							//3.调用接口保存文章并追加到下面
+							console.log("name:" + name);
 							experenceTitle = name;
 							saveExperence();
 						}
@@ -87,7 +79,6 @@ $(function() {
 	 * 保存经历到服务器
 	 */
 	function saveExperence() {
-		console.log("content:" + content + ",experenceTitle:" + experenceTitle);
 		$.ajax({
 			url: base_url + "/addExperence",
 			dataType: "json",
@@ -121,7 +112,7 @@ $(function() {
 					$(".experences:first").before(experenceHtml);
 					initExperence();
 				} else {
-					alert("保存失败");
+					oilAlert("保存失败")
 				}
 			}
 		});

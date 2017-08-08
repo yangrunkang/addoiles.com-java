@@ -7,7 +7,7 @@ $(function() {
 		var title = $("input[name='title']").val();
 		var content = $("textarea[name='content']").val();
 
-		if(checkParam(title, "请输入动弹标题") && checkParam(content, "请输入动弹内容")) {
+		if(checkParam(title, "请输入动弹标题",null) && checkParam(content, "请输入动弹内容",null)) {
 			$.ajax({
 				url: base_url + "/share",
 				dataType: "json",
@@ -31,32 +31,12 @@ $(function() {
 						//清空输入框内容
 						$("input[name='title']").val('');
 						$("textarea[name='content']").val('')
+					}else{
+						oilAlert("发布动弹失败")
 					}
 				}
 			});
 		}
 
 	});
-
-	/**
-	 * 参数检查,提示内容
-	 * TODO: 后期改进提示方式，更加友好点
-	 * @param {Object} data
-	 * @param {Object} msg
-	 */
-	function checkParam(data, msg) {
-		if(data == null || data == undefined || data == '') {
-			$.confirm({
-				icon: 'fa fa-question',
-				theme: 'modern',
-				closeIcon: true,
-				animation: 'scale',
-				type: 'blue',
-				title: msg,
-				content: "不放弃,不抛弃,追梦之路,不孤单",
-			});
-			return false;
-		}
-		return true;
-	}
 });
