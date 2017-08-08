@@ -24,6 +24,9 @@ public class BusinessException   extends RuntimeException {
      */
     private String message;
 
+    private ErrorCode errorCode;
+
+
     /**
      * 业务异常
      *
@@ -51,5 +54,10 @@ public class BusinessException   extends RuntimeException {
     public String getMessage() {
         return message;
     }
+
+    public ErrorCode getErrorCode() {
+        return errorCode;
+    }
+
 
 }

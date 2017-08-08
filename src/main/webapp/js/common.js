@@ -39,7 +39,6 @@ function checkParam(data, msg, content) {
 	return true;
 }
 
-
 /**
  * 格式化时间戳
  * @param {Object} fmt
@@ -58,4 +57,23 @@ Date.prototype.Format = function(fmt) { //author: meizz
 	for(var k in o)
 		if(new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
 	return fmt;
+}
+
+function logout(userId) {
+	$.ajax({
+		url: base_url + "/logout",
+		dataType: "json",
+		type: "post",
+		data: {
+			"userId": userId
+		},
+		success: function(result) {
+			if(result.code == 0) {
+				oilAlert("注销成功!");
+				window.location.href = base_url;
+			} else {
+				oilAlert("抱歉,服务器故障,给您带来麻烦了")
+			}
+		}
+	});
 }

@@ -16,6 +16,7 @@ public enum  ErrorCode {
     SYSTEM_ERROR(2, "系统繁忙"),
     LOGIN_FAILED(3,"登录失败"),
     REGISTER_FAILED(4,"注册失败"),
+    LOG_OUT_FAILED(5,"注销失败"),
     ;
 
     /**

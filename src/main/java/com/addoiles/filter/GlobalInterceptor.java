@@ -66,7 +66,7 @@ public class GlobalInterceptor implements HandlerInterceptor {
         OilUser user = (OilUser)session.getAttribute("user");
         //user_bar主要负责用户登录注销状态工作
         if(Objects.nonNull(user)){
-            modelAndView.addObject("user_bar",loginOk(user.getUserName()));
+            modelAndView.addObject("user_bar",loginOk(user));
         }else{
             modelAndView.addObject("user_bar",noUser());
         }
@@ -75,12 +75,11 @@ public class GlobalInterceptor implements HandlerInterceptor {
     /***
      * 登录成功时,展示用户名
      * TODO 后期会展示其他信息
-     * @param userName
      * @return
      */
-    private String loginOk(String userName) {
+    private String loginOk(OilUser user) {
         //TODO 超链接做注销功能
-        return "<ul class='nav navbar-nav navbar-right'><li><a href='#'><span class='glyphicon glyphicon-log-in'></span>" + userName + "</a></li><li><a href='#注销功能'><span class='glyphicon glyphicon-user'></span>注销</a></li></ul>";
+        return "<ul class='nav navbar-nav navbar-right'><li><a href='#'><span class='glyphicon glyphicon-user'></span>" + user.getUserName() + "</a></li><li><a href=\"javascript:logout('"+user.getUserId()+"');\"><span class='glyphicon glyphicon-log-in'></span>注销</a></li></ul>";
     }
 
     private String noUser(){

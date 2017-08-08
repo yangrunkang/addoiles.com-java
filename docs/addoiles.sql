@@ -87,6 +87,9 @@ CREATE TABLE `oil_user` (
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- 调整名字大小
+alter table `oil_user`  modify column `user_name` varchar(20) COMMENT '用户名';
+
 
 DROP TABLE IF EXISTS `oil_text`;
 CREATE TABLE `oil_text` (
