@@ -32,7 +32,7 @@ $(function() {
 						$("input[name='title']").val('');
 						$("textarea[name='content']").val('')
 					}else{
-						oilAlert("发布动弹失败")
+						oilAlert("发布动弹失败了，呜呜")
 					}
 				}
 			});

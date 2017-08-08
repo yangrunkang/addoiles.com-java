@@ -2,6 +2,8 @@ package com.addoiles.service;
 
 import com.addoiles.entity.OilComment;
 
+import java.util.List;
+
 /**
  * Description:
  * author:      Yangrunkang
@@ -10,5 +12,7 @@ import com.addoiles.entity.OilComment;
 public interface OilCommentService {
 
     Integer insert(OilComment oilComment);
+
+    List<OilComment> findExperenceComments(String articleId);
 
 }

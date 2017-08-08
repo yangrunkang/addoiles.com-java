@@ -4,6 +4,7 @@ import com.addoiles.common.enums.OilArticleConstant;
 import com.addoiles.entity.OilArticle;
 import com.addoiles.entity.OilText;
 import com.addoiles.service.OilArticleService;
+import com.addoiles.service.OilCommentService;
 import com.addoiles.service.OilShareService;
 import com.addoiles.service.OilTextService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +32,9 @@ public class PageController {
 
     @Autowired
     private OilTextService oilTextService;
+
+    @Autowired
+    private OilCommentService oilCommentService;
 
 
     @RequestMapping
@@ -69,6 +73,8 @@ public class PageController {
             if(Objects.nonNull(oilText)){
                 oilArticle.setOilText(oilText);
             }
+            // 加载评论
+            oilArticle.setOilComments(oilCommentService.findExperenceComments(oilArticle.getArticleId()));
         });
         modelAndView.addObject("oilExperenceList",experenceArticles);
         return modelAndView;

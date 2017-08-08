@@ -62,8 +62,7 @@ public class OilArticleController {
             OilArticle oilArticle = new OilArticle();
             OilArticleBuilder.buildOilArticle(oilArticle, OilArticleConstant.Type.EXPERENCE.getValue());
             oilArticle.setTitle(title);
-            oilArticle.setContent(content.substring(0, content.length() >= 50 ? 50 : content.length()).concat("..."));
-
+            oilArticle.setContent(content);
             //关联到oil_text
             OilText oilText = new OilText();
             oilText.setArticleId(oilArticle.getArticleId());

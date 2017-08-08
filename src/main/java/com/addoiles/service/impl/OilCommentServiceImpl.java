@@ -6,6 +6,8 @@ import com.addoiles.service.OilCommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Description:
  * author:      Yangrunkang
@@ -22,4 +24,8 @@ public class OilCommentServiceImpl implements OilCommentService {
         return oilCommentMapper.insert(oilComment);
     }
 
+    @Override
+    public List<OilComment> findExperenceComments(String articleId) {
+        return oilCommentMapper.findExperenceComments(articleId);
+    }
 }

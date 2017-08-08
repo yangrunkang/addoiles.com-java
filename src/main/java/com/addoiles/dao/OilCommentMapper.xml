@@ -20,6 +20,15 @@
     from oil_comment
     where comment_id = #{commentId,jdbcType=VARCHAR}
   </select>
+
+  <select id="findExperenceComments" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from oil_comment
+    where article_id = #{articleId,jdbcType=VARCHAR} order by create_time desc
+  </select>
+
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
 
     delete from oil_comment

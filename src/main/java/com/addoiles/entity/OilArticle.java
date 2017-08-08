@@ -1,5 +1,7 @@
 package com.addoiles.entity;
 
+import java.util.List;
+
 /**
  * 文章
  */
@@ -47,10 +49,18 @@ public class OilArticle {
      */
     private Integer createTime;
 
+
+    /*********下面都是构造数据结构**********/
+    /*非表字段*/
     /**
      * 文章关联的大文本
      */
     private OilText oilText;
+
+    /**
+     * 文章的评论
+     */
+    private List<OilComment> oilComments;
 
 
     public String getId() {
@@ -138,5 +148,13 @@ public class OilArticle {
 
     public void setOilText(OilText oilText) {
         this.oilText = oilText;
+    }
+
+    public List<OilComment> getOilComments() {
+        return oilComments;
+    }
+
+    public void setOilComments(List<OilComment> oilComments) {
+        this.oilComments = oilComments;
     }
 }

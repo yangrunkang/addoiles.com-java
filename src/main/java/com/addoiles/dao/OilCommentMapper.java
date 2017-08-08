@@ -2,6 +2,8 @@ package com.addoiles.dao;
 
 import com.addoiles.entity.OilComment;
 
+import java.util.List;
+
 public interface OilCommentMapper {
 
     int deleteByPrimaryKey(String commentId);
@@ -15,4 +17,6 @@ public interface OilCommentMapper {
     int updateByPrimaryKeySelective(OilComment record);
 
     int updateByPrimaryKey(OilComment record);
+
+    List<OilComment> findExperenceComments(String articleId);
 }

@@ -91,18 +91,20 @@ $(function() {
 				if(result.code == 0) {
 					var data = result.data;
 					var experenceHtml = "<div class='experences panel panel-default'>" +
-										"<div class='panel-heading'>" + data.title + "</div>"+
+										"<div class='panel-heading'><h2>" + data.title + "</h2></div>"+
 										"<div class='panel-body'>" + data.content + "</div>"+
 									    "<div class='panel-footer'>"+
+									    "<div class='alert alert-info "+data.articleId+"' role='alert' style='display: none;'></div>"+
 											"<div class='input-group'>"+
-												"<input type='text' class='form-control' placeholder='Search for...'>"+
-												"<span class='input-group-btn'>"+
-											        "<a class='btn btn-default' href='#'>评论</a>"+
+												"<input id='"+data.articleId+"' type='text' class='form-control' placeholder='写下你此时的感受'>"+
+												"<span class='input-group-btn'>\n"+
+											        "<a class='btn btn-default "+data.articleId+"' href=\"javascript:commit('"+data.userId+"','"+data.articleId+"','"+data.articleId+"')\">评论</a>\n"+
+											        "<a class='btn btn-default' href=\"javascript:cancelConfirm('"+data.articleId+"')\">取消</a>"+
 										     	"</span>"+
 											"</div>"+
 										"</div>"+
 									"</div>";
-					
+					console.log(experenceHtml);
 					//修复网站初始化时,没有数据的Bug
 					if($(".experences:first").length == 0){ //TO-DO 可以根据length做不同的背景颜色设置
 						$("#exp_guo").after(experenceHtml);
@@ -131,6 +133,67 @@ $(function() {
 		content = "";
 		$('#summernote').summernote('destroy');
 	}
-	
 
 });
+
+	/******************************超链接里面触发的函数放在$(function(){});外面*******************************/
+
+	/**
+	 * 评论分享的经历
+	 * @param {Object} userId
+	 * @param {Object} articleId
+	 * @param {Object} inputId (和 articleId是一样的)
+	 */
+	function commit(userId, articleId, inputId){
+		var content = $("#"+inputId).val();
+		if(content == null || content == undefined || content == '') {
+			oilAlert("评论内容不能为空");
+			return;
+		}
+		$.ajax({
+			url: base_url + "/commit",
+			dataType: "json",
+			type: "post",
+			data: {
+				"userId": userId,
+				"articleId": articleId,
+				"content": content
+			},
+			success: function(result) {
+				if(result.code == 0){
+					$("#"+inputId).val(''); //清空评论框
+					$(".alert.alert-info."+articleId+":first")
+					.after("<div class='alert alert-info "+articleId+"' role='alert'>"+result.data.content+"</div>");
+				}
+			}
+		});
+	}
+
+	/**
+	 * 取消确认经历分享的评论
+	 */
+	function cancelConfirm(inputId){
+		$.confirm({
+			icon: 'fa fa-question',
+			theme: 'modern',
+			closeIcon: true,
+			animation: 'scale',
+			type: 'blue',
+			title: "确认取消该评论吗?",
+			content: "评论将会被清空",
+			buttons: {
+				confirm: {
+					text : "确认",
+					action : function() {
+						$("#"+inputId).val('');
+					}
+				},
+				cancel: {
+					text : "继续评论",
+					action : function() {
+						//nothing
+					}
+				}
+			}
+		});
+	}
