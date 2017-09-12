@@ -35,4 +35,6 @@
     <import resource="application-freemarker.xml"/>
     <import resource="application-datasource.xml"/>
 
+    <bean class="com.addoiles.util.SpringContextUtils"/>
+
 </beans>
