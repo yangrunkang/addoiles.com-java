@@ -7,7 +7,7 @@
     <bean id="propertyConfigurer" class="com.addoiles.util.PropertyUtils">
         <property name="locations">
             <list>
-                <value>classpath:configure.properties</value>
+                <value>classpath:jdbc.properties</value>
             </list>
         </property>
     </bean>

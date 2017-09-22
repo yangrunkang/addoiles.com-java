@@ -4,7 +4,6 @@ import com.addoiles.common.ErrorCode;
 import com.addoiles.common.OilResponse;
 import com.addoiles.common.enums.OilArticleConstant;
 import com.addoiles.entity.OilArticle;
-import com.addoiles.entity.OilText;
 import com.addoiles.service.OilArticleService;
 import com.addoiles.service.OilTextService;
 import com.addoiles.service.build.OilArticleBuilder;
@@ -54,30 +53,6 @@ public class OilArticleController {
         return oilResponse;
     }
 
-    @RequestMapping("addExperence")
-    @ResponseBody
-    public OilResponse addExperence(String content, String title) {
-        OilResponse oilResponse = new OilResponse();
-        try {
-            OilArticle oilArticle = new OilArticle();
-            OilArticleBuilder.buildOilArticle(oilArticle, OilArticleConstant.Type.EXPERENCE.getValue());
-            oilArticle.setTitle(title);
-            oilArticle.setContent(content);
-            //关联到oil_text
-            OilText oilText = new OilText();
-            oilText.setArticleId(oilArticle.getArticleId());
-            oilText.setContent(content);
-            oilArticleService.insert(oilArticle);
-            oilTextService.insert(oilText);
-
-            oilResponse.setData(oilArticle);
-        } catch (Exception e) {
-            oilResponse.setCode(ErrorCode.SYSTEM_ERROR.getCode());
-            oilResponse.setMessage(JsonUtils.toJson(e));
-            logger.error("{}", e.getMessage());
-        }
-        return oilResponse;
-    }
 
 
 }

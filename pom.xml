@@ -10,110 +10,20 @@
 
 
     <properties>
-        <!--spring-->
         <spring.version>4.1.4.RELEASE</spring.version>
-        <!--spring end-->
-        <!--日志组件-->
+        <mybatis.version>3.4.0</mybatis.version>
+        <mybatis.spring.version>1.3.0</mybatis.spring.version>
+        <commons-lang.version>2.5</commons-lang.version>
         <slf4j.version>1.7.12</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
         <logback.version>1.1.3</logback.version>
         <logback.ext.spring.version>0.1.2</logback.ext.spring.version>
-        <!--日志组件 end-->
-        <!--apache commons guava-->
-        <commons-lang3.version>3.3.2</commons-lang3.version>
-        <commons-io.version>2.4</commons-io.version>
-        <commons-lang.version>2.5</commons-lang.version>
-        <commons-net.version>3.3</commons-net.version>
-        <commons-fileupload.version>1.3.1</commons-fileupload.version>
-        <commons-codec.version>1.8</commons-codec.version>
-        <commons-beanutils.version>1.8.3</commons-beanutils.version>
-        <commons-logging.version>1.1.2</commons-logging.version>
-        <commons-collections.version>3.2</commons-collections.version>
-        <commons-digester.version>2.0</commons-digester.version>
-        <commons-logging.version>1.1.3</commons-logging.version>
-        <commons-validator.version>1.1.4</commons-validator.version>
-        <commons.httpclient.version>4.5.2</commons.httpclient.version>
-        <guava.version>20.0</guava.version>
-        <!--apache commons guava end-->
-        <!--测试组件-->
-        <junit.version>4.11</junit.version>
-        <mockito.version>2.7.22</mockito.version>
-        <mockito-all.version>1.10.19</mockito-all.version>
-        <googlecode.catch-exception.version>1.2.0</googlecode.catch-exception.version>
-        <powermock.version>1.6.5</powermock.version>
-        <powermock-module-junit4.version>1.6.5</powermock-module-junit4.version>
-        <!--测试组件 end-->
-        <!--json 组件-->
+        <jackson.version>2.6.5</jackson.version>
+        <druid.version>1.0.27</druid.version>
+        <mysql.version>5.1.34</mysql.version>
         <fastjson.version>1.2.4</fastjson.version>
         <json-lib.version>2.4</json-lib.version>
-        <jackson.version>2.6.5</jackson.version>
         <gson.version>2.3</gson.version>
-        <!--json 组件 end-->
-        <!--class 操作-->
-        <cglib.version>3.1</cglib.version>
-        <javassist.version>3.20.0-GA</javassist.version>
-        <!--class 操作 end-->
-        <!--rpc net-->
-        <netty4.version>4.1.5.Final</netty4.version>
-        <dubbo.version>2.5.4-ext</dubbo.version>
-        <thrift.version>0.9.3</thrift.version>
-        <!--rpc net end-->
-        <!--zookeeper-->
-        <zkclient.version>0.10</zkclient.version>
-        <zookeeper.version>3.5.1-alpha</zookeeper.version>
-        <curator.version>2.8.0</curator.version>
-        <!--zookeeper end-->
-        <!--序列化 组件-->
-        <fst.version>2.27</fst.version>
-        <kryo.version>4.0.0</kryo.version>
-        <kryo-serializers.version>0.38</kryo-serializers.version>
-        <hessian.version>4.0.38</hessian.version>
-        <!--序列化 组件 end-->
-        <servlet.api.version>3.0.1</servlet.api.version>
-        <!--nosql 缓存 start-->
-        <redis.client.version>2.9.0</redis.client.version>
-        <mongodb.driver.version>3.2.2</mongodb.driver.version>
-        <mongodb.morphia.version>1.3.2</mongodb.morphia.version>
-        <avro.version>1.8.0</avro.version>
-        <elasticsearch.version>2.3.3</elasticsearch.version>
-        <net.sf.ehcache.version>2.5.0</net.sf.ehcache.version>
-        <!--nosql 缓存 end-->
-        <!--数据库/连接池-->
-        <druid.version>1.0.27</druid.version>
-        <dbcp.version>1.4</dbcp.version>
-        <mysql.version>5.1.34</mysql.version>
-        <mybatis.version>3.4.0</mybatis.version>
-        <mybatis.spring.version>1.3.0</mybatis.spring.version>
-        <mybatis.paginator.version>3.6.2</mybatis.paginator.version>
-        <!--数据库/连接池 end-->
-        <disruptor.version>3.2.0</disruptor.version>
-        <!--mq-->
-        <rabbitmq.version>3.6.2</rabbitmq.version>
-        <!--mq end-->
-        <!--xml 组件-->
-        <jdom.version>1.1.3</jdom.version>
-        <dom4j.version>1.6.1</dom4j.version>
-        <!--xml 组件 end-->
-        <!--excel -->
-        <poi.version>3.10-FINAL</poi.version>
-        <jxl.version>2.6.12</jxl.version>
-        <!--excel end-->
-        <shiro.version>1.2.3</shiro.version>
-        <hibernate.validator.version>5.1.3.Final</hibernate.validator.version>
-        <validation.api.version>1.1.0.Final</validation.api.version>
-        <bcprov.jdk15on.version>1.49</bcprov.jdk15on.version>
-        <aspectjrt.version>1.8.10</aspectjrt.version>
-        <aspectjweaver.version>1.8.10</aspectjweaver.version>
-        <servlet.api.version>3.0.1</servlet.api.version>
-        <quartz.version>2.2.0</quartz.version>
-        <jaxb.core.version>2.2.11</jaxb.core.version>
-        <javax.mail.version>1.4.7</javax.mail.version>
-        <persistence-api.version>1.0.2</persistence-api.version>
-        <!--百度日志管理系统进行改造-->
-        <disconf.version>2.6.36-SNAPSHOT</disconf.version>
-        <!-- 源码字符集 -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>1.8</java.version>
     </properties>
 
 
@@ -180,12 +90,6 @@
             <groupId>org.mybatis</groupId>
             <artifactId>mybatis-spring</artifactId>
             <version>${mybatis.spring.version}</version>
-        </dependency>
-        <!--ftl-->
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <version>2.3.20</version>
         </dependency>
         <!--commons工具包-->
         <dependency>
@@ -401,11 +305,9 @@
                 <includes>
                     <include>applicationContext.xml</include>
                     <include>application-datasource.xml</include>
-                    <include>application-freemarker.xml</include>
                     <include>mybatis/sqlMapConfig.xml</include>
                     <include>log4j.properties</include>
-                    <include>configure.properties</include>
-                    <include>ueditor.config.json</include>
+                    <include>jdbc.properties</include>
                 </includes>
             </resource>
         </resources>

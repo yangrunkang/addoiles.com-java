@@ -14,9 +14,6 @@
     <mvc:annotation-driven/>
     <mvc:default-servlet-handler/>
 
-   <!-- <mvc:resources mapping="/static/**" location="/static/" cache-period="31556926"/>
-    <mvc:resources mapping="/js/**" location="/js/" cache-period="31556926"/>
--->
 
     <mvc:interceptors>
         <mvc:interceptor>
@@ -28,11 +25,10 @@
     <bean id="propertyConfigurer" class="com.addoiles.util.PropertyUtils">
         <property name="locations">
             <list>
-                <value>classpath:configure.properties</value>
+                <value>classpath:jdbc.properties</value>
             </list>
         </property>
     </bean>
-    <import resource="application-freemarker.xml"/>
     <import resource="application-datasource.xml"/>
 
 </beans>
