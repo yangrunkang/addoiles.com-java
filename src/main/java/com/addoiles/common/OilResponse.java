@@ -13,7 +13,7 @@ import java.io.Serializable;
 public class OilResponse implements Serializable{
 
     private static final long serialVersionUID = 3468809980704226548L;
-    private Integer code = Integer.valueOf(0);
+    private Integer code = 0;
     private String message = "success";
     private Object data;
 
