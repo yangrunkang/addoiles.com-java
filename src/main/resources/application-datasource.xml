@@ -33,21 +33,20 @@
 
     <!-- 从整合包里找，org.mybatis:mybatis-spring:1.2.4 -->
     <!-- sqlSessionFactory -->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <bean  id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 数据库连接池 -->
         <property name="dataSource" ref="dataSource" />
         <!-- 加载mybatis的全局配置文件 -->
-        <property name="configLocation" value="classpath:mybatis/sqlMapConfig.xml" />
+        <property name="configLocation" value="classpath:mybatis/config/sqlMapConfig.xml" />
+        <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
+        <property name="typeAliasesPackage" value="com.addoiles.entity"/>
+        <!-- 显式指定Mapper文件位置 -->
+        <property name="mapperLocations" value="com/addoiles/dao/*Mapper.xml"/>
     </bean>
     <!-- mapper扫描器 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <!-- 扫描包路径，如果需要扫描多个包，中间使用半角逗号隔开 -->
         <property name="basePackage" value="com.addoiles.dao"/>
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
-        <!-- <property name="sqlSessionFactory" ref="sqlSessionFactory" />
-        会导致数据源配置不管用，数据库连接不上。
-        且spring 4弃用
-        -->
+        <!--<property name="sqlSessionFactoryBeanName" value="sqlSessionFactoryBean" />-->
     </bean>
 
 

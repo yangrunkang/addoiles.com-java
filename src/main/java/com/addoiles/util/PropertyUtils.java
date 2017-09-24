@@ -3,7 +3,8 @@ package com.addoiles.util;
 
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.log4j.Logger;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 
@@ -17,7 +18,7 @@ import java.util.Properties;
 
 
 public class PropertyUtils extends PropertyPlaceholderConfigurer{
-	public static final Logger logger = Logger.getLogger(PropertyUtils.class);
+	public static final Logger logger = LoggerFactory.getLogger(PropertyUtils.class);
 	private static Map<String, String> propertyMap;
 	
 	protected void processProperties(ConfigurableListableBeanFactory beanFactoryToProcess,Properties props){
