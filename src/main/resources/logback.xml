@@ -35,7 +35,7 @@
     
     <!-- info日志 appender  -->
     <appender name="infoRollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.dir}/${log.module.name}/${log.module.name}.log.tmp</file>
+        <file>/tmp/addoiles-${file.tail.pattern}.log.tmp</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>/tmp/addoiles-${file.tail.pattern}.log</fileNamePattern>
             <MaxHistory>30</MaxHistory>
