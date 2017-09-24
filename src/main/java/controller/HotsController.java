@@ -6,8 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.HotsService;
 
-import java.util.List;
-
 /**
  * Created by bla on 9/24/2017.
  */
@@ -19,7 +17,7 @@ public class HotsController {
 
     @RequestMapping("getLatestHots")
     @ResponseBody
-    public List getLatestHots(){
+    public Object getLatestHots() {
         return hotsService.getLatestHots();
     }
 
