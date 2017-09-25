@@ -10,7 +10,7 @@ import service.HotsService;
  * Created by bla on 9/24/2017.
  */
 @Controller
-public class HotsController {
+public class HotsController extends BaseController{
 
     @Autowired
     private HotsService hotsService;

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
  * Created by bla on 9/24/2017.
  */
 @Controller
-public class ArticleController {
+public class ArticleController extends BaseController{
 
 
 }
