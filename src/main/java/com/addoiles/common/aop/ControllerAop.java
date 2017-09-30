@@ -46,10 +46,10 @@ public class ControllerAop {
             if(exception instanceof BusinessException){
                 oilResponse.setCode(((BusinessException) exception).getCode());
                 oilResponse.setMessage((exception).getMessage());
-                logger.error("business error:()", exception.getMessage());
+                logger.error("business error:{}", exception);
             }else {
                 oilResponse.setErrorCode(ErrorCode.SYSTEM_ERROR);
-                logger.error(exception.getMessage());
+                logger.error("system error:{}", exception);
             }
 
         }

@@ -1,78 +1,38 @@
 package com.addoiles.entity;
 
 public class User {
-    /**
-     *
-     *
-     *  user.id
-     *
-     *
-     */
+
+
     private Integer id;
 
     /**
-     *
      *   用户id
-     *
-     *
-     *  user.user_id
-     *
-     *
      */
     private String userId;
 
     /**
-     *
      *   用户名
-     *
-     *
-     *  user.name
-     *
      *
      */
     private String name;
 
     /**
-     *
      *   用户名密码
-     *
-     *
-     *  user.password
-     *
-     *
      */
     private String password;
 
     /**
-     *
      *   用户邮箱
-     *
-     *
-     *  user.email
-     *
-     *
      */
     private String email;
 
     /**
-     *
      *   删除状态 0-正常 1-删除
-     *
-     *
-     *  user.delete_status
-     *
-     *
      */
     private Integer deleteStatus;
 
     /**
-     *
      *   创建时间
-     *
-     *
-     *  user.create_time
-     *
-     *
      */
     private Integer createTime;
 

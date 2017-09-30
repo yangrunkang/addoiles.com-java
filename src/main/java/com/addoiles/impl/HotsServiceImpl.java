@@ -22,8 +22,5 @@ public class HotsServiceImpl implements HotsService{
         return hotsMapper.selectAll();
     }
 
-    @Override
-    public List<Hots> getHotestHots() {
-        return null;
-    }
+
 }

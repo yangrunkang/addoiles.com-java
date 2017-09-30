@@ -2,18 +2,18 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.addoiles.dao.ArticleMapper">
   <resultMap id="BaseResultMap" type="com.addoiles.entity.Article">
-
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="article_id" jdbcType="VARCHAR" property="articleId" />
     <result column="article_type" jdbcType="INTEGER" property="articleType" />
     <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
     <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
     <result column="create_time" jdbcType="INTEGER" property="createTime" />
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
 
   <sql id="BaseColumn">
-    id, article_id, article_type, title, delete_status, create_time, content
+    id, article_id, article_type, title,sub_title, delete_status, create_time, content
   </sql>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -24,10 +24,10 @@
   <insert id="insert" parameterType="com.addoiles.entity.Article">
 
     insert into article (id, article_id, article_type, 
-      title, delete_status, create_time, 
+      title,sub_title, delete_status, create_time,
       content)
     values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=VARCHAR}, #{articleType,jdbcType=INTEGER}, 
-      #{title,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER}, 
+      #{title,jdbcType=VARCHAR},#{subTitle,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER},
       #{content,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.addoiles.entity.Article">
@@ -36,20 +36,19 @@
     set article_id = #{articleId,jdbcType=VARCHAR},
       article_type = #{articleType,jdbcType=INTEGER},
       title = #{title,jdbcType=VARCHAR},
+      sub_title = #{subTitle,jdbcType=VARCHAR},
       delete_status = #{deleteStatus,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=INTEGER},
       content = #{content,jdbcType=LONGVARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-
     select
     <include refid="BaseColumn" />
     from article
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-
     select
     <include refid="BaseColumn" />
     from article

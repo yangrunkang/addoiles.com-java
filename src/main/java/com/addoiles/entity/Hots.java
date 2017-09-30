@@ -2,78 +2,36 @@ package com.addoiles.entity;
 
 
 public class Hots {
-    /**
-     *
-     *
-     *  hots.id
-     *
-     *
-     */
+
     private Integer id;
 
     /**
-     *
      *   热门id
-     *
-     *
-     *  hots.hot_id
-     *
-     *
      */
     private String hotId;
 
     /**
-     *
      *   用户id(可以为空)
-     *
-     *
-     *  hots.user_id
-     *
-     *
      */
     private String userId;
 
     /**
-     *
      *   热门动弹标题
-     *
-     *
-     *  hots.title
-     *
-     *
      */
     private String title;
 
     /**
-     *
      *   热门动弹内容
-     *
-     *
-     *  hots.content
-     *
-     *
      */
     private String content;
 
     /**
-     *
      *   删除状态 0-正常 1-删除
-     *
-     *
-     *  hots.delete_status
-     *
-     *
      */
     private Integer deleteStatus;
 
     /**
-     *
      *   创建时间
-     *
-     *
-     *  hots.create_time
-     *
-     *
      */
     private Integer createTime;
 

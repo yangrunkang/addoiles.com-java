@@ -2,100 +2,47 @@ package com.addoiles.entity;
 
 
 public class Comment {
-    /**
-     *
-     *
-     *  comment.id
-     *
-     *
-     */
     private Integer id;
 
     /**
-     *
      *   评论id
-     *
-     *
-     *  comment.commit_id
-     *
-     *
      */
     private String commitId;
 
     /**
-     *
      *   用户id
-     *
-     *
-     *  comment.user_id
-     *
-     *
      */
     private String userId;
 
     /**
-     *
      *   被评论内容的id
-     *
-     *
-     *  comment.target_id
-     *
-     *
      */
     private String targetId;
 
     /**
-     *
      *   评论内容
-     *
-     *
-     *  comment.content
-     *
-     *
      */
     private String content;
 
     /**
-     *
      *   删除状态 0-正常 1-删除
-     *
-     *
-     *  comment.delete_status
-     *
-     *
      */
     private Integer deleteStatus;
 
     /**
-     *
      *   创建时间
-     *
-     *
-     *  comment.create_time
-     *
-     *
      */
     private Integer createTime;
 
     /**
-     *
      *  comment.id
-     *
-     * @return the value of comment.id
-     *
-     *
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     *
      *  comment.id
-     *
-     * @param id the value for comment.id
-     *
-     *
      */
     public void setId(Integer id) {
         this.id = id;

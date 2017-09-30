@@ -5,6 +5,7 @@ import com.addoiles.entity.Hots;
 import java.util.List;
 
 /**
+ * 热门动弹
  * Created by bla on 9/24/2017.
  */
 public interface HotsService {
@@ -15,10 +16,5 @@ public interface HotsService {
      */
     List<Hots> getLatestHots();
 
-    /**
-     * 获取最热门的动弹
-     * @return
-     */
-    List<Hots> getHotestHots();
 
 }

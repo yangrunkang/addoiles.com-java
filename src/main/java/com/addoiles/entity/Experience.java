@@ -2,89 +2,41 @@ package com.addoiles.entity;
 
 
 public class Experience {
-    /**
-     *
-     *
-     *  experience.id
-     *
-     *
-     */
+
     private Integer id;
 
     /**
-     *
      *   经历id
-     *
-     *
-     *  experience.experience_id
-     *
-     *
      */
     private String experienceId;
 
     /**
-     *
      *   用户id
-     *
-     *
-     *  experience.user_id
-     *
-     *
      */
     private String userId;
 
     /**
-     *
      *   经历标题
-     *
-     *
-     *  experience.title
-     *
-     *
      */
     private String title;
 
     /**
-     *
      *   经历内容
-     *
-     *
-     *  experience.content
-     *
-     *
      */
     private String content;
 
     /**
-     *
      *   评分
-     *
-     *
-     *  experience.rates
-     *
-     *
      */
     private Integer rates;
 
     /**
-     *
      *   删除状态 0-正常 1-删除
-     *
-     *
-     *  experience.delete_status
-     *
-     *
      */
     private Integer deleteStatus;
 
     /**
-     *
      *   创建时间
-     *
-     *
-     *  experience.create_time
-     *
-     *
      */
     private Integer createTime;
 

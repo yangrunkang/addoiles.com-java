@@ -6,64 +6,39 @@ public class Article {
     private Integer id;
 
     /**
-     *
      *   文章id
-     *
-     *
-     *  article.article_id
-     *
-     *
      */
     private String articleId;
 
     /**
-     *
      *   文章类型
-     *
      */
     private Integer articleType;
 
     /**
-     *
      *   文章标题
-     *
-     *
-     *  article.title
-     *
-     *
      */
     private String title;
 
+
     /**
-     *
+     * 副标题
+     */
+    private String subTitle;
+
+
+    /**
      *   删除状态 0-正常 1-删除
-     *
-     *
-     *  article.delete_status
-     *
-     *
      */
     private Integer deleteStatus;
 
     /**
-     *
      *   创建时间
-     *
-     *
-     *  article.create_time
-     *
-     *
      */
     private Integer createTime;
 
     /**
-     *
      *   文章内容
-     *
-     *
-     *  article.content
-     *
-     *
      */
     private String content;
 
@@ -233,5 +208,13 @@ public class Article {
      */
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getSubTitle() {
+        return subTitle;
+    }
+
+    public void setSubTitle(String subTitle) {
+        this.subTitle = subTitle;
     }
 }

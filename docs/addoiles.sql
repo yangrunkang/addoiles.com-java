@@ -29,6 +29,11 @@ CREATE TABLE `article` (
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+-- 添加副标题
+alter table `article` add `sub_title` varchar(70) DEFAULT NULL COMMENT '副标题' AFTER `title`;
+-- 调整顺序 Demo
+-- ALTER TABLE `article` CHANGE `commit_times` `commit_times` int(10) AFTER `favourite` ;
+
 
 -- ----------------------------
 -- Table structure for comment
@@ -72,7 +77,7 @@ CREATE TABLE `experience` (
   `title` varchar(50) NOT NULL COMMENT '经历标题',
   `content` varchar(2000) NOT NULL COMMENT '经历内容',
   `rates` int(2) NOT NULL DEFAULT '0' COMMENT '评分',
-  `delete_status` int(1) NOT NULL DEFAULT '0' COMMENT '删除状态 0-正常 1-删除',
+  `delete_status` int(1) NOT NULL DEFAULT '0' COMMENT '删除状态 0-正常 1-草稿 2-删除',
   `create_time` int(11) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -106,3 +111,17 @@ CREATE TABLE `user` (
   `create_time` int(11) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for nav_settings
+-- ----------------------------
+DROP TABLE IF EXISTS `nav_settings`;
+CREATE TABLE `nav_settings` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nav_name` varchar(10) DEFAULT NULL COMMENT '导航栏名称',
+  `nav_router` varchar(20) DEFAULT NULL COMMENT '导航栏路由',
+  `nav_icon` varchar(50) DEFAULT NULL COMMENT '导航栏图标',
+  `is_start` int(1) DEFAULT '0' COMMENT '是否启用 0 -启用 1-不启用',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='导航栏设置';
+

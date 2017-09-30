@@ -2,123 +2,60 @@ package com.addoiles.entity;
 
 
 public class Dreams {
-    /**
-     *
-     *
-     *  dreams.id
-     *
-     *
-     */
+
     private Integer id;
 
     /**
-     *
      *   梦想id
-     *
-     *
-     *  dreams.dream_id
-     *
-     *
      */
     private String dreamId;
 
     /**
-     *
      *   用户id
-     *
-     *
-     *  dreams.user_id
-     *
-     *
      */
     private String userId;
 
     /**
-     *
      *   梦想标题
-     *
-     *
-     *  dreams.title
-     *
-     *
      */
     private String title;
 
     /**
-     *
      *   梦想内容
-     *
-     *
-     *  dreams.content
-     *
-     *
      */
     private String content;
 
     /**
-     *
      *   点赞数
-     *
-     *
-     *  dreams.likes
-     *
-     *
      */
     private Integer likes;
 
     /**
-     *
      *   删除状态 0-正常 1-删除
-     *
-     *
-     *  dreams.delete_status
-     *
-     *
      */
     private Integer deleteStatus;
 
     /**
-     *
      *   创建时间
-     *
-     *
-     *  dreams.create_time
-     *
-     *
      */
     private Integer createTime;
 
     /**
-     *
      *  dreams.id
-     *
-     * @return the value of dreams.id
-     *
-     *
      */
     public Integer getId() {
         return id;
     }
 
     /**
-     *
      *  dreams.id
-     *
-     * @param id the value for dreams.id
-     *
-     *
      */
     public void setId(Integer id) {
         this.id = id;
     }
 
     /**
-     *
      *  dreams.dream_id
-     *
-     * @return the value of dreams.dream_id
-     *
-     *
      */
     public String getDreamId() {
         return dreamId;
