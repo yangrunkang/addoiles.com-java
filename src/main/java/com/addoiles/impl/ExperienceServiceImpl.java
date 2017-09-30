@@ -1,5 +1,6 @@
 package com.addoiles.impl;
 
+import com.addoiles.common.Page;
 import com.addoiles.dao.ExperienceMapper;
 import com.addoiles.entity.Experience;
 import com.addoiles.util.OilUtils;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Service;
 import service.ExperienceService;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * Created by bla on 9/24/2017.
@@ -25,5 +27,10 @@ public class ExperienceServiceImpl implements ExperienceService {
         experience.setRates(0);
         experience.setCreateTime(TimeUtil.currentTime());
         return experienceMapper.insert(experience);
+    }
+
+    @Override
+    public List<Experience> selectExperienceList(Page page) {
+        return experienceMapper.selectExperienceList(page);
     }
 }

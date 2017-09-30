@@ -17,7 +17,7 @@ public interface DreamsMapper {
     Dreams selectByPrimaryKey(Integer id);
 
 
-    List<Dreams> selectAll(@Param("page")Page page);
+    List<Dreams> selectAll(@Param("page") Page page);
 
 
     int updateByPrimaryKey(Dreams record);

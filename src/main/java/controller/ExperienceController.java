@@ -1,12 +1,20 @@
 package controller;
 
+import com.addoiles.common.Page;
+import com.addoiles.dto.ExperienceDto;
+import com.addoiles.entity.Comment;
 import com.addoiles.entity.Experience;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import service.CommentService;
 import service.ExperienceService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by bla on 9/24/2017.
@@ -17,9 +25,39 @@ public class ExperienceController extends BaseController{
     @Autowired
     private ExperienceService experienceService;
 
+    @Autowired
+    private CommentService commentService;
+
     @RequestMapping(value = "/addExperience",method = RequestMethod.POST)
     @ResponseBody
     public Object addExperience(Experience experience){
         return experienceService.addExperience(experience);
+    }
+
+    @RequestMapping(value = "/getExperienceList",method = RequestMethod.POST)
+    @ResponseBody
+    public Object getExperienceList(Page page){
+        List<ExperienceDto> experienceDtoList = new ArrayList<>();
+
+        List<Experience> experienceList = experienceService.selectExperienceList(page);
+        if(CollectionUtils.isEmpty(experienceList)){
+            return experienceDtoList; //在页面上显示空
+        }else{
+            experienceList.forEach(experience -> {
+                List<Comment> commentList = commentService.getCommentListByTargetId(experience.getExperienceId());
+                if(!CollectionUtils.isEmpty(commentList)){
+                    ExperienceDto experienceDto = new ExperienceDto();
+                    experienceDto.setExperience(experience);
+                    experienceDto.setCommentList(commentList);
+                    experienceDtoList.add(experienceDto);
+                }else {
+                    ExperienceDto experienceDto = new ExperienceDto();
+                    experienceDto.setExperience(experience);
+                    experienceDto.setCommentList(new ArrayList<>());
+                    experienceDtoList.add(experienceDto);
+                }
+            });
+        }
+        return experienceDtoList;
     }
 }

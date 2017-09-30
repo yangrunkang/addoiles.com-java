@@ -1,6 +1,8 @@
 package com.addoiles.dao;
 
 import com.addoiles.entity.Comment;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface CommentMapper {
@@ -15,6 +17,8 @@ public interface CommentMapper {
 
 
     List<Comment> selectAll();
+
+    List<Comment> selectByTargetId(@Param("targetId") String targetId);
 
 
     int updateByPrimaryKey(Comment record);
