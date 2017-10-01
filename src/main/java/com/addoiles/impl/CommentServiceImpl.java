@@ -2,6 +2,8 @@ package com.addoiles.impl;
 
 import com.addoiles.dao.CommentMapper;
 import com.addoiles.entity.Comment;
+import com.addoiles.util.OilUtils;
+import com.addoiles.util.TimeUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.CommentService;
@@ -21,6 +23,14 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public List<Comment> getCommentListByTargetId(String targetId) {
         return commentMapper.selectByTargetId(targetId);
+    }
+
+    @Override
+    public Integer addComment(Comment comment) {
+        comment.setCommitId(OilUtils.generateID());
+        comment.setDeleteStatus(0);
+        comment.setCreateTime(TimeUtil.currentTime());
+        return commentMapper.insert(comment);
     }
 
 }

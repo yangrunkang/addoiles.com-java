@@ -31,6 +31,11 @@ public class Experience {
     private Integer rates;
 
     /**
+     * 评分次数
+     */
+    private Integer rateCount;
+
+    /**
      *   删除状态 0-正常 1-删除
      */
     private Integer deleteStatus;
@@ -223,12 +228,16 @@ public class Experience {
     /**
      *
      *  experience.create_time
-     *
-     * @param createTime the value for experience.create_time
-     *
-     *
      */
     public void setCreateTime(Integer createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getRateCount() {
+        return rateCount;
+    }
+
+    public void setRateCount(Integer rateCount) {
+        this.rateCount = rateCount;
     }
 }

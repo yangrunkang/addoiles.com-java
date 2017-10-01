@@ -6,6 +6,7 @@ import com.addoiles.entity.Experience;
 import java.util.List;
 
 /**
+ * 经历分享页DTO
  * Created by bla on 10/1/2017.
  */
 public class ExperienceDto {

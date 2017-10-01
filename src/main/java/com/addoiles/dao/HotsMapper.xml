@@ -10,8 +10,10 @@
     <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
     <result column="create_time" jdbcType="INTEGER" property="createTime" />
   </resultMap>
+  <sql id="BaseColumn">
+    id, hot_id, user_id, title, content, delete_status, create_time
+  </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-
     delete from hots
     where id = #{id,jdbcType=INTEGER}
   </delete>
@@ -39,7 +41,11 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-    select id, hot_id, user_id, title, content, delete_status, create_time
+    select
+    <include refid="BaseColumn" />
     from hots
+    where delete_status = 0
+    order by create_time DESC
+    limit limit #{page.pageNo},#{page.pageSize}
   </select>
 </mapper>

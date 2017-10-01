@@ -24,4 +24,11 @@ public interface ExperienceService {
      */
     List<Experience> selectExperienceList(Page page);
 
+    /**
+     * 评分接口
+     * @param experienceId
+     * @return
+     */
+    Integer updateRates(String experienceId,Integer rate);
+
 }

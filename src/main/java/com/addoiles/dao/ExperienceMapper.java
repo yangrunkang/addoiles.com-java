@@ -14,7 +14,9 @@ public interface ExperienceMapper {
 
     Experience selectByPrimaryKey(Integer id);
 
+    Experience selectByExperienceId(@Param("experienceId") String experienceId);
+
     List<Experience> selectExperienceList(@Param("page") Page page);
 
-    int updateByPrimaryKey(Experience record);
+    int updateByExperienceId(Experience record);
 }

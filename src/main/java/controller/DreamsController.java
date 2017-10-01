@@ -18,13 +18,13 @@ public class DreamsController extends BaseController{
     @Autowired
     private DreamsService dreamsService;
 
-    @RequestMapping("/getDreams")
+    @RequestMapping("getDreams")
     @ResponseBody
     public Object getDreams(Page page){
         return dreamsService.getDreams(page);
     }
 
-    @RequestMapping(value = "/addDream",method = RequestMethod.POST)
+    @RequestMapping(value = "addDream",method = RequestMethod.POST)
     @ResponseBody
     public Object addDream(Dreams dreams){
         return dreamsService.addDream(dreams);

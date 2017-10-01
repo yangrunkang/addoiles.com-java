@@ -28,13 +28,13 @@ public class ExperienceController extends BaseController{
     @Autowired
     private CommentService commentService;
 
-    @RequestMapping(value = "/addExperience",method = RequestMethod.POST)
+    @RequestMapping(value = "addExperience",method = RequestMethod.POST)
     @ResponseBody
     public Object addExperience(Experience experience){
         return experienceService.addExperience(experience);
     }
 
-    @RequestMapping(value = "/getExperienceList",method = RequestMethod.POST)
+    @RequestMapping(value = "getExperienceList",method = RequestMethod.GET)
     @ResponseBody
     public Object getExperienceList(Page page){
         List<ExperienceDto> experienceDtoList = new ArrayList<>();
@@ -56,8 +56,22 @@ public class ExperienceController extends BaseController{
                     experienceDto.setCommentList(new ArrayList<>());
                     experienceDtoList.add(experienceDto);
                 }
+                //设定评分
+                Integer rates = experience.getRates();
+                Integer rateCount = experience.getRateCount();
+                if(rateCount > 0 ){
+                    experience.setRates(rates / rateCount > 5 ? 5 : rates / rateCount);
+                }
+
             });
         }
         return experienceDtoList;
     }
+
+    @RequestMapping(value = "updateRates",method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateRates(String experienceId,Integer rate){
+        return experienceService.updateRates(experienceId,rate);
+    }
+
 }

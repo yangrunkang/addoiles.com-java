@@ -1,5 +1,6 @@
 package controller;
 
+import com.addoiles.common.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,8 +18,8 @@ public class HotsController extends BaseController{
 
     @RequestMapping("getLatestHots")
     @ResponseBody
-    public Object getLatestHots() {
-        return hotsService.getLatestHots();
+    public Object getLatestHots(Page page) {
+        return hotsService.getLatestHots(page);
     }
 
 }

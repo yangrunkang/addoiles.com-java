@@ -1,6 +1,9 @@
 package com.addoiles.dao;
 
+import com.addoiles.common.Page;
 import com.addoiles.entity.Hots;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface HotsMapper {
@@ -14,7 +17,7 @@ public interface HotsMapper {
     Hots selectByPrimaryKey(Integer id);
 
 
-    List<Hots> selectAll();
+    List<Hots> selectAll(@Param("page") Page page);
 
 
     int updateByPrimaryKey(Hots record);

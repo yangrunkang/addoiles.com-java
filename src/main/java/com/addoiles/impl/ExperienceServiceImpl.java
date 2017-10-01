@@ -25,6 +25,7 @@ public class ExperienceServiceImpl implements ExperienceService {
         experience.setExperienceId(OilUtils.generateID());
         experience.setUserId(OilUtils.generateID());
         experience.setRates(0);
+        experience.setRateCount(0);
         experience.setCreateTime(TimeUtil.currentTime());
         return experienceMapper.insert(experience);
     }
@@ -32,5 +33,22 @@ public class ExperienceServiceImpl implements ExperienceService {
     @Override
     public List<Experience> selectExperienceList(Page page) {
         return experienceMapper.selectExperienceList(page);
+    }
+
+    @Override
+    public Integer updateRates(String experienceId, Integer rate) {
+        Experience experience = experienceMapper.selectByExperienceId(experienceId);
+
+        if(experience == null) return -1;
+
+        Integer rates = experience.getRates();
+        Integer rateCount = experience.getRateCount();
+        //评分累加 + 次数+1
+        rates += rate;
+        rateCount++;
+
+        experience.setRates(rates);
+        experience.setRateCount(rateCount);
+        return experienceMapper.updateByExperienceId(experience);
     }
 }

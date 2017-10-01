@@ -43,7 +43,6 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   <select id="selectAll" resultMap="BaseResultMap">
-
     select id, user_id, name, password, email, delete_status, create_time
     from user
   </select>

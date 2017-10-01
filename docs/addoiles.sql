@@ -31,8 +31,8 @@ CREATE TABLE `article` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 -- 添加副标题
 alter table `article` add `sub_title` varchar(70) DEFAULT NULL COMMENT '副标题' AFTER `title`;
--- 调整顺序 Demo
--- ALTER TABLE `article` CHANGE `commit_times` `commit_times` int(10) AFTER `favourite` ;
+-- 修改列注释
+ALTER TABLE `article`  MODIFY COLUMN `article_type` int(1) COMMENT '文章类型 1-软件评测 2-技术沉淀';
 
 
 -- ----------------------------
@@ -81,6 +81,8 @@ CREATE TABLE `experience` (
   `create_time` int(11) NOT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- 添加评分次数
+alter table `experience` add `rate_count` int(4) DEFAULT 0 COMMENT '评分次数' AFTER `rates`;
 
 -- ----------------------------
 -- Table structure for hots

@@ -1,5 +1,6 @@
 package com.addoiles.impl;
 
+import com.addoiles.common.Page;
 import com.addoiles.dao.HotsMapper;
 import com.addoiles.entity.Hots;
 import org.springframework.stereotype.Service;
@@ -18,8 +19,8 @@ public class HotsServiceImpl implements HotsService{
     private HotsMapper hotsMapper;
 
     @Override
-    public List<Hots> getLatestHots() {
-        return hotsMapper.selectAll();
+    public List<Hots> getLatestHots(Page page) {
+        return hotsMapper.selectAll(page);
     }
 
 

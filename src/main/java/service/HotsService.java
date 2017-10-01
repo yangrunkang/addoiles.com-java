@@ -1,5 +1,6 @@
 package service;
 
+import com.addoiles.common.Page;
 import com.addoiles.entity.Hots;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface HotsService {
      * 获取最新发表的动弹
      * @return
      */
-    List<Hots> getLatestHots();
+    List<Hots> getLatestHots(Page page);
 
 
 }
