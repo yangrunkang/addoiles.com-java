@@ -34,6 +34,14 @@ public class Comment {
      */
     private Integer createTime;
 
+
+    /******非表字段*******/
+    /**
+     * 用户名
+     */
+    private String userName;
+
+
     /**
      *  comment.id
      */
@@ -190,5 +198,13 @@ public class Comment {
      */
     public void setCreateTime(Integer createTime) {
         this.createTime = createTime;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

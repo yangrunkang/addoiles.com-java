@@ -28,4 +28,10 @@ public interface UserMapper {
      */
     List<User> countByEmail(@Param("email")String email,@Param("password")String password);
 
+    /**
+     * 获取用户id和Name
+     * @return
+     */
+    List<User> getUsersOfIdNameList();
+
 }

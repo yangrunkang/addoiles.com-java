@@ -15,6 +15,7 @@ import org.springframework.util.CollectionUtils;
 import service.UserService;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -52,4 +53,9 @@ public class UserServiceImpl implements UserService {
         return userMapper.insert(user);
     }
 
+    @Override
+    public List<User> getUsersOfIdNameList() {
+        List<User> userIdNames = userMapper.getUsersOfIdNameList();
+        return CollectionUtils.isEmpty(userIdNames)?new ArrayList<>():userIdNames;
+    }
 }

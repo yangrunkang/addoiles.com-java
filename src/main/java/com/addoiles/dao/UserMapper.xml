@@ -61,4 +61,12 @@
     where delete_status = 0
   </select>
 
+
+  <select id="getUsersOfIdNameList" resultMap="BaseResultMap">
+    select
+    DISTINCT user_id,name
+    from user
+    where delete_status = 0
+  </select>
+
 </mapper>

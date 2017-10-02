@@ -23,7 +23,6 @@ public class ExperienceServiceImpl implements ExperienceService {
     @Override
     public Integer addExperience(Experience experience) {
         experience.setExperienceId(OilUtils.generateID());
-        experience.setUserId(OilUtils.generateID());
         experience.setRates(0);
         experience.setRateCount(0);
         experience.setCreateTime(TimeUtil.currentTime());
