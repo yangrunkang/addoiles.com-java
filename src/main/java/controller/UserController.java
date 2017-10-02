@@ -2,6 +2,7 @@ package controller;
 
 import com.addoiles.dto.LoginReq;
 import com.addoiles.dto.LoginResp;
+import com.addoiles.dto.RegisterReq;
 import com.addoiles.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,6 +37,12 @@ public class UserController extends BaseController {
         }
 
         return loginResp;
+    }
+
+    @RequestMapping(value = "register", method = RequestMethod.POST)
+    @ResponseBody
+    public Object register(@RequestBody RegisterReq registerReq) {
+        return userService.register(registerReq) > 0;
     }
 
 }

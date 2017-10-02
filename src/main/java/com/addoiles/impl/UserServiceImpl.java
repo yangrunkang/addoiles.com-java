@@ -3,8 +3,11 @@ package com.addoiles.impl;
 import com.addoiles.dao.UserMapper;
 import com.addoiles.dto.LoginReq;
 import com.addoiles.dto.LoginResp;
+import com.addoiles.dto.RegisterReq;
 import com.addoiles.entity.User;
 import com.addoiles.util.JsonUtils;
+import com.addoiles.util.OilUtils;
+import com.addoiles.util.TimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -35,6 +38,18 @@ public class UserServiceImpl implements UserService {
             logger.error("userList'size is:{},userList：{}",userList.size(), JsonUtils.toJson(userList));
             return null;
         }
+    }
+
+    @Override
+    public Integer register(RegisterReq registerReq) {
+        User user = new User();
+        user.setUserId(OilUtils.generateID());
+        user.setName(registerReq.getUserName());
+        user.setEmail(registerReq.getEmail());
+        user.setPassword(registerReq.getPassword());
+        user.setDeleteStatus(0);
+        user.setCreateTime(TimeUtil.currentTime());
+        return userMapper.insert(user);
     }
 
 }
