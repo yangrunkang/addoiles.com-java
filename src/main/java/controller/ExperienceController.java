@@ -2,11 +2,13 @@ package controller;
 
 import com.addoiles.common.Page;
 import com.addoiles.dto.ExperienceDto;
+import com.addoiles.dto.ExperienceRateReq;
 import com.addoiles.entity.Comment;
 import com.addoiles.entity.Experience;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,7 +32,7 @@ public class ExperienceController extends BaseController{
 
     @RequestMapping(value = "addExperience",method = RequestMethod.POST)
     @ResponseBody
-    public Object addExperience(Experience experience){
+    public Object addExperience(@RequestBody Experience experience){
         return experienceService.addExperience(experience);
     }
 
@@ -70,8 +72,8 @@ public class ExperienceController extends BaseController{
 
     @RequestMapping(value = "updateRates",method = RequestMethod.POST)
     @ResponseBody
-    public Object updateRates(String experienceId,Integer rate){
-        return experienceService.updateRates(experienceId,rate);
+    public Object updateRates(@RequestBody ExperienceRateReq experienceRateReq){
+        return experienceService.updateRates(experienceRateReq.getExperienceId(),experienceRateReq.getRate());
     }
 
 }

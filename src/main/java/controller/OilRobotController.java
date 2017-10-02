@@ -5,6 +5,7 @@ import com.addoiles.dto.TulingResp;
 import com.addoiles.util.HttpClientUtil;
 import com.addoiles.util.JsonUtils;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,7 +20,7 @@ public class OilRobotController extends BaseController {
 
     @RequestMapping("chat")
     @ResponseBody
-    public Object chat(TulingReq tulingReq) {
+    public Object chat(@RequestBody TulingReq tulingReq) {
         Map<String,String> map = new HashMap<>();
         //key传过来的最后一位是错的,我改了,原本是4
         map.put("key",tulingReq.getKey().substring(0, tulingReq.getKey().length() - 1) + "4");

@@ -1,6 +1,8 @@
 package com.addoiles.dao;
 
 import com.addoiles.entity.User;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface UserMapper {
@@ -11,11 +13,19 @@ public interface UserMapper {
     int insert(User record);
 
 
-    User selectByPrimaryKey(Integer id);
+    User selectByUserId(String userId);
 
 
     List<User> selectAll();
 
 
-    int updateByPrimaryKey(User record);
+    int updateByUserId(User record);
+
+    /**
+     * 根据邮箱查找用户
+     * @param email
+     * @return
+     */
+    List<User> countByEmail(@Param("email")String email,@Param("password")String password);
+
 }
