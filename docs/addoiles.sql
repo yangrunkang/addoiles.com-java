@@ -127,3 +127,12 @@ CREATE TABLE `nav_settings` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COMMENT='导航栏设置';
 
+INSERT INTO `nav_settings` VALUES ('1', '主页', '/', 'ios-navigate', '0');
+INSERT INTO `nav_settings` VALUES ('2', '梦想墙', '/Dreams', 'ios-keypad', '0');
+INSERT INTO `nav_settings` VALUES ('3', '经历分享', '/Experience', 'ios-lightbulb-outline', '0');
+INSERT INTO `nav_settings` VALUES ('4', 'IT技术', '/ITTech', 'ios-flask-outline', '0');
+INSERT INTO `nav_settings` VALUES ('5', '软件评测', '/SoftwareTalk', 'ios-barcode-outline', '1');
+INSERT INTO `nav_settings` VALUES ('6', '聊天机器人', '/OilRobot', 'social-reddit-outline', '0');
+INSERT INTO `nav_settings` VALUES ('7', '程序员的生活记录', null, null, '1');
+INSERT INTO `nav_settings` VALUES ('8', '登录', '/Login', 'person', '0');
+INSERT INTO `nav_settings` VALUES ('9', '注册', '/Register', 'log-in', '0');
