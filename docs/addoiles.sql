@@ -23,16 +23,18 @@ CREATE TABLE `article` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `article_id` varchar(32) NOT NULL COMMENT '文章id',
   `article_type` int(1) NOT NULL COMMENT '文章类型',
-  `title` varchar(50) DEFAULT NULL COMMENT '文章标题',
+  `title` varchar(50) NOT NULL COMMENT '文章标题',
   `content` longtext COMMENT '文章内容',
   `delete_status` int(1) DEFAULT NULL COMMENT '删除状态 0-正常 1-删除',
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 -- 添加副标题
-alter table `article` add `sub_title` varchar(70) DEFAULT NULL COMMENT '副标题' AFTER `title`;
+alter table `article` add `sub_title` varchar(70) NOT NULL COMMENT '副标题' AFTER `title`;
 -- 修改列注释
-ALTER TABLE `article`  MODIFY COLUMN `article_type` int(1) COMMENT '文章类型 1-软件评测 2-技术沉淀';
+ALTER TABLE `article`  MODIFY COLUMN `article_type` int(1) NOT NULL COMMENT '文章类型 1-软件评测 2-技术沉淀';
+-- 修改content 类型
+alter table `article` modify column `content` text NOT NULL COMMENT '文章内容';
 
 
 -- ----------------------------
@@ -83,6 +85,8 @@ CREATE TABLE `experience` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- 添加评分次数
 alter table `experience` add `rate_count` int(4) DEFAULT 0 COMMENT '评分次数' AFTER `rates`;
+-- 修改content 类型
+alter table `experience` modify column `content` text  COMMENT '经历内容';
 
 -- ----------------------------
 -- Table structure for hots

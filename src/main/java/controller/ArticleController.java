@@ -9,6 +9,7 @@ import com.addoiles.impl.ServiceUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.ArticleService;
@@ -79,5 +80,13 @@ public class ArticleController extends BaseController {
     public Object getSoftwareTalkArticleList(Page page) {
         return articleService.getSoftwareTalkArticleList(page);
     }
+
+    @RequestMapping("addArticle")
+    @ResponseBody
+    public Object addArticle(@RequestBody Article article) {
+        return articleService.addArticle(article);
+    }
+
+
 
 }

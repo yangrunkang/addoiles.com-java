@@ -39,4 +39,10 @@ public interface ArticleService {
      */
     List<Article> getSoftwareTalkArticleList(Page page);
 
+    /**
+     * 添加文章
+     */
+    Integer addArticle(Article article);
+
+
 }

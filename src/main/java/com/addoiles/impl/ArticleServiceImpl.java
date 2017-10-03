@@ -3,6 +3,8 @@ package com.addoiles.impl;
 import com.addoiles.common.Page;
 import com.addoiles.dao.ArticleMapper;
 import com.addoiles.entity.Article;
+import com.addoiles.util.OilUtils;
+import com.addoiles.util.TimeUtil;
 import org.springframework.stereotype.Service;
 import service.ArticleService;
 
@@ -31,6 +33,14 @@ public class ArticleServiceImpl implements ArticleService{
     @Override
     public List<Article> getSoftwareTalkArticleList(Page page) {
         return articleMapper.selectByArticleType(page,1);
+    }
+
+    @Override
+    public Integer addArticle(Article article) {
+        article.setArticleId(OilUtils.generateID());
+        article.setDeleteStatus(0);
+        article.setCreateTime(TimeUtil.currentTime());
+        return articleMapper.insert(article);
     }
 
     @Override
