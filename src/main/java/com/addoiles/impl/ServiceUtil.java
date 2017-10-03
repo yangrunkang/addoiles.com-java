@@ -15,9 +15,7 @@ public class ServiceUtil {
             userList.forEach(user -> {
                 if (comment.getUserId().equals(user.getUserId())) {
                     comment.setUserName(user.getName());
-                } else {
-                    comment.setUserName("Oil客");
-                }
+                }//notice: none else
             });
         });
     }

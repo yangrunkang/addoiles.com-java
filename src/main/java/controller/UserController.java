@@ -20,7 +20,6 @@ import java.util.Objects;
 @Controller
 public class UserController extends BaseController {
 
-//    private Logger logger = LoggerFactory.getLogger(UserController.class);
 
     @Autowired
     private UserService userService;
