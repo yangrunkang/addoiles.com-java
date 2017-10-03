@@ -54,6 +54,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Integer checkHasRegister(String email) {
+        return userMapper.checkHasRegister(email);
+    }
+
+    @Override
     public List<User> getUsersOfIdNameList() {
         List<User> userIdNames = userMapper.getUsersOfIdNameList();
         return CollectionUtils.isEmpty(userIdNames)?new ArrayList<>():userIdNames;

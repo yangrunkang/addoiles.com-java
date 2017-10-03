@@ -29,9 +29,18 @@ public interface UserMapper {
     List<User> countByEmail(@Param("email")String email,@Param("password")String password);
 
     /**
+     * 检查注册用户是否已已经注册过
+     * @param email
+     * @return
+     */
+    Integer checkHasRegister(@Param("email")String email);
+
+    /**
      * 获取用户id和Name
      * @return
      */
     List<User> getUsersOfIdNameList();
+
+
 
 }

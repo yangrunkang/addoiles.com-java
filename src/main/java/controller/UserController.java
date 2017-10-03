@@ -1,5 +1,6 @@
 package controller;
 
+import com.addoiles.common.OilConstant;
 import com.addoiles.dto.LoginReq;
 import com.addoiles.dto.LoginResp;
 import com.addoiles.dto.RegisterReq;
@@ -41,6 +42,11 @@ public class UserController extends BaseController {
     @RequestMapping(value = "register", method = RequestMethod.POST)
     @ResponseBody
     public Object register(@RequestBody RegisterReq registerReq) {
+        //检查用户是否已经注册
+        Integer hasRegister = userService.checkHasRegister(registerReq.getEmail());
+        if(hasRegister > 0){
+            return OilConstant.HAS_REGISTERED;//已经注册
+        }
         return userService.register(registerReq) > 0;
     }
 

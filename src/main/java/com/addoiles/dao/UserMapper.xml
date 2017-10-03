@@ -54,6 +54,13 @@
     and email = #{email,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
   </select>
 
+  <select id="checkHasRegister" resultType="java.lang.Integer">
+    select
+    count(*)
+    from user
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
+
   <select id="selectAll" resultMap="BaseResultMap">
     select
     <include refid="BaseColumn" />

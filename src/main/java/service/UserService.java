@@ -25,6 +25,13 @@ public interface UserService {
      */
     Integer register(RegisterReq registerReq);
 
+    /***
+     * 检查用户是否已经注册过
+     * @param email
+     * @return
+     */
+    Integer checkHasRegister(String email);
+
     /**
      * 获取用户id和Name
      * @return
