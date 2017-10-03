@@ -3,6 +3,8 @@ package com.addoiles.impl;
 import com.addoiles.common.Page;
 import com.addoiles.dao.HotsMapper;
 import com.addoiles.entity.Hots;
+import com.addoiles.util.OilUtils;
+import com.addoiles.util.TimeUtil;
 import org.springframework.stereotype.Service;
 import service.HotsService;
 
@@ -23,5 +25,12 @@ public class HotsServiceImpl implements HotsService{
         return hotsMapper.selectAll(page);
     }
 
-
+    @Override
+    public Integer addHots(Hots hots) {
+        //用户id可为空
+        hots.setHotId(OilUtils.generateID());
+        hots.setDeleteStatus(0);
+        hots.setCreateTime(TimeUtil.currentTime());
+        return hotsMapper.insert(hots);
+    }
 }

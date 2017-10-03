@@ -17,5 +17,11 @@ public interface HotsService {
      */
     List<Hots> getLatestHots(Page page);
 
+    /**
+     * 新增热门
+     * @param hots
+     * @return
+     */
+    Integer addHots(Hots hots);
 
 }
