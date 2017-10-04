@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ServiceUtil {
 
-    public static void HandleUserIdToUserName(List<Comment> commentList,List<User> userList){
+    public static void HandleCommentUserIdToUserName(List<Comment> commentList, List<User> userList){
         commentList.forEach(comment -> {
             userList.forEach(user -> {
                 if (comment.getUserId().equals(user.getUserId())) {

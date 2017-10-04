@@ -140,3 +140,27 @@ INSERT INTO `nav_settings` VALUES ('6', '聊天机器人', '/OilRobot', 'social-
 INSERT INTO `nav_settings` VALUES ('7', '程序员的生活记录', null, null, '1');
 INSERT INTO `nav_settings` VALUES ('8', '登录', '/Login', 'person', '0');
 INSERT INTO `nav_settings` VALUES ('9', '注册', '/Register', 'log-in', '0');
+
+-- ----------------------------
+-- Table structure for question
+-- ----------------------------
+DROP TABLE IF EXISTS `question`;
+CREATE TABLE `question` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(32) DEFAULT NULL COMMENT '用户id',
+  `question_id` varchar(32) DEFAULT NULL COMMENT '问题id',
+  `content` varchar(3000) DEFAULT NULL COMMENT '内容',
+  `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Table structure for suggest
+-- ----------------------------
+DROP TABLE IF EXISTS `suggest`;
+CREATE TABLE `suggest` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(32) DEFAULT NULL COMMENT '用户id',
+  `content` varchar(3000) DEFAULT NULL COMMENT '内容',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;

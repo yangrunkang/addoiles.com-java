@@ -20,7 +20,7 @@ public interface ArticleMapper {
     /**
      * 根据文章类型获取
      * @param page 分页对象
-     * @param articleType 文章类型 1-软件评测 2-技术沉淀
+     * @param articleType 文章类型 1-软件评测 2-技术沉淀 3-问答
      * @return
      */
     List<Article> selectByArticleType(@Param("page")Page page,@Param("articleType")Integer articleType);

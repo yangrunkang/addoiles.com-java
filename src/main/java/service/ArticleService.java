@@ -20,9 +20,12 @@ public interface ArticleService {
     /**
      * 获取IT技术文章
      * @param articleId 文章id
-     * @param articleType 文章类型 1-软件评测 2-技术沉淀
+     * @param articleType 文章类型 1-软件评测 2-技术沉淀 3-提问
      */
     Article getArticleByParams(String articleId,Integer articleType);
+
+
+    List<Article> getArticleByArticleType(Page page,Integer articleType);
 
 
     /**

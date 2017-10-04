@@ -54,7 +54,7 @@ public class ArticleController extends BaseController {
             }
             //处理userId转userName
             List<User> usersOfIdNameList = userService.getUsersOfIdNameList();
-            ServiceUtil.HandleUserIdToUserName(articleCommentList, usersOfIdNameList);
+            ServiceUtil.HandleCommentUserIdToUserName(articleCommentList, usersOfIdNameList);
 
             itTechDto.setPithinessList(pithinessArticleList);
             itTechDto.setArticle(article);

@@ -59,7 +59,7 @@ public class ExperienceController extends BaseController {
                     ExperienceDto experienceDto = new ExperienceDto();
                     experienceDto.setExperience(experience);
                     //处理userId转userName
-                    ServiceUtil.HandleUserIdToUserName(commentList, usersOfIdNameList);
+                    ServiceUtil.HandleCommentUserIdToUserName(commentList, usersOfIdNameList);
                     experienceDto.setCommentList(commentList);
                     experienceDtoList.add(experienceDto);
                 } else {

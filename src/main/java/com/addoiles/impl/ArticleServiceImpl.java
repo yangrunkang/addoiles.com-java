@@ -37,6 +37,7 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public Integer addArticle(Article article) {
+        //articleType从前端传过来
         article.setArticleId(OilUtils.generateID());
         article.setDeleteStatus(0);
         article.setCreateTime(TimeUtil.currentTime());
@@ -46,6 +47,11 @@ public class ArticleServiceImpl implements ArticleService{
     @Override
     public Article getArticleByParams(String articleId, Integer articleType) {
         return articleMapper.getArticleByParams(articleId,articleType);
+    }
+
+    @Override
+    public List<Article> getArticleByArticleType(Page page, Integer articleType) {
+        return articleMapper.selectByArticleType(page,articleType);
     }
 
 }
