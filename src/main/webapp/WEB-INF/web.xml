@@ -17,10 +17,10 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
 
-    <!-- 所有请求交于名字为spring的DispatcherSerlet处理 -->
+    <!-- 所有请求交于名字为spring的DispatcherServlet处理 -->
     <servlet-mapping>
         <servlet-name>dispatcherServlet</servlet-name>
-        <url-pattern>/</url-pattern>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
 
     <!-- 配置过滤器 -->
