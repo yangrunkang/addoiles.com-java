@@ -155,7 +155,7 @@ CREATE TABLE `question` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
--- Table structure for suggest
+-- Table structure for suggest todo 有哪个表示少delete_status好像
 -- ----------------------------
 DROP TABLE IF EXISTS `suggest`;
 CREATE TABLE `suggest` (
