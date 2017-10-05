@@ -53,6 +53,8 @@ public class ExperienceController extends BaseController {
         if (CollectionUtils.isEmpty(experienceList)) {
             return experienceDtoList; //在页面上显示空
         } else {
+            //处理userId转userName
+            ServiceUtil.HandleExperienceUserIdToUserName(experienceList,usersOfIdNameList);
             experienceList.forEach(experience -> {
                 List<Comment> commentList = commentService.getCommentListByTargetId(experience.getExperienceId());
                 if (!CollectionUtils.isEmpty(commentList)) {

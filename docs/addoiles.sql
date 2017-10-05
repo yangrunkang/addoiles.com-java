@@ -153,9 +153,11 @@ CREATE TABLE `question` (
   `create_time` int(11) DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- 添加 删除状态 字段
+alter table `question` add `delete_status` int(1) NOT NULL COMMENT '删除状态 0-正常 1-删除' AFTER `content`;
 
 -- ----------------------------
--- Table structure for suggest todo 有哪个表示少delete_status好像
+-- Table structure for suggest
 -- ----------------------------
 DROP TABLE IF EXISTS `suggest`;
 CREATE TABLE `suggest` (

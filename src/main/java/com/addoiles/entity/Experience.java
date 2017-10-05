@@ -45,14 +45,16 @@ public class Experience {
      */
     private Integer createTime;
 
+
+    /***************非表字段***************/
+
     /**
-     *
-     *  experience.id
-     *
-     * @return the value of experience.id
-     *
-     *
+     * 用户名
      */
+    private String userName;
+
+
+
     public Integer getId() {
         return id;
     }
@@ -239,5 +241,13 @@ public class Experience {
 
     public void setRateCount(Integer rateCount) {
         this.rateCount = rateCount;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

@@ -26,6 +26,7 @@
     <include refid="Base_Column_List" />
     from question
     where  delete_status = 0
+    order by create_time desc
     limit #{page.pageNo},#{page.pageSize}
   </select>
 
