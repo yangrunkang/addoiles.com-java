@@ -35,7 +35,8 @@ alter table `article` add `sub_title` varchar(70) NOT NULL COMMENT '副标题' A
 ALTER TABLE `article`  MODIFY COLUMN `article_type` int(1) NOT NULL COMMENT '文章类型 1-软件评测 2-技术沉淀';
 -- 修改content 类型
 alter table `article` modify column `content` text NOT NULL COMMENT '文章内容';
-
+-- 添加 草稿类型
+alter table `article` modify column `delete_status` int(1) NOT NULL COMMENT '删除状态 0-正常 1-删除 2-草稿';
 
 -- ----------------------------
 -- Table structure for comment
@@ -87,6 +88,8 @@ CREATE TABLE `experience` (
 alter table `experience` add `rate_count` int(4) DEFAULT 0 COMMENT '评分次数' AFTER `rates`;
 -- 修改content 类型
 alter table `experience` modify column `content` text  COMMENT '经历内容';
+-- 添加草稿
+alter table `experience` modify column `delete_status` int(1) NOT NULL COMMENT '删除状态 0-正常 1-删除 2-草稿';
 
 -- ----------------------------
 -- Table structure for hots

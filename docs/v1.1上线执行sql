@@ -1,0 +1,5 @@
+-- 添加 草稿类型
+alter table `article` modify column `delete_status` int(1) NOT NULL COMMENT '删除状态 0-正常 1-删除 2-草稿';
+
+-- 添加 草稿类型
+alter table `experience` modify column `delete_status` int(1) NOT NULL COMMENT '删除状态 0-正常 1-删除 2-草稿';
