@@ -30,7 +30,7 @@ public class DreamsServiceImpl implements DreamsService {
     public Integer addDream(Dreams dreams) {
         //默认值
         dreams.setDreamId(OilUtils.generateID());
-        dreams.setUserId(OilUtils.generateID());
+        dreams.setUserId(dreams.getUserId() == null ? "no user" : dreams.getUserId());
         dreams.setCreateTime(TimeUtil.currentTime());
         dreams.setLikes(0);
         dreams.setDeleteStatus(0);
