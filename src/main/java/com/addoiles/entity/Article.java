@@ -38,6 +38,11 @@ public class Article {
     private Integer createTime;
 
     /**
+     * 编辑时间
+     */
+    private Integer updateTime;
+
+    /**
      *   文章内容
      */
     private String content;
@@ -216,5 +221,14 @@ public class Article {
 
     public void setSubTitle(String subTitle) {
         this.subTitle = subTitle;
+    }
+
+
+    public Integer getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Integer updateTime) {
+        this.updateTime = updateTime;
     }
 }

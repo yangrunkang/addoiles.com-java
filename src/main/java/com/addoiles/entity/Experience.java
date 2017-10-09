@@ -45,6 +45,11 @@ public class Experience {
      */
     private Integer createTime;
 
+    /**
+     * 编辑时间
+     */
+    private Integer updateTime;
+
 
     /***************非表字段***************/
 
@@ -249,5 +254,14 @@ public class Experience {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+
+    public Integer getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Integer updateTime) {
+        this.updateTime = updateTime;
     }
 }

@@ -3,3 +3,9 @@ alter table `article` modify column `delete_status` int(1) NOT NULL COMMENT '删
 
 -- 添加 草稿类型
 alter table `experience` modify column `delete_status` int(1) NOT NULL COMMENT '删除状态 0-正常 1-删除 2-草稿';
+
+-- 添加编辑时间
+alter table `article` add `update_time` int(11) DEFAULT NULL COMMENT '编辑时间' AFTER `create_time`;
+
+-- -- 添加编辑时间
+alter table `experience` add `update_time` int(11) DEFAULT NULL COMMENT '编辑时间' AFTER `create_time`;

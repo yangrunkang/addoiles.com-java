@@ -9,11 +9,12 @@
     <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
     <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
     <result column="create_time" jdbcType="INTEGER" property="createTime" />
+    <result column="update_time" jdbcType="INTEGER" property="updateTime" />
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
 
   <sql id="BaseColumn">
-    id, article_id, article_type, title,sub_title, delete_status, create_time, content
+    id, article_id, article_type, title,sub_title, delete_status, create_time,update_time, content
   </sql>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -22,10 +23,11 @@
   </delete>
   <insert id="insert" parameterType="com.addoiles.entity.Article">
     insert into article (id, article_id, article_type,
-      title,sub_title, delete_status, create_time,
+      title,sub_title, delete_status, create_time,update_time,
       content)
     values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=VARCHAR}, #{articleType,jdbcType=INTEGER}, 
       #{title,jdbcType=VARCHAR},#{subTitle,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER},
+      #{updateTime,jdbcType=INTEGER},
       #{content,jdbcType=LONGVARCHAR})
   </insert>
   <update id="updateByArticleId" parameterType="com.addoiles.entity.Article">
@@ -36,6 +38,7 @@
       sub_title = #{subTitle,jdbcType=VARCHAR},
       delete_status = #{deleteStatus,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=INTEGER},
       content = #{content,jdbcType=LONGVARCHAR}
     where article_id = #{articleId,jdbcType=VARCHAR}
   </update>

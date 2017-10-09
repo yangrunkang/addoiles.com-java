@@ -37,6 +37,8 @@ ALTER TABLE `article`  MODIFY COLUMN `article_type` int(1) NOT NULL COMMENT '文
 alter table `article` modify column `content` text NOT NULL COMMENT '文章内容';
 -- 添加 草稿类型
 alter table `article` modify column `delete_status` int(1) NOT NULL COMMENT '删除状态 0-正常 1-删除 2-草稿';
+-- 添加编辑时间
+alter table `article` add `update_time` int(11) DEFAULT NULL COMMENT '编辑时间' AFTER `create_time`;
 
 -- ----------------------------
 -- Table structure for comment
@@ -90,6 +92,8 @@ alter table `experience` add `rate_count` int(4) DEFAULT 0 COMMENT '评分次数
 alter table `experience` modify column `content` text  COMMENT '经历内容';
 -- 添加草稿
 alter table `experience` modify column `delete_status` int(1) NOT NULL COMMENT '删除状态 0-正常 1-删除 2-草稿';
+-- 添加编辑时间
+alter table `experience` add `update_time` int(11) DEFAULT NULL COMMENT '编辑时间' AFTER `create_time`;
 
 -- ----------------------------
 -- Table structure for hots

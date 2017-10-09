@@ -11,9 +11,10 @@
     <result column="rate_count" jdbcType="INTEGER" property="rateCount" />
     <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
     <result column="create_time" jdbcType="INTEGER" property="createTime" />
+    <result column="update_time" jdbcType="INTEGER" property="updateTime" />
   </resultMap>
   <sql id="BaseColumn">
-    id, experience_id, user_id, title, content, rates, rate_count, delete_status, create_time
+    id, experience_id, user_id, title, content, rates, rate_count, delete_status, create_time,update_time
   </sql>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from experience
@@ -22,10 +23,10 @@
   <insert id="insert" parameterType="com.addoiles.entity.Experience">
     insert into experience (id, experience_id, user_id,
       title, content, rates, rate_count,
-      delete_status, create_time)
+      delete_status, create_time,update_time)
     values (#{id,jdbcType=INTEGER}, #{experienceId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
       #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{rates,jdbcType=INTEGER}, #{rateCount,jdbcType=INTEGER},
-      #{deleteStatus,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER})
+      #{deleteStatus,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER},#{updateTime,jdbcType=INTEGER})
   </insert>
   <update id="updateByExperienceId" parameterType="com.addoiles.entity.Experience">
     update experience
@@ -36,7 +37,8 @@
       rates = #{rates,jdbcType=INTEGER},
       rate_count = #{rateCount,jdbcType=INTEGER},
       delete_status = #{deleteStatus,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=INTEGER}
+      create_time = #{createTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=INTEGER}
     where experience_id = #{experienceId,jdbcType=INTEGER}
   </update>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
