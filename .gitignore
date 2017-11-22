@@ -16,6 +16,8 @@ target/
 *.ipr
 *.iml
 *.iws
+# .com 是我的项目名....
+*.com.iml
 
 # temp ignore
 *.log
