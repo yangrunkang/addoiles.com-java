@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="com.addoiles.entity.Article">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="article_id" jdbcType="VARCHAR" property="articleId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
     <result column="article_type" jdbcType="INTEGER" property="articleType" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="sub_title" jdbcType="VARCHAR" property="subTitle" />
@@ -14,7 +15,7 @@
   </resultMap>
 
   <sql id="BaseColumn">
-    id, article_id, article_type, title,sub_title, delete_status, create_time,update_time, content
+    id, article_id,user_id, article_type, title,sub_title, delete_status, create_time,update_time, content
   </sql>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -22,10 +23,10 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="com.addoiles.entity.Article">
-    insert into article (id, article_id, article_type,
+    insert into article (id, article_id,user_id, article_type,
       title,sub_title, delete_status, create_time,update_time,
       content)
-    values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=VARCHAR}, #{articleType,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=VARCHAR},#{userId,jdbcType=VARCHAR}, #{articleType,jdbcType=INTEGER},
       #{title,jdbcType=VARCHAR},#{subTitle,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER},
       #{updateTime,jdbcType=INTEGER},
       #{content,jdbcType=LONGVARCHAR})
@@ -42,6 +43,28 @@
       content = #{content,jdbcType=LONGVARCHAR}
     where article_id = #{articleId,jdbcType=VARCHAR}
   </update>
+  <update id="updateSelectiveByArticleId" parameterType="com.addoiles.entity.Article">
+    update article
+    <set>
+      <if test="userId != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="subTitle != null">
+        sub_title = #{subTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where article_id = #{articleId,jdbcType=VARCHAR}
+  </update>
+
 
   <select id="selectByArticleId" parameterType="java.lang.String" resultMap="BaseResultMap">
     select

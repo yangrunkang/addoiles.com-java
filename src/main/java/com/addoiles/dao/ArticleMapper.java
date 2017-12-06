@@ -44,4 +44,7 @@ public interface ArticleMapper {
 
 
     int updateByArticleId(Article record);
+
+
+    int updateSelectiveByArticleId(Article record);
 }

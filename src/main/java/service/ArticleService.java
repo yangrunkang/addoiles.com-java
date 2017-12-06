@@ -47,5 +47,10 @@ public interface ArticleService {
      */
     Integer addArticle(Article article);
 
+   /**
+     * 编辑文章
+     */
+    Integer editArticle(Article article);
+
 
 }

@@ -11,6 +11,11 @@ public class Article {
     private String articleId;
 
     /**
+     *   用户id
+     */
+    private String userId;
+
+    /**
      *   文章类型
      */
     private Integer articleType;
@@ -230,5 +235,13 @@ public class Article {
 
     public void setUpdateTime(Integer updateTime) {
         this.updateTime = updateTime;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 }

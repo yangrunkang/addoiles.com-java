@@ -54,4 +54,14 @@ public class ArticleServiceImpl implements ArticleService{
         return articleMapper.selectByArticleType(page,articleType);
     }
 
+    @Override
+    public Integer editArticle(Article article) {
+        Article tmp = new Article();
+        tmp.setArticleId(article.getArticleId());
+        tmp.setTitle(article.getTitle());
+        tmp.setSubTitle(article.getSubTitle());
+        tmp.setContent(article.getContent());
+        tmp.setUpdateTime(TimeUtil.currentTime());
+        return articleMapper.updateSelectiveByArticleId(tmp);
+    }
 }

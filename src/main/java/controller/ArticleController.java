@@ -88,5 +88,12 @@ public class ArticleController extends BaseController {
     }
 
 
+    @RequestMapping("editArticle")
+    @ResponseBody
+    public Object editArticle(@RequestBody Article article) {
+        return articleService.editArticle(article);
+    }
+
+
 
 }
