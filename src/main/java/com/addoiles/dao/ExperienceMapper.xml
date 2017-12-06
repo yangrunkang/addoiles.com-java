@@ -41,6 +41,34 @@
       update_time = #{updateTime,jdbcType=INTEGER}
     where experience_id = #{experienceId,jdbcType=INTEGER}
   </update>
+  <update id="updateSelectiveByExperienceId" parameterType="com.addoiles.entity.Experience">
+    update experience
+    <set>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
+      </if>
+      <if test="rates != null">
+        rates = #{rates,jdbcType=INTEGER},
+      </if>
+      <if test="rateCount != null">
+        rate_count = #{rateCount,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteStatus != null">
+        delete_status = #{deleteStatus,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=INTEGER},
+      </if>
+    </set>
+    where experience_id = #{experienceId,jdbcType=INTEGER}
+  </update>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="BaseColumn" />

@@ -50,4 +50,14 @@ public class ExperienceServiceImpl implements ExperienceService {
         experience.setRateCount(rateCount);
         return experienceMapper.updateByExperienceId(experience);
     }
+
+    @Override
+    public Integer updateExperience(Experience experience) {
+        Experience tmp = new Experience();
+        tmp.setTitle(experience.getTitle());
+        tmp.setContent(experience.getContent());
+        tmp.setExperienceId(experience.getExperienceId());
+        tmp.setUpdateTime(TimeUtil.currentTime());
+        return experienceMapper.updateSelectiveByExperienceId(tmp);
+    }
 }

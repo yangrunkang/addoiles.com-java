@@ -19,4 +19,7 @@ public interface ExperienceMapper {
     List<Experience> selectExperienceList(@Param("page") Page page);
 
     int updateByExperienceId(Experience record);
+
+    int updateSelectiveByExperienceId(Experience record);
+
 }

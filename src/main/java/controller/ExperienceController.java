@@ -88,5 +88,15 @@ public class ExperienceController extends BaseController {
         return experienceService.updateRates(experienceRateReq.getExperienceId(), experienceRateReq.getRate());
     }
 
+    @RequestMapping(value = "editExperience", method = RequestMethod.POST)
+    @ResponseBody
+    public Object editExperience(@RequestBody Experience experience) {
+//
+//        if(Objects.isNull(experience.getExperienceId())){
+//
+//        }
+        return experienceService.updateExperience(experience);
+    }
+
 
 }

@@ -31,4 +31,11 @@ public interface ExperienceService {
      */
     Integer updateRates(String experienceId,Integer rate);
 
+    /**
+     * 编辑经历
+     * @param experience
+     * @return
+     */
+    Integer updateExperience(Experience experience);
+
 }
