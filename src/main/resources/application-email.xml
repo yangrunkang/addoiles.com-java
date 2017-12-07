@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	         http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--邮件配置-->
+    <bean id="emailConfig" class="com.addoiles.mail.config.EmailConfig">
+        <property name="transportProtocol" value="${emailConfig.transportProtocol}"/>
+        <property name="mailHost" value="${emailConfig.mailHost}"/>
+        <property name="mailHostPort" value="${emailConfig.mailHostPort}"/>
+        <property name="isMailAuth" value="${emailConfig.isMailAuth}"/>
+        <property name="personalCharset" value="${emailConfig.personalCharset}" />
+        <property name="subjectCharset" value="${emailConfig.subjectCharset}" />
+        <property name="contentCharset" value="${emailConfig.contentCharset}" />
+    </bean>
+
+    <!--发送者配置-->
+    <bean id="sender" class="com.addoiles.mail.dto.Sender">
+        <property name="name" value="${sender.name}"/>
+        <property name="emailAddress" value="${sender.email}"/>
+        <property name="authorizationCode" value="${sender.authCode}"/>
+    </bean>
+
+    <!--邮件内容基本信息配置-->
+<!--
+    <bean id="email" class="com.addoiles.mail.dto.Email">
+
+    </bean>
+-->
+    <bean id="baseEmailService" class="com.addoiles.mail.service.BaseEmailService">
+        <property name="emailConfig" ref="emailConfig" />
+        <property name="sender" ref="sender" />
+    </bean>
+
+
+</beans>

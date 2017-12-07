@@ -31,6 +31,22 @@ public class EmailConfig {
     private String isMailAuth;
 
 
+    /**
+     * 主题字符编码
+     */
+    private String subjectCharset;
+
+    /**
+     * 内容字符编码
+     */
+    private String contentCharset;
+
+    /**
+     * 发件人/收件人姓名字符编码
+     */
+    private String personalCharset;
+
+
 
     public String getTransportProtocol() {
         return transportProtocol;
@@ -62,5 +78,29 @@ public class EmailConfig {
 
     public void setMailHostPort(String mailHostPort) {
         this.mailHostPort = mailHostPort;
+    }
+
+    public String getSubjectCharset() {
+        return subjectCharset;
+    }
+
+    public void setSubjectCharset(String subjectCharset) {
+        this.subjectCharset = subjectCharset;
+    }
+
+    public String getContentCharset() {
+        return contentCharset;
+    }
+
+    public void setContentCharset(String contentCharset) {
+        this.contentCharset = contentCharset;
+    }
+
+    public String getPersonalCharset() {
+        return personalCharset;
+    }
+
+    public void setPersonalCharset(String personalCharset) {
+        this.personalCharset = personalCharset;
     }
 }

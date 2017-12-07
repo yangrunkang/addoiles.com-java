@@ -2,8 +2,8 @@ package com.addoiles.mail.service;
 
 import com.addoiles.mail.config.EmailConfig;
 import com.addoiles.mail.dto.Email;
-import com.addoiles.mail.dto.Receiver;
 import com.addoiles.mail.dto.Sender;
+import org.springframework.stereotype.Service;
 
 import javax.mail.Session;
 import javax.mail.Transport;
@@ -18,9 +18,18 @@ import java.util.Properties;
  * @author Yangrunkang
  * DateTime:  2017/12/7 16:20
  */
+@Service
 public class BaseEmailService {
 
+    /**
+     * 邮件配置
+     */
     private EmailConfig emailConfig;
+
+    /**
+     * 发送者
+     */
+    private Sender sender;
 
     /**
      * 创建Email
@@ -30,21 +39,21 @@ public class BaseEmailService {
      * @return
      * @throws Exception
      */
-    public MimeMessage createEmail(Session session, Email email) throws Exception {
+    private MimeMessage createEmail(Session session, Email email) throws Exception {
         // 1. 创建一封邮件
         MimeMessage message = new MimeMessage(session);
 
         // 2. From: 发件人（昵称有广告嫌疑，避免被邮件服务器误认为是滥发广告以至返回失败，请修改昵称）
-        message.setFrom(new InternetAddress(email.getSender().getEmailAddress(), email.getSender().getName(), email.getPersonalCharset()));
+        message.setFrom(new InternetAddress(sender.getEmailAddress(), sender.getName(), emailConfig.getPersonalCharset()));
 
         // 3. To: 收件人（可以增加多个收件人、抄送、密送）
-        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(email.getReceiver().getEmailAddress(), email.getReceiver().getEmailAddress(), email.getPersonalCharset()));
+        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(email.getReceiver().getEmailAddress(), email.getReceiver().getEmailAddress(), emailConfig.getPersonalCharset()));
 
         // 4. Subject: 邮件主题（标题有广告嫌疑，避免被邮件服务器误认为是滥发广告以至返回失败，请修改标题）
-        message.setSubject(email.getSubject(), email.getSubjectCharset());
+        message.setSubject(email.getSubject(), emailConfig.getSubjectCharset());
 
         // 5. Content: 邮件正文（可以使用html标签）（内容有广告嫌疑，避免被邮件服务器误认为是滥发广告以至返回失败，请修改发送内容）
-        message.setContent(email.getContent(), email.getContentCharset());
+        message.setContent(email.getContent(), emailConfig.getContentCharset());
 
         // 6. 设置发件时间
         message.setSentDate(new Date());
@@ -80,7 +89,7 @@ public class BaseEmailService {
         Transport transport = session.getTransport();
 
         // 5. 使用 邮箱账号 和 密码 连接邮件服务器, 这里认证的邮箱必须与 message 中的发件人邮箱一致, 否则报错
-        transport.connect(email.getSender().getEmailAddress(), email.getSender().getAuthorizationCode());
+        transport.connect(sender.getEmailAddress(), sender.getAuthorizationCode());
 
         // 6. 发送邮件, 发到所有的收件地址, message.getAllRecipients() 获取到的是在创建邮件对象时添加的所有收件人, 抄送人, 密送人
 
@@ -89,46 +98,14 @@ public class BaseEmailService {
         // 7. 关闭连接
         transport.close();
 
-        return false;
-    }
-
-    public static void main(String[] args) {
-        Email email = new Email();
-
-        Sender sender = new Sender();
-        sender.setAuthorizationCode("ratrlqxcsupyhfid");
-        sender.setEmailAddress("1162865556@qq.com");
-        sender.setName("我是发件人-www.addoiles.com");
-
-        Receiver receiver = new Receiver();
-        receiver.setEmailAddress("1743703238@qq.com");
-        receiver.setName("会飞的猪");
-
-        email.setSender(sender);
-        email.setReceiver(receiver);
-
-        email.setPersonalCharset("UTF-8");
-        email.setContentCharset("text/html;charset=UTF-8");
-        email.setSubject("我是邮件主题-测试邮件基础服务");
-        email.setContent("我是邮件正文-Hi,AddoilesEmail");
-
-        EmailConfig emailConfig = new EmailConfig();
-        emailConfig.setTransportProtocol("smtp");
-        emailConfig.setIsMailAuth("false");
-        emailConfig.setMailHost("smtp.qq.com");
-        emailConfig.setMailHostPort("465");
-
-        BaseEmailService baseEmailService = new BaseEmailService();
-        baseEmailService.setEmailConfig(emailConfig);
-
-        try {
-            baseEmailService.sendEmail(email);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        return true;
     }
 
     public void setEmailConfig(EmailConfig emailConfig) {
         this.emailConfig = emailConfig;
+    }
+
+    public void setSender(Sender sender) {
+        this.sender = sender;
     }
 }

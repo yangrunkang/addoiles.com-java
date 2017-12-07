@@ -20,9 +20,9 @@ public class Sender {
 
     /**
      * 发送者邮箱授权码
-     * @apiNote 如果验证不通过,需要重新申请
+     *
+     * @apiNote 如果验证不通过, 需要重新申请
      */
-    // TODO: 2017/12/7 配置文件配置 ratrlqxcsupyhfid
     private String authorizationCode;
 
 

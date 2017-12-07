@@ -9,17 +9,12 @@ package com.addoiles.mail.dto;
 public class Email {
 
     /**
-     * 发送者
-     */
-    private Sender sender;
-
-    /**
      * 邮件主题
      */
     private String subject;
 
     /**
-     * 邮件主题
+     * 邮件内容
      */
     private String content;
 
@@ -27,29 +22,6 @@ public class Email {
      * 接收者
      */
     private Receiver receiver;
-
-    /**
-     * 主题字符编码
-     */
-    private String subjectCharset;
-
-    /**
-     * 内容字符编码
-     */
-    private String contentCharset;
-
-    /**
-     * 发件人/收件人姓名字符编码
-     */
-    private String personalCharset;
-
-    public Sender getSender() {
-        return sender;
-    }
-
-    public void setSender(Sender sender) {
-        this.sender = sender;
-    }
 
     public String getSubject() {
         return subject;
@@ -73,29 +45,5 @@ public class Email {
 
     public void setReceiver(Receiver receiver) {
         this.receiver = receiver;
-    }
-
-    public String getSubjectCharset() {
-        return subjectCharset;
-    }
-
-    public void setSubjectCharset(String subjectCharset) {
-        this.subjectCharset = subjectCharset;
-    }
-
-    public String getContentCharset() {
-        return contentCharset;
-    }
-
-    public void setContentCharset(String contentCharset) {
-        this.contentCharset = contentCharset;
-    }
-
-    public String getPersonalCharset() {
-        return personalCharset;
-    }
-
-    public void setPersonalCharset(String personalCharset) {
-        this.personalCharset = personalCharset;
     }
 }
