@@ -22,6 +22,14 @@ public interface UserMapper {
     int updateByUserId(User record);
 
     /**
+     * 更新密码
+     *  提供单独接口
+     * @param user
+     * @return
+     */
+    int updatePasswordByEmail(User user);
+
+    /**
      * 根据邮箱查找用户
      * @param email
      * @return

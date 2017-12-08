@@ -40,6 +40,14 @@
     where user_id = #{userId,jdbcType=INTEGER}
   </update>
 
+
+  <update id="updatePasswordByEmail" parameterType="com.addoiles.entity.User">
+    update user
+    set
+      password = #{password,jdbcType=VARCHAR}
+    where email = #{email,jdbcType=VARCHAR} and delete_status = 0
+  </update>
+
   <select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
     select id, user_id, name, password, email, delete_status, create_time
     from user

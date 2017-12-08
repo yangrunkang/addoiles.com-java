@@ -1,6 +1,7 @@
 package controller;
 
-import com.addoiles.dto.LoginResp;
+import com.addoiles.dto.resp.LoginResp;
+import com.addoiles.dto.req.VerificationCodeReq;
 import com.addoiles.mail.EmailService;
 import com.addoiles.mail.dto.Email;
 import com.addoiles.mail.dto.Receiver;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import service.UserService;
 
 /**
  * Description:
@@ -20,6 +22,9 @@ public class TestController {
 
     @Autowired
     private EmailService emailService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "sendEmail", method = RequestMethod.GET)
     public Object sendEmail() {
@@ -40,5 +45,16 @@ public class TestController {
 
         return loginResp;
     }
+
+    @RequestMapping(value = "sendCode", method = RequestMethod.GET)
+    public Object sendCode() {
+        VerificationCodeReq verificationCodeReq = new VerificationCodeReq();
+        verificationCodeReq.setEmail("1743703238@qq.com");
+        verificationCodeReq.setType(1);
+        userService.sendVerificationCode(verificationCodeReq);
+
+        return 0;
+    }
+
 
 }
