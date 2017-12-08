@@ -1,7 +1,7 @@
 package com.addoiles.impl;
 
 import com.addoiles.common.Page;
-import com.addoiles.dao.QuestionMapper;
+import com.addoiles.db.dao.QuestionMapper;
 import com.addoiles.entity.Question;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;

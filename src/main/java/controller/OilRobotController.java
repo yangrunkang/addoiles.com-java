@@ -1,7 +1,7 @@
 package controller;
 
-import com.addoiles.dto.TulingReq;
-import com.addoiles.dto.TulingResp;
+import com.addoiles.dto.req.TulingReq;
+import com.addoiles.dto.resp.TulingResp;
 import com.addoiles.util.HttpClientUtil;
 import com.addoiles.util.JsonUtils;
 import org.springframework.stereotype.Controller;

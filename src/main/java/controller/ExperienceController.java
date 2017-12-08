@@ -2,7 +2,7 @@ package controller;
 
 import com.addoiles.common.Page;
 import com.addoiles.dto.ExperienceDto;
-import com.addoiles.dto.ExperienceRateReq;
+import com.addoiles.dto.req.ExperienceRateReq;
 import com.addoiles.entity.Comment;
 import com.addoiles.entity.Experience;
 import com.addoiles.entity.User;

@@ -1,4 +1,4 @@
-package com.addoiles.dto;
+package com.addoiles.dto.resp;
 
 import java.io.Serializable;
 

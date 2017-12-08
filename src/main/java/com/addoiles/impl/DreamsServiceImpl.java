@@ -1,11 +1,10 @@
 package com.addoiles.impl;
 
 import com.addoiles.common.Page;
-import com.addoiles.dao.DreamsMapper;
+import com.addoiles.db.dao.DreamsMapper;
 import com.addoiles.entity.Dreams;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
-import org.springframework.jca.cci.core.InteractionCallback;
 import org.springframework.stereotype.Service;
 import service.DreamsService;
 

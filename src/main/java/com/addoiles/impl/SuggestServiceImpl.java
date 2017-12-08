@@ -1,6 +1,6 @@
 package com.addoiles.impl;
 
-import com.addoiles.dao.SuggestMapper;
+import com.addoiles.db.dao.SuggestMapper;
 import com.addoiles.entity.Suggest;
 import org.springframework.stereotype.Service;
 import service.SuggestService;
