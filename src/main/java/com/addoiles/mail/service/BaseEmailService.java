@@ -47,7 +47,7 @@ public class BaseEmailService {
         message.setFrom(new InternetAddress(sender.getEmailAddress(), sender.getName(), emailConfig.getPersonalCharset()));
 
         // 3. To: 收件人（可以增加多个收件人、抄送、密送）
-        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(email.getReceiver().getEmailAddress(), email.getReceiver().getEmailAddress(), emailConfig.getPersonalCharset()));
+        message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(email.getReceiver().getEmailAddress(), email.getReceiver().getName(), emailConfig.getPersonalCharset()));
 
         // 4. Subject: 邮件主题（标题有广告嫌疑，避免被邮件服务器误认为是滥发广告以至返回失败，请修改标题）
         message.setSubject(email.getSubject(), emailConfig.getSubjectCharset());
