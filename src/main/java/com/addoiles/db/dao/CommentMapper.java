@@ -1,4 +1,4 @@
-package com.addoiles.dao;
+package com.addoiles.db.dao;
 
 import com.addoiles.entity.Comment;
 import org.apache.ibatis.annotations.Param;

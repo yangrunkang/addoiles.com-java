@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.addoiles.dao.HotsMapper">
+<mapper namespace="com.addoiles.db.dao.HotsMapper">
   <resultMap id="BaseResultMap" type="com.addoiles.entity.Hots">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="hot_id" jdbcType="VARCHAR" property="hotId" />

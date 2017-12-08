@@ -1,4 +1,4 @@
-package com.addoiles.dao;
+package com.addoiles.db.dao;
 
 import com.addoiles.entity.Suggest;
 
