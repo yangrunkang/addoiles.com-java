@@ -15,6 +15,7 @@ public interface UserService {
 
     /**
      * 登录
+     *
      * @param loginReq
      * @return
      */
@@ -22,6 +23,7 @@ public interface UserService {
 
     /**
      * 注册
+     *
      * @param registerReq
      * @return
      */
@@ -36,19 +38,20 @@ public interface UserService {
 
     /**
      * 获取用户id和Name
+     *
      * @return
      */
     List<User> getUsersOfIdNameList();
 
     /**
      * 发送验证码到邮箱
+     *
      * @param verificationCodeReq
      * @return
      */
     Integer sendVerificationCode(VerificationCodeReq verificationCodeReq);
 
     Integer resetPassword(ResetPasswordReq resetPasswordReq);
-
 
 
 }

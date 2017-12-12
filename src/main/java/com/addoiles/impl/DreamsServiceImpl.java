@@ -41,5 +41,8 @@ public class DreamsServiceImpl implements DreamsService {
         return dreamsMapper.selectByUserId(userId);
     }
 
-
+    @Override
+    public Integer deleteByDreamId(String dreamId) {
+        return dreamsMapper.deleteByDreamId(dreamId);
+    }
 }

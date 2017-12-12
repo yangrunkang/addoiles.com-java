@@ -5,32 +5,32 @@ public class Comment {
     private Integer id;
 
     /**
-     *   评论id
+     * 评论id
      */
     private String commitId;
 
     /**
-     *   用户id
+     * 用户id
      */
     private String userId;
 
     /**
-     *   被评论内容的id
+     * 被评论内容的id
      */
     private String targetId;
 
     /**
-     *   评论内容
+     * 评论内容
      */
     private String content;
 
     /**
-     *   删除状态 0-正常 1-删除
+     * 删除状态 0-正常 1-删除
      */
     private Integer deleteStatus;
 
     /**
-     *   创建时间
+     * 创建时间
      */
     private Integer createTime;
 

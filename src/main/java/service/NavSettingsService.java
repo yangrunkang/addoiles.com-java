@@ -12,6 +12,7 @@ import java.util.List;
 public interface NavSettingsService {
     /**
      * 获取有效导航栏
+     *
      * @return
      */
     List<NavSettings> getNavs();

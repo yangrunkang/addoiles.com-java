@@ -21,4 +21,13 @@ public interface QuestionService {
      */
     List<Question> getQuestionsByUserId(String userId);
 
+    /**
+     * 根据问题id删除
+     *
+     * @param questionId
+     * @return
+     */
+    Integer deleteByQuestionId(String questionId);
+
+
 }

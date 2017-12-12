@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.addoiles.db.dao.DreamsMapper">
-  <resultMap id="BaseResultMap" type="com.addoiles.entity.Dreams">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="dream_id" jdbcType="VARCHAR" property="dreamId" />
-    <result column="user_id" jdbcType="VARCHAR" property="userId" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
-    <result column="content" jdbcType="VARCHAR" property="content" />
-    <result column="likes" jdbcType="INTEGER" property="likes" />
-    <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
-    <result column="create_time" jdbcType="INTEGER" property="createTime" />
-  </resultMap>
-  <sql id="BaseColumn">
+    <resultMap id="BaseResultMap" type="com.addoiles.entity.Dreams">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="dream_id" jdbcType="VARCHAR" property="dreamId"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="likes" jdbcType="INTEGER" property="likes"/>
+        <result column="delete_status" jdbcType="INTEGER" property="deleteStatus"/>
+        <result column="create_time" jdbcType="INTEGER" property="createTime"/>
+    </resultMap>
+    <sql id="BaseColumn">
     id, dream_id, user_id, title, content, likes, delete_status, create_time
   </sql>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from dreams
-    where id = #{id,jdbcType=INTEGER}
+    <delete id="deleteByDreamId" parameterType="java.lang.String">
+    update  dreams set delete_status = 1
+    where dream_id = #{dreamId,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.addoiles.entity.Dreams">
+    <insert id="insert" parameterType="com.addoiles.entity.Dreams">
 
     insert into dreams (id, dream_id, user_id, 
       title, content, likes, 
@@ -27,7 +27,7 @@
       #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{likes,jdbcType=INTEGER}, 
       #{deleteStatus,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.addoiles.entity.Dreams">
+    <update id="updateByPrimaryKey" parameterType="com.addoiles.entity.Dreams">
 
     update dreams
     set dream_id = #{dreamId,jdbcType=VARCHAR},
@@ -39,27 +39,27 @@
       create_time = #{createTime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select
-    <include refid="BaseColumn" />
-    from dreams
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select
-    <include refid="BaseColumn" />
-    from dreams
-    where delete_status = 0
-    order by create_time desc
-    limit #{page.pageNo},#{page.pageSize}
-  </select>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumn"/>
+        from dreams
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="selectAll" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumn"/>
+        from dreams
+        where delete_status = 0
+        order by create_time desc
+        limit #{page.pageNo},#{page.pageSize}
+    </select>
 
-  <select id="selectByUserId" resultMap="BaseResultMap">
-    select
-    <include refid="BaseColumn" />
-    from dreams
-    where delete_status = 0
-    and user_id = #{userId,jdbcType=VARCHAR}
-    order by create_time desc
-  </select>
+    <select id="selectByUserId" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumn"/>
+        from dreams
+        where delete_status = 0
+        and user_id = #{userId,jdbcType=VARCHAR}
+        order by create_time desc
+    </select>
 </mapper>

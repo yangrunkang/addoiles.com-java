@@ -10,7 +10,7 @@ import java.io.Serializable;
  * author:      Yangrunkang
  * Createdate:  2017/7/20 8:59
  */
-public class OilResponse implements Serializable{
+public class OilResponse implements Serializable {
 
     private static final long serialVersionUID = 3468809980704226548L;
     private Integer code = 0;
@@ -29,12 +29,12 @@ public class OilResponse implements Serializable{
         this.message = message;
     }
 
-    public void setErrorCode(ErrorCode errorCode){
+    public void setErrorCode(ErrorCode errorCode) {
         this.code = errorCode.getCode();
         this.message = errorCode.getMessage();
     }
 
-    public OilResponse(ErrorCode errorCode){
+    public OilResponse(ErrorCode errorCode) {
         this.code = errorCode.getCode();
         this.message = errorCode.getMessage();
     }

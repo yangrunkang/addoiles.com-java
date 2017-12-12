@@ -14,7 +14,7 @@ import service.HotsService;
  * Created by bla on 9/24/2017.
  */
 @Controller
-public class HotsController extends BaseController{
+public class HotsController extends BaseController {
 
     @Autowired
     private HotsService hotsService;
@@ -25,16 +25,22 @@ public class HotsController extends BaseController{
         return hotsService.getLatestHots(page);
     }
 
-    @RequestMapping(value = "addHots",method = RequestMethod.POST)
+    @RequestMapping(value = "addHots", method = RequestMethod.POST)
     @ResponseBody
-    public Object addHots(@RequestBody Hots hots){
+    public Object addHots(@RequestBody Hots hots) {
         return hotsService.addHots(hots);
     }
 
-    @RequestMapping(value = "getHotsByUserId",method = RequestMethod.GET)
+    @RequestMapping(value = "getHotsByUserId", method = RequestMethod.GET)
     @ResponseBody
-    public Object getHotsByUserId(String userId){
+    public Object getHotsByUserId(String userId) {
         return hotsService.getHotsByUserId(userId);
+    }
+
+    @RequestMapping(value = "deleteByHotId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object deleteByHotId(String hotId) {
+        return hotsService.deleteByHotId(hotId);
     }
 
 }

@@ -1,7 +1,7 @@
 package controller;
 
-import com.addoiles.dto.resp.LoginResp;
 import com.addoiles.dto.req.VerificationCodeReq;
+import com.addoiles.dto.resp.LoginResp;
 import com.addoiles.mail.EmailService;
 import com.addoiles.mail.dto.Email;
 import com.addoiles.mail.dto.Receiver;
@@ -38,7 +38,6 @@ public class TestController {
         email.setReceiver(receiver);
         email.setSubject("我是邮件主题-测试邮件基础服务");
         email.setContent("我是邮件正文-Hi,AddoilesEmail");
-
 
 
         emailService.sendEmail(email);

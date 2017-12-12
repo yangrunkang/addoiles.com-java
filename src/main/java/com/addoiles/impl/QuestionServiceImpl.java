@@ -37,4 +37,9 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> getQuestionsByUserId(String userId) {
         return questionMapper.selectQuestionListByUserId(userId);
     }
+
+    @Override
+    public Integer deleteByQuestionId(String questionId) {
+        return questionMapper.deleteByQuestionId(questionId);
+    }
 }

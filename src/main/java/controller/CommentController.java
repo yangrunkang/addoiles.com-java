@@ -13,14 +13,14 @@ import service.CommentService;
  * Created by bla on 9/24/2017.
  */
 @Controller
-public class CommentController extends BaseController{
+public class CommentController extends BaseController {
 
     @Autowired
     private CommentService commentService;
 
-    @RequestMapping(value = "addComment",method = RequestMethod.POST)
+    @RequestMapping(value = "addComment", method = RequestMethod.POST)
     @ResponseBody
-    public Object addComment(@RequestBody Comment comment){
+    public Object addComment(@RequestBody Comment comment) {
         return commentService.addComment(comment);
     }
 

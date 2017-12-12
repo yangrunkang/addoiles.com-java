@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface HotsMapper {
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByHotsId(String hot);
 
 
     int insert(Hots record);
@@ -19,7 +19,7 @@ public interface HotsMapper {
 
     List<Hots> selectAll(@Param("page") Page page);
 
-    List<Hots> selectByUserId(@Param("userId")String userId);
+    List<Hots> selectByUserId(@Param("userId") String userId);
 
 
     int updateByPrimaryKey(Hots record);

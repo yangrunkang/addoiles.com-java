@@ -23,7 +23,8 @@ public interface UserMapper {
 
     /**
      * 更新密码
-     *  提供单独接口
+     * 提供单独接口
+     *
      * @param user
      * @return
      */
@@ -31,24 +32,26 @@ public interface UserMapper {
 
     /**
      * 根据邮箱查找用户
+     *
      * @param email
      * @return
      */
-    List<User> countByEmail(@Param("email")String email,@Param("password")String password);
+    List<User> countByEmail(@Param("email") String email, @Param("password") String password);
 
     /**
      * 检查注册用户是否已已经注册过
+     *
      * @param email
      * @return
      */
-    Integer checkHasRegister(@Param("email")String email);
+    Integer checkHasRegister(@Param("email") String email);
 
     /**
      * 获取用户id和Name
+     *
      * @return
      */
     List<User> getUsersOfIdNameList();
-
 
 
 }

@@ -80,10 +80,8 @@ public class UserController extends BaseController {
     @RequestMapping(value = "confirmResetPassword", method = RequestMethod.POST)
     @ResponseBody
     public Object confirmResetPassword(@RequestBody ResetPasswordReq resetPasswordReq) {
-       return userService.resetPassword(resetPasswordReq);
+        return userService.resetPassword(resetPasswordReq);
     }
-
-
 
 
 }

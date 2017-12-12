@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface QuestionMapper {
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByQuestionId(String questionId);
 
     int insert(Question record);
 
@@ -17,6 +17,7 @@ public interface QuestionMapper {
 
     /**
      * 查找最新的问题
+     *
      * @param page
      * @return
      */
@@ -24,9 +25,10 @@ public interface QuestionMapper {
 
     /**
      * 查找最新的问题
+     *
      * @return
      */
-    List<Question> selectQuestionListByUserId(@Param("userId")String userId);
+    List<Question> selectQuestionListByUserId(@Param("userId") String userId);
 
     int updateByPrimaryKeySelective(Question record);
 

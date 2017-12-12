@@ -1,8 +1,11 @@
--- 文章表 添加 草稿类型
+-- 文章表 添加 草稿类型 注释
 alter table `article` modify column `delete_status` int(1) NOT NULL COMMENT '删除状态 0-正常 1-删除 2-草稿';
 
--- 经历表 添加 草稿类型
+-- 经历表 添加 草稿类型 注释
 alter table `experience` modify column `delete_status` int(1) NOT NULL COMMENT '删除状态 0-正常 1-删除 2-草稿';
+
+-- 问题表 添加 删除状态备注
+alter table `question` modify column `delete_status` int(1) NOT NULL COMMENT '删除状态 0-正常 1-删除';
 
 -- 文章表 添加 编辑时间
 alter table `article` add `update_time` int(11) DEFAULT NULL COMMENT '编辑时间' AFTER `create_time`;

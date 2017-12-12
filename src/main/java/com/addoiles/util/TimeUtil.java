@@ -2,7 +2,7 @@ package com.addoiles.util;
 
 /**
  * 时间与时区工具类
- *
+ * <p>
  * All rights Reserved, Designed By
  * Copyright:   Copyright(C) 2016
  * Company:     .
@@ -11,14 +11,16 @@ package com.addoiles.util;
  */
 public class TimeUtil {
 
-	private TimeUtil(){}
+    private TimeUtil() {
+    }
 
-	/**
-	 * 系统Unix时间戳,精确到秒
-	 * @return
-	 */
-	public static Integer currentTime() {
-		return (int)(System.currentTimeMillis()/1000);
-	}
+    /**
+     * 系统Unix时间戳,精确到秒
+     *
+     * @return
+     */
+    public static Integer currentTime() {
+        return (int) (System.currentTimeMillis() / 1000);
+    }
 
 }

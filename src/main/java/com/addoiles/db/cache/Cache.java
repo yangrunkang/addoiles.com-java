@@ -23,7 +23,7 @@ public class Cache {
      */
     private Integer createdTime;
 
-    private Cache(){
+    private Cache() {
         super();
     }
 

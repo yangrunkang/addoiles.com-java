@@ -12,10 +12,9 @@ public class AddoilesConstant {
     /**
      * 邮件类型
      */
-    public enum EmailType{
-        FORGET_PASSWORD(1,"忘记密码"),
-        REGISTER(2,"新用户注册")
-        ;
+    public enum EmailType {
+        FORGET_PASSWORD(1, "忘记密码"),
+        REGISTER(2, "新用户注册");
 
 
         private final Integer type;
@@ -35,7 +34,6 @@ public class AddoilesConstant {
             return desc;
         }
     }
-
 
 
 }

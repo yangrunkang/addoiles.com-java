@@ -2,12 +2,14 @@ package com.addoiles.dto.req;
 
 import java.io.Serializable;
 
-/** 图灵请求
+/**
+ * 图灵请求
  * Created by bla on 10/2/2017.
  */
 public class TulingReq implements Serializable {
 
-    private TulingReq(){}
+    private TulingReq() {
+    }
 
     private String key;
 

@@ -81,4 +81,10 @@ public class QuestionController extends BaseController {
         return questionService.getQuestionsByUserId(userId);
     }
 
+    @RequestMapping(value = "deleteByQuestionId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object deleteByQuestionId(String questionId) {
+        return questionService.deleteByQuestionId(questionId);
+    }
+
 }

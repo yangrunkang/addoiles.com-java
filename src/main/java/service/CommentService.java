@@ -12,6 +12,7 @@ public interface CommentService {
 
     /**
      * 获取目标内容的评论
+     *
      * @param targetId
      * @return
      */
@@ -19,6 +20,7 @@ public interface CommentService {
 
     /**
      * 添加评论
+     *
      * @param comment
      * @return
      */

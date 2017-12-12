@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.ArticleService;
 import service.CommentService;
@@ -95,13 +96,17 @@ public class ArticleController extends BaseController {
     }
 
 
-
     @RequestMapping("getArticlesByUserId")
     @ResponseBody
-    public Object getArticlesByUserId(String userId,String articleType) {
-        return articleService.getArticlesByUserId(userId,articleType);
+    public Object getArticlesByUserId(String userId, String articleType) {
+        return articleService.getArticlesByUserId(userId, articleType);
     }
 
+    @RequestMapping(value = "deleteByArticleId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object deleteByArticleId(String articleId) {
+        return articleService.deleteByArticleId(articleId);
+    }
 
 
 }

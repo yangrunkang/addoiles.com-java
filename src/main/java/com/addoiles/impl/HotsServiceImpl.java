@@ -15,7 +15,7 @@ import java.util.List;
  * Created by bla on 9/24/2017.
  */
 @Service
-public class HotsServiceImpl implements HotsService{
+public class HotsServiceImpl implements HotsService {
 
     @Resource
     private HotsMapper hotsMapper;
@@ -37,5 +37,10 @@ public class HotsServiceImpl implements HotsService{
     @Override
     public List<Hots> getHotsByUserId(String userId) {
         return hotsMapper.selectByUserId(userId);
+    }
+
+    @Override
+    public Integer deleteByHotId(String hotId) {
+        return hotsMapper.deleteByHotsId(hotId);
     }
 }

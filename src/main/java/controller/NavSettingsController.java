@@ -18,7 +18,7 @@ public class NavSettingsController extends BaseController {
 
     @RequestMapping("getNavs")
     @ResponseBody
-    public Object getNavs(){
+    public Object getNavs() {
         return navSettingsService.getNavs();
     }
 

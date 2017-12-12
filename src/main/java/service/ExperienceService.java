@@ -12,6 +12,7 @@ public interface ExperienceService {
 
     /**
      * 添加经历
+     *
      * @param experience
      * @return
      */
@@ -19,6 +20,7 @@ public interface ExperienceService {
 
     /**
      * 获取经历列表
+     *
      * @param page
      * @return
      */
@@ -26,13 +28,15 @@ public interface ExperienceService {
 
     /**
      * 评分接口
+     *
      * @param experienceId
      * @return
      */
-    Integer updateRates(String experienceId,Integer rate);
+    Integer updateRates(String experienceId, Integer rate);
 
     /**
      * 编辑经历
+     *
      * @param experience
      * @return
      */
@@ -40,10 +44,11 @@ public interface ExperienceService {
 
     /**
      * 获取用户经历
+     *
      * @param userId
      * @return
      */
     List<Experience> getExperienceByUserId(String userId);
 
-
+    Integer deleteByExperienceId(String experienceId);
 }

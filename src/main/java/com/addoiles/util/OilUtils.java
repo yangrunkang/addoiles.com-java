@@ -11,18 +11,20 @@ public class OilUtils {
 
     /**
      * 生成ID
+     *
      * @return
      */
-    public static String generateID(){
-        return UUID.randomUUID().toString().replace("-","");
+    public static String generateID() {
+        return UUID.randomUUID().toString().replace("-", "");
     }
 
     /**
      * 生成随机数
+     *
      * @param length 生成的随机数长度
      * @return
      */
-    public static String generateRandom(int length){
+    public static String generateRandom(int length) {
         return String.valueOf(Math.random()).substring(2, length + 2);
     }
 

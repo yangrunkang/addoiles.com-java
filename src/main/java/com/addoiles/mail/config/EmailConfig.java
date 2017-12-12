@@ -47,7 +47,6 @@ public class EmailConfig {
     private String personalCharset;
 
 
-
     public String getTransportProtocol() {
         return transportProtocol;
     }

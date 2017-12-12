@@ -8,7 +8,7 @@ import java.io.Serializable;
  * @author Yangrunkang
  * DateTime:  2017/12/8 15:19
  */
-public class ExistsVerifyCodeReq implements Serializable{
+public class ExistsVerifyCodeReq implements Serializable {
 
     private String email;
 

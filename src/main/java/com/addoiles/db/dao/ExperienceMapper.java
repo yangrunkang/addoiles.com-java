@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ExperienceMapper {
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByExperienceId(String experienceId);
 
     int insert(Experience record);
 

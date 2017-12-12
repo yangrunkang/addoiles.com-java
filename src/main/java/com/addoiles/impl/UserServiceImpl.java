@@ -102,7 +102,7 @@ public class UserServiceImpl implements UserService {
         }
 
         //放入缓存
-        CacheManager.getInstance().setString(verificationCodeReq.getEmail(),verificationCode,60);
+        CacheManager.getInstance().setString(verificationCodeReq.getEmail(), verificationCode, 60);
 
         Receiver receiver = new Receiver();
         receiver.setEmailAddress(verificationCodeReq.getEmail());

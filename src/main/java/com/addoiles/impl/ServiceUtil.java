@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class ServiceUtil {
 
-    public static void HandleCommentUserIdToUserName(List<Comment> commentList, List<User> userList){
+    public static void HandleCommentUserIdToUserName(List<Comment> commentList, List<User> userList) {
         commentList.forEach(comment -> {
             userList.forEach(user -> {
                 if (comment.getUserId().equals(user.getUserId())) {
@@ -21,7 +21,7 @@ public class ServiceUtil {
         });
     }
 
-    public static void HandleExperienceUserIdToUserName(List<Experience> experienceList, List<User> userList){
+    public static void HandleExperienceUserIdToUserName(List<Experience> experienceList, List<User> userList) {
         experienceList.forEach(experience -> {
             userList.forEach(user -> {
                 if (experience.getUserId().equals(user.getUserId())) {

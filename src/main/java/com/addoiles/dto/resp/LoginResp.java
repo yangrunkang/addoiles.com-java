@@ -5,13 +5,12 @@ import java.io.Serializable;
 /**
  * Created by bla on 10/2/2017.
  */
-public class LoginResp implements Serializable{
+public class LoginResp implements Serializable {
 
 
     private String userId;
 
     private String userName;
-
 
 
     public String getUserId() {

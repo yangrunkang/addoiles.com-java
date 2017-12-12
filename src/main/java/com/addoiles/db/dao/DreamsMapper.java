@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface DreamsMapper {
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByDreamId(String dreamId);
 
 
     int insert(Dreams record);
@@ -19,7 +19,7 @@ public interface DreamsMapper {
 
     List<Dreams> selectAll(@Param("page") Page page);
 
-    List<Dreams> selectByUserId(@Param("userId")String userId);
+    List<Dreams> selectByUserId(@Param("userId") String userId);
 
     int updateByPrimaryKey(Dreams record);
 }

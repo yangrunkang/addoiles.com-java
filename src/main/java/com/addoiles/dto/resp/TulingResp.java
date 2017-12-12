@@ -5,7 +5,7 @@ import java.io.Serializable;
 /**
  * Created by bla on 10/2/2017.
  */
-public class TulingResp implements Serializable{
+public class TulingResp implements Serializable {
 
     private Integer code;
 

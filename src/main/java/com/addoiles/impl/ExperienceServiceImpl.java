@@ -38,7 +38,7 @@ public class ExperienceServiceImpl implements ExperienceService {
     public Integer updateRates(String experienceId, Integer rate) {
         Experience experience = experienceMapper.selectByExperienceId(experienceId);
 
-        if(experience == null) return -1;
+        if (experience == null) return -1;
 
         Integer rates = experience.getRates();
         Integer rateCount = experience.getRateCount();
@@ -64,5 +64,10 @@ public class ExperienceServiceImpl implements ExperienceService {
     @Override
     public List<Experience> getExperienceByUserId(String userId) {
         return experienceMapper.selectByUserId(userId);
+    }
+
+    @Override
+    public Integer deleteByExperienceId(String experienceId) {
+        return experienceMapper.deleteByExperienceId(experienceId);
     }
 }

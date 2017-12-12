@@ -11,7 +11,7 @@ import javax.annotation.Resource;
  * Created by bla on 9/24/2017.
  */
 @Service
-public class SuggestServiceImpl implements SuggestService{
+public class SuggestServiceImpl implements SuggestService {
 
     @Resource
     private SuggestMapper suggestMapper;
