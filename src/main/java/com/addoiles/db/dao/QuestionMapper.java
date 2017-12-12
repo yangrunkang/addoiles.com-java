@@ -22,6 +22,13 @@ public interface QuestionMapper {
      */
     List<Question> selectQuestionList(@Param("page") Page page);
 
+    /**
+     * 查找最新的问题
+     * @param page
+     * @return
+     */
+    List<Question> selectQuestionListByUserId(@Param("page") Page page,@Param("userId")String userId);
+
     int updateByPrimaryKeySelective(Question record);
 
     int updateByPrimaryKey(Question record);

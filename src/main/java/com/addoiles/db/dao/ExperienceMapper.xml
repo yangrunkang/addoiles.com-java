@@ -75,12 +75,22 @@
     from experience
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <select id="selectByExperienceId" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="BaseColumn" />
     from experience
     where experience_id = #{experienceId,jdbcType=INTEGER}
   </select>
+
+  <select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+        id, experience_id, user_id, title,delete_status, create_time,update_time
+    from experience
+    where user_id = #{userId,jdbcType=INTEGER}
+    limit #{page.pageNo},#{page.pageSize}
+  </select>
+
   <select id="selectExperienceList" resultMap="BaseResultMap">
     select
     <include refid="BaseColumn" />

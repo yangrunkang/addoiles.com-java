@@ -25,6 +25,9 @@ public interface ArticleMapper {
      */
     List<Article> selectByArticleType(@Param("page")Page page,@Param("articleType")Integer articleType);
 
+
+    List<Article> selectByArticleByUserId(@Param("page")Page page,@Param("userId")String userId);
+
     /**
      * 查询简洁的文章
      * 只查询文章id,文章标题,副标题

@@ -53,4 +53,14 @@
     order by create_time desc
     limit #{page.pageNo},#{page.pageSize}
   </select>
+
+  <select id="selectByUserId" resultMap="BaseResultMap">
+    select
+    <include refid="BaseColumn" />
+    from dreams
+    where delete_status = 0
+    and user_id = #{userId,jdbcType=VARCHAR}
+    order by create_time desc
+    limit #{page.pageNo},#{page.pageSize}
+  </select>
 </mapper>
