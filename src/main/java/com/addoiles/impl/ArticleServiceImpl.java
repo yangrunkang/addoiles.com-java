@@ -64,4 +64,9 @@ public class ArticleServiceImpl implements ArticleService{
         tmp.setUpdateTime(TimeUtil.currentTime());
         return articleMapper.updateSelectiveByArticleId(tmp);
     }
+
+    @Override
+    public List<Article> getArticlesByUserId(String userId,String articleType) {
+        return articleMapper.selectByArticleByUserId(userId,articleType);
+    }
 }

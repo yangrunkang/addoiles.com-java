@@ -23,4 +23,6 @@ public interface DreamsService {
      */
     Integer addDream(Dreams dreams);
 
+    List<Dreams> getDreamsByUserId(String userId);
+
 }

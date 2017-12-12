@@ -31,4 +31,10 @@ public class DreamsController extends BaseController{
         return dreamsService.addDream(dreams);
     }
 
+    @RequestMapping(value = "getDreamsByUserId",method = RequestMethod.GET)
+    @ResponseBody
+    public Object getDreamsByUserId(String userId){
+        return dreamsService.getDreamsByUserId(userId);
+    }
+
 }

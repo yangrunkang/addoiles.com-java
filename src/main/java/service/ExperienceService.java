@@ -38,4 +38,12 @@ public interface ExperienceService {
      */
     Integer updateExperience(Experience experience);
 
+    /**
+     * 获取用户经历
+     * @param userId
+     * @return
+     */
+    List<Experience> getExperienceByUserId(String userId);
+
+
 }

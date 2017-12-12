@@ -75,4 +75,10 @@ public class QuestionController extends BaseController {
         return questionService.addQuestion(question);
     }
 
+    @RequestMapping(value = "getQuestionsByUserId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getQuestionsByUserId(String userId) {
+        return questionService.getQuestionsByUserId(userId);
+    }
+
 }

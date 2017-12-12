@@ -31,4 +31,10 @@ public class HotsController extends BaseController{
         return hotsService.addHots(hots);
     }
 
+    @RequestMapping(value = "getHotsByUserId",method = RequestMethod.GET)
+    @ResponseBody
+    public Object getHotsByUserId(String userId){
+        return hotsService.getHotsByUserId(userId);
+    }
+
 }

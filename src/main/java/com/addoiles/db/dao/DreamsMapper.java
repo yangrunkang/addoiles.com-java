@@ -19,8 +19,7 @@ public interface DreamsMapper {
 
     List<Dreams> selectAll(@Param("page") Page page);
 
-    List<Dreams> selectByUserId(@Param("page") Page page,@Param("userId")String userId);
-
+    List<Dreams> selectByUserId(@Param("userId")String userId);
 
     int updateByPrimaryKey(Dreams record);
 }

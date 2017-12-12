@@ -33,4 +33,9 @@ public class HotsServiceImpl implements HotsService{
         hots.setCreateTime(TimeUtil.currentTime());
         return hotsMapper.insert(hots);
     }
+
+    @Override
+    public List<Hots> getHotsByUserId(String userId) {
+        return hotsMapper.selectByUserId(userId);
+    }
 }

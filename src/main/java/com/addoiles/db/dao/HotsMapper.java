@@ -19,7 +19,7 @@ public interface HotsMapper {
 
     List<Hots> selectAll(@Param("page") Page page);
 
-    List<Hots> selectByUserId(@Param("page") Page page,@Param("userId")String userId);
+    List<Hots> selectByUserId(@Param("userId")String userId);
 
 
     int updateByPrimaryKey(Hots record);

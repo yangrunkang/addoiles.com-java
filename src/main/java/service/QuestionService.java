@@ -14,4 +14,11 @@ public interface QuestionService {
 
     Integer addQuestion(Question question);
 
+    /***
+     * 获取用户问题
+     * @param userId
+     * @return
+     */
+    List<Question> getQuestionsByUserId(String userId);
+
 }

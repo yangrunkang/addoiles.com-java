@@ -52,5 +52,11 @@ public interface ArticleService {
      */
     Integer editArticle(Article article);
 
+    /**
+     * 获取用户文章
+     * @param userId
+     * @return
+     */
+    List<Article> getArticlesByUserId(String userId,String articleType);
 
 }

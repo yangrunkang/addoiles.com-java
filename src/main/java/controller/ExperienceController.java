@@ -54,7 +54,7 @@ public class ExperienceController extends BaseController {
             return experienceDtoList; //在页面上显示空
         } else {
             //处理userId转userName
-            ServiceUtil.HandleExperienceUserIdToUserName(experienceList,usersOfIdNameList);
+            ServiceUtil.HandleExperienceUserIdToUserName(experienceList, usersOfIdNameList);
             experienceList.forEach(experience -> {
                 List<Comment> commentList = commentService.getCommentListByTargetId(experience.getExperienceId());
                 if (!CollectionUtils.isEmpty(commentList)) {
@@ -91,11 +91,13 @@ public class ExperienceController extends BaseController {
     @RequestMapping(value = "editExperience", method = RequestMethod.POST)
     @ResponseBody
     public Object editExperience(@RequestBody Experience experience) {
-//
-//        if(Objects.isNull(experience.getExperienceId())){
-//
-//        }
         return experienceService.updateExperience(experience);
+    }
+
+    @RequestMapping(value = "getExperienceByUserId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getExperienceByUserId(String userId) {
+        return experienceService.getExperienceByUserId(userId);
     }
 
 

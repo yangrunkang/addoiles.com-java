@@ -96,4 +96,12 @@ public class ArticleController extends BaseController {
 
 
 
+    @RequestMapping("getArticlesByUserId")
+    @ResponseBody
+    public Object getArticlesByUserId(String userId,String articleType) {
+        return articleService.getArticlesByUserId(userId,articleType);
+    }
+
+
+
 }

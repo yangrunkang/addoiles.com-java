@@ -26,7 +26,7 @@ public interface ArticleMapper {
     List<Article> selectByArticleType(@Param("page")Page page,@Param("articleType")Integer articleType);
 
 
-    List<Article> selectByArticleByUserId(@Param("page")Page page,@Param("userId")String userId);
+    List<Article> selectByArticleByUserId(@Param("userId")String userId,@Param("articleType")String articleType);
 
     /**
      * 查询简洁的文章

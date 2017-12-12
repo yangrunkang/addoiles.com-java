@@ -35,4 +35,11 @@ public class DreamsServiceImpl implements DreamsService {
         dreams.setDeleteStatus(0);
         return dreamsMapper.insert(dreams);
     }
+
+    @Override
+    public List<Dreams> getDreamsByUserId(String userId) {
+        return dreamsMapper.selectByUserId(userId);
+    }
+
+
 }

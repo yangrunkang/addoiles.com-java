@@ -16,7 +16,7 @@ public interface ExperienceMapper {
 
     Experience selectByExperienceId(@Param("experienceId") String experienceId);
 
-    Experience selectByUserId(@Param("page") Page page,@Param("userId") String userId);
+    List<Experience> selectByUserId(@Param("userId") String userId);
 
     List<Experience> selectExperienceList(@Param("page") Page page);
 

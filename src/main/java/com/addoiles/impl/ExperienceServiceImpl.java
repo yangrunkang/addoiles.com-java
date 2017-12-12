@@ -60,4 +60,9 @@ public class ExperienceServiceImpl implements ExperienceService {
         tmp.setUpdateTime(TimeUtil.currentTime());
         return experienceMapper.updateSelectiveByExperienceId(tmp);
     }
+
+    @Override
+    public List<Experience> getExperienceByUserId(String userId) {
+        return experienceMapper.selectByUserId(userId);
+    }
 }

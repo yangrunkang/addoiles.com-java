@@ -24,10 +24,9 @@ public interface QuestionMapper {
 
     /**
      * 查找最新的问题
-     * @param page
      * @return
      */
-    List<Question> selectQuestionListByUserId(@Param("page") Page page,@Param("userId")String userId);
+    List<Question> selectQuestionListByUserId(@Param("userId")String userId);
 
     int updateByPrimaryKeySelective(Question record);
 

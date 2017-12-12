@@ -24,4 +24,11 @@ public interface HotsService {
      */
     Integer addHots(Hots hots);
 
+    /**
+     * 获取用户热门
+     * @param userId
+     * @return
+     */
+    List<Hots> getHotsByUserId(String userId);
+
 }

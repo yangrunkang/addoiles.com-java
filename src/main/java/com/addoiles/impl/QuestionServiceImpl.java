@@ -32,4 +32,9 @@ public class QuestionServiceImpl implements QuestionService {
         question.setDeleteStatus(0);
         return questionMapper.insert(question);
     }
+
+    @Override
+    public List<Question> getQuestionsByUserId(String userId) {
+        return questionMapper.selectQuestionListByUserId(userId);
+    }
 }
