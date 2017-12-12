@@ -34,7 +34,7 @@
         <include refid="Base_Column_List"/>
         from question
         where delete_status = 0
-        and user_id = #{userId,jdbcType=VARCHAR}
+        and user_id = #{userId,jdbcType=VARCHAR} and delete_status = 0
         order by create_time desc
     </select>
 
