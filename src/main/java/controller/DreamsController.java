@@ -18,7 +18,7 @@ public class DreamsController extends BaseController {
 
     @RequestMapping("getDreams")
     @ResponseBody
-    public Object getDreams(Page page) {
+    public Object getDreams(@RequestBody Page page) {
         return dreamsService.getDreams(page);
     }
 
