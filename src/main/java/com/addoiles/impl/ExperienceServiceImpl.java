@@ -70,4 +70,9 @@ public class ExperienceServiceImpl implements ExperienceService {
     public Integer deleteByExperienceId(String experienceId) {
         return experienceMapper.deleteByExperienceId(experienceId);
     }
+
+    @Override
+    public Experience getExperienceByExperienceId(String experienceId) {
+        return experienceMapper.selectByExperienceId(experienceId);
+    }
 }

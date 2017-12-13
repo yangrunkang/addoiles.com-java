@@ -50,5 +50,12 @@ public interface ExperienceService {
      */
     List<Experience> getExperienceByUserId(String userId);
 
+    /**
+     * 根据experienceId获取文章
+     * @param experienceId
+     * @return
+     */
+    Experience getExperienceByExperienceId(String experienceId);
+
     Integer deleteByExperienceId(String experienceId);
 }

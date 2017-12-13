@@ -64,6 +64,13 @@ public interface ArticleService {
     List<Article> getArticlesByUserId(String userId, String articleType);
 
     /**
+     * 根据articleId获取文章
+     * @param articleId
+     * @return
+     */
+    Article getArticlesByArticleId(String articleId);
+
+    /**
      * 根据文章id删除
      *
      * @param articleId

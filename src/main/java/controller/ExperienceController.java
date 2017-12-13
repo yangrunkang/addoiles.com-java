@@ -107,5 +107,11 @@ public class ExperienceController extends BaseController {
         return experienceService.deleteByExperienceId(experienceId);
     }
 
+    @RequestMapping(value = "getExperienceByExperienceId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getExperienceByExperienceId(String experienceId) {
+        return experienceService.getExperienceByExperienceId(experienceId);
+    }
+
 
 }

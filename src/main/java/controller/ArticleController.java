@@ -108,5 +108,11 @@ public class ArticleController extends BaseController {
         return articleService.deleteByArticleId(articleId);
     }
 
+    @RequestMapping(value = "getArticlesByArticleId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getArticlesByArticleId(String articleId) {
+        return articleService.getArticlesByArticleId(articleId);
+    }
+
 
 }

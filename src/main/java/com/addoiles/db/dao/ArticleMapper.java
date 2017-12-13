@@ -14,8 +14,7 @@ public interface ArticleMapper {
 
     int insert(Article record);
 
-
-    Article selectByArticleId(Integer articleId);
+    Article selectByArticleId(String articleId);
 
     /**
      * 根据文章类型获取
