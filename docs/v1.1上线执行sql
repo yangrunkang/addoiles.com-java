@@ -16,3 +16,5 @@ alter table `article` add `user_id` varchar(32) NOT NULL COMMENT '用户id' AFTE
 -- 经历表 添加 编辑时间
 alter table `experience` add `update_time` int(11) DEFAULT NULL COMMENT '编辑时间' AFTER `create_time`;
 
+-- 调整用户表 password 长度
+alter table `user` modify column `password` varchar(46) NOT NULL COMMENT '用户密码';
