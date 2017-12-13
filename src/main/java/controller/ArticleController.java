@@ -38,7 +38,7 @@ public class ArticleController extends BaseController {
 
     @RequestMapping("getITTechArticleList")
     @ResponseBody
-    public Object getITTechArticleList(@RequestBody Page page, String articleId) {
+    public Object getITTechArticleList(Page page, String articleId) {
         ITTechDto itTechDto = new ITTechDto();
         List<Article> pithinessArticleList = articleService.selectPithinessByType(page, 2);
         if (!CollectionUtils.isEmpty(pithinessArticleList)) {
@@ -72,7 +72,7 @@ public class ArticleController extends BaseController {
      */
     @RequestMapping("showMoreITTechArticles")
     @ResponseBody
-    public Object showMoreITTechArticles(Page page) {
+    public Object showMoreITTechArticles(@RequestBody Page page) {
         return articleService.selectPithinessByType(page, 2);
     }
 
