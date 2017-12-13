@@ -94,9 +94,9 @@ public class CacheManager {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
-                logger.info("clearTask begin run...{}", new Date());
+//                logger.info("clearTask begin run...{}", new Date());
                 clearExpiredCache();
-                logger.info("clearTask run over...{},current cache pool size:{}", new Date(), getCacheMap().size());
+//                logger.info("clearTask run over...{},current cache pool size:{}", new Date(), getCacheMap().size());
             }
         };
 
