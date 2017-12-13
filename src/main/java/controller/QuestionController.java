@@ -37,7 +37,7 @@ public class QuestionController extends BaseController {
 
     @RequestMapping("getQuestionAnswerList")
     @ResponseBody
-    public Object getQuestionAnswerList(/*@RequestBody */Page page) {
+    public Object getQuestionAnswerList(@RequestBody Page page) {
         List<QuestionAnswerDto> questionAnswerDtoList = new ArrayList<>();
 
         List<Question> questionList = questionService.getQuestionList(page);

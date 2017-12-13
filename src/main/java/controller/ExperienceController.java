@@ -42,9 +42,9 @@ public class ExperienceController extends BaseController {
         return experienceService.addExperience(experience);
     }
 
-    @RequestMapping(value = "getExperienceList", method = RequestMethod.GET)
+    @RequestMapping(value = "getExperienceList", method = RequestMethod.POST)
     @ResponseBody
-    public Object getExperienceList(Page page) {
+    public Object getExperienceList(@RequestBody Page page) {
         List<ExperienceDto> experienceDtoList = new ArrayList<>();
 
         List<User> usersOfIdNameList = userService.getUsersOfIdNameList();
