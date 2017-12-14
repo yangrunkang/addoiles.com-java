@@ -28,4 +28,38 @@ public class OilUtils {
         return String.valueOf(Math.random()).substring(2, length + 2);
     }
 
+    /**
+     * 加密
+     *
+     * @param var
+     * @return
+     */
+    public static String encrypt(String var) {
+        String result = "error_";
+        try {
+            CryptoUtil des1 = new CryptoUtil();
+            result = des1.encrypt(var);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    /**
+     * 解密
+     *
+     * @param var
+     * @return
+     */
+    public static String decrypt(String var) {
+        String result = "error_";
+        try {
+            CryptoUtil des1 = new CryptoUtil();
+            result = des1.decrypt(des1.encrypt(var));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

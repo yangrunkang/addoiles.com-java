@@ -21,6 +21,8 @@ import service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.addoiles.common.OilConstant.CONTENT_TOO_LONG;
+
 /**
  * Created by bla on 9/24/2017.
  */
@@ -39,7 +41,13 @@ public class ExperienceController extends BaseController {
     @RequestMapping(value = "addExperience", method = RequestMethod.POST)
     @ResponseBody
     public Object addExperience(@RequestBody Experience experience) {
-        return experienceService.addExperience(experience);
+        Integer count;
+        try {
+            count = experienceService.addExperience(experience);
+        } catch (Exception e) {
+            count = CONTENT_TOO_LONG;
+        }
+        return count;
     }
 
     @RequestMapping(value = "getExperienceList", method = RequestMethod.POST)
@@ -91,7 +99,13 @@ public class ExperienceController extends BaseController {
     @RequestMapping(value = "editExperience", method = RequestMethod.POST)
     @ResponseBody
     public Object editExperience(@RequestBody Experience experience) {
-        return experienceService.updateExperience(experience);
+        Integer count;
+        try {
+            count = experienceService.updateExperience(experience);
+        } catch (Exception e) {
+            count = CONTENT_TOO_LONG;
+        }
+        return count;
     }
 
     @RequestMapping(value = "getExperienceByUserId", method = RequestMethod.GET)

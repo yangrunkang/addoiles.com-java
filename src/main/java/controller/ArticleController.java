@@ -21,6 +21,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+import static com.addoiles.common.OilConstant.CONTENT_TOO_LONG;
+
 /**
  * Created by bla on 9/24/2017.
  */
@@ -85,14 +87,26 @@ public class ArticleController extends BaseController {
     @RequestMapping("addArticle")
     @ResponseBody
     public Object addArticle(@RequestBody Article article) {
-        return articleService.addArticle(article);
+        Integer count;
+        try {
+            count = articleService.addArticle(article);
+        } catch (Exception e) {
+            count = CONTENT_TOO_LONG;
+        }
+        return count;
     }
 
 
     @RequestMapping("editArticle")
     @ResponseBody
     public Object editArticle(@RequestBody Article article) {
-        return articleService.editArticle(article);
+        Integer count;
+        try {
+            count = articleService.editArticle(article);
+        } catch (Exception e) {
+            count = CONTENT_TOO_LONG;
+        }
+        return count;
     }
 
 

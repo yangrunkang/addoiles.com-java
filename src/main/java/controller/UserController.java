@@ -84,4 +84,12 @@ public class UserController extends BaseController {
     }
 
 
+    @RequestMapping(value = "checkHasRegister", method = RequestMethod.GET)
+    @ResponseBody
+    public Object checkHasRegister(String email) {
+        Integer count = userService.checkHasRegister(email);
+        return count;
+    }
+
+
 }

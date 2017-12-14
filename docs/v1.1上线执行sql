@@ -18,3 +18,7 @@ alter table `experience` add `update_time` int(11) DEFAULT NULL COMMENT '编辑�
 
 -- 调整用户表 password 长度
 alter table `user` modify column `password` varchar(46) NOT NULL COMMENT '用户密码';
+
+-- 调整文章表和经历表 content 字段类型
+alter table `article` modify column `content` longtext NOT NULL COMMENT '文章内容';
+alter table `experience` modify column `content` longtext NOT NULL COMMENT '经历内容';

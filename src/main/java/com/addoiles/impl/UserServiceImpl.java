@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User login(LoginReq loginReq) {
-        List<User> userList = userMapper.countByEmail(loginReq.getEmail(), loginReq.getPassword());
+        List<User> userList = userMapper.countByEmail(loginReq.getEmail(), OilUtils.encrypt(loginReq.getPassword()));
         if (!CollectionUtils.isEmpty(userList) && userList.size() == 1) {
             return userList.get(0);
         } else {
@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
         user.setUserId(OilUtils.generateID());
         user.setName(registerReq.getUserName());
         user.setEmail(registerReq.getEmail());
-        user.setPassword(registerReq.getPassword());
+        user.setPassword(OilUtils.encrypt(registerReq.getPassword()));
         user.setDeleteStatus(0);
         user.setCreateTime(TimeUtil.currentTime());
         return userMapper.insert(user);
@@ -117,7 +117,7 @@ public class UserServiceImpl implements UserService {
     public Integer resetPassword(ResetPasswordReq resetPasswordReq) {
 
         User user = new User();
-        user.setPassword(resetPasswordReq.getPassword());
+        user.setPassword(OilUtils.encrypt(resetPasswordReq.getPassword()));
         user.setEmail(resetPasswordReq.getEmail());
 
         return userMapper.updatePasswordByEmail(user);

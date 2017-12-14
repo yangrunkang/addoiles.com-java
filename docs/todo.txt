@@ -7,7 +7,7 @@ new features:
 # 第三方登录
 # 支付宝
 # 首页可以考虑增加美文
-# redis 端口 8787 服务器iptables还未开通，注意开通 todo
+# redis 端口 8787 服务器iptables还未开通，注意开通  --暂时不做
 
 
 must do:
