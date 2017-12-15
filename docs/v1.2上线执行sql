@@ -1,0 +1,2 @@
+-- 由于采取了加密算法 根据密码长度加密结果长度也有变化 !!!!
+alter table `user` modify column `password` varchar(100) NOT NULL COMMENT '用户密码';
