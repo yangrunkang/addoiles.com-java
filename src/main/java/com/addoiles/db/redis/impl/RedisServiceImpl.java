@@ -1,5 +1,6 @@
-package com.addoiles.db.redis;
+package com.addoiles.db.redis.impl;
 
+import com.addoiles.db.redis.inter.RedisService;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 

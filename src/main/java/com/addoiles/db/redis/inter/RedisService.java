@@ -1,4 +1,4 @@
-package com.addoiles.db.redis;
+package com.addoiles.db.redis.inter;
 
 /**
  * Description:
