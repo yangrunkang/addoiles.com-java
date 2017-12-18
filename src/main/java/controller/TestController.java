@@ -1,11 +1,14 @@
 package controller;
 
+import com.addoiles.db.redis.RedisService;
 import com.addoiles.dto.req.VerificationCodeReq;
 import com.addoiles.dto.resp.LoginResp;
 import com.addoiles.mail.EmailService;
 import com.addoiles.mail.dto.Email;
 import com.addoiles.mail.dto.Receiver;
+import com.addoiles.util.SpringContextUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -54,6 +57,46 @@ public class TestController {
 
         return 0;
     }
+
+    public static void main(String[] sf){
+        startSpring();
+
+        RedisService redisService = SpringContextUtils.getBean(RedisService.class);
+//        redisService.set("33","asfasd");
+        String s = redisService.get("33");
+        System.out.println(s);
+    }
+
+    private static final String[] CONFIG_RESOUCES = new String[]{"application-context.xml"};
+    private static volatile boolean running = true;
+    private static ClassPathXmlApplicationContext springContext = null;
+    private static void startSpring() {
+        springContext = new ClassPathXmlApplicationContext(CONFIG_RESOUCES);
+        springContext.start();
+
+
+//        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+//            if (springContext != null) {
+//                springContext.stop();
+//                springContext.close();
+//                springContext = null;
+//            }
+//            synchronized (TestController.class) {
+//                running = false;
+//                TestController.class.notifyAll();
+//            }
+//        }));
+//
+//        synchronized (TestController.class) {
+//            while (running) {
+//                try {
+//                    TestController.class.wait();
+//                } catch (Throwable e) {
+//                }
+//            }
+//        }
+    }
+
 
 
 }

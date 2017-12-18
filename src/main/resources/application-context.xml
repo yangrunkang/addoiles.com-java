@@ -38,4 +38,7 @@
     <bean class="com.addoiles.db.cache.CacheManager" init-method="clearTask"/>
 
 
+    <bean class="com.addoiles.util.SpringContextUtils"/>
+
+
 </beans>
