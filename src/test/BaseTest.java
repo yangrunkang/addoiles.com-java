@@ -9,7 +9,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
  * DateTime:  2017/8/3 10:45
  */
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations = "classpath:applicationContext*.xml")
+@ContextConfiguration(locations = "classpath:application*.xml")
 public class BaseTest {
 
 //    @Autowired
