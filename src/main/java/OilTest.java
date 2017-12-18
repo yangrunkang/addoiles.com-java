@@ -1,4 +1,4 @@
-import com.addoiles.db.redis.RedisService;
+import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.dto.req.VerificationCodeReq;
 import com.addoiles.dto.resp.LoginResp;
 import com.addoiles.mail.EmailService;
@@ -6,6 +6,7 @@ import com.addoiles.mail.dto.Email;
 import com.addoiles.mail.dto.Receiver;
 import com.addoiles.util.SpringContextUtils;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import service.UserService;
 
 /**
@@ -14,7 +15,7 @@ import service.UserService;
  * @author Yangrunkang
  * DateTime:  2017/12/7 17:56
  */
-public class OilTest {
+public class OilTest{
 
 
     private static final String[] CONFIG_RESOUCES = new String[]{"application-context.xml"};
@@ -26,7 +27,23 @@ public class OilTest {
     public static void main(String[] sf) {
         startSpring();
 
-        testRedisGet();
+//        testRedisGet();
+//        testPub();
+
+    }
+
+
+    private static void testSub() {
+        StringRedisTemplate redisTemplate = SpringContextUtils.getBean(StringRedisTemplate.class);
+    }
+
+    /**
+     * 测试发布
+     */
+    private static void testPub() {
+
+        StringRedisTemplate redisTemplate = SpringContextUtils.getBean(StringRedisTemplate.class);
+        redisTemplate.convertAndSend("testChannel","from yrk");
     }
 
     private static void testRedisGet() {
@@ -44,26 +61,26 @@ public class OilTest {
         springContext.start();
 
 
-//        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-//            if (springContext != null) {
-//                springContext.stop();
-//                springContext.close();
-//                springContext = null;
-//            }
-//            synchronized (TestController.class) {
-//                running = false;
-//                TestController.class.notifyAll();
-//            }
-//        }));
-//
-//        synchronized (TestController.class) {
-//            while (running) {
-//                try {
-//                    TestController.class.wait();
-//                } catch (Throwable e) {
-//                }
-//            }
-//        }
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            if (springContext != null) {
+                springContext.stop();
+                springContext.close();
+                springContext = null;
+            }
+            synchronized (OilTest.class) {
+                running = false;
+                OilTest.class.notifyAll();
+            }
+        }));
+
+        synchronized (OilTest.class) {
+            while (running) {
+                try {
+                    OilTest.class.wait();
+                } catch (Throwable e) {
+                }
+            }
+        }
     }
 
     public Object sendEmail() {

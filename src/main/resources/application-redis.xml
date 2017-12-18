@@ -43,5 +43,27 @@
         <property name="enableTransactionSupport" value="true"/>
     </bean>
 
+    <bean id="serialization" class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+
+    <bean id="messageDelegateListener" class="com.addoiles.db.redis.sub.RedisSub" />
+
+    <bean id="messageListener" class="org.springframework.data.redis.listener.adapter.MessageListenerAdapter">
+        <property name="delegate" ref="messageDelegateListener" />
+        <property name="serializer" ref="serialization" />
+    </bean>
+
+    <bean id="redisContainer" class="org.springframework.data.redis.listener.RedisMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="messageListeners">
+            <!-- map of listeners and their associated topics (channels or/and patterns) -->
+            <map>
+                <entry key-ref="messageListener">
+                    <bean class="org.springframework.data.redis.listener.ChannelTopic">
+                        <constructor-arg value="java" />   <!-- 这里配置消费端需要订阅的频道，可以是多个。该一例子订阅JAVA这个频道  -->
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
 
 </beans>
