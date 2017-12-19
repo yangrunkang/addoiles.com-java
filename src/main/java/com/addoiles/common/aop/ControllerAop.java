@@ -31,7 +31,7 @@ public class ControllerAop {
 
     @Before("aspectJMethod()")
     public void before(JoinPoint joinPoint) {
-        logger.info("method：{} , args:", joinPoint.getSignature().getName(), JsonUtils.toJson(joinPoint.getArgs()));
+        logger.info("method：{} , args:{}", joinPoint.getSignature().getName(), JsonUtils.toJson(joinPoint.getArgs()));
     }
 
     @Around("aspectJMethod()")
