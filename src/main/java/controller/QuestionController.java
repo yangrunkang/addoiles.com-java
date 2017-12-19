@@ -1,7 +1,7 @@
 package controller;
 
 import com.addoiles.common.Page;
-import com.addoiles.dto.QuestionAnswerDto;
+import com.addoiles.dto.view.QuestionAnswerDto;
 import com.addoiles.entity.Comment;
 import com.addoiles.entity.Question;
 import com.addoiles.entity.User;

@@ -1,6 +1,7 @@
 package com.addoiles.impl;
 
 import com.addoiles.common.Page;
+import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.DreamsMapper;
 import com.addoiles.entity.Dreams;
 import com.addoiles.util.OilUtils;
@@ -25,6 +26,7 @@ public class DreamsServiceImpl implements DreamsService {
         return dreamsMapper.selectAll(page);
     }
 
+    @OilLog
     @Override
     public Integer addDream(Dreams dreams) {
         //默认值
@@ -41,6 +43,7 @@ public class DreamsServiceImpl implements DreamsService {
         return dreamsMapper.selectByUserId(userId);
     }
 
+    @OilLog
     @Override
     public Integer deleteByDreamId(String dreamId) {
         return dreamsMapper.deleteByDreamId(dreamId);

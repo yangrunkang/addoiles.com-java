@@ -1,6 +1,7 @@
 package com.addoiles.impl;
 
 import com.addoiles.common.Page;
+import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.ArticleMapper;
 import com.addoiles.entity.Article;
 import com.addoiles.util.OilUtils;
@@ -35,6 +36,7 @@ public class ArticleServiceImpl implements ArticleService {
         return articleMapper.selectByArticleType(page, 1);
     }
 
+    @OilLog
     @Override
     public Integer addArticle(Article article) {
         //articleType从前端传过来
@@ -54,6 +56,7 @@ public class ArticleServiceImpl implements ArticleService {
         return articleMapper.selectByArticleType(page, articleType);
     }
 
+    @OilLog
     @Override
     public Integer editArticle(Article article) {
         Article tmp = new Article();
@@ -70,6 +73,7 @@ public class ArticleServiceImpl implements ArticleService {
         return articleMapper.selectByArticleByUserId(userId, articleType);
     }
 
+    @OilLog
     @Override
     public Integer deleteByArticleId(String articleId) {
         return articleMapper.deleteByArticleId(articleId);

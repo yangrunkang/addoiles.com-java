@@ -1,5 +1,6 @@
 package com.addoiles.impl;
 
+import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.SuggestMapper;
 import com.addoiles.entity.Suggest;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ public class SuggestServiceImpl implements SuggestService {
     @Resource
     private SuggestMapper suggestMapper;
 
+    @OilLog
     @Override
     public void suggest(Suggest suggest) {
         suggestMapper.insert(suggest);

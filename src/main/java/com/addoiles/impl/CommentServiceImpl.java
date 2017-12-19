@@ -1,5 +1,6 @@
 package com.addoiles.impl;
 
+import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.CommentMapper;
 import com.addoiles.entity.Comment;
 import com.addoiles.util.OilUtils;
@@ -24,6 +25,7 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.selectByTargetId(targetId);
     }
 
+    @OilLog
     @Override
     public Integer addComment(Comment comment) {
         comment.setCommitId(OilUtils.generateID());

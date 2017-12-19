@@ -1,6 +1,6 @@
 package controller;
 
-import com.addoiles.common.OilConstant;
+import com.addoiles.common.enums.OilConstant;
 import com.addoiles.db.cache.Cache;
 import com.addoiles.db.cache.CacheManager;
 import com.addoiles.dto.req.*;

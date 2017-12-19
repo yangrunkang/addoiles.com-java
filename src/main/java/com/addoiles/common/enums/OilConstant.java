@@ -1,4 +1,4 @@
-package com.addoiles.common;
+package com.addoiles.common.enums;
 
 public class OilConstant {
     //每页数

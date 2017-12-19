@@ -1,7 +1,7 @@
 package controller;
 
 import com.addoiles.common.Page;
-import com.addoiles.dto.ITTechDto;
+import com.addoiles.dto.view.ITTechDto;
 import com.addoiles.entity.Article;
 import com.addoiles.entity.Comment;
 import com.addoiles.entity.User;
@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static com.addoiles.common.OilConstant.CONTENT_TOO_LONG;
+import static com.addoiles.common.enums.OilConstant.CONTENT_TOO_LONG;
 
 /**
  * Created by bla on 9/24/2017.

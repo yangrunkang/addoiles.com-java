@@ -1,4 +1,4 @@
-package com.addoiles.dto;
+package com.addoiles.dto.view;
 
 import com.addoiles.entity.Article;
 import com.addoiles.entity.Comment;

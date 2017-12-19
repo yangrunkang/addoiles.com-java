@@ -1,6 +1,7 @@
 package com.addoiles.impl;
 
 import com.addoiles.common.Page;
+import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.ExperienceMapper;
 import com.addoiles.entity.Experience;
 import com.addoiles.util.OilUtils;
@@ -20,6 +21,7 @@ public class ExperienceServiceImpl implements ExperienceService {
     @Resource
     private ExperienceMapper experienceMapper;
 
+    @OilLog
     @Override
     public Integer addExperience(Experience experience) {
         experience.setExperienceId(OilUtils.generateID());
@@ -34,6 +36,7 @@ public class ExperienceServiceImpl implements ExperienceService {
         return experienceMapper.selectExperienceList(page);
     }
 
+    @OilLog
     @Override
     public Integer updateRates(String experienceId, Integer rate) {
         Experience experience = experienceMapper.selectByExperienceId(experienceId);
@@ -51,6 +54,7 @@ public class ExperienceServiceImpl implements ExperienceService {
         return experienceMapper.updateByExperienceId(experience);
     }
 
+    @OilLog
     @Override
     public Integer updateExperience(Experience experience) {
         Experience tmp = new Experience();
@@ -66,6 +70,7 @@ public class ExperienceServiceImpl implements ExperienceService {
         return experienceMapper.selectByUserId(userId);
     }
 
+    @OilLog
     @Override
     public Integer deleteByExperienceId(String experienceId) {
         return experienceMapper.deleteByExperienceId(experienceId);

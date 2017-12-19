@@ -1,6 +1,7 @@
 package com.addoiles.impl;
 
 import com.addoiles.common.Page;
+import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.HotsMapper;
 import com.addoiles.entity.Hots;
 import com.addoiles.util.OilUtils;
@@ -25,6 +26,7 @@ public class HotsServiceImpl implements HotsService {
         return hotsMapper.selectAll(page);
     }
 
+    @OilLog
     @Override
     public Integer addHots(Hots hots) {
         //用户id可为空
@@ -39,6 +41,7 @@ public class HotsServiceImpl implements HotsService {
         return hotsMapper.selectByUserId(userId);
     }
 
+    @OilLog
     @Override
     public Integer deleteByHotId(String hotId) {
         return hotsMapper.deleteByHotsId(hotId);

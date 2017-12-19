@@ -1,6 +1,7 @@
 package com.addoiles.impl;
 
 import com.addoiles.common.ErrorCode;
+import com.addoiles.common.annotations.OilLog;
 import com.addoiles.common.enums.AddoilesConstant;
 import com.addoiles.db.cache.CacheManager;
 import com.addoiles.db.dao.UserMapper;
@@ -40,6 +41,7 @@ public class UserServiceImpl implements UserService {
     @Resource
     private EmailService emailService;
 
+    @OilLog
     @Override
     public User login(LoginReq loginReq) {
         List<User> userList = userMapper.countByEmail(loginReq.getEmail(), OilUtils.encrypt(loginReq.getPassword()));
@@ -51,6 +53,7 @@ public class UserServiceImpl implements UserService {
         }
     }
 
+    @OilLog
     @Override
     public Integer register(RegisterReq registerReq) {
         User user = new User();
@@ -113,6 +116,7 @@ public class UserServiceImpl implements UserService {
         return 0;
     }
 
+    @OilLog
     @Override
     public Integer resetPassword(ResetPasswordReq resetPasswordReq) {
 

@@ -1,7 +1,7 @@
 package controller;
 
 import com.addoiles.common.Page;
-import com.addoiles.dto.ExperienceDto;
+import com.addoiles.dto.view.ExperienceDto;
 import com.addoiles.dto.req.ExperienceRateReq;
 import com.addoiles.entity.Comment;
 import com.addoiles.entity.Experience;
@@ -21,7 +21,7 @@ import service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.addoiles.common.OilConstant.CONTENT_TOO_LONG;
+import static com.addoiles.common.enums.OilConstant.CONTENT_TOO_LONG;
 
 /**
  * Created by bla on 9/24/2017.

@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 
 /**
  * Controller 切面
+ * 主要记录入参出餐
  * Created by bla on 9/24/2017.
  */
 @Aspect

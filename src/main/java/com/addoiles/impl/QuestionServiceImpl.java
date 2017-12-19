@@ -1,6 +1,7 @@
 package com.addoiles.impl;
 
 import com.addoiles.common.Page;
+import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.QuestionMapper;
 import com.addoiles.entity.Question;
 import com.addoiles.util.OilUtils;
@@ -25,6 +26,7 @@ public class QuestionServiceImpl implements QuestionService {
         return questionMapper.selectQuestionList(page);
     }
 
+    @OilLog
     @Override
     public Integer addQuestion(Question question) {
         question.setQuestionId(OilUtils.generateID());
@@ -38,6 +40,7 @@ public class QuestionServiceImpl implements QuestionService {
         return questionMapper.selectQuestionListByUserId(userId);
     }
 
+    @OilLog
     @Override
     public Integer deleteByQuestionId(String questionId) {
         return questionMapper.deleteByQuestionId(questionId);
