@@ -1,7 +1,7 @@
 package com.addoiles.db.eventbus.listeners;
 
 import com.addoiles.common.annotations.OilEventListener;
-import com.addoiles.dto.event.TestEvent;
+import com.addoiles.db.eventbus.event.AddArticleEvent;
 import com.google.common.eventbus.Subscribe;
 
 /**
@@ -17,7 +17,8 @@ import com.google.common.eventbus.Subscribe;
 public class OilLogsListener {
 
     @Subscribe
-    public void testEvent(TestEvent testEvent){
-        System.out.println(testEvent.hi);
+    public void addArticle(AddArticleEvent addArticleEvent){
+        System.out.println("添加了文章");
     }
+
 }
