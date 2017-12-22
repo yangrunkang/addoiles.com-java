@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
+@Deprecated
 public interface DreamsMapper {
 
     int deleteByDreamId(String dreamId);

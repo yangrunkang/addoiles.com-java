@@ -8,6 +8,7 @@ import java.util.List;
 /**
  * Created by bla on 9/24/2017.
  */
+@Deprecated
 public interface ExperienceService {
 
     /**

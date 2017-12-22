@@ -26,6 +26,7 @@ import static com.addoiles.common.enums.OilConstant.CONTENT_TOO_LONG;
 /**
  * Created by bla on 9/24/2017.
  */
+@Deprecated
 @Controller
 public class ExperienceController extends BaseController {
 

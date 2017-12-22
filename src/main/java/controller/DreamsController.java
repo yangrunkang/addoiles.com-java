@@ -10,6 +10,7 @@ import service.DreamsService;
 /**
  * Created by bla on 9/24/2017.
  */
+@Deprecated
 @Controller
 public class DreamsController extends BaseController {
 

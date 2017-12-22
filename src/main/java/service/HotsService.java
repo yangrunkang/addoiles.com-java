@@ -9,6 +9,7 @@ import java.util.List;
  * 热门动弹
  * Created by bla on 9/24/2017.
  */
+@Deprecated
 public interface HotsService {
 
     /**

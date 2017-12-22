@@ -5,7 +5,7 @@ import com.addoiles.entity.Hots;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-
+@Deprecated
 public interface HotsMapper {
 
     int deleteByHotsId(String hot);

@@ -13,6 +13,7 @@ import service.HotsService;
 /**
  * Created by bla on 9/24/2017.
  */
+@Deprecated
 @Controller
 public class HotsController extends BaseController {
 
