@@ -20,3 +20,35 @@ drop table experience;
 
 
 --
+-- 创建微内容新表 (合并hots和dreams表等等 它们都属于微内容)
+CREATE TABLE `micro_content` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `micro_id` varchar(32) NOT NULL COMMENT '微内容id',
+  `user_id` varchar(32) DEFAULT NULL COMMENT '用户id',
+  `micro_type` int(1) NOT NULL COMMENT '微内容类型 0-热门动弹 1-梦想',
+  `title` varchar(32) NOT NULL COMMENT '标题',
+  `content` varchar(500) NOT NULL COMMENT '内容',
+  `likes` int(6) NOT NULL DEFAULT '0' COMMENT '点赞数',
+  `delete_status` int(1) NOT NULL DEFAULT '0' COMMENT '删除状态 0-正常 1-删除',
+  `create_time` int(11) NOT NULL COMMENT '创建时间',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT '微内容';
+-- 迁移hots表
+select hot_id,user_id,0,title,content,0,delete_status,create_time from hots
+into outfile '/data/hots_data.csv' fields terminated by ',' optionally enclosed by '"' lines terminated by '\n';
+-- 迁移
+load data infile '/data/hots_data.csv' replace into table  micro_content
+fields terminated by ',' optionally enclosed by '"' lines terminated by '\n'
+(micro_id,user_id,micro_type,title,content,likes,delete_status,create_time);
+-- 删除hots表
+drop table hots;
+
+-- 迁移dreams表
+select dream_id,user_id,1,title,content,0,delete_status,create_time from dreams
+into outfile '/data/dreams_data.csv' fields terminated by ',' optionally enclosed by '"' lines terminated by '\n';
+-- 迁移
+load data infile '/data/dreams_data.csv' replace into table  micro_content
+fields terminated by ',' optionally enclosed by '"' lines terminated by '\n'
+(micro_id,user_id,micro_type,title,content,likes,delete_status,create_time);
+-- 删除dreams表
+drop table dreams;
