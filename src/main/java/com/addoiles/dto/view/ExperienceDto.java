@@ -9,6 +9,7 @@ import java.util.List;
  * 经历分享页DTO
  * Created by bla on 10/1/2017.
  */
+@Deprecated
 public class ExperienceDto {
 
     /**

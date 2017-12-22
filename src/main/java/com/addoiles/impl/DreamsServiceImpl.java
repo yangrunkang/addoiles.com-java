@@ -15,6 +15,7 @@ import java.util.List;
 /**
  * Created by bla on 9/24/2017.
  */
+@Deprecated
 @Service
 public class DreamsServiceImpl implements DreamsService {
 

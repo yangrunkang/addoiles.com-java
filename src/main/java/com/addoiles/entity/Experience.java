@@ -1,6 +1,6 @@
 package com.addoiles.entity;
 
-
+@Deprecated
 public class Experience {
 
     private Integer id;

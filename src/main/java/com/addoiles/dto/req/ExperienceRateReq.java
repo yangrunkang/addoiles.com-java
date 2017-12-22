@@ -5,6 +5,7 @@ import java.io.Serializable;
 /**
  * Created by bla on 10/3/2017.
  */
+@Deprecated
 public class ExperienceRateReq implements Serializable {
 
     /**

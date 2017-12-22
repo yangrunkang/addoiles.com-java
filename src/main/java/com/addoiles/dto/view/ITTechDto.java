@@ -9,6 +9,7 @@ import java.util.List;
  * 技术沉淀Dto
  * Created by bla on 10/1/2017.
  */
+@Deprecated
 public class ITTechDto {
 
     /**
