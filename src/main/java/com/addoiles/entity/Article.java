@@ -33,7 +33,23 @@ public class Article {
 
 
     /**
-     * 删除状态 0-正常 1-删除
+     * 文章内容
+     */
+    private String content;
+
+    /**
+     * 评分
+     */
+    private Integer rates;
+
+    /**
+     * 评分次数
+     */
+    private Integer rateCount;
+
+
+    /**
+     * 删除状态 0-正常 1-删除 2-草稿
      */
     private Integer deleteStatus;
 
@@ -46,11 +62,6 @@ public class Article {
      * 编辑时间
      */
     private Integer updateTime;
-
-    /**
-     * 文章内容
-     */
-    private String content;
 
     /**
      * article.id
@@ -201,5 +212,21 @@ public class Article {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public Integer getRates() {
+        return rates;
+    }
+
+    public void setRates(Integer rates) {
+        this.rates = rates;
+    }
+
+    public Integer getRateCount() {
+        return rateCount;
+    }
+
+    public void setRateCount(Integer rateCount) {
+        this.rateCount = rateCount;
     }
 }

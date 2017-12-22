@@ -1,6 +1,10 @@
 package com.addoiles.db.dao;
 
+import com.addoiles.dto.db.QueryMicroContentDto;
 import com.addoiles.entity.MicroContent;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  * 微内容Mapper
@@ -12,7 +16,7 @@ import com.addoiles.entity.MicroContent;
  */
 public interface MicroContentMapper {
 
-    int deleteByPrimaryKey(Integer id);
+    int deleteByMicroId(@Param("microId")String microId);
 
     int insert(MicroContent record);
 
@@ -23,4 +27,7 @@ public interface MicroContentMapper {
     int updateByPrimaryKeySelective(MicroContent record);
 
     int updateByPrimaryKey(MicroContent record);
+
+    List<MicroContent> queryByDto(@Param("queryMicroContentDto") QueryMicroContentDto queryMicroContentDto);
+
 }

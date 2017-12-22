@@ -23,9 +23,9 @@
     from micro_content
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+  <delete id="deleteByMicroId" parameterType="java.lang.String">
     delete from micro_content
-    where id = #{id,jdbcType=INTEGER}
+    where micro_id = #{microId,jdbcType=VARCHAR}
   </delete>
 
   <insert id="insert" parameterType="com.addoiles.entity.MicroContent">
@@ -142,4 +142,30 @@
       create_time = #{createTime,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="queryByDto" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from micro_content
+    where 1 = 1
+    <if test="queryMicroContentDto != null">
+
+        <if test="queryMicroContentDto.userId != null">
+          and micro_content.user_id = #{queryMicroContentDto.userId,,jdbcType=VARCHAR}
+        </if>
+
+        <if test="queryMicroContentDto.microType != null">
+          and micro_content.micro_type = #{queryMicroContentDto.microType,,jdbcType=INTEGER}
+        </if>
+
+        <!-- 放最后 -->
+        <if test="queryMicroContentDto.page != null">
+          order by create_time desc
+          limit #{queryMicroContentDto.page.pageNo},#{queryMicroContentDto.page.pageSize}
+        </if>
+
+    </if>
+  </select>
+
+
 </mapper>
