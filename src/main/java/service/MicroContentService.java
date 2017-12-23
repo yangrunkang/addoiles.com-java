@@ -1,5 +1,7 @@
 package service;
 
+import com.addoiles.entity.MicroContent;
+
 /**
  * Description: 微内容接口
  * All rights Reserved, Designed By HQYG
@@ -11,5 +13,12 @@ package service;
  */
 
 public interface MicroContentService {
+
+    /**
+     * 添加微内容
+     * @param microContent
+     * @return
+     */
+    int addMicroContent(MicroContent microContent);
 
 }

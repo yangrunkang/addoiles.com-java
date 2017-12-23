@@ -8,11 +8,13 @@ package com.addoiles.common.enums;
  * author:      Yangrunkang
  * Createdate:  2017/7/20 14:59
  */
+@Deprecated
 public class OilArticleConstant {
 
     /**
      * 删除状态
      */
+    @Deprecated
     public enum DeleteStatus {
 
         /**
@@ -39,9 +41,10 @@ public class OilArticleConstant {
     /**
      * 类型
      */
+    @Deprecated
     public enum Type {
         DREAM(1),
-        EXPERENCE(2),
+        EXPERIENCE(2),
         DIFFICULT(3),
         COMPLAINT(4),;
 
