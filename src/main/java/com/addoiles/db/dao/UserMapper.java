@@ -2,24 +2,12 @@ package com.addoiles.db.dao;
 
 import com.addoiles.entity.User;
 import org.apache.ibatis.annotations.Param;
+import com.addoiles.BaseService;
 
 import java.util.List;
 
-public interface UserMapper {
+public interface UserMapper extends BaseService<User> {
 
-    int deleteByPrimaryKey(Integer id);
-
-
-    int insert(User record);
-
-
-    User selectByUserId(String userId);
-
-
-    List<User> selectAll();
-
-
-    int updateByUserId(User record);
 
     /**
      * 更新密码

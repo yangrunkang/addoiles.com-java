@@ -6,155 +6,17 @@
         <result column="nav_name" jdbcType="VARCHAR" property="navName"/>
         <result column="nav_router" jdbcType="VARCHAR" property="navRouter"/>
         <result column="nav_icon" jdbcType="VARCHAR" property="navIcon"/>
-        <result column="is_start" jdbcType="INTEGER" property="isStart"/>
     </resultMap>
-    <sql id="Example_Where_Clause">
-        <where>
-            <foreach collection="oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
-            </foreach>
-        </where>
-    </sql>
-    <sql id="Update_By_Example_Where_Clause">
-        <where>
-            <foreach collection="example.oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="("
-                                             separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
-            </foreach>
-        </where>
-    </sql>
+
     <sql id="Base_Column_List">
         id, nav_name, nav_router, nav_icon, is_start
     </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from nav_settings
-        where id = #{id,jdbcType=INTEGER}
-    </select>
 
-    <select id="selectAll" resultMap="BaseResultMap">
+    <select id="getList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from nav_settings
         where is_start = 0
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from nav_settings
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-    <insert id="insert" parameterType="com.addoiles.entity.NavSettings">
-        insert into nav_settings (id, nav_name, nav_router,
-        nav_icon, is_start)
-        values (#{id,jdbcType=INTEGER}, #{navName,jdbcType=VARCHAR}, #{navRouter,jdbcType=VARCHAR},
-        #{navIcon,jdbcType=VARCHAR}, #{isStart,jdbcType=INTEGER})
-    </insert>
-    <insert id="insertSelective" parameterType="com.addoiles.entity.NavSettings">
-        insert into nav_settings
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="navName != null">
-                nav_name,
-            </if>
-            <if test="navRouter != null">
-                nav_router,
-            </if>
-            <if test="navIcon != null">
-                nav_icon,
-            </if>
-            <if test="isStart != null">
-                is_start,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="navName != null">
-                #{navName,jdbcType=VARCHAR},
-            </if>
-            <if test="navRouter != null">
-                #{navRouter,jdbcType=VARCHAR},
-            </if>
-            <if test="navIcon != null">
-                #{navIcon,jdbcType=VARCHAR},
-            </if>
-            <if test="isStart != null">
-                #{isStart,jdbcType=INTEGER},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.addoiles.entity.NavSettings">
-        update nav_settings
-        <set>
-            <if test="navName != null">
-                nav_name = #{navName,jdbcType=VARCHAR},
-            </if>
-            <if test="navRouter != null">
-                nav_router = #{navRouter,jdbcType=VARCHAR},
-            </if>
-            <if test="navIcon != null">
-                nav_icon = #{navIcon,jdbcType=VARCHAR},
-            </if>
-            <if test="isStart != null">
-                is_start = #{isStart,jdbcType=INTEGER},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.addoiles.entity.NavSettings">
-        update nav_settings
-        set nav_name = #{navName,jdbcType=VARCHAR},
-        nav_router = #{navRouter,jdbcType=VARCHAR},
-        nav_icon = #{navIcon,jdbcType=VARCHAR},
-        is_start = #{isStart,jdbcType=INTEGER}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
+
 </mapper>

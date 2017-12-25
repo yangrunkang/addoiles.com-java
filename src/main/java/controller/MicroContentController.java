@@ -1,6 +1,6 @@
 package controller;
 
-import com.addoiles.dto.db.QueryMicroContentDto;
+import com.addoiles.dto.query.QueryMicroContentDto;
 import com.addoiles.entity.MicroContent;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;

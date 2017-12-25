@@ -1,11 +1,13 @@
-package com.addoiles.db.dao;
+package com.addoiles;
 
+import com.addoiles.dto.query.QueryDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
 /**
  * Description: 基础服务
+ * <p>Service和Mapper共用</p>
  * All rights Reserved, Designed By HQYG
  *
  * @author Yangrunkang
@@ -14,41 +16,42 @@ import java.util.List;
  * @CreateDate: 2017/12/25 14:56
  */
 
-public interface BaseMapper<T> {
+public interface BaseService<T> {
 
     /**
      * 添加
      * @param t
      * @return
      */
-    int insert(T t);
+    Integer insert(T t);
 
     /**
      * 根据businessId
      * @param businessId
      * @return
      */
-    int delete(String businessId);
+    Integer delete(String businessId);
 
     /**
      * 更新
      * @param t
      * @return
      */
-    int update(T t);
+    Integer update(T t);
 
     /**
      * 根据businessId获取
-     * @param businessId
+     * @param businessId 除表id外的实体id,比如User表中的userId,Article表的articleId
      * @return
      */
-    T get(String businessId);
+    T getByBusinessId(String businessId);
+
 
     /**
      * 获取列表
-     * @param baseQueryDto
+     * @param queryDto
      * @return
      */
-    List<T> getList(@Param("queryMicroContentDto")Object baseQueryDto);
+    List<T> getList(@Param("queryDto")QueryDto queryDto);
 
 }

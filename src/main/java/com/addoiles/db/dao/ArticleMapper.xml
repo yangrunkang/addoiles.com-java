@@ -20,7 +20,7 @@
     id, article_id,user_id, article_type, title,sub_title,content,rates, rate_count,delete_status, create_time,update_time
   </sql>
 
-    <delete id="deleteByArticleId" parameterType="java.lang.String">
+    <delete id="delete" parameterType="java.lang.String">
     update article set delete_status = 1
     where article_id = #{articleId,jdbcType=VARCHAR}
   </delete>
@@ -32,21 +32,8 @@
        #{deleteStatus,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER},#{updateTime,jdbcType=INTEGER}
       )
   </insert>
-    <update id="updateByArticleId" parameterType="com.addoiles.entity.Article">
-    update article
-    set
-      article_type = #{articleType,jdbcType=INTEGER},
-      title = #{title,jdbcType=VARCHAR},
-      sub_title = #{subTitle,jdbcType=VARCHAR},
-      content = #{content,jdbcType=LONGVARCHAR},
-      rates = #{rates,jdbcType=INTEGER},
-      rate_count = #{rateCount,jdbcType=INTEGER},
-      delete_status = #{deleteStatus,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=INTEGER},
-      update_time = #{updateTime,jdbcType=INTEGER},
-    where article_id = #{articleId,jdbcType=VARCHAR}
-  </update>
-    <update id="updateSelectiveByArticleId" parameterType="com.addoiles.entity.Article">
+
+    <update id="update" parameterType="com.addoiles.entity.Article">
         update article
         <set>
             <if test="userId != null">
@@ -75,22 +62,15 @@
     </update>
 
 
-    <select id="selectByArticleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="getByBusinessId" parameterType="java.lang.String" resultMap="BaseResultMap">
         select
         <include refid="BaseColumn"/>
         from article
         where article_id = #{articleId,jdbcType=INTEGER}
     </select>
 
-    <select id="getArticleByParams" resultMap="BaseResultMap">
-        select
-        <include refid="BaseColumn"/>
-        from article
-        where article_id = #{articleId,jdbcType=INTEGER}
-        and article_type = #{articleType,jdbcType=INTEGER}
-    </select>
 
-    <select id="selectByArticleType" resultMap="BaseResultMap">
+    <select id="getList" resultMap="BaseResultMap">
         select
         <include refid="BaseColumn"/>
         from article
@@ -101,7 +81,7 @@
     </select>
 
 
-    <select id="selectByArticleByUserId" resultMap="BaseResultMap">
+    <select id="getByUserId" resultMap="BaseResultMap">
     select
     id, article_id,user_id, article_type, title,sub_title, delete_status, create_time,update_time
     from article

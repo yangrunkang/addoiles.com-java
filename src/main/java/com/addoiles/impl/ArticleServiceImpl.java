@@ -3,6 +3,7 @@ package com.addoiles.impl;
 import com.addoiles.common.Page;
 import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.ArticleMapper;
+import com.addoiles.dto.query.QueryDto;
 import com.addoiles.entity.Article;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
@@ -22,8 +23,8 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleMapper articleMapper;
 
     @Override
-    public List<Article> getITTechArticleList(Page page) {
-        return articleMapper.selectByArticleType(page, 2);
+    public List<Article> getList(QueryDto queryDto) {
+        return articleMapper.getList(queryDto);
     }
 
     @Override
@@ -31,14 +32,10 @@ public class ArticleServiceImpl implements ArticleService {
         return articleMapper.selectPithinessByType(page, articleType);
     }
 
-    @Override
-    public List<Article> getSoftwareTalkArticleList(Page page) {
-        return articleMapper.selectByArticleType(page, 1);
-    }
 
     @OilLog
     @Override
-    public Integer addArticle(Article article) {
+    public Integer insert(Article article) {
         //articleType从前端传过来
         article.setArticleId(OilUtils.generateID());
         article.setDeleteStatus(0);
@@ -47,40 +44,28 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public Article getArticleByParams(String articleId, Integer articleType) {
-        return articleMapper.getArticleByParams(articleId, articleType);
+    public Article getByBusinessId(String businessId) {
+        return articleMapper.getByBusinessId(businessId);
     }
 
-    @Override
-    public List<Article> getArticleByArticleType(Page page, Integer articleType) {
-        return articleMapper.selectByArticleType(page, articleType);
-    }
 
     @OilLog
     @Override
-    public Integer editArticle(Article article) {
+    public Integer update(Article article) {
         Article tmp = new Article();
         tmp.setArticleId(article.getArticleId());
         tmp.setTitle(article.getTitle());
         tmp.setSubTitle(article.getSubTitle());
         tmp.setContent(article.getContent());
         tmp.setUpdateTime(TimeUtil.currentTime());
-        return articleMapper.updateSelectiveByArticleId(tmp);
+        return articleMapper.update(tmp);
     }
 
-    @Override
-    public List<Article> getArticlesByUserId(String userId, String articleType) {
-        return articleMapper.selectByArticleByUserId(userId, articleType);
-    }
 
     @OilLog
     @Override
-    public Integer deleteByArticleId(String articleId) {
-        return articleMapper.deleteByArticleId(articleId);
+    public Integer delete(String articleId) {
+        return articleMapper.delete(articleId);
     }
 
-    @Override
-    public Article getArticlesByArticleId(String articleId) {
-        return articleMapper.selectByArticleId(articleId);
-    }
 }

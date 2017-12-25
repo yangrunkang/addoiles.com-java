@@ -1,6 +1,7 @@
 package com.addoiles.db.dao;
 
 import com.addoiles.entity.MicroContent;
+import com.addoiles.BaseService;
 
 /**
  * 微内容Mapper
@@ -10,8 +11,8 @@ import com.addoiles.entity.MicroContent;
  * @author       Yangrunkang
  * @CreateDate   2017/12/22 16:39
  */
-public interface MicroContentMapper extends BaseMapper{
+public interface MicroContentMapper extends BaseService<MicroContent> {
 
-    int insertSelective(MicroContent record);
+
 
 }

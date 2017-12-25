@@ -78,18 +78,14 @@ public class ArticleController extends BaseController {
         return articleService.selectPithinessByType(page, 2);
     }
 
-    @RequestMapping("getSoftwareTalkArticleList")
-    @ResponseBody
-    public Object getSoftwareTalkArticleList(Page page) {
-        return articleService.getSoftwareTalkArticleList(page);
-    }
+
 
     @RequestMapping("addArticle")
     @ResponseBody
     public Object addArticle(@RequestBody Article article) {
         Integer count;
         try {
-            count = articleService.addArticle(article);
+            count = articleService.insert(article);
         } catch (Exception e) {
             count = CONTENT_TOO_LONG;
         }
@@ -102,7 +98,7 @@ public class ArticleController extends BaseController {
     public Object editArticle(@RequestBody Article article) {
         Integer count;
         try {
-            count = articleService.editArticle(article);
+            count = articleService.update(article);
         } catch (Exception e) {
             count = CONTENT_TOO_LONG;
         }
@@ -112,8 +108,9 @@ public class ArticleController extends BaseController {
 
     @RequestMapping("getArticlesByUserId")
     @ResponseBody
-    public Object getArticlesByUserId(String userId, String articleType) {
-        return articleService.getArticlesByUserId(userId, articleType);
+    public Object getArticlesByUserId(String userId) {
+        Quer
+        return articleService.getByUserId(userId);
     }
 
     @RequestMapping(value = "deleteByArticleId", method = RequestMethod.GET)

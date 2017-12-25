@@ -1,7 +1,9 @@
 package com.addoiles.impl;
 
+import com.addoiles.common.annotations.OilLog;
 import com.addoiles.common.enums.DBFieldEnum;
 import com.addoiles.db.dao.MicroContentMapper;
+import com.addoiles.dto.query.QueryDto;
 import com.addoiles.entity.MicroContent;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
@@ -25,8 +27,9 @@ public class MicroContentServiceImpl implements MicroContentService {
     @Resource
     private MicroContentMapper microContentMapper;
 
+    @OilLog
     @Override
-    public int add(MicroContent microContent) {
+    public Integer insert(MicroContent microContent) {
         microContent.setMicroId(OilUtils.generateID());
         microContent.setDeleteStatus(DBFieldEnum.MicroContentDeleteStatus.NORMAL.getValue());
         microContent.setCreateTime(TimeUtil.currentTime());
@@ -34,23 +37,23 @@ public class MicroContentServiceImpl implements MicroContentService {
     }
 
     @Override
-    public int delete(String businessId) {
+    public Integer delete(String businessId) {
         return microContentMapper.delete(businessId);
     }
 
     @Override
-    public int update(MicroContent microContent) {
+    public Integer update(MicroContent microContent) {
         return microContentMapper.update(microContent);
     }
 
     @Override
-    public MicroContent get(String id) {
+    public MicroContent getByBusinessId(String id) {
         return null;
     }
 
     @Override
-    public List<MicroContent> getList(Object queryMicroContentDto) {
-        return microContentMapper.getList(queryMicroContentDto);
+    public List<MicroContent> getList(QueryDto queryDto) {
+        return microContentMapper.getList(queryDto);
     }
 
 

@@ -1,5 +1,6 @@
 package service;
 
+import com.addoiles.BaseService;
 import com.addoiles.entity.MicroContent;
 
 /**
@@ -12,7 +13,7 @@ import com.addoiles.entity.MicroContent;
  * @CreateDate: 2017/12/22 16:39
  */
 
-public interface MicroContentService extends BaseService<MicroContent>{
+public interface MicroContentService extends BaseService<MicroContent> {
 
 
 }

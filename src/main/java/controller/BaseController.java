@@ -10,4 +10,5 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @CrossOrigin(origins = "*", methods = {RequestMethod.POST, RequestMethod.GET})
 public class BaseController {
+
 }

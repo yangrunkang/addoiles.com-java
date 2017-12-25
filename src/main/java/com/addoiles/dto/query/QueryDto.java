@@ -1,4 +1,4 @@
-package com.addoiles.dto.db;
+package com.addoiles.dto.query;
 
 import com.addoiles.common.Page;
 
@@ -11,7 +11,7 @@ import com.addoiles.common.Page;
  * @Company: HQYG
  * @CreateDate: 2017/12/25 14:58
  */
-public class BaseQueryDto {
+public class QueryDto {
 
     /**
      * 分页对象
@@ -22,6 +22,15 @@ public class BaseQueryDto {
      * 用户id
      */
     private String userId;
+
+    /**
+     * 业务id
+     * 除表id外的实体id,比如User表中的userId,Article表的articleId
+     * @return
+     */
+    private String businessId;
+
+
 
     public Page getPage() {
         return page;

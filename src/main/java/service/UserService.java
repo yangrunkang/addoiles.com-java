@@ -1,5 +1,6 @@
 package service;
 
+import com.addoiles.BaseService;
 import com.addoiles.dto.req.LoginReq;
 import com.addoiles.dto.req.RegisterReq;
 import com.addoiles.dto.req.ResetPasswordReq;
@@ -11,7 +12,7 @@ import java.util.List;
 /**
  * Created by bla on 9/24/2017.
  */
-public interface UserService {
+public interface UserService extends BaseService<User> {
 
     /**
      * 登录
