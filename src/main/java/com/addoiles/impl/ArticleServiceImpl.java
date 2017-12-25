@@ -1,6 +1,5 @@
 package com.addoiles.impl;
 
-import com.addoiles.common.Page;
 import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.ArticleMapper;
 import com.addoiles.dto.query.QueryDto;
@@ -27,10 +26,6 @@ public class ArticleServiceImpl implements ArticleService {
         return articleMapper.getList(queryDto);
     }
 
-    @Override
-    public List<Article> selectPithinessByType(Page page, Integer articleType) {
-        return articleMapper.selectPithinessByType(page, articleType);
-    }
 
 
     @OilLog
@@ -68,4 +63,8 @@ public class ArticleServiceImpl implements ArticleService {
         return articleMapper.delete(articleId);
     }
 
+    @Override
+    public List<Article> selectPithinessByType(QueryDto queryDto) {
+        return articleMapper.selectPithinessByType(queryDto);
+    }
 }

@@ -30,8 +30,6 @@ public class QueryDto {
      */
     private String businessId;
 
-
-
     public Page getPage() {
         return page;
     }
@@ -46,5 +44,13 @@ public class QueryDto {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public String getBusinessId() {
+        return businessId;
+    }
+
+    public void setBusinessId(String businessId) {
+        this.businessId = businessId;
     }
 }

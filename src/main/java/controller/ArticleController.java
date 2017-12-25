@@ -1,6 +1,6 @@
 package controller;
 
-import com.addoiles.common.Page;
+import com.addoiles.dto.query.QueryDto;
 import com.addoiles.dto.view.ITTechDto;
 import com.addoiles.entity.Article;
 import com.addoiles.entity.Comment;
@@ -38,18 +38,18 @@ public class ArticleController extends BaseController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("getITTechArticleList")
+    @RequestMapping(value = "getITTechArticleList",method = RequestMethod.POST)
     @ResponseBody
-    public Object getITTechArticleList(Page page, String articleId) {
+    public Object getITTechArticleList(@RequestBody QueryDto queryDto) {
         ITTechDto itTechDto = new ITTechDto();
-        List<Article> pithinessArticleList = articleService.selectPithinessByType(page, 2);
+        List<Article> pithinessArticleList = articleService.selectPithinessByType(queryDto);
         if (!CollectionUtils.isEmpty(pithinessArticleList)) {
-            Article firstInList = pithinessArticleList.get(0);
             Article article;
-            if (Objects.nonNull(articleId)) { //显示指定articleId对应的文章
-                article = articleService.getArticleByParams(articleId, 2);
+            String businessId = queryDto.getBusinessId();
+            if (Objects.nonNull(businessId)) { //显示指定articleId对应的文章
+                article = articleService.getByBusinessId(businessId);
             } else { //显示默认第一篇文章
-                article = articleService.getArticleByParams(firstInList.getArticleId(), 2);
+                article = pithinessArticleList.get(0);
             }
             List<Comment> articleCommentList = commentService.getCommentListByTargetId(article.getArticleId());
             if (CollectionUtils.isEmpty(articleCommentList)) {
@@ -69,13 +69,12 @@ public class ArticleController extends BaseController {
     /**
      * 展示更多
      *
-     * @param page
      * @return
      */
     @RequestMapping("showMoreITTechArticles")
     @ResponseBody
-    public Object showMoreITTechArticles(@RequestBody Page page) {
-        return articleService.selectPithinessByType(page, 2);
+    public Object showMoreITTechArticles(@RequestBody QueryDto queryDto) {
+        return articleService.selectPithinessByType(queryDto);
     }
 
 
@@ -108,21 +107,20 @@ public class ArticleController extends BaseController {
 
     @RequestMapping("getArticlesByUserId")
     @ResponseBody
-    public Object getArticlesByUserId(String userId) {
-        Quer
-        return articleService.getByUserId(userId);
+    public Object getArticlesByUserId(QueryDto queryDto) {
+        return articleService.getList(queryDto);
     }
 
     @RequestMapping(value = "deleteByArticleId", method = RequestMethod.GET)
     @ResponseBody
     public Object deleteByArticleId(String articleId) {
-        return articleService.deleteByArticleId(articleId);
+        return articleService.delete(articleId);
     }
 
     @RequestMapping(value = "getArticlesByArticleId", method = RequestMethod.GET)
     @ResponseBody
     public Object getArticlesByArticleId(String articleId) {
-        return articleService.getArticlesByArticleId(articleId);
+        return articleService.getByBusinessId(articleId);
     }
 
 

@@ -1,10 +1,11 @@
 package controller;
 
-import com.addoiles.dto.query.QueryMicroContentDto;
+import com.addoiles.dto.query.QueryDto;
 import com.addoiles.entity.MicroContent;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.MicroContentService;
 
@@ -26,8 +27,8 @@ public class MicroContentController extends BaseController {
 
     @RequestMapping("getMicroContentList")
     @ResponseBody
-    public Object getMicroContentList(@RequestBody QueryMicroContentDto queryMicroContentDto) {
-        return microContentService.getList(queryMicroContentDto);
+    public Object getMicroContentList(@RequestBody QueryDto queryDto) {
+        return microContentService.getList(queryDto);
     }
 
 
@@ -35,14 +36,14 @@ public class MicroContentController extends BaseController {
     @RequestMapping("addMicroContent")
     @ResponseBody
     public Object addMicroContent(@RequestBody MicroContent microContent) {
-        return microContentService.add(microContent);
+        return microContentService.insert(microContent);
     }
 
 
-    @RequestMapping("delMicroContent")
+    @RequestMapping(value = "delMicroContent",method = RequestMethod.GET)
     @ResponseBody
-    public Object delMicroContent(@RequestBody MicroContent microContent) {
-        return microContentService.delete(microContent.getMicroId());
+    public Object delMicroContent(String microContentId) {
+        return microContentService.delete(microContentId);
     }
 
 

@@ -22,7 +22,7 @@ public class SuggestServiceImpl implements SuggestService {
     @OilLog
     @Override
     public Integer insert(Suggest suggest) {
-        suggestMapper.insert(suggest);
+        return suggestMapper.insert(suggest);
     }
 
     @Override

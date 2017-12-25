@@ -21,7 +21,7 @@ public class CommentController extends BaseController {
     @RequestMapping(value = "addComment", method = RequestMethod.POST)
     @ResponseBody
     public Object addComment(@RequestBody Comment comment) {
-        return commentService.addComment(comment);
+        return commentService.insert(comment);
     }
 
 

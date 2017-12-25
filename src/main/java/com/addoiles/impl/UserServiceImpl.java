@@ -5,6 +5,7 @@ import com.addoiles.common.annotations.OilLog;
 import com.addoiles.common.enums.AddoilesConstant;
 import com.addoiles.db.cache.CacheManager;
 import com.addoiles.db.dao.UserMapper;
+import com.addoiles.dto.query.QueryDto;
 import com.addoiles.dto.req.LoginReq;
 import com.addoiles.dto.req.RegisterReq;
 import com.addoiles.dto.req.ResetPasswordReq;
@@ -63,7 +64,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(OilUtils.encrypt(registerReq.getPassword()));
         user.setDeleteStatus(0);
         user.setCreateTime(TimeUtil.currentTime());
-        return userMapper.insert(user);
+        return this.insert(user);
     }
 
     @Override
@@ -127,7 +128,28 @@ public class UserServiceImpl implements UserService {
         return userMapper.updatePasswordByEmail(user);
     }
 
+    @Override
+    public Integer insert(User user) {
+        return userMapper.insert(user);
+    }
 
+    @Override
+    public Integer delete(String businessId) {
+        return null;
+    }
 
+    @Override
+    public Integer update(User user) {
+        return null;
+    }
 
+    @Override
+    public User getByBusinessId(String businessId) {
+        return null;
+    }
+
+    @Override
+    public List<User> getList(QueryDto queryDto) {
+        return null;
+    }
 }
