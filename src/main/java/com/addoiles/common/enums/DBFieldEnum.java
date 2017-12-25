@@ -15,7 +15,7 @@ public class DBFieldEnum {
     /**
      * 文章类型枚举
      */
-    public enum ArticleTypeEnum {
+    public enum ArticleType {
 
         /**
          * 经历分享
@@ -34,7 +34,7 @@ public class DBFieldEnum {
 
         private final int value;
 
-        ArticleTypeEnum(int value) {
+        ArticleType(int value) {
             this.value = value;
         }
 
@@ -47,7 +47,7 @@ public class DBFieldEnum {
     /**
      * 文章删除状态枚举
      */
-    public enum ArticleDeleteStatusEnum {
+    public enum ArticleDeleteStatus {
 
         /**
          * 正常
@@ -66,7 +66,7 @@ public class DBFieldEnum {
 
         private final int value;
 
-        ArticleDeleteStatusEnum(int value) {
+        ArticleDeleteStatus(int value) {
             this.value = value;
         }
 
@@ -79,7 +79,7 @@ public class DBFieldEnum {
     /**
      * 评论删除状态枚举
      */
-    public enum CommentDeleteStatusEnum {
+    public enum CommentDeleteStatus {
 
         /**
          * 正常
@@ -93,7 +93,7 @@ public class DBFieldEnum {
 
         private final int value;
 
-        CommentDeleteStatusEnum(int value) {
+        CommentDeleteStatus(int value) {
             this.value = value;
         }
 
@@ -105,7 +105,7 @@ public class DBFieldEnum {
     /**
      * 微内容类型枚举
      */
-    public enum MicroContentTypeEnum {
+    public enum MicroContentType {
 
         /**
          * 热门动弹
@@ -119,7 +119,7 @@ public class DBFieldEnum {
 
         private final int value;
 
-        MicroContentTypeEnum(int value) {
+        MicroContentType(int value) {
             this.value = value;
         }
 
@@ -131,7 +131,7 @@ public class DBFieldEnum {
     /**
      * 微内容删除状态枚举
      */
-    public enum MicroContentDeleteStatusEnum {
+    public enum MicroContentDeleteStatus {
 
         /**
          * 正常
@@ -145,7 +145,7 @@ public class DBFieldEnum {
 
         private final int value;
 
-        MicroContentDeleteStatusEnum(int value) {
+        MicroContentDeleteStatus(int value) {
             this.value = value;
         }
 
@@ -157,7 +157,7 @@ public class DBFieldEnum {
     /**
      * 导航栏是否启用枚举
      */
-    public enum NavSettingsIsEnableEnum {
+    public enum NavSettingsIsEnable {
 
         /**
          * 启用
@@ -171,7 +171,7 @@ public class DBFieldEnum {
 
         private final int value;
 
-        NavSettingsIsEnableEnum(int value) {
+        NavSettingsIsEnable(int value) {
             this.value = value;
         }
 
@@ -183,7 +183,7 @@ public class DBFieldEnum {
     /**
      * 问题删除状态枚举
      */
-    public enum QuestionDeletedStatusEnum {
+    public enum QuestionDeletedStatus {
 
         /**
          * 正常
@@ -197,7 +197,7 @@ public class DBFieldEnum {
 
         private final int value;
 
-        QuestionDeletedStatusEnum(int value) {
+        QuestionDeletedStatus(int value) {
             this.value = value;
         }
 
@@ -210,7 +210,7 @@ public class DBFieldEnum {
     /**
      * 用户删除状态枚举
      */
-    public enum UserDeletedStatusEnum {
+    public enum UserDeletedStatus {
 
         /**
          * 正常
@@ -224,7 +224,7 @@ public class DBFieldEnum {
 
         private final int value;
 
-        UserDeletedStatusEnum(int value) {
+        UserDeletedStatus(int value) {
             this.value = value;
         }
 
