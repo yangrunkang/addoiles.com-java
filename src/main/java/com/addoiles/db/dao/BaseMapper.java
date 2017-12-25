@@ -1,4 +1,6 @@
-package service;
+package com.addoiles.db.dao;
+
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -12,14 +14,14 @@ import java.util.List;
  * @CreateDate: 2017/12/25 14:56
  */
 
-public interface BaseService<T> {
+public interface BaseMapper<T> {
 
     /**
      * 添加
      * @param t
      * @return
      */
-    int add(T t);
+    int insert(T t);
 
     /**
      * 根据businessId
@@ -47,6 +49,6 @@ public interface BaseService<T> {
      * @param baseQueryDto
      * @return
      */
-    List<T> getList(Object baseQueryDto);
+    List<T> getList(@Param("queryMicroContentDto")Object baseQueryDto);
 
 }
