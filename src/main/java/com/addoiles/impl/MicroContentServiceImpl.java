@@ -2,7 +2,6 @@ package com.addoiles.impl;
 
 import com.addoiles.common.enums.DBFieldEnum;
 import com.addoiles.db.dao.MicroContentMapper;
-import com.addoiles.dto.db.QueryMicroContentDto;
 import com.addoiles.entity.MicroContent;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
@@ -35,13 +34,13 @@ public class MicroContentServiceImpl implements MicroContentService {
     }
 
     @Override
-    public int delete(MicroContent microContent) {
-        return 0;
+    public int delete(String businessId) {
+        return microContentMapper.delete(businessId);
     }
 
     @Override
     public int update(MicroContent microContent) {
-        return 0;
+        return microContentMapper.update(microContent);
     }
 
     @Override
@@ -51,7 +50,7 @@ public class MicroContentServiceImpl implements MicroContentService {
 
     @Override
     public List<MicroContent> getList(Object queryMicroContentDto) {
-        return microContentMapper.queryByDto((QueryMicroContentDto)queryMicroContentDto);
+        return microContentMapper.getList(queryMicroContentDto);
     }
 
 

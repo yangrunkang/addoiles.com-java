@@ -42,7 +42,7 @@ public class MicroContentController extends BaseController {
     @RequestMapping("delMicroContent")
     @ResponseBody
     public Object delMicroContent(@RequestBody MicroContent microContent) {
-        return microContentService.delete(microContent);
+        return microContentService.delete(microContent.getMicroId());
     }
 
 
