@@ -1,6 +1,9 @@
 package service;
 
+import com.addoiles.dto.db.QueryMicroContentDto;
 import com.addoiles.entity.MicroContent;
+
+import java.util.List;
 
 /**
  * Description: 微内容接口
@@ -20,5 +23,12 @@ public interface MicroContentService {
      * @return
      */
     int addMicroContent(MicroContent microContent);
+
+    /**
+     * 获取微内容
+     * @param queryMicroContentDto
+     * @return
+     */
+    List<MicroContent> getMicroContentList(QueryMicroContentDto queryMicroContentDto);
 
 }

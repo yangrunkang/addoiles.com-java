@@ -1,6 +1,14 @@
 package controller;
 
+import com.addoiles.dto.db.QueryMicroContentDto;
+import com.addoiles.entity.MicroContent;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import service.MicroContentService;
+
+import javax.annotation.Resource;
 
 /**
  *  微内容Controller
@@ -12,6 +20,23 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class MicroContentController extends BaseController {
+
+    @Resource
+    private MicroContentService microContentService;
+
+    @RequestMapping("getMicroContentList")
+    @ResponseBody
+    public Object getMicroContentList(@RequestBody QueryMicroContentDto queryMicroContentDto) {
+        return microContentService.getMicroContentList(queryMicroContentDto);
+    }
+
+
+
+    @RequestMapping("addMicroContent")
+    @ResponseBody
+    public Object addMicroContent(@RequestBody MicroContent microContent) {
+        return microContentService.addMicroContent(microContent);
+    }
 
 
 
