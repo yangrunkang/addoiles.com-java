@@ -8,6 +8,8 @@ alter table `article` modify column `article_type` int(1) NOT NULL COMMENT '文�
 -- article 表添加 评分 和 评分次数 字段
 alter table `article` add `rates` int(2) NOT NULL DEFAULT '0' COMMENT '评分' AFTER `content`;
 alter table `article` add `rate_count` int(4) DEFAULT '0' COMMENT '评分次数' AFTER `rates`;
+
+-- 具体的导出路径需要看show global variables like '%secure%';结果secure_file_priv的值
 -- experience 表数据 迁移到 article 表
 SELECT experience_id,0,user_id,title,content,rates,rate_count,delete_status,create_time,update_time from experience
 into outfile '/data/experience_data.csv' fields terminated by ',' optionally enclosed by '"' lines terminated by '\n';
