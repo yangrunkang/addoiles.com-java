@@ -1,7 +1,7 @@
 package com.addoiles.impl;
 
+import com.addoiles.entity.Article;
 import com.addoiles.entity.Comment;
-import com.addoiles.entity.Experience;
 import com.addoiles.entity.User;
 
 import java.util.List;
@@ -21,11 +21,11 @@ public class ServiceUtil {
         });
     }
 
-    public static void HandleExperienceUserIdToUserName(List<Experience> experienceList, List<User> userList) {
-        experienceList.forEach(experience -> {
+    public static void HandleExperienceUserIdToUserName(List<Article> articleList, List<User> userList) {
+        articleList.forEach(article -> {
             userList.forEach(user -> {
-                if (experience.getUserId().equals(user.getUserId())) {
-                    experience.setUserName(user.getName());
+                if (article.getUserId().equals(user.getUserId())) {
+//                    experience.setUserName(user.getName());
                 }
             });
         });
