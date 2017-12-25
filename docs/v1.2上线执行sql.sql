@@ -1,7 +1,7 @@
 -- 由于采取了加密算法 根据密码长度加密结果长度也有变化 !!!!
 alter table `user` modify column `password` varchar(100) NOT NULL COMMENT '用户密码';
 
-
+-- -----------------------------------------数据迁移Start-------------------------------------------------------------
 -- experience表变更(drop)和数据迁移(迁移至article)
 -- article 表添加type类型 0-经历分享
 alter table `article` modify column `article_type` int(1) NOT NULL COMMENT '文章类型 0-经历分享 1-软件评测 2-技术沉淀';
@@ -52,3 +52,4 @@ fields terminated by ',' optionally enclosed by '"' lines terminated by '\n'
 (micro_id,user_id,micro_type,title,content,likes,delete_status,create_time);
 -- 删除dreams表
 drop table dreams;
+-- -----------------------------------------数据迁移End-------------------------------------------------------------
