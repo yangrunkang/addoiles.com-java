@@ -27,7 +27,7 @@ public class MicroContentController extends BaseController {
     @RequestMapping("getMicroContentList")
     @ResponseBody
     public Object getMicroContentList(@RequestBody QueryMicroContentDto queryMicroContentDto) {
-        return microContentService.getMicroContentList(queryMicroContentDto);
+        return microContentService.getList(queryMicroContentDto);
     }
 
 
@@ -35,7 +35,14 @@ public class MicroContentController extends BaseController {
     @RequestMapping("addMicroContent")
     @ResponseBody
     public Object addMicroContent(@RequestBody MicroContent microContent) {
-        return microContentService.addMicroContent(microContent);
+        return microContentService.add(microContent);
+    }
+
+
+    @RequestMapping("delMicroContent")
+    @ResponseBody
+    public Object delMicroContent(@RequestBody MicroContent microContent) {
+        return microContentService.delete(microContent);
     }
 
 

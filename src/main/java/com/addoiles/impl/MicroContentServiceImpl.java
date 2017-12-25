@@ -27,7 +27,7 @@ public class MicroContentServiceImpl implements MicroContentService {
     private MicroContentMapper microContentMapper;
 
     @Override
-    public int addMicroContent(MicroContent microContent) {
+    public int add(MicroContent microContent) {
         microContent.setMicroId(OilUtils.generateID());
         microContent.setDeleteStatus(DBFieldEnum.MicroContentDeleteStatus.NORMAL.getValue());
         microContent.setCreateTime(TimeUtil.currentTime());
@@ -35,7 +35,24 @@ public class MicroContentServiceImpl implements MicroContentService {
     }
 
     @Override
-    public List<MicroContent> getMicroContentList(QueryMicroContentDto queryMicroContentDto) {
-        return microContentMapper.queryByDto(queryMicroContentDto);
+    public int delete(MicroContent microContent) {
+        return 0;
     }
+
+    @Override
+    public int update(MicroContent microContent) {
+        return 0;
+    }
+
+    @Override
+    public MicroContent get(String id) {
+        return null;
+    }
+
+    @Override
+    public List<MicroContent> getList(Object queryMicroContentDto) {
+        return microContentMapper.queryByDto((QueryMicroContentDto)queryMicroContentDto);
+    }
+
+
 }
