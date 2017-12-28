@@ -1,6 +1,7 @@
 package controller;
 
 import com.addoiles.dto.query.QueryDto;
+import com.addoiles.dto.resp.ExperienceDto;
 import com.addoiles.dto.view.ITTechDto;
 import com.addoiles.entity.Article;
 import com.addoiles.entity.Comment;
@@ -24,6 +25,7 @@ import java.util.Objects;
 import static com.addoiles.common.enums.OilConstant.CONTENT_TOO_LONG;
 
 /**
+ *
  * Created by bla on 9/24/2017.
  */
 @Controller
@@ -38,18 +40,62 @@ public class ArticleController extends BaseController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping(value = "getITTechArticleList",method = RequestMethod.POST)
+
+    @RequestMapping(value = "getExperienceList", method = RequestMethod.POST)
     @ResponseBody
-    public Object getITTechArticleList(@RequestBody QueryDto queryDto) {
+    public Object getExperienceList(@RequestBody QueryDto queryDto) {
+        List<ExperienceDto> articleDtoList = new ArrayList<>();
+
+        List<User> usersOfIdNameList = userService.getUsersOfIdNameList();
+        List<Article> articleList = articleService.getList(queryDto);
+
+
+        if (CollectionUtils.isEmpty(articleList)) {
+            return articleDtoList; //在页面上显示空
+        } else {
+            //处理userId转userName
+            ServiceUtil.HandleExperienceUserIdToUserName(articleList, usersOfIdNameList);
+            articleList.forEach(article -> {
+                List<Comment> commentList = commentService.getCommentListByTargetId(article.getArticleId());
+                if (!CollectionUtils.isEmpty(commentList)) {
+                    ExperienceDto articleDto = new ExperienceDto();
+                    articleDto.setArticle(article);
+                    //处理userId转userName
+                    ServiceUtil.HandleCommentUserIdToUserName(commentList, usersOfIdNameList);
+                    articleDto.setCommentList(commentList);
+                    articleDtoList.add(articleDto);
+                } else {
+                    ExperienceDto articleDto = new ExperienceDto();
+                    articleDto.setArticle(article);
+                    articleDto.setCommentList(new ArrayList<>());
+                    articleDtoList.add(articleDto);
+                }
+                //设定评分
+                Integer rates = article.getRates();
+                Integer rateCount = article.getRateCount();
+                if (rateCount > 0) {
+                    article.setRates(rates / rateCount > 5 ? 5 : rates / rateCount);
+                }
+
+            });
+        }
+        return articleDtoList;
+    }
+
+
+
+    @RequestMapping(value = "getITArticleList",method = RequestMethod.POST)
+    @ResponseBody
+    public Object getITArticleList(@RequestBody QueryDto queryDto) {
         ITTechDto itTechDto = new ITTechDto();
-        List<Article> pithinessArticleList = articleService.selectPithinessByType(queryDto);
+        List<Article> pithinessArticleList = articleService.getSimpleList(queryDto);
         if (!CollectionUtils.isEmpty(pithinessArticleList)) {
             Article article;
             String businessId = queryDto.getBusinessId();
             if (Objects.nonNull(businessId)) { //显示指定articleId对应的文章
                 article = articleService.getByBusinessId(businessId);
             } else { //显示默认第一篇文章
-                article = pithinessArticleList.get(0);
+                article = articleService.getByBusinessId(pithinessArticleList.get(0).getArticleId());
             }
             List<Comment> articleCommentList = commentService.getCommentListByTargetId(article.getArticleId());
             if (CollectionUtils.isEmpty(articleCommentList)) {
@@ -66,6 +112,15 @@ public class ArticleController extends BaseController {
         return itTechDto;
     }
 
+
+    @RequestMapping(value = "getSimpleList",method = RequestMethod.POST)
+    @ResponseBody
+    public Object getSimpleList(@RequestBody QueryDto queryDto) {
+        return articleService.getSimpleList(queryDto);
+    }
+
+
+
     /**
      * 展示更多
      *
@@ -74,7 +129,7 @@ public class ArticleController extends BaseController {
     @RequestMapping("showMoreITTechArticles")
     @ResponseBody
     public Object showMoreITTechArticles(@RequestBody QueryDto queryDto) {
-        return articleService.selectPithinessByType(queryDto);
+        return articleService.getSimpleList(queryDto);
     }
 
 

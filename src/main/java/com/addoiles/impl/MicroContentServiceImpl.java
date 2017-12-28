@@ -7,6 +7,7 @@ import com.addoiles.dto.query.QueryDto;
 import com.addoiles.entity.MicroContent;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
+import org.springframework.stereotype.Service;
 import service.MicroContentService;
 
 import javax.annotation.Resource;
@@ -21,7 +22,7 @@ import java.util.List;
  * @Company: HQYG
  * @CreateDate: 2017/12/23 8:39
  */
-
+@Service
 public class MicroContentServiceImpl implements MicroContentService {
 
     @Resource
@@ -31,6 +32,7 @@ public class MicroContentServiceImpl implements MicroContentService {
     @Override
     public Integer insert(MicroContent microContent) {
         microContent.setMicroId(OilUtils.generateID());
+        microContent.setLikes(0);
         microContent.setDeleteStatus(DBFieldEnum.MicroContentDeleteStatus.NORMAL.getValue());
         microContent.setCreateTime(TimeUtil.currentTime());
         return microContentMapper.insert(microContent);

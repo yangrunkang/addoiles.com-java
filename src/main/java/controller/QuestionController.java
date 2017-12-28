@@ -35,7 +35,7 @@ public class QuestionController extends BaseController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("getQuestionAnswerList")
+    @RequestMapping(value = "getQuestionAnswerList",method = RequestMethod.POST)
     @ResponseBody
     public Object getQuestionAnswerList(@RequestBody QueryDto queryDto) {
         List<QuestionAnswerDto> questionAnswerDtoList = new ArrayList<>();
@@ -64,7 +64,6 @@ public class QuestionController extends BaseController {
             questionAnswerDtoList.add(questionAnswerDto);
         });
 
-
         return questionAnswerDtoList;
     }
 
@@ -77,11 +76,11 @@ public class QuestionController extends BaseController {
 
     @RequestMapping(value = "getQuestionsByUserId", method = RequestMethod.POST)
     @ResponseBody
-    public Object getQuestionsByUserId(QueryDto queryDto) {
-        return questionService.getList(queryDto);
+    public Object getQuestionsByUserId(@RequestBody QueryDto queryDto) {
+        return questionService.getSimpleList(queryDto);
     }
 
-    @RequestMapping(value = "deleteByQuestionId", method = RequestMethod.GET)
+    @RequestMapping(value = "deleteByQuestionId", method = RequestMethod.POST)
     @ResponseBody
     public Object deleteByQuestionId(String questionId) {
         return questionService.delete(questionId);

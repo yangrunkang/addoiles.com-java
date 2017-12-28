@@ -27,7 +27,16 @@
         from question
         where delete_status = 0
         order by create_time desc
-        limit #{page.pageNo},#{page.pageSize}
+        limit #{queryDto.page.pageNo},#{queryDto.page.pageSize}
+    </select>
+
+    <select id="getSimpleList" resultMap="BaseResultMap">
+        select
+        question_id, content, delete_status,create_time
+        from question
+        where delete_status = 0
+        and user_id = #{queryDto.userId,jdbcType=VARCHAR}
+        order by create_time desc
     </select>
 
     <select id="getByUserId" resultMap="BaseResultMap">

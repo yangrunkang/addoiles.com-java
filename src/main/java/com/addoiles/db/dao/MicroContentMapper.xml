@@ -126,20 +126,20 @@
     <include refid="Base_Column_List" />
     from micro_content
     where 1 = 1
-    <if test="queryMicroContentDto != null">
+    <if test="queryDto != null">
 
-        <if test="queryMicroContentDto.userId != null">
-          and micro_content.user_id = #{queryMicroContentDto.userId,,jdbcType=VARCHAR}
+        <if test="queryDto.userId != null">
+          and micro_content.user_id = #{queryDto.userId,jdbcType=VARCHAR}
         </if>
 
-        <if test="queryMicroContentDto.microType != null">
-          and micro_content.micro_type = #{queryMicroContentDto.microType,,jdbcType=INTEGER}
+        <if test="queryDto.microType != null">
+          and micro_content.micro_type = #{queryDto.microType,jdbcType=INTEGER}
         </if>
 
         <!-- 放最后 -->
-        <if test="queryMicroContentDto.page != null">
+        <if test="queryDto.page != null">
           order by create_time desc
-          limit #{queryMicroContentDto.page.pageNo},#{queryMicroContentDto.page.pageSize}
+          limit #{queryDto.page.pageNo},#{queryDto.page.pageSize}
         </if>
 
     </if>

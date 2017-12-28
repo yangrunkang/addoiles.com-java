@@ -1,5 +1,6 @@
 package com.addoiles.impl;
 
+import com.addoiles.ManagerService;
 import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.QuestionMapper;
 import com.addoiles.dto.query.QueryDto;
@@ -16,7 +17,7 @@ import java.util.List;
  * Created by bla on 9/24/2017.
  */
 @Service
-public class QuestionServiceImpl implements QuestionService {
+public class QuestionServiceImpl implements QuestionService,ManagerService<Question> {
 
     @Resource
     private QuestionMapper questionMapper;
@@ -51,5 +52,10 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public Question getByBusinessId(String businessId) {
         return null;
+    }
+
+    @Override
+    public List<Question> getSimpleList(QueryDto queryDto) {
+        return questionMapper.getSimpleList(queryDto);
     }
 }

@@ -75,19 +75,21 @@
         <include refid="BaseColumn"/>
         from article
         where delete_status = 0
-        and article_type = #{articleType,jdbcType=INTEGER}
+        and article_type = #{queryDto.articleType,jdbcType=INTEGER}
         order by create_time desc
-        limit #{page.pageNo},#{page.pageSize}
+        limit #{queryDto.page.pageNo},#{queryDto.page.pageSize}
     </select>
 
-    <select id="selectPithinessByType" resultMap="BaseResultMap">
-    select
-    article_id, title,sub_title
-    from article
-    where delete_status = 0
-    and article_type = #{articleType,jdbcType=INTEGER}
-    order by create_time desc
-    limit #{page.pageNo},#{page.pageSize}
-  </select>
+    <select id="getSimpleList" resultMap="BaseResultMap">
+        select
+        article_id, title,sub_title,create_time
+        from article
+        where delete_status = 0
+        and article_type = #{queryDto.articleType,jdbcType=INTEGER}
+        <if test="queryDto.userId != null">
+            and user_id = #{queryDto.userId,jdbcType=VARCHAR}
+        </if>
+        order by create_time desc
+    </select>
 
 </mapper>

@@ -64,7 +64,7 @@ public class ArticleServiceImpl implements ArticleService {
     }
 
     @Override
-    public List<Article> selectPithinessByType(QueryDto queryDto) {
-        return articleMapper.selectPithinessByType(queryDto);
+    public List<Article> getSimpleList(QueryDto queryDto) {
+        return articleMapper.getSimpleList(queryDto);
     }
 }

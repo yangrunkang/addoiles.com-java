@@ -26,9 +26,24 @@ public class QueryDto {
     /**
      * 业务id
      * 除表id外的实体id,比如User表中的userId,Article表的articleId
+     *
      * @return
      */
     private String businessId;
+
+    /*微内容业务********************************/
+    /**
+     * 微内容类型 0-热门动弹 1-梦想
+     */
+    private Integer microType;
+
+
+    /*文章业务********************************/
+    /**
+     * 文章类型 0-经历分享 1-软件评测 2-技术沉淀
+     */
+    private Integer articleType;
+
 
     public Page getPage() {
         return page;
@@ -52,5 +67,21 @@ public class QueryDto {
 
     public void setBusinessId(String businessId) {
         this.businessId = businessId;
+    }
+
+    public Integer getMicroType() {
+        return microType;
+    }
+
+    public void setMicroType(Integer microType) {
+        this.microType = microType;
+    }
+
+    public Integer getArticleType() {
+        return articleType;
+    }
+
+    public void setArticleType(Integer articleType) {
+        this.articleType = articleType;
     }
 }
