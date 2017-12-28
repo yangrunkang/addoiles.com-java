@@ -55,3 +55,6 @@ fields terminated by ',' optionally enclosed by '"' lines terminated by '\n'
 -- 删除dreams表
 drop table dreams;
 -- -----------------------------------------数据迁移End-------------------------------------------------------------
+
+-- 删除 article表 sub_title字段
+alter table article drop column sub_title;
