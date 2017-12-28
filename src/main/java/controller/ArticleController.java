@@ -119,6 +119,12 @@ public class ArticleController extends BaseController {
         return articleService.getSimpleList(queryDto);
     }
 
+    @RequestMapping(value = "getArticleByBusinessId",method = RequestMethod.POST)
+    @ResponseBody
+    public Object getArticleByBusinessId(@RequestBody QueryDto queryDto) {
+        return articleService.getByBusinessId(queryDto.getBusinessId());
+    }
+
 
 
     /**
@@ -157,13 +163,6 @@ public class ArticleController extends BaseController {
             count = CONTENT_TOO_LONG;
         }
         return count;
-    }
-
-
-    @RequestMapping("getArticlesByUserId")
-    @ResponseBody
-    public Object getArticlesByUserId(QueryDto queryDto) {
-        return articleService.getList(queryDto);
     }
 
     @RequestMapping(value = "deleteByArticleId", method = RequestMethod.GET)
