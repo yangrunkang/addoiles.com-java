@@ -25,13 +25,6 @@ public class Article {
      */
     private String title;
 
-
-    /**
-     * 副标题
-     */
-    private String subTitle;
-
-
     /**
      * 文章内容
      */
@@ -188,15 +181,6 @@ public class Article {
     public void setContent(String content) {
         this.content = content;
     }
-
-    public String getSubTitle() {
-        return subTitle;
-    }
-
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
-    }
-
 
     public Integer getUpdateTime() {
         return updateTime;

@@ -33,7 +33,9 @@ public class ArticleServiceImpl implements ArticleService {
     public Integer insert(Article article) {
         //articleType从前端传过来
         article.setArticleId(OilUtils.generateID());
-        article.setDeleteStatus(0);
+//        article.setDeleteStatus(0);
+        article.setRates(0);
+        article.setRateCount(0);
         article.setCreateTime(TimeUtil.currentTime());
         return articleMapper.insert(article);
     }
@@ -50,7 +52,6 @@ public class ArticleServiceImpl implements ArticleService {
         Article tmp = new Article();
         tmp.setArticleId(article.getArticleId());
         tmp.setTitle(article.getTitle());
-        tmp.setSubTitle(article.getSubTitle());
         tmp.setContent(article.getContent());
         tmp.setUpdateTime(TimeUtil.currentTime());
         return articleMapper.update(tmp);

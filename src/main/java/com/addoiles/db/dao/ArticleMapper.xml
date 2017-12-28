@@ -7,7 +7,6 @@
         <result column="user_id" jdbcType="VARCHAR" property="userId"/>
         <result column="article_type" jdbcType="INTEGER" property="articleType"/>
         <result column="title" jdbcType="VARCHAR" property="title"/>
-        <result column="sub_title" jdbcType="VARCHAR" property="subTitle"/>
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
         <result column="rates" jdbcType="INTEGER" property="rates"/>
         <result column="rate_count" jdbcType="INTEGER" property="rateCount"/>
@@ -17,7 +16,7 @@
     </resultMap>
 
     <sql id="BaseColumn">
-    id, article_id,user_id, article_type, title,sub_title,content,rates, rate_count,delete_status, create_time,update_time
+    id, article_id,user_id, article_type, title,content,rates, rate_count,delete_status, create_time,update_time
   </sql>
 
     <delete id="delete" parameterType="java.lang.String">
@@ -26,9 +25,9 @@
   </delete>
     <insert id="insert" parameterType="com.addoiles.entity.Article">
     insert into article (id, article_id,user_id, article_type,
-      title,sub_title,content,rates, rate_count, delete_status, create_time,update_time)
+      title,content,rates, rate_count, delete_status, create_time,update_time)
     values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=VARCHAR},#{userId,jdbcType=VARCHAR}, #{articleType,jdbcType=INTEGER},
-      #{title,jdbcType=VARCHAR},#{subTitle,jdbcType=VARCHAR},#{content,jdbcType=LONGVARCHAR},#{rates,jdbcType=INTEGER}, #{rateCount,jdbcType=INTEGER},
+      #{title,jdbcType=VARCHAR},#{content,jdbcType=LONGVARCHAR},#{rates,jdbcType=INTEGER}, #{rateCount,jdbcType=INTEGER},
        #{deleteStatus,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER},#{updateTime,jdbcType=INTEGER}
       )
   </insert>
@@ -42,9 +41,6 @@
             <if test="title != null">
                 title = #{title,jdbcType=VARCHAR},
             </if>
-            <if test="subTitle != null">
-                sub_title = #{subTitle,jdbcType=VARCHAR},
-            </if>
             <if test="content != null">
                 content = #{content,jdbcType=VARCHAR},
             </if>
@@ -53,6 +49,9 @@
             </if>
             <if test="rateCount != null">
                 rate_count = #{rateCount,jdbcType=INTEGER},
+            </if>
+            <if test="deleteStatus != null">
+                delete_status = #{deleteStatus,jdbcType=INTEGER},
             </if>
             <if test="updateTime != null">
                 update_time = #{updateTime,jdbcType=INTEGER},
@@ -82,9 +81,9 @@
 
     <select id="getSimpleList" resultMap="BaseResultMap">
         select
-        article_id, title,sub_title,create_time
+        article_id, title,create_time,delete_status
         from article
-        where delete_status = 0
+        where delete_status != 1
         and article_type = #{queryDto.articleType,jdbcType=INTEGER}
         <if test="queryDto.userId != null">
             and user_id = #{queryDto.userId,jdbcType=VARCHAR}
