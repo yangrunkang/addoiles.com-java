@@ -73,7 +73,7 @@
         select
         <include refid="BaseColumn"/>
         from article
-        where delete_status = 0
+        where delete_status != 1
         and article_type = #{queryDto.articleType,jdbcType=INTEGER}
         order by create_time desc
         limit #{queryDto.page.pageNo},#{queryDto.page.pageSize}

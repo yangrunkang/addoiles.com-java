@@ -125,7 +125,7 @@
     select
     <include refid="Base_Column_List" />
     from micro_content
-    where 1 = 1
+    where and delete_status != 1
     <if test="queryDto != null">
 
         <if test="queryDto.userId != null">

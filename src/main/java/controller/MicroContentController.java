@@ -40,10 +40,10 @@ public class MicroContentController extends BaseController {
     }
 
 
-    @RequestMapping(value = "delMicroContent",method = RequestMethod.POST)
+    @RequestMapping(value = "deleteMicroContent",method = RequestMethod.POST)
     @ResponseBody
-    public Object delMicroContent(String microContentId) {
-        return microContentService.delete(microContentId);
+    public Object delete(@RequestBody QueryDto queryDto) {
+        return microContentService.delete(queryDto.getBusinessId());
     }
 
 
