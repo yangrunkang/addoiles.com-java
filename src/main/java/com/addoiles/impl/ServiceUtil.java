@@ -21,7 +21,7 @@ public class ServiceUtil {
         });
     }
 
-    public static void HandleExperienceUserIdToUserName(List<Article> articleList, List<User> userList) {
+    public static void HandleArticleUserIdToUserName(List<Article> articleList, List<User> userList) {
         articleList.forEach(article -> {
             userList.forEach(user -> {
                 if (article.getUserId().equals(user.getUserId())) {

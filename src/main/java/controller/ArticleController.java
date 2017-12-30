@@ -21,6 +21,7 @@ import service.CommentService;
 import service.UserService;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -49,6 +50,7 @@ public class ArticleController extends BaseController {
     public Object getExperienceList(@RequestBody QueryDto queryDto) {
         List<ExperienceDto> articleDtoList = new ArrayList<>();
 
+        //use redis
         List<User> usersOfIdNameList = userService.getUsersOfIdNameList();
         List<Article> articleList = articleService.getList(queryDto);
 
@@ -58,7 +60,7 @@ public class ArticleController extends BaseController {
             return articleDtoList;
         } else {
             //处理userId转userName
-            ServiceUtil.HandleExperienceUserIdToUserName(articleList, usersOfIdNameList);
+            ServiceUtil.HandleArticleUserIdToUserName(articleList, usersOfIdNameList);
             articleList.forEach(article -> {
                 List<Comment> commentList = commentService.getCommentListByTargetId(article.getArticleId());
                 if (!CollectionUtils.isEmpty(commentList)) {
@@ -102,7 +104,7 @@ public class ArticleController extends BaseController {
 
         Article article;
         String businessId = queryDto.getBusinessId();
-        //显示指定articleId对应的文章
+
         if (Objects.nonNull(businessId)) {
             article = articleService.getByBusinessId(businessId);
         } else {
@@ -113,9 +115,12 @@ public class ArticleController extends BaseController {
         if (CollectionUtils.isEmpty(articleCommentList)) {
             articleCommentList = new ArrayList<>();
         }
-        //处理userId转userName
+        //显示指定articleId对应的文章
         List<User> usersOfIdNameList = userService.getUsersOfIdNameList();
+        //处理评论 userId转userName
         ServiceUtil.HandleCommentUserIdToUserName(articleCommentList, usersOfIdNameList);
+        //处理文章 userId转userName
+        ServiceUtil.HandleArticleUserIdToUserName(Arrays.asList(article), usersOfIdNameList);
 
         itTechDto.setPithinessList(pithinessArticleList);
         itTechDto.setArticle(article);
@@ -131,6 +136,13 @@ public class ArticleController extends BaseController {
         return articleService.getSimpleList(queryDto);
     }
 
+
+    /**
+     * 根据businessId获取文章
+     * @apiNote 编辑器使用
+     * @param queryDto
+     * @return
+     */
     @RequestMapping(value = "getArticleByBusinessId",method = RequestMethod.POST)
     @ResponseBody
     public Object getArticleByBusinessId(@RequestBody QueryDto queryDto) {
