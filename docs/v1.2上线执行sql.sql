@@ -60,4 +60,4 @@ drop table dreams;
 alter table `article` drop column `sub_title`;
 
 -- 文章是否隐藏
-alter table `article` add `isHide` int(1) DEFAULT 0 COMMENT '是否隐藏 0-公开 1-隐藏' AFTER `rate_count`;
+alter table `article` add `is_hide` int(1) DEFAULT 0 COMMENT '是否隐藏 0-公开 1-隐藏' AFTER `rate_count`;
