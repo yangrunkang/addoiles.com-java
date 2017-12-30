@@ -10,13 +10,14 @@
         <result column="content" jdbcType="LONGVARCHAR" property="content"/>
         <result column="rates" jdbcType="INTEGER" property="rates"/>
         <result column="rate_count" jdbcType="INTEGER" property="rateCount"/>
+        <result column="is_hide" jdbcType="INTEGER" property="isHide"/>
         <result column="delete_status" jdbcType="INTEGER" property="deleteStatus"/>
         <result column="create_time" jdbcType="INTEGER" property="createTime"/>
         <result column="update_time" jdbcType="INTEGER" property="updateTime"/>
     </resultMap>
 
     <sql id="BaseColumn">
-    id, article_id,user_id, article_type, title,content,rates, rate_count,delete_status, create_time,update_time
+    id, article_id,user_id, article_type, title,content,rates, rate_count,is_hide,delete_status, create_time,update_time
   </sql>
 
     <delete id="delete" parameterType="java.lang.String">
@@ -25,10 +26,10 @@
   </delete>
     <insert id="insert" parameterType="com.addoiles.entity.Article">
     insert into article (id, article_id,user_id, article_type,
-      title,content,rates, rate_count, delete_status, create_time,update_time)
+      title,content,rates, rate_count,is_hide, delete_status, create_time,update_time)
     values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=VARCHAR},#{userId,jdbcType=VARCHAR}, #{articleType,jdbcType=INTEGER},
       #{title,jdbcType=VARCHAR},#{content,jdbcType=LONGVARCHAR},#{rates,jdbcType=INTEGER}, #{rateCount,jdbcType=INTEGER},
-       #{deleteStatus,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER},#{updateTime,jdbcType=INTEGER}
+      #{isHide,jdbcType=INTEGER},#{deleteStatus,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER},#{updateTime,jdbcType=INTEGER}
       )
   </insert>
 
@@ -49,6 +50,9 @@
             </if>
             <if test="rateCount != null">
                 rate_count = #{rateCount,jdbcType=INTEGER},
+            </if>
+            <if test="isHide != null">
+                is_hide = #{isHide,jdbcType=INTEGER},
             </if>
             <if test="deleteStatus != null">
                 delete_status = #{deleteStatus,jdbcType=INTEGER},
@@ -75,6 +79,7 @@
         from article
         <!-- 正文(包含内容) 只显示正常的 -->
         where delete_status != 1 and delete_status != 2
+        and is_hide = 0
         and article_type = #{queryDto.articleType,jdbcType=INTEGER}
         order by create_time desc
         limit #{queryDto.page.pageNo},#{queryDto.page.pageSize}
@@ -82,7 +87,7 @@
 
     <select id="getSimpleList" resultMap="BaseResultMap">
         select
-        article_id, title,create_time,delete_status
+        article_id,title,is_hide,delete_status,create_time
         from article
         <!-- 简化(不包含内容) 除了删除的都显示 -->
         where delete_status != 1

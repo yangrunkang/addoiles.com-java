@@ -54,7 +54,8 @@ public class ArticleController extends BaseController {
 
 
         if (CollectionUtils.isEmpty(articleList)) {
-            return articleDtoList; //在页面上显示空
+            //在页面上显示空
+            return articleDtoList;
         } else {
             //处理userId转userName
             ServiceUtil.HandleExperienceUserIdToUserName(articleList, usersOfIdNameList);

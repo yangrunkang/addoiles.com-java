@@ -13,7 +13,12 @@ import javax.annotation.Resource;
 import java.util.List;
 
 /**
- * Created by bla on 9/24/2017.
+ *
+ * <p>All rights Reserved, Designed By HQYG.</p>
+ * @Copyright    Copyright(C) 2017.
+ * @Company      HQYG.
+ * @author       Yangrunkang
+ * @CreateDate   9/24/2017 15:17
  */
 @Service
 public class ArticleServiceImpl implements ArticleService {
@@ -31,9 +36,7 @@ public class ArticleServiceImpl implements ArticleService {
     @OilLog
     @Override
     public Integer insert(Article article) {
-        //articleType从前端传过来
         article.setArticleId(OilUtils.generateID());
-//        article.setDeleteStatus(0);
         article.setRates(0);
         article.setRateCount(0);
         article.setCreateTime(TimeUtil.currentTime());
@@ -49,15 +52,8 @@ public class ArticleServiceImpl implements ArticleService {
     @OilLog
     @Override
     public Integer update(Article article) {
-        Article tmp = new Article();
-        tmp.setArticleId(article.getArticleId());
-        tmp.setTitle(article.getTitle());
-        tmp.setContent(article.getContent());
-        tmp.setRates(article.getRates());
-        tmp.setRateCount(article.getRateCount());
-        tmp.setDeleteStatus(article.getDeleteStatus());
-        tmp.setUpdateTime(TimeUtil.currentTime());
-        return articleMapper.update(tmp);
+        article.setUpdateTime(TimeUtil.currentTime());
+        return articleMapper.update(article);
     }
 
 

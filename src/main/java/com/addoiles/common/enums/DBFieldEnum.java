@@ -43,6 +43,32 @@ public class DBFieldEnum {
         }
     }
 
+    /**
+     * 文章是否隐藏状态枚举
+     */
+    public enum ArticleIsHide {
+
+        /**
+         * 公开
+         */
+        NOT_HIDE(0),
+
+        /**
+         * 隐藏
+         */
+        HIDE(1),
+        ;
+
+        private final int value;
+
+        ArticleIsHide(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
 
     /**
      * 文章删除状态枚举

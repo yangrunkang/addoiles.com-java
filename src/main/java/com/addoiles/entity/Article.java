@@ -40,6 +40,10 @@ public class Article {
      */
     private Integer rateCount;
 
+    /**
+     * 文章是否隐藏 0-公开 1-隐藏
+     */
+    private Integer isHide;
 
     /**
      * 删除状态 0-正常 1-删除 2-草稿
@@ -212,5 +216,13 @@ public class Article {
 
     public void setRateCount(Integer rateCount) {
         this.rateCount = rateCount;
+    }
+
+    public Integer getIsHide() {
+        return isHide;
+    }
+
+    public void setIsHide(Integer isHide) {
+        this.isHide = isHide;
     }
 }
