@@ -25,7 +25,7 @@ public class ServiceUtil {
         articleList.forEach(article -> {
             userList.forEach(user -> {
                 if (article.getUserId().equals(user.getUserId())) {
-//                    experience.setUserName(user.getName());
+                    article.setUserName(user.getName());
                 }
             });
         });

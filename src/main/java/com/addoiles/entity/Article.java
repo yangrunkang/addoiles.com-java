@@ -60,6 +60,10 @@ public class Article {
      */
     private Integer updateTime;
 
+
+    /********非表字段***********/
+    private String userName;
+
     /**
      * article.id
      *
@@ -224,5 +228,13 @@ public class Article {
 
     public void setIsHide(Integer isHide) {
         this.isHide = isHide;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }
