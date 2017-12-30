@@ -5,6 +5,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Description:
@@ -37,4 +38,8 @@ public class RedisServiceImpl implements RedisService {
         stringRedisTemplate.opsForValue().set(key,value);
     }
 
+    @Override
+    public void setTTL(String key, String value, Integer timeLong) {
+        stringRedisTemplate.opsForValue().set(key,value,timeLong, TimeUnit.SECONDS);
+    }
 }

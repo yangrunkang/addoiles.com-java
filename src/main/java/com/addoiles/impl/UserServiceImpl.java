@@ -3,7 +3,6 @@ package com.addoiles.impl;
 import com.addoiles.common.ErrorCode;
 import com.addoiles.common.annotations.OilLog;
 import com.addoiles.common.enums.AddoilesConstant;
-import com.addoiles.db.cache.CacheManager;
 import com.addoiles.db.dao.UserMapper;
 import com.addoiles.dto.query.QueryDto;
 import com.addoiles.dto.req.LoginReq;
@@ -22,10 +21,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import service.OilRedisService;
 import service.UserService;
 
 import javax.annotation.Resource;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -41,6 +40,9 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private EmailService emailService;
+
+    @Resource
+    private OilRedisService oilRedisService;
 
     @OilLog
     @Override
@@ -64,20 +66,21 @@ public class UserServiceImpl implements UserService {
         user.setPassword(OilUtils.encrypt(registerReq.getPassword()));
         user.setDeleteStatus(0);
         user.setCreateTime(TimeUtil.currentTime());
-        return this.insert(user);
+
+        Integer insert = this.insert(user);
+
+        if(insert > 0){
+            oilRedisService.getUsersIdsNames(true);
+            logger.info("already reload data to redis");
+        }
+
+        return insert;
     }
 
     @Override
     public Integer checkHasRegister(String email) {
         return userMapper.checkHasRegister(email);
     }
-
-    @Override
-    public List<User> getUsersOfIdNameList() {
-        List<User> userIdNames = userMapper.getUsersOfIdNameList();
-        return CollectionUtils.isEmpty(userIdNames) ? new ArrayList<>() : userIdNames;
-    }
-
 
     @Override
     public Integer sendVerificationCode(VerificationCodeReq verificationCodeReq) {
@@ -105,8 +108,9 @@ public class UserServiceImpl implements UserService {
             throw ErrorCode.PARAMETER_ERROR.getException();
         }
 
-        //放入缓存
-        CacheManager.getInstance().setString(verificationCodeReq.getEmail(), verificationCode, 60);
+        //放入Redis
+        oilRedisService.cacheUserVerifyCode(verificationCodeReq.getEmail(), verificationCode);
+
 
         Receiver receiver = new Receiver();
         receiver.setEmailAddress(verificationCodeReq.getEmail());

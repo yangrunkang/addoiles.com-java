@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.CommentService;
+import service.OilRedisService;
 import service.QuestionService;
 import service.UserService;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +37,9 @@ public class QuestionController extends BaseController {
     @Autowired
     private UserService userService;
 
+    @Resource
+    private OilRedisService oilRedisService;
+
     @RequestMapping(value = "getQuestionAnswerList",method = RequestMethod.POST)
     @ResponseBody
     public Object getQuestionAnswerList(@RequestBody QueryDto queryDto) {
@@ -42,7 +47,7 @@ public class QuestionController extends BaseController {
 
         List<Question> questionList = questionService.getList(queryDto);
 
-        List<User> usersOfIdNameList = userService.getUsersOfIdNameList();
+        List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
 
         questionList.forEach(question -> {
             List<Comment> commentList = commentService.getCommentListByTargetId(question.getQuestionId());

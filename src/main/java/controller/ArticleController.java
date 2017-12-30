@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.ArticleService;
 import service.CommentService;
+import service.OilRedisService;
 import service.UserService;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -44,6 +46,9 @@ public class ArticleController extends BaseController {
     @Autowired
     private UserService userService;
 
+    @Resource
+    private OilRedisService oilRedisService;
+
 
     @RequestMapping(value = "getExperienceList", method = RequestMethod.POST)
     @ResponseBody
@@ -51,7 +56,7 @@ public class ArticleController extends BaseController {
         List<ExperienceDto> articleDtoList = new ArrayList<>();
 
         //use redis
-        List<User> usersOfIdNameList = userService.getUsersOfIdNameList();
+        List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
         List<Article> articleList = articleService.getList(queryDto);
 
 
@@ -116,7 +121,7 @@ public class ArticleController extends BaseController {
             articleCommentList = new ArrayList<>();
         }
         //显示指定articleId对应的文章
-        List<User> usersOfIdNameList = userService.getUsersOfIdNameList();
+        List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
         //处理评论 userId转userName
         ServiceUtil.HandleCommentUserIdToUserName(articleCommentList, usersOfIdNameList);
         //处理文章 userId转userName

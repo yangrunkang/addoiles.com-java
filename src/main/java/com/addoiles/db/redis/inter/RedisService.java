@@ -12,10 +12,32 @@ package com.addoiles.db.redis.inter;
 
 public interface RedisService {
 
+    /**
+     * 根据key删除
+     * @param key
+     */
     void delete(String key);
 
+    /**
+     * 根据key获取
+     * @param key
+     * @return
+     */
     String get(String key);
 
+    /**
+     * 设置值
+     * @param key
+     * @param value
+     */
     void set(String key,String value);
+
+    /**
+     * 设置值 - 有效期
+     * @param key
+     * @param value
+     * @param timeLong
+     */
+    void setTTL(String key,String value,Integer timeLong);
 
 }

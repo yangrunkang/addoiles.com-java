@@ -7,8 +7,6 @@ import com.addoiles.dto.req.ResetPasswordReq;
 import com.addoiles.dto.req.VerificationCodeReq;
 import com.addoiles.entity.User;
 
-import java.util.List;
-
 /**
  * Created by bla on 9/24/2017.
  */
@@ -38,20 +36,18 @@ public interface UserService extends BaseService<User> {
     Integer checkHasRegister(String email);
 
     /**
-     * 获取用户id和Name
-     *
-     * @return
-     */
-    List<User> getUsersOfIdNameList();
-
-    /**
      * 发送验证码到邮箱
      *
-     * @param verificationCodeReq
+     * @param verificationCodeReq req
      * @return
      */
     Integer sendVerificationCode(VerificationCodeReq verificationCodeReq);
 
+    /**
+     * 重设密码
+     * @param resetPasswordReq req
+     * @return
+     */
     Integer resetPassword(ResetPasswordReq resetPasswordReq);
 
 

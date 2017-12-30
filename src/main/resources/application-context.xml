@@ -24,7 +24,7 @@
 
     <import resource="application-datasource.xml"/>
     <import resource="application-email.xml"/>
-    <!--<import resource="application-redis.xml"/>-->
+    <import resource="application-redis.xml"/>
 
     <bean id="propertyConfigurer" class="com.addoiles.util.PropertyUtils">
         <property name="locations">
@@ -34,8 +34,8 @@
         </property>
     </bean>
 
-    <!--配置缓存-->
-    <bean class="com.addoiles.db.cache.CacheManager" init-method="clearTask"/>
+    <!--配置缓存 不用-->
+    <!--<bean class="com.addoiles.db.cache.CacheManager" init-method="clearTask"/>-->
 
 
     <bean class="com.addoiles.util.SpringContextUtils"/>
