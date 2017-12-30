@@ -167,8 +167,8 @@ public class ArticleController extends BaseController {
 
     @RequestMapping(value = "deleteArticle", method = RequestMethod.POST)
     @ResponseBody
-    public Object delete(String articleId) {
-        return articleService.delete(articleId);
+    public Object delete(@RequestBody QueryDto queryDto) {
+        return articleService.delete(queryDto.getBusinessId());
     }
 
     @RequestMapping(value = "getArticlesByArticleId", method = RequestMethod.GET)

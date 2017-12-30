@@ -82,8 +82,8 @@ public class QuestionController extends BaseController {
 
     @RequestMapping(value = "deleteByQuestionId", method = RequestMethod.POST)
     @ResponseBody
-    public Object deleteByQuestionId(String questionId) {
-        return questionService.delete(questionId);
+    public Object deleteByQuestionId(@RequestBody QueryDto queryDto) {
+        return questionService.delete(queryDto.getBusinessId());
     }
 
 }
