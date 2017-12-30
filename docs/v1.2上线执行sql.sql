@@ -57,4 +57,4 @@ drop table dreams;
 -- -----------------------------------------数据迁移End-------------------------------------------------------------
 
 -- 删除 article表 sub_title字段
-alter table article drop column sub_title;
+alter table `article` drop column `sub_title`;
