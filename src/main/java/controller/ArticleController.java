@@ -98,12 +98,7 @@ public class ArticleController extends BaseController {
             return  itTechDto;
         }
 
-        pithinessArticleList = pithinessArticleList.stream()
-                //过滤掉非草稿
-                .filter(article -> article.getDeleteStatus() != DBFieldEnum.ArticleDeleteStatus.DRAFT.getValue())
-                //过滤掉非隐藏的
-                .filter(article -> article.getIsHide() != DBFieldEnum.ArticleIsHide.HIDE.getValue())
-                .collect(Collectors.toList());
+        pithinessArticleList =doFilterITTechList(pithinessArticleList);
 
         Article article;
         String businessId = queryDto.getBusinessId();
@@ -152,7 +147,8 @@ public class ArticleController extends BaseController {
     @RequestMapping("showMoreITTechArticles")
     @ResponseBody
     public Object showMoreITTechArticles(@RequestBody QueryDto queryDto) {
-        return articleService.getSimpleList(queryDto);
+        List<Article> simpleList = articleService.getSimpleList(queryDto);
+        return doFilterITTechList(simpleList);
     }
 
 
@@ -202,4 +198,15 @@ public class ArticleController extends BaseController {
         tmp.setRates(ratesDto.getRate());
         return articleService.update(tmp);
     }
+
+    private List<Article> doFilterITTechList(List<Article> simpleList){
+        simpleList = simpleList.stream()
+                //过滤掉非草稿
+                .filter(article -> article.getDeleteStatus() != DBFieldEnum.ArticleDeleteStatus.DRAFT.getValue())
+                //过滤掉非隐藏的
+                .filter(article -> article.getIsHide() != DBFieldEnum.ArticleIsHide.HIDE.getValue())
+                .collect(Collectors.toList());
+        return simpleList;
+    }
+
 }
