@@ -98,16 +98,20 @@ public class ArticleController extends BaseController {
             return  itTechDto;
         }
 
-        //过滤掉草稿
-        pithinessArticleList = pithinessArticleList.stream().filter(article -> article.getDeleteStatus() != DBFieldEnum
-                .ArticleDeleteStatus
-                .DRAFT.getValue()).collect(Collectors.toList());
+        pithinessArticleList = pithinessArticleList.stream()
+                //过滤掉非草稿
+                .filter(article -> article.getDeleteStatus() != DBFieldEnum.ArticleDeleteStatus.DRAFT.getValue())
+                //过滤掉非隐藏的
+                .filter(article -> article.getIsHide() != DBFieldEnum.ArticleIsHide.HIDE.getValue())
+                .collect(Collectors.toList());
 
         Article article;
         String businessId = queryDto.getBusinessId();
-        if (Objects.nonNull(businessId)) { //显示指定articleId对应的文章
+        //显示指定articleId对应的文章
+        if (Objects.nonNull(businessId)) {
             article = articleService.getByBusinessId(businessId);
-        } else { //显示默认第一篇文章
+        } else {
+            //显示默认第一篇文章
             article = articleService.getByBusinessId(pithinessArticleList.get(0).getArticleId());
         }
         List<Comment> articleCommentList = commentService.getCommentListByTargetId(article.getArticleId());
