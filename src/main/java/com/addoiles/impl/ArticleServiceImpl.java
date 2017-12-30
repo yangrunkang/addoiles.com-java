@@ -53,6 +53,8 @@ public class ArticleServiceImpl implements ArticleService {
         tmp.setArticleId(article.getArticleId());
         tmp.setTitle(article.getTitle());
         tmp.setContent(article.getContent());
+        tmp.setRates(article.getRates());
+        tmp.setRateCount(article.getRateCount());
         tmp.setDeleteStatus(article.getDeleteStatus());
         tmp.setUpdateTime(TimeUtil.currentTime());
         return articleMapper.update(tmp);

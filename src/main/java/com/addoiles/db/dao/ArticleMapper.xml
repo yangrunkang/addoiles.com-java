@@ -73,7 +73,8 @@
         select
         <include refid="BaseColumn"/>
         from article
-        where delete_status != 1
+        <!-- 正文(包含内容) 只显示正常的 -->
+        where delete_status != 1 and delete_status != 2
         and article_type = #{queryDto.articleType,jdbcType=INTEGER}
         order by create_time desc
         limit #{queryDto.page.pageNo},#{queryDto.page.pageSize}
@@ -83,6 +84,7 @@
         select
         article_id, title,create_time,delete_status
         from article
+        <!-- 简化(不包含内容) 除了删除的都显示 -->
         where delete_status != 1
         and article_type = #{queryDto.articleType,jdbcType=INTEGER}
         <if test="queryDto.userId != null">

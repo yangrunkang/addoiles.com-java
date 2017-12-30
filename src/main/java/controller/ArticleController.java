@@ -1,6 +1,8 @@
 package controller;
 
+import com.addoiles.common.enums.DBFieldEnum;
 import com.addoiles.dto.query.QueryDto;
+import com.addoiles.dto.req.RatesDto;
 import com.addoiles.dto.resp.ExperienceDto;
 import com.addoiles.dto.view.ITTechDto;
 import com.addoiles.entity.Article;
@@ -21,6 +23,7 @@ import service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import static com.addoiles.common.enums.OilConstant.CONTENT_TOO_LONG;
 
@@ -89,26 +92,35 @@ public class ArticleController extends BaseController {
     public Object getITArticleList(@RequestBody QueryDto queryDto) {
         ITTechDto itTechDto = new ITTechDto();
         List<Article> pithinessArticleList = articleService.getSimpleList(queryDto);
-        if (!CollectionUtils.isEmpty(pithinessArticleList)) {
-            Article article;
-            String businessId = queryDto.getBusinessId();
-            if (Objects.nonNull(businessId)) { //显示指定articleId对应的文章
-                article = articleService.getByBusinessId(businessId);
-            } else { //显示默认第一篇文章
-                article = articleService.getByBusinessId(pithinessArticleList.get(0).getArticleId());
-            }
-            List<Comment> articleCommentList = commentService.getCommentListByTargetId(article.getArticleId());
-            if (CollectionUtils.isEmpty(articleCommentList)) {
-                articleCommentList = new ArrayList<>();
-            }
-            //处理userId转userName
-            List<User> usersOfIdNameList = userService.getUsersOfIdNameList();
-            ServiceUtil.HandleCommentUserIdToUserName(articleCommentList, usersOfIdNameList);
 
-            itTechDto.setPithinessList(pithinessArticleList);
-            itTechDto.setArticle(article);
-            itTechDto.setArticleCommentList(articleCommentList);
+        if(CollectionUtils.isEmpty(pithinessArticleList)){
+            return  itTechDto;
         }
+
+        //过滤掉草稿
+        pithinessArticleList = pithinessArticleList.stream().filter(article -> article.getDeleteStatus() != DBFieldEnum
+                .ArticleDeleteStatus
+                .DRAFT.getValue()).collect(Collectors.toList());
+
+        Article article;
+        String businessId = queryDto.getBusinessId();
+        if (Objects.nonNull(businessId)) { //显示指定articleId对应的文章
+            article = articleService.getByBusinessId(businessId);
+        } else { //显示默认第一篇文章
+            article = articleService.getByBusinessId(pithinessArticleList.get(0).getArticleId());
+        }
+        List<Comment> articleCommentList = commentService.getCommentListByTargetId(article.getArticleId());
+        if (CollectionUtils.isEmpty(articleCommentList)) {
+            articleCommentList = new ArrayList<>();
+        }
+        //处理userId转userName
+        List<User> usersOfIdNameList = userService.getUsersOfIdNameList();
+        ServiceUtil.HandleCommentUserIdToUserName(articleCommentList, usersOfIdNameList);
+
+        itTechDto.setPithinessList(pithinessArticleList);
+        itTechDto.setArticle(article);
+        itTechDto.setArticleCommentList(articleCommentList);
+
         return itTechDto;
     }
 
@@ -177,5 +189,12 @@ public class ArticleController extends BaseController {
         return articleService.getByBusinessId(articleId);
     }
 
-
+    @RequestMapping(value = "updateRates", method = RequestMethod.POST)
+    @ResponseBody
+    public Object updateRates(@RequestBody RatesDto ratesDto) {
+        Article tmp = new Article();
+        tmp.setArticleId(ratesDto.getBusinessId());
+        tmp.setRates(ratesDto.getRate());
+        return articleService.update(tmp);
+    }
 }
