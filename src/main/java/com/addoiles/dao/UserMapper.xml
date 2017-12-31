@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.addoiles.dao.UserMapper">
+  <resultMap id="BaseResultMap" type="com.addoiles.entity.User">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="name" jdbcType="VARCHAR" property="name" />
+    <result column="password" jdbcType="VARCHAR" property="password" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
+    <result column="create_time" jdbcType="INTEGER" property="createTime" />
+  </resultMap>
+
+  <sql id="BaseColumn">
+    id, user_id, name, password, email, delete_status, create_time
+  </sql>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+
+  <insert id="insert" parameterType="com.addoiles.entity.User">
+    insert into user (id, user_id, name,
+      password, email, delete_status, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, 
+      #{password,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=INTEGER})
+  </insert>
+
+  <update id="updateByUserId" parameterType="com.addoiles.entity.User">
+    update user
+    set
+      name = #{name,jdbcType=VARCHAR},
+      password = #{password,jdbcType=VARCHAR},
+      email = #{email,jdbcType=VARCHAR},
+      delete_status = #{deleteStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=INTEGER}
+    where user_id = #{userId,jdbcType=INTEGER}
+  </update>
+
+  <select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select id, user_id, name, password, email, delete_status, create_time
+    from user
+    where user_id = #{userId,jdbcType=VARCHAR} and delete_status = 0
+  </select>
+
+  <select id="countByEmail" resultMap="BaseResultMap">
+    select
+    <include refid="BaseColumn" />
+    from user
+    where delete_status = 0
+    and email = #{email,jdbcType=VARCHAR} and password = #{password,jdbcType=VARCHAR}
+  </select>
+
+  <select id="checkHasRegister" resultType="java.lang.Integer">
+    select
+    count(*)
+    from user
+    where email = #{email,jdbcType=VARCHAR}
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="BaseColumn" />
+    from user
+    where delete_status = 0
+  </select>
+
+
+  <select id="getUsersOfIdNameList" resultMap="BaseResultMap">
+    select
+    DISTINCT user_id,name
+    from user
+    where delete_status = 0
+  </select>
+
+</mapper>

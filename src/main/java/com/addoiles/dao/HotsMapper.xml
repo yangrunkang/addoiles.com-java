@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.addoiles.dao.HotsMapper">
+  <resultMap id="BaseResultMap" type="com.addoiles.entity.Hots">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="hot_id" jdbcType="VARCHAR" property="hotId" />
+    <result column="user_id" jdbcType="VARCHAR" property="userId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
+    <result column="create_time" jdbcType="INTEGER" property="createTime" />
+  </resultMap>
+  <sql id="BaseColumn">
+    id, hot_id, user_id, title, content, delete_status, create_time
+  </sql>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from hots
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.addoiles.entity.Hots">
+    insert into hots (id, hot_id, user_id,
+      title, content, delete_status, 
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{hotId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR}, 
+      #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=INTEGER}, 
+      #{createTime,jdbcType=INTEGER})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.addoiles.entity.Hots">
+    update hots
+    set hot_id = #{hotId,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=VARCHAR},
+      title = #{title,jdbcType=VARCHAR},
+      content = #{content,jdbcType=VARCHAR},
+      delete_status = #{deleteStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id, hot_id, user_id, title, content, delete_status, create_time
+    from hots
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="BaseColumn" />
+    from hots
+    where delete_status = 0
+    order by create_time DESC
+    limit #{page.pageNo},#{page.pageSize}
+  </select>
+</mapper>
