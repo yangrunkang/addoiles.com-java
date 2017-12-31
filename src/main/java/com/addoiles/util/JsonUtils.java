@@ -10,7 +10,8 @@ import static com.alibaba.fastjson.serializer.SerializerFeature.*;
 
 public class JsonUtils {
 
-    private JsonUtils(){}
+    private JsonUtils() {
+    }
 
     public static String toJson(Object object) {
         return JSON.toJSONString(object,

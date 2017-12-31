@@ -1,7 +1,7 @@
 package com.addoiles.impl;
 
 import com.addoiles.common.Page;
-import com.addoiles.dao.ExperienceMapper;
+import com.addoiles.db.dao.ExperienceMapper;
 import com.addoiles.entity.Experience;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
@@ -38,7 +38,7 @@ public class ExperienceServiceImpl implements ExperienceService {
     public Integer updateRates(String experienceId, Integer rate) {
         Experience experience = experienceMapper.selectByExperienceId(experienceId);
 
-        if(experience == null) return -1;
+        if (experience == null) return -1;
 
         Integer rates = experience.getRates();
         Integer rateCount = experience.getRateCount();
@@ -49,5 +49,30 @@ public class ExperienceServiceImpl implements ExperienceService {
         experience.setRates(rates);
         experience.setRateCount(rateCount);
         return experienceMapper.updateByExperienceId(experience);
+    }
+
+    @Override
+    public Integer updateExperience(Experience experience) {
+        Experience tmp = new Experience();
+        tmp.setTitle(experience.getTitle());
+        tmp.setContent(experience.getContent());
+        tmp.setExperienceId(experience.getExperienceId());
+        tmp.setUpdateTime(TimeUtil.currentTime());
+        return experienceMapper.updateSelectiveByExperienceId(tmp);
+    }
+
+    @Override
+    public List<Experience> getExperienceByUserId(String userId) {
+        return experienceMapper.selectByUserId(userId);
+    }
+
+    @Override
+    public Integer deleteByExperienceId(String experienceId) {
+        return experienceMapper.deleteByExperienceId(experienceId);
+    }
+
+    @Override
+    public Experience getExperienceByExperienceId(String experienceId) {
+        return experienceMapper.selectByExperienceId(experienceId);
     }
 }

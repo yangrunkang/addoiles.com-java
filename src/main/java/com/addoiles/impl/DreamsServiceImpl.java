@@ -1,11 +1,10 @@
 package com.addoiles.impl;
 
 import com.addoiles.common.Page;
-import com.addoiles.dao.DreamsMapper;
+import com.addoiles.db.dao.DreamsMapper;
 import com.addoiles.entity.Dreams;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
-import org.springframework.jca.cci.core.InteractionCallback;
 import org.springframework.stereotype.Service;
 import service.DreamsService;
 
@@ -30,10 +29,20 @@ public class DreamsServiceImpl implements DreamsService {
     public Integer addDream(Dreams dreams) {
         //默认值
         dreams.setDreamId(OilUtils.generateID());
-        dreams.setUserId(OilUtils.generateID());
+        dreams.setUserId(dreams.getUserId() == null ? "no user" : dreams.getUserId());
         dreams.setCreateTime(TimeUtil.currentTime());
         dreams.setLikes(0);
         dreams.setDeleteStatus(0);
         return dreamsMapper.insert(dreams);
+    }
+
+    @Override
+    public List<Dreams> getDreamsByUserId(String userId) {
+        return dreamsMapper.selectByUserId(userId);
+    }
+
+    @Override
+    public Integer deleteByDreamId(String dreamId) {
+        return dreamsMapper.deleteByDreamId(dreamId);
     }
 }

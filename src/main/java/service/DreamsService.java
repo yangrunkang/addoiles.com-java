@@ -13,6 +13,7 @@ public interface DreamsService {
 
     /**
      * 获取梦想
+     *
      * @param page
      * @return
      */
@@ -22,5 +23,15 @@ public interface DreamsService {
      * 添加梦想
      */
     Integer addDream(Dreams dreams);
+
+    List<Dreams> getDreamsByUserId(String userId);
+
+    /**
+     * 根据梦想id删除
+     *
+     * @param dreamId
+     * @return
+     */
+    Integer deleteByDreamId(String dreamId);
 
 }

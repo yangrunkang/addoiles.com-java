@@ -2,7 +2,7 @@ package controller;
 
 import com.addoiles.common.Page;
 import com.addoiles.dto.ExperienceDto;
-import com.addoiles.dto.ExperienceRateReq;
+import com.addoiles.dto.req.ExperienceRateReq;
 import com.addoiles.entity.Comment;
 import com.addoiles.entity.Experience;
 import com.addoiles.entity.User;
@@ -20,6 +20,8 @@ import service.UserService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static com.addoiles.common.OilConstant.CONTENT_TOO_LONG;
 
 /**
  * Created by bla on 9/24/2017.
@@ -39,12 +41,18 @@ public class ExperienceController extends BaseController {
     @RequestMapping(value = "addExperience", method = RequestMethod.POST)
     @ResponseBody
     public Object addExperience(@RequestBody Experience experience) {
-        return experienceService.addExperience(experience);
+        Integer count;
+        try {
+            count = experienceService.addExperience(experience);
+        } catch (Exception e) {
+            count = CONTENT_TOO_LONG;
+        }
+        return count;
     }
 
-    @RequestMapping(value = "getExperienceList", method = RequestMethod.GET)
+    @RequestMapping(value = "getExperienceList", method = RequestMethod.POST)
     @ResponseBody
-    public Object getExperienceList(Page page) {
+    public Object getExperienceList(@RequestBody Page page) {
         List<ExperienceDto> experienceDtoList = new ArrayList<>();
 
         List<User> usersOfIdNameList = userService.getUsersOfIdNameList();
@@ -54,7 +62,7 @@ public class ExperienceController extends BaseController {
             return experienceDtoList; //在页面上显示空
         } else {
             //处理userId转userName
-            ServiceUtil.HandleExperienceUserIdToUserName(experienceList,usersOfIdNameList);
+            ServiceUtil.HandleExperienceUserIdToUserName(experienceList, usersOfIdNameList);
             experienceList.forEach(experience -> {
                 List<Comment> commentList = commentService.getCommentListByTargetId(experience.getExperienceId());
                 if (!CollectionUtils.isEmpty(commentList)) {
@@ -86,6 +94,37 @@ public class ExperienceController extends BaseController {
     @ResponseBody
     public Object updateRates(@RequestBody ExperienceRateReq experienceRateReq) {
         return experienceService.updateRates(experienceRateReq.getExperienceId(), experienceRateReq.getRate());
+    }
+
+    @RequestMapping(value = "editExperience", method = RequestMethod.POST)
+    @ResponseBody
+    public Object editExperience(@RequestBody Experience experience) {
+        Integer count;
+        try {
+            count = experienceService.updateExperience(experience);
+        } catch (Exception e) {
+            count = CONTENT_TOO_LONG;
+        }
+        return count;
+    }
+
+    @RequestMapping(value = "getExperienceByUserId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getExperienceByUserId(String userId) {
+        return experienceService.getExperienceByUserId(userId);
+    }
+
+
+    @RequestMapping(value = "deleteByExperienceId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object deleteByExperienceId(String experienceId) {
+        return experienceService.deleteByExperienceId(experienceId);
+    }
+
+    @RequestMapping(value = "getExperienceByExperienceId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getExperienceByExperienceId(String experienceId) {
+        return experienceService.getExperienceByExperienceId(experienceId);
     }
 
 

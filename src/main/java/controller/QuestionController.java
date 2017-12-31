@@ -37,7 +37,7 @@ public class QuestionController extends BaseController {
 
     @RequestMapping("getQuestionAnswerList")
     @ResponseBody
-    public Object getQuestionAnswerList(/*@RequestBody */Page page) {
+    public Object getQuestionAnswerList(@RequestBody Page page) {
         List<QuestionAnswerDto> questionAnswerDtoList = new ArrayList<>();
 
         List<Question> questionList = questionService.getQuestionList(page);
@@ -73,6 +73,18 @@ public class QuestionController extends BaseController {
     @ResponseBody
     public Object addQuestion(@RequestBody Question question) {
         return questionService.addQuestion(question);
+    }
+
+    @RequestMapping(value = "getQuestionsByUserId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getQuestionsByUserId(String userId) {
+        return questionService.getQuestionsByUserId(userId);
+    }
+
+    @RequestMapping(value = "deleteByQuestionId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object deleteByQuestionId(String questionId) {
+        return questionService.deleteByQuestionId(questionId);
     }
 
 }

@@ -4,13 +4,6 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
 	         http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <bean id="propertyConfigurer" class="com.addoiles.util.PropertyUtils">
-        <property name="locations">
-            <list>
-                <value>classpath:jdbc.properties</value>
-            </list>
-        </property>
-    </bean>
     <!-- 配置数据源 -->
     <bean id="dataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
         <property name="driverClassName" value="${jdbc.driverClass}" />
@@ -41,11 +34,11 @@
         <!-- 自动扫描entity目录, 省掉Configuration.xml里的手工配置 -->
         <property name="typeAliasesPackage" value="com.addoiles.entity"/>
         <!-- 显式指定Mapper文件位置 -->
-        <property name="mapperLocations" value="classpath*:com/addoiles/dao/*.xml"/>
+        <property name="mapperLocations" value="classpath*:com/addoiles/db/dao/*.xml"/>
     </bean>
     <!-- mapper扫描器 -->
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.addoiles.dao"/>
+        <property name="basePackage" value="com.addoiles.db.dao"/>
         <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
     </bean>
 

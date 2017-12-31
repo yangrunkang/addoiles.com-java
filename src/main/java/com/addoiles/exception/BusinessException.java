@@ -10,7 +10,7 @@ import com.addoiles.common.ErrorCode;
  * author:      Yangrunkang
  * Createdate:  2017/7/20 9:36
  */
-public class BusinessException   extends RuntimeException {
+public class BusinessException extends RuntimeException {
 
     private static final long serialVersionUID = 8130361585821557354L;
 

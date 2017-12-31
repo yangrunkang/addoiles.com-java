@@ -1,11 +1,10 @@
 package com.addoiles.impl;
 
-import com.addoiles.dao.CommentMapper;
+import com.addoiles.db.dao.CommentMapper;
 import com.addoiles.entity.Comment;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ResponseBody;
 import service.CommentService;
 
 import javax.annotation.Resource;

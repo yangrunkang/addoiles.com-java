@@ -35,19 +35,19 @@ public class ControllerAop {
     }
 
     @Around("aspectJMethod()")
-    public OilResponse around(ProceedingJoinPoint pjp) throws Throwable{
+    public OilResponse around(ProceedingJoinPoint pjp) throws Throwable {
         OilResponse oilResponse = new OilResponse();
 
         try {
             Object proceed = pjp.proceed();
             oilResponse.setData(proceed);
-            logger.info("method:{} ,response:{}",pjp.getSignature().getName(), JsonUtils.toJson(oilResponse));
+            logger.info("method:{} ,response:{}", pjp.getSignature().getName(), JsonUtils.toJson(oilResponse));
         } catch (Exception exception) {
-            if(exception instanceof BusinessException){
+            if (exception instanceof BusinessException) {
                 oilResponse.setCode(((BusinessException) exception).getCode());
                 oilResponse.setMessage((exception).getMessage());
                 logger.error("business error:{}", exception);
-            }else {
+            } else {
                 oilResponse.setErrorCode(ErrorCode.SYSTEM_ERROR);
                 logger.error("system error:{}", exception);
             }

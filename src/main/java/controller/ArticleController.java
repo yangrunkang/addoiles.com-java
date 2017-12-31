@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.ArticleService;
 import service.CommentService;
@@ -19,6 +20,8 @@ import service.UserService;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+
+import static com.addoiles.common.OilConstant.CONTENT_TOO_LONG;
 
 /**
  * Created by bla on 9/24/2017.
@@ -71,7 +74,7 @@ public class ArticleController extends BaseController {
      */
     @RequestMapping("showMoreITTechArticles")
     @ResponseBody
-    public Object showMoreITTechArticles(Page page) {
+    public Object showMoreITTechArticles(@RequestBody Page page) {
         return articleService.selectPithinessByType(page, 2);
     }
 
@@ -84,9 +87,46 @@ public class ArticleController extends BaseController {
     @RequestMapping("addArticle")
     @ResponseBody
     public Object addArticle(@RequestBody Article article) {
-        return articleService.addArticle(article);
+        Integer count;
+        try {
+            count = articleService.addArticle(article);
+        } catch (Exception e) {
+            count = CONTENT_TOO_LONG;
+        }
+        return count;
     }
 
+
+    @RequestMapping("editArticle")
+    @ResponseBody
+    public Object editArticle(@RequestBody Article article) {
+        Integer count;
+        try {
+            count = articleService.editArticle(article);
+        } catch (Exception e) {
+            count = CONTENT_TOO_LONG;
+        }
+        return count;
+    }
+
+
+    @RequestMapping("getArticlesByUserId")
+    @ResponseBody
+    public Object getArticlesByUserId(String userId, String articleType) {
+        return articleService.getArticlesByUserId(userId, articleType);
+    }
+
+    @RequestMapping(value = "deleteByArticleId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object deleteByArticleId(String articleId) {
+        return articleService.deleteByArticleId(articleId);
+    }
+
+    @RequestMapping(value = "getArticlesByArticleId", method = RequestMethod.GET)
+    @ResponseBody
+    public Object getArticlesByArticleId(String articleId) {
+        return articleService.getArticlesByArticleId(articleId);
+    }
 
 
 }

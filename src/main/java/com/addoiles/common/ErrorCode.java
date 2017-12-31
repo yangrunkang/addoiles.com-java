@@ -10,14 +10,13 @@ import com.addoiles.exception.BusinessException;
  * author:      Yangrunkang
  * Createdate:  2017/7/20 9:35
  */
-public enum  ErrorCode {
+public enum ErrorCode {
     SUCCESS(0, "success"),
     PARAMETER_ERROR(1, "参数错误"),
     SYSTEM_ERROR(2, "系统异常"),
-    LOGIN_FAILED(3,"登录失败"),
-    REGISTER_FAILED(4,"注册失败"),
-    LOG_OUT_FAILED(5,"注销失败"),
-    ;
+    LOGIN_FAILED(3, "登录失败"),
+    REGISTER_FAILED(4, "注册失败"),
+    LOG_OUT_FAILED(5, "注销失败"),;
 
     /**
      * 状态码

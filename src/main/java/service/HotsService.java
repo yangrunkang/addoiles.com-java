@@ -13,15 +13,33 @@ public interface HotsService {
 
     /**
      * 获取最新发表的动弹
+     *
      * @return
      */
     List<Hots> getLatestHots(Page page);
 
     /**
      * 新增热门
+     *
      * @param hots
      * @return
      */
     Integer addHots(Hots hots);
+
+    /**
+     * 获取用户热门
+     *
+     * @param userId
+     * @return
+     */
+    List<Hots> getHotsByUserId(String userId);
+
+    /**
+     * 根据热门id删除
+     *
+     * @param hotId
+     * @return
+     */
+    Integer deleteByHotId(String hotId);
 
 }

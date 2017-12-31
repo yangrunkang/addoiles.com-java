@@ -1,9 +1,10 @@
 package controller;
 
 import com.addoiles.common.OilConstant;
-import com.addoiles.dto.LoginReq;
-import com.addoiles.dto.LoginResp;
-import com.addoiles.dto.RegisterReq;
+import com.addoiles.db.cache.Cache;
+import com.addoiles.db.cache.CacheManager;
+import com.addoiles.dto.req.*;
+import com.addoiles.dto.resp.LoginResp;
 import com.addoiles.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,10 +45,51 @@ public class UserController extends BaseController {
     public Object register(@RequestBody RegisterReq registerReq) {
         //检查用户是否已经注册
         Integer hasRegister = userService.checkHasRegister(registerReq.getEmail());
-        if(hasRegister > 0){
+        if (hasRegister > 0) {
             return OilConstant.HAS_REGISTERED;//已经注册
         }
         return userService.register(registerReq) > 0;
     }
+
+    @RequestMapping(value = "sendVerificationCode", method = RequestMethod.POST)
+    @ResponseBody
+    public Object sendVerificationCode(@RequestBody VerificationCodeReq verificationCodeReq) {
+        userService.sendVerificationCode(verificationCodeReq);
+        return true;
+    }
+
+    @RequestMapping(value = "verifyCode", method = RequestMethod.POST)
+    @ResponseBody
+    public Object verifyCode(@RequestBody ExistsVerifyCodeReq existsVerifyCodeReq) {
+        Cache cache = CacheManager.isExists(existsVerifyCodeReq.getEmail());
+
+        if (Objects.isNull(cache)) {
+            return false;
+        }
+
+        if (cache.getValue().equals(existsVerifyCodeReq.getCode())) {
+            //验证完之后移除
+            CacheManager.remove(existsVerifyCodeReq.getEmail());
+            return true;
+        }
+
+        return false;
+    }
+
+
+    @RequestMapping(value = "confirmResetPassword", method = RequestMethod.POST)
+    @ResponseBody
+    public Object confirmResetPassword(@RequestBody ResetPasswordReq resetPasswordReq) {
+        return userService.resetPassword(resetPasswordReq);
+    }
+
+
+    @RequestMapping(value = "checkHasRegister", method = RequestMethod.GET)
+    @ResponseBody
+    public Object checkHasRegister(String email) {
+        Integer count = userService.checkHasRegister(email);
+        return count;
+    }
+
 
 }

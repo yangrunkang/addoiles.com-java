@@ -30,7 +30,7 @@ public class HttpClientUtil {
      * @throws ParseException
      * @throws IOException
      */
-    public static String sendPost(String url, Map<String, String> map, String encoding)  {
+    public static String sendPost(String url, Map<String, String> map, String encoding) {
         String body = "";
         CloseableHttpResponse response = null;
         try {
@@ -66,8 +66,8 @@ public class HttpClientUtil {
 
         } catch (IOException e) {
             e.printStackTrace();
-        }finally {
-            if(Objects.nonNull(response)){
+        } finally {
+            if (Objects.nonNull(response)) {
                 //释放链接
                 try {
                     response.close();

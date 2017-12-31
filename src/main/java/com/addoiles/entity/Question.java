@@ -3,7 +3,7 @@ package com.addoiles.entity;
 import java.io.Serializable;
 
 /**
- * @author 
+ * @author
  */
 public class Question implements Serializable {
 

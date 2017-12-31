@@ -1,7 +1,7 @@
 package com.addoiles.impl;
 
 import com.addoiles.common.Page;
-import com.addoiles.dao.ArticleMapper;
+import com.addoiles.db.dao.ArticleMapper;
 import com.addoiles.entity.Article;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
@@ -15,24 +15,24 @@ import java.util.List;
  * Created by bla on 9/24/2017.
  */
 @Service
-public class ArticleServiceImpl implements ArticleService{
+public class ArticleServiceImpl implements ArticleService {
 
     @Resource
     private ArticleMapper articleMapper;
 
     @Override
     public List<Article> getITTechArticleList(Page page) {
-        return articleMapper.selectByArticleType(page,2);
+        return articleMapper.selectByArticleType(page, 2);
     }
 
     @Override
     public List<Article> selectPithinessByType(Page page, Integer articleType) {
-        return articleMapper.selectPithinessByType(page,articleType);
+        return articleMapper.selectPithinessByType(page, articleType);
     }
 
     @Override
     public List<Article> getSoftwareTalkArticleList(Page page) {
-        return articleMapper.selectByArticleType(page,1);
+        return articleMapper.selectByArticleType(page, 1);
     }
 
     @Override
@@ -46,12 +46,37 @@ public class ArticleServiceImpl implements ArticleService{
 
     @Override
     public Article getArticleByParams(String articleId, Integer articleType) {
-        return articleMapper.getArticleByParams(articleId,articleType);
+        return articleMapper.getArticleByParams(articleId, articleType);
     }
 
     @Override
     public List<Article> getArticleByArticleType(Page page, Integer articleType) {
-        return articleMapper.selectByArticleType(page,articleType);
+        return articleMapper.selectByArticleType(page, articleType);
     }
 
+    @Override
+    public Integer editArticle(Article article) {
+        Article tmp = new Article();
+        tmp.setArticleId(article.getArticleId());
+        tmp.setTitle(article.getTitle());
+        tmp.setSubTitle(article.getSubTitle());
+        tmp.setContent(article.getContent());
+        tmp.setUpdateTime(TimeUtil.currentTime());
+        return articleMapper.updateSelectiveByArticleId(tmp);
+    }
+
+    @Override
+    public List<Article> getArticlesByUserId(String userId, String articleType) {
+        return articleMapper.selectByArticleByUserId(userId, articleType);
+    }
+
+    @Override
+    public Integer deleteByArticleId(String articleId) {
+        return articleMapper.deleteByArticleId(articleId);
+    }
+
+    @Override
+    public Article getArticlesByArticleId(String articleId) {
+        return articleMapper.selectByArticleId(articleId);
+    }
 }

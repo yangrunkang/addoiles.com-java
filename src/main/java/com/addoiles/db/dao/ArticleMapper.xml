@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.addoiles.db.dao.ArticleMapper">
+    <resultMap id="BaseResultMap" type="com.addoiles.entity.Article">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="article_id" jdbcType="VARCHAR" property="articleId"/>
+        <result column="user_id" jdbcType="VARCHAR" property="userId"/>
+        <result column="article_type" jdbcType="INTEGER" property="articleType"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="sub_title" jdbcType="VARCHAR" property="subTitle"/>
+        <result column="delete_status" jdbcType="INTEGER" property="deleteStatus"/>
+        <result column="create_time" jdbcType="INTEGER" property="createTime"/>
+        <result column="update_time" jdbcType="INTEGER" property="updateTime"/>
+        <result column="content" jdbcType="LONGVARCHAR" property="content"/>
+    </resultMap>
+
+    <sql id="BaseColumn">
+    id, article_id,user_id, article_type, title,sub_title, delete_status, create_time,update_time, content
+  </sql>
+
+    <delete id="deleteByArticleId" parameterType="java.lang.String">
+    update article set delete_status = 1
+    where article_id = #{articleId,jdbcType=VARCHAR}
+  </delete>
+    <insert id="insert" parameterType="com.addoiles.entity.Article">
+    insert into article (id, article_id,user_id, article_type,
+      title,sub_title, delete_status, create_time,update_time,
+      content)
+    values (#{id,jdbcType=INTEGER}, #{articleId,jdbcType=VARCHAR},#{userId,jdbcType=VARCHAR}, #{articleType,jdbcType=INTEGER},
+      #{title,jdbcType=VARCHAR},#{subTitle,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=INTEGER}, #{createTime,jdbcType=INTEGER},
+      #{updateTime,jdbcType=INTEGER},
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+    <update id="updateByArticleId" parameterType="com.addoiles.entity.Article">
+    update article
+    set
+      article_type = #{articleType,jdbcType=INTEGER},
+      title = #{title,jdbcType=VARCHAR},
+      sub_title = #{subTitle,jdbcType=VARCHAR},
+      delete_status = #{deleteStatus,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where article_id = #{articleId,jdbcType=VARCHAR}
+  </update>
+    <update id="updateSelectiveByArticleId" parameterType="com.addoiles.entity.Article">
+        update article
+        <set>
+            <if test="userId != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="subTitle != null">
+                sub_title = #{subTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=INTEGER},
+            </if>
+        </set>
+        where article_id = #{articleId,jdbcType=VARCHAR}
+    </update>
+
+
+    <select id="selectByArticleId" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumn"/>
+        from article
+        where article_id = #{articleId,jdbcType=INTEGER}
+    </select>
+
+    <select id="getArticleByParams" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumn"/>
+        from article
+        where article_id = #{articleId,jdbcType=INTEGER}
+        and article_type = #{articleType,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByArticleType" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumn"/>
+        from article
+        where delete_status = 0
+        and article_type = #{articleType,jdbcType=INTEGER}
+        order by create_time desc
+        limit #{page.pageNo},#{page.pageSize}
+    </select>
+
+
+    <select id="selectByArticleByUserId" resultMap="BaseResultMap">
+    select
+    id, article_id,user_id, article_type, title,sub_title, delete_status, create_time,update_time
+    from article
+    where delete_status = 0
+    and user_id = #{userId,jdbcType=INTEGER} and article_type = #{articleType,jdbcType=INTEGER} and delete_status = 0
+    order by create_time desc
+  </select>
+
+    <select id="selectPithinessByType" resultMap="BaseResultMap">
+    select
+    article_id, title,sub_title
+    from article
+    where delete_status = 0
+    and article_type = #{articleType,jdbcType=INTEGER}
+    order by create_time desc
+    limit #{page.pageNo},#{page.pageSize}
+  </select>
+
+</mapper>

@@ -12,9 +12,9 @@ public class Page {
 
 
     /**
-     * 大小 todo 没加分页功能前先搞100个先用
+     * 大小
      */
-    private Integer pageSize = 100;
+    private Integer pageSize = 10;
 
 
     public Integer getPageNo() {
