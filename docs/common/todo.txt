@@ -1,0 +1,14 @@
+# 少于2000字的文章字数校验
+# was not registered for synchronization because synchronization is not active
+# 状态信息存储在session中,session一直存储在浏览器中,可以做一些功能,利用状态栏的激活,用户的状态
+
+new features:
+# http://www.bootcss.com/p/jquery.pin/ 钉在右下角,用于用户反馈
+# 第三方登录
+# 支付宝
+# 首页可以考虑增加美文
+# redis 端口 8787 服务器iptables还未开通，注意开通  --暂时不做
+
+
+must do:
+    解决上传图片时经历添加失败的问题(前端需要响应结果,不能什么都不提示)
