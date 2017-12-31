@@ -1,5 +1,6 @@
 package service;
 
+import com.addoiles.BaseService;
 import com.addoiles.entity.NavSettings;
 
 import java.util.List;
@@ -9,7 +10,7 @@ import java.util.List;
  * 获取导航栏
  * Created by bla on 10/1/2017.
  */
-public interface NavSettingsService {
+public interface NavSettingsService extends BaseService<NavSettings> {
     /**
      * 获取有效导航栏
      *

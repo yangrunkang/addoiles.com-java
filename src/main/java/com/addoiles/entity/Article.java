@@ -25,15 +25,28 @@ public class Article {
      */
     private String title;
 
-
     /**
-     * 副标题
+     * 文章内容
      */
-    private String subTitle;
-
+    private String content;
 
     /**
-     * 删除状态 0-正常 1-删除
+     * 评分
+     */
+    private Integer rates;
+
+    /**
+     * 评分次数
+     */
+    private Integer rateCount;
+
+    /**
+     * 文章是否隐藏 0-公开 1-隐藏
+     */
+    private Integer isHide;
+
+    /**
+     * 删除状态 0-正常 1-删除 2-草稿
      */
     private Integer deleteStatus;
 
@@ -47,10 +60,9 @@ public class Article {
      */
     private Integer updateTime;
 
-    /**
-     * 文章内容
-     */
-    private String content;
+
+    /********非表字段***********/
+    private String userName;
 
     /**
      * article.id
@@ -178,15 +190,6 @@ public class Article {
         this.content = content;
     }
 
-    public String getSubTitle() {
-        return subTitle;
-    }
-
-    public void setSubTitle(String subTitle) {
-        this.subTitle = subTitle;
-    }
-
-
     public Integer getUpdateTime() {
         return updateTime;
     }
@@ -201,5 +204,37 @@ public class Article {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+    public Integer getRates() {
+        return rates;
+    }
+
+    public void setRates(Integer rates) {
+        this.rates = rates;
+    }
+
+    public Integer getRateCount() {
+        return rateCount;
+    }
+
+    public void setRateCount(Integer rateCount) {
+        this.rateCount = rateCount;
+    }
+
+    public Integer getIsHide() {
+        return isHide;
+    }
+
+    public void setIsHide(Integer isHide) {
+        this.isHide = isHide;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 }

@@ -23,7 +23,7 @@ public class SuggestController extends BaseController {
     @RequestMapping(value = "suggest", method = RequestMethod.POST)
     @ResponseBody
     public Object suggest(@RequestBody Suggest suggest) {
-        suggestService.suggest(suggest);
+        suggestService.insert(suggest);
         return 0;
     }
 

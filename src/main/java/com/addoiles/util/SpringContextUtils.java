@@ -5,8 +5,14 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 /**
+ *
+ * <p>All rights Reserved, Designed By HQYG.</p>
+ * @Copyright    Copyright(C) 2017.
+ * @Company      HQYG.
+ * @author       Yangrunkang
+ * @CreateDate   2017/12/18 17:03
  * spring bean工具类
- * 
+ *
  * <p>All rights Reserved, Designed By HQYG</p>
  * @Copyright:   Copyright(C) 2016
  * @Company:     HQYG.

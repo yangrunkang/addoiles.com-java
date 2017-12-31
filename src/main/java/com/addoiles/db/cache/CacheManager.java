@@ -13,6 +13,7 @@ import java.util.*;
  * @author Yangrunkang
  * DateTime:  2017/12/8 14:07
  */
+@Deprecated
 public class CacheManager {
 
     private static final Logger logger = LoggerFactory.getLogger(CacheManager.class);

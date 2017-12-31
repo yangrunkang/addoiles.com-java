@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	         http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--（1）如果你有多个数据源需要通过<context:property-placeholder管理，且不愿意放在一个配置文件里，那么一定要加上ignore-unresolvable=“true"-->
+    <!--（2）注意新版的（具体从哪个版本开始不清楚，有兴趣可以查一下）JedisPoolConfig的property name，不是maxActive而是maxTotal，而且没有maxWait属性，建议看一下Jedis源码。-->
+    <!-- redis连接池 -->
+    <bean id="jedisConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.maxActive}" />
+        <property name="maxIdle" value="${redis.maxIdle}" />
+        <property name="maxWaitMillis" value="${redis.maxWait}" />
+        <property name="testOnBorrow" value="${redis.testOnBorrow}" />
+    </bean>
+    <!-- redis连接工厂 -->
+    <bean id="connectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="hostName" value="${redis.host}" />
+        <property name="port" value="${redis.port}" />
+        <property name="password" value="${redis.password}" />
+        <property name="poolConfig" ref="jedisConfig" />
+    </bean>
+
+    <!--  http://www.jianshu.com/p/7bf5dc61ca06
+    StringRedisTemplate与RedisTemplate
+        两者的关系是StringRedisTemplate继承RedisTemplate。
+        两者的数据是不共通的；也就是说StringRedisTemplate只能管理StringRedisTemplate里面的数据，RedisTemplate只能管理RedisTemplate中的数据。
+        SDR默认采用的序列化策略有两种，一种是String的序列化策略，一种是JDK的序列化策略。
+        StringRedisTemplate默认采用的是String的序列化策略，保存的key和value都是采用此策略序列化保存的。
+        RedisTemplate默认采用的是JDK的序列化策略，保存的key和value都是采用此策略序列化保存的。
+    -->
+    <!-- redis操作模板，这里采用尽量面向对象的模板 -->
+    <bean id="stringRedisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <!--     如果不配置Serializer，那么存储的时候只能使用String，如果用对象类型存储，那么会提示错误 can't cast to String！！！-->
+        <property name="keySerializer">
+            <bean class="org.springframework.data.redis.serializer.StringRedisSerializer"/>
+        </property>
+        <property name="valueSerializer">
+            <bean class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer"/>
+        </property>
+        <!--开启事务-->
+        <property name="enableTransactionSupport" value="true"/>
+    </bean>
+
+    <bean id="serialization" class="org.springframework.data.redis.serializer.JdkSerializationRedisSerializer" />
+
+    <bean id="messageDelegateListener" class="com.addoiles.db.redis.sub.RedisSub" />
+
+    <bean id="messageListener" class="org.springframework.data.redis.listener.adapter.MessageListenerAdapter">
+        <property name="delegate" ref="messageDelegateListener" />
+        <property name="serializer" ref="serialization" />
+    </bean>
+
+    <bean id="redisContainer" class="org.springframework.data.redis.listener.RedisMessageListenerContainer">
+        <property name="connectionFactory" ref="connectionFactory"/>
+        <property name="messageListeners">
+            <!-- map of listeners and their associated topics (channels or/and patterns) -->
+            <map>
+                <entry key-ref="messageListener">
+                    <bean class="org.springframework.data.redis.listener.ChannelTopic">
+                        <constructor-arg value="java" />   <!-- 这里配置消费端需要订阅的频道，可以是多个。该一例子订阅JAVA这个频道  -->
+                    </bean>
+                </entry>
+            </map>
+        </property>
+    </bean>
+
+</beans>

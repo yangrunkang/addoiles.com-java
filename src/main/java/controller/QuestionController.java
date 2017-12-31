@@ -1,7 +1,7 @@
 package controller;
 
-import com.addoiles.common.Page;
-import com.addoiles.dto.QuestionAnswerDto;
+import com.addoiles.dto.query.QueryDto;
+import com.addoiles.dto.view.QuestionAnswerDto;
 import com.addoiles.entity.Comment;
 import com.addoiles.entity.Question;
 import com.addoiles.entity.User;
@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.CommentService;
+import service.OilRedisService;
 import service.QuestionService;
 import service.UserService;
 
+import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,14 +37,17 @@ public class QuestionController extends BaseController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("getQuestionAnswerList")
+    @Resource
+    private OilRedisService oilRedisService;
+
+    @RequestMapping(value = "getQuestionAnswerList",method = RequestMethod.POST)
     @ResponseBody
-    public Object getQuestionAnswerList(@RequestBody Page page) {
+    public Object getQuestionAnswerList(@RequestBody QueryDto queryDto) {
         List<QuestionAnswerDto> questionAnswerDtoList = new ArrayList<>();
 
-        List<Question> questionList = questionService.getQuestionList(page);
+        List<Question> questionList = questionService.getList(queryDto);
 
-        List<User> usersOfIdNameList = userService.getUsersOfIdNameList();
+        List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
 
         questionList.forEach(question -> {
             List<Comment> commentList = commentService.getCommentListByTargetId(question.getQuestionId());
@@ -64,7 +69,6 @@ public class QuestionController extends BaseController {
             questionAnswerDtoList.add(questionAnswerDto);
         });
 
-
         return questionAnswerDtoList;
     }
 
@@ -72,19 +76,19 @@ public class QuestionController extends BaseController {
     @RequestMapping(value = "addQuestion", method = RequestMethod.POST)
     @ResponseBody
     public Object addQuestion(@RequestBody Question question) {
-        return questionService.addQuestion(question);
+        return questionService.insert(question);
     }
 
-    @RequestMapping(value = "getQuestionsByUserId", method = RequestMethod.GET)
+    @RequestMapping(value = "getQuestionsByUserId", method = RequestMethod.POST)
     @ResponseBody
-    public Object getQuestionsByUserId(String userId) {
-        return questionService.getQuestionsByUserId(userId);
+    public Object getQuestionsByUserId(@RequestBody QueryDto queryDto) {
+        return questionService.getSimpleList(queryDto);
     }
 
-    @RequestMapping(value = "deleteByQuestionId", method = RequestMethod.GET)
+    @RequestMapping(value = "deleteByQuestionId", method = RequestMethod.POST)
     @ResponseBody
-    public Object deleteByQuestionId(String questionId) {
-        return questionService.deleteByQuestionId(questionId);
+    public Object deleteByQuestionId(@RequestBody QueryDto queryDto) {
+        return questionService.delete(queryDto.getBusinessId());
     }
 
 }

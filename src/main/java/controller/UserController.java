@@ -1,19 +1,19 @@
 package controller;
 
-import com.addoiles.common.OilConstant;
-import com.addoiles.db.cache.Cache;
-import com.addoiles.db.cache.CacheManager;
+import com.addoiles.common.enums.OilConstant;
 import com.addoiles.dto.req.*;
 import com.addoiles.dto.resp.LoginResp;
 import com.addoiles.entity.User;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import service.OilRedisService;
 import service.UserService;
 
+import javax.annotation.Resource;
 import java.util.Objects;
 
 /**
@@ -23,8 +23,11 @@ import java.util.Objects;
 public class UserController extends BaseController {
 
 
-    @Autowired
+    @Resource
     private UserService userService;
+
+    @Resource
+    private OilRedisService oilRedisService;
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     @ResponseBody
@@ -46,7 +49,7 @@ public class UserController extends BaseController {
         //检查用户是否已经注册
         Integer hasRegister = userService.checkHasRegister(registerReq.getEmail());
         if (hasRegister > 0) {
-            return OilConstant.HAS_REGISTERED;//已经注册
+            return OilConstant.HAS_REGISTERED;
         }
         return userService.register(registerReq) > 0;
     }
@@ -61,19 +64,12 @@ public class UserController extends BaseController {
     @RequestMapping(value = "verifyCode", method = RequestMethod.POST)
     @ResponseBody
     public Object verifyCode(@RequestBody ExistsVerifyCodeReq existsVerifyCodeReq) {
-        Cache cache = CacheManager.isExists(existsVerifyCodeReq.getEmail());
+        String verifyCode = oilRedisService.getVerifyCodeByEmail(existsVerifyCodeReq.getEmail());
 
-        if (Objects.isNull(cache)) {
+        if (StringUtils.isEmpty(verifyCode) || !verifyCode.equals(existsVerifyCodeReq.getCode())) {
             return false;
         }
-
-        if (cache.getValue().equals(existsVerifyCodeReq.getCode())) {
-            //验证完之后移除
-            CacheManager.remove(existsVerifyCodeReq.getEmail());
-            return true;
-        }
-
-        return false;
+        return true;
     }
 
 

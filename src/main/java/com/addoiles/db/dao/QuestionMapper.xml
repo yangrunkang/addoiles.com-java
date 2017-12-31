@@ -14,22 +14,32 @@
     id, user_id, question_id, content, delete_status,create_time
   </sql>
 
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="getByBusinessId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from question
         where question_id = #{questionId,jdbcType=INTEGER} and delete_status = 0
     </select>
 
-    <select id="selectQuestionList" resultMap="BaseResultMap">
+    <select id="getList" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from question
         where delete_status = 0
         order by create_time desc
-        limit #{page.pageNo},#{page.pageSize}
+        limit #{queryDto.page.pageNo},#{queryDto.page.pageSize}
     </select>
-    <select id="selectQuestionListByUserId" resultMap="BaseResultMap">
+
+    <select id="getSimpleList" resultMap="BaseResultMap">
+        select
+        question_id, content, delete_status,create_time
+        from question
+        where delete_status = 0
+        and user_id = #{queryDto.userId,jdbcType=VARCHAR}
+        order by create_time desc
+    </select>
+
+    <select id="getByUserId" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from question
@@ -38,7 +48,7 @@
         order by create_time desc
     </select>
 
-    <delete id="deleteByQuestionId" parameterType="java.lang.String">
+    <delete id="delete" parameterType="java.lang.String">
     update  question set delete_status = 1
     where question_id = #{questionId,jdbcType=VARCHAR}
   </delete>
@@ -51,7 +61,7 @@
       #{createTime,jdbcType=INTEGER})
   </insert>
 
-    <update id="updateByPrimaryKeySelective" parameterType="com.addoiles.entity.Question">
+    <update id="update" parameterType="com.addoiles.entity.Question">
         update question
         <set>
             <if test="userId != null">
@@ -69,12 +79,5 @@
         </set>
         where question_id = #{questionId,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="com.addoiles.entity.Question">
-    update question
-    set user_id = #{userId,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
-      delete_status = #{deleteStatus,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=INTEGER}
-    where question_id = #{questionId,jdbcType=INTEGER}
-  </update>
+
 </mapper>

@@ -62,4 +62,10 @@ public class OilUtils {
         return result;
     }
 
+
+    public static void main(String[] args) {//允许明文密码长度47
+        String encrypt = OilUtils.encrypt("asfavklzxhfiashf90y389462*%^&*%&423124456HJKKLG");
+        System.out.println(encrypt.length());
+    }
+
 }

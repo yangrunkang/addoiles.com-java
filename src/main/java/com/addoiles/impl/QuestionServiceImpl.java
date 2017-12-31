@@ -1,7 +1,9 @@
 package com.addoiles.impl;
 
-import com.addoiles.common.Page;
+import com.addoiles.ManagerService;
+import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.QuestionMapper;
+import com.addoiles.dto.query.QueryDto;
 import com.addoiles.entity.Question;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
@@ -15,31 +17,45 @@ import java.util.List;
  * Created by bla on 9/24/2017.
  */
 @Service
-public class QuestionServiceImpl implements QuestionService {
+public class QuestionServiceImpl implements QuestionService,ManagerService<Question> {
 
     @Resource
     private QuestionMapper questionMapper;
 
     @Override
-    public List<Question> getQuestionList(Page page) {
-        return questionMapper.selectQuestionList(page);
+    public List<Question> getList(QueryDto queryDto) {
+        return questionMapper.getList(queryDto);
     }
 
+    @OilLog
     @Override
-    public Integer addQuestion(Question question) {
+    public Integer insert(Question question) {
         question.setQuestionId(OilUtils.generateID());
         question.setCreateTime(TimeUtil.currentTime());
         question.setDeleteStatus(0);
         return questionMapper.insert(question);
     }
 
+
+
+    @OilLog
     @Override
-    public List<Question> getQuestionsByUserId(String userId) {
-        return questionMapper.selectQuestionListByUserId(userId);
+    public Integer delete(String questionId) {
+        return questionMapper.delete(questionId);
     }
 
     @Override
-    public Integer deleteByQuestionId(String questionId) {
-        return questionMapper.deleteByQuestionId(questionId);
+    public Integer update(Question question) {
+        return null;
+    }
+
+    @Override
+    public Question getByBusinessId(String businessId) {
+        return null;
+    }
+
+    @Override
+    public List<Question> getSimpleList(QueryDto queryDto) {
+        return questionMapper.getSimpleList(queryDto);
     }
 }

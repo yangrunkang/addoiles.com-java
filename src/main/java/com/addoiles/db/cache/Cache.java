@@ -6,6 +6,7 @@ package com.addoiles.db.cache;
  * @author Yangrunkang
  * DateTime:  2017/12/8 14:10
  */
+@Deprecated
 public class Cache {
 
     /**

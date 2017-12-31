@@ -13,10 +13,7 @@
     <sql id="BaseColumn">
         id, commit_id, user_id, target_id, content, delete_status, create_time
     </sql>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from comment
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+
     <insert id="insert" parameterType="com.addoiles.entity.Comment">
         insert into comment (id, commit_id, user_id,
         target_id, content, delete_status,
@@ -25,25 +22,16 @@
         #{targetId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{deleteStatus,jdbcType=INTEGER},
         #{createTime,jdbcType=INTEGER})
     </insert>
-    <update id="updateByPrimaryKey" parameterType="com.addoiles.entity.Comment">
 
-    update comment
-    set commit_id = #{commitId,jdbcType=VARCHAR},
-      user_id = #{userId,jdbcType=VARCHAR},
-      target_id = #{targetId,jdbcType=VARCHAR},
-      content = #{content,jdbcType=VARCHAR},
-      delete_status = #{deleteStatus,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="update" parameterType="java.lang.Integer" resultMap="BaseResultMap">
 
         select
         <include refid="BaseColumn"/>
         from comment
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <select id="selectAll" resultMap="BaseResultMap">
+
+    <select id="getList" resultMap="BaseResultMap">
         select
         <include refid="BaseColumn"/>
         from comment

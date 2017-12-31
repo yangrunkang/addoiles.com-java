@@ -15,9 +15,11 @@
         id, user_id, name, password, email, delete_status, create_time
     </sql>
 
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where id = #{id,jdbcType=INTEGER}
+    <delete id="delete" parameterType="java.lang.Integer">
+        update user
+        set
+        delete_status = 1
+        where user_id = #{userId,jdbcType=INTEGER}
   </delete>
 
     <insert id="insert" parameterType="com.addoiles.entity.User">
@@ -29,7 +31,7 @@
         #{createTime,jdbcType=INTEGER})
     </insert>
 
-    <update id="updateByUserId" parameterType="com.addoiles.entity.User">
+    <update id="update" parameterType="com.addoiles.entity.User">
         update user
         set
         name = #{name,jdbcType=VARCHAR},
@@ -48,7 +50,7 @@
         where email = #{email,jdbcType=VARCHAR} and delete_status = 0
     </update>
 
-    <select id="selectByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <select id="getByUserId" parameterType="java.lang.String" resultMap="BaseResultMap">
         select id, user_id, name, password, email, delete_status, create_time
         from user
         where user_id = #{userId,jdbcType=VARCHAR} and delete_status = 0
@@ -69,7 +71,7 @@
         where email = #{email,jdbcType=VARCHAR}
     </select>
 
-    <select id="selectAll" resultMap="BaseResultMap">
+    <select id="getList" resultMap="BaseResultMap">
         select
         <include refid="BaseColumn"/>
         from user

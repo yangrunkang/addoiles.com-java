@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
-	
-	<!-- ${log.dir} ${log.module.name} 参考src/main/assembly/default.properties 重配置，通过构建参数占位 -->
+
 	<property name="default.pattern" value="%date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
-	<property name="elog.pattern" value="[%p] %date{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
 	<property name="file.tail.pattern" value="%d{yyyy-MM-dd}.%i" />
 	
 	<!-- 控制台日志 -->
@@ -15,7 +13,7 @@
     
     <!-- 综合时间与大小的滚动策略，先按小时滚动，小时内的文件大于10mb时再按大小滚动 -->
     <appender name="errorRollingFile" class="ch.qos.logback.core.rolling.RollingFileAppender">
-        <file>${log.dir}/${log.module.name}/${log.module.name}-error.log.tmp</file>
+        <file>/usr/services/apache-tomcat-8.5.16/logs/addoiles/addoiles-error.log.tmp</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <fileNamePattern>/tmp/addoiles-error-${file.tail.pattern}.log</fileNamePattern>
             <MaxHistory>30</MaxHistory>
@@ -43,9 +41,6 @@
                 <maxFileSize>100MB</maxFileSize>
             </timeBasedFileNamingAndTriggeringPolicy>
         </rollingPolicy>
-        <encoder>
-            <pattern>${elog.pattern}</pattern>
-        </encoder>
     </appender>
 
 

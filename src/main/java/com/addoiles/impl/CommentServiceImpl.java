@@ -1,6 +1,8 @@
 package com.addoiles.impl;
 
+import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.CommentMapper;
+import com.addoiles.dto.query.QueryDto;
 import com.addoiles.entity.Comment;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
@@ -24,12 +26,32 @@ public class CommentServiceImpl implements CommentService {
         return commentMapper.selectByTargetId(targetId);
     }
 
+    @OilLog
     @Override
-    public Integer addComment(Comment comment) {
+    public Integer insert(Comment comment) {
         comment.setCommitId(OilUtils.generateID());
         comment.setDeleteStatus(0);
         comment.setCreateTime(TimeUtil.currentTime());
         return commentMapper.insert(comment);
     }
 
+    @Override
+    public Integer delete(String businessId) {
+        return null;
+    }
+
+    @Override
+    public Integer update(Comment comment) {
+        return null;
+    }
+
+    @Override
+    public Comment getByBusinessId(String businessId) {
+        return null;
+    }
+
+    @Override
+    public List<Comment> getList(QueryDto queryDto) {
+        return null;
+    }
 }
