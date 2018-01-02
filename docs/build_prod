@@ -4,9 +4,11 @@
 
 2. jdbc.properties 库连接记得修改
 
-3. redis.properties 要改
+3. redis.properties 要改(暂时不改,通过key决定,回家的时候测试,redis不支持windows..)
 
 4. 如果没有写清除程序,要记得清理redis key
+
+5. 要改这个: com.addoiles.db.redis.OilRedisConstant
 
 
 
