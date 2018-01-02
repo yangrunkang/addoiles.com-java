@@ -6,7 +6,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * Description: 日志注解 用于切面
+ * Description: redis注解用于切面
  * All rights Reserved, Designed By HQYG
  *
  * @author Yangrunkang
@@ -16,6 +16,6 @@ import java.lang.annotation.Target;
  */
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface OilLog {
+public @interface OilRedis {
 
 }
