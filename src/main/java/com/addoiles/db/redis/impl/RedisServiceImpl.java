@@ -5,6 +5,8 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.Iterator;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -29,6 +31,11 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
+    public Set<String> keys(String pattern) {
+        return stringRedisTemplate.keys(pattern);
+    }
+
+    @Override
     public String get(String key) {
         return stringRedisTemplate.opsForValue().get(key);
     }
@@ -41,5 +48,15 @@ public class RedisServiceImpl implements RedisService {
     @Override
     public void setTTL(String key, String value, Integer timeLong) {
         stringRedisTemplate.opsForValue().set(key,value,timeLong, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public void deleteKeys(String pattern) {
+        Set<String> keys = keys(pattern);
+        Iterator<String> iterator = keys.iterator();
+        while (iterator.hasNext()) {
+            String next = iterator.next();
+            delete(next);
+        }
     }
 }

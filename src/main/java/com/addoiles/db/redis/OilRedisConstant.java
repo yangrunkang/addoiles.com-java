@@ -13,15 +13,15 @@ package com.addoiles.db.redis;
 public class OilRedisConstant {
 
     /**
-     * 开发时加上
-     * 生产是去掉
+     * 开发时加上 DEV.
+     * 生产是 DEV. 加上 PRD.
      */
-    private static final String REDIS_ENV = "DEV";
+    private static final String REDIS_ENV = "DEV.";
 
     /**
      * redis key 前缀
      */
-    private static String OIL_WEBSITE = REDIS_ENV +"com.addoiles.wwww";
+    public static String OIL_WEBSITE = REDIS_ENV +"com.addoiles.wwww.";
 
     /**
      * 用户ID-用户名 映射集合

@@ -13,7 +13,13 @@ public class AddoilesConstant {
      * 邮件类型
      */
     public enum EmailType {
+        /**
+         * 忘记密码
+         */
         FORGET_PASSWORD(1, "忘记密码"),
+        /**
+         * 新用户注册
+         */
         REGISTER(2, "新用户注册");
 
 

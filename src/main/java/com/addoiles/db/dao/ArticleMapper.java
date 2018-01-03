@@ -2,9 +2,27 @@ package com.addoiles.db.dao;
 
 import com.addoiles.BaseService;
 import com.addoiles.ManagerService;
+import com.addoiles.dto.query.QueryDto;
 import com.addoiles.entity.Article;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 
 public interface ArticleMapper extends BaseService<Article>,ManagerService<Article> {
 
+
+    /**
+     * 获取所有文章
+     * @apiNote 缓存至redis
+     * @return
+     */
+    List<Article> getAllArticles();
+
+    /**
+     * 根据条件获取文章ID集合
+     * @param queryDto
+     * @return
+     */
+    List<String> getArticleIdList(@Param("queryDto")QueryDto queryDto);
 }

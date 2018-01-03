@@ -1,5 +1,7 @@
 package com.addoiles.db.redis.inter;
 
+import java.util.Set;
+
 /**
  * Description:
  * All rights Reserved, Designed By HQYG
@@ -17,6 +19,13 @@ public interface RedisService {
      * @param key
      */
     void delete(String key);
+
+    /**
+     * 获取所有键
+     * @param pattern
+     * @return
+     */
+    Set<String> keys(String pattern);
 
     /**
      * 根据key获取
@@ -39,5 +48,11 @@ public interface RedisService {
      * @param timeLong
      */
     void setTTL(String key,String value,Integer timeLong);
+
+    /**
+     * 删除符合 pattern 模式的key
+     * @param pattern
+     */
+    void deleteKeys(String pattern);
 
 }

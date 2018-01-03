@@ -78,4 +78,6 @@ public class OilRedisServiceImpl implements OilRedisService {
     public String getVerifyCodeByEmail(String email) {
         return redisService.get(email);
     }
+
+
 }

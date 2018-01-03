@@ -25,6 +25,7 @@
     <import resource="application-datasource.xml"/>
     <import resource="application-email.xml"/>
     <import resource="application-redis.xml"/>
+    <import resource="application-business.xml"/>
 
     <bean id="propertyConfigurer" class="com.addoiles.util.PropertyUtils">
         <property name="locations">

@@ -85,6 +85,25 @@
         limit #{queryDto.page.pageNo},#{queryDto.page.pageSize}
     </select>
 
+
+    <select id="getArticleIdList" resultType="java.lang.String">
+        select
+        article_id
+        from article
+        <!-- 正文(包含内容) 只显示正常的 -->
+        where delete_status != 1 and delete_status != 2
+        and is_hide = 0
+        and article_type = #{queryDto.articleType,jdbcType=INTEGER}
+        order by create_time desc
+        limit #{queryDto.page.pageNo},#{queryDto.page.pageSize}
+    </select>
+
+    <select id="getAllArticles" resultMap="BaseResultMap">
+        select
+        <include refid="BaseColumn"/>
+        from article
+    </select>
+
     <select id="getSimpleList" resultMap="BaseResultMap">
         select
         article_id,title,is_hide,delete_status,create_time
