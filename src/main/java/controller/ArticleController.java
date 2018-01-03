@@ -25,7 +25,6 @@ import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.addoiles.common.enums.OilConstant.CONTENT_TOO_LONG;
@@ -99,23 +98,10 @@ public class ArticleController extends BaseController {
     @ResponseBody
     public Object getITArticleList(@RequestBody QueryDto queryDto) {
         ITTechDto itTechDto = new ITTechDto();
-        List<Article> pithinessArticleList = articleService.getSimpleList(queryDto);
 
-        if(CollectionUtils.isEmpty(pithinessArticleList)){
-            return  itTechDto;
-        }
-
-        pithinessArticleList =doFilterITTechList(pithinessArticleList);
-
-        Article article;
         String businessId = queryDto.getBusinessId();
+        Article article = articleService.getByBusinessId(businessId);
 
-        if (Objects.nonNull(businessId)) {
-            article = articleService.getByBusinessId(businessId);
-        } else {
-            //显示默认第一篇文章
-            article = articleService.getByBusinessId(pithinessArticleList.get(0).getArticleId());
-        }
         List<Comment> articleCommentList = commentService.getCommentListByTargetId(article.getArticleId());
         if (CollectionUtils.isEmpty(articleCommentList)) {
             articleCommentList = new ArrayList<>();
@@ -127,12 +113,21 @@ public class ArticleController extends BaseController {
         //处理文章 userId转userName
         ServiceUtil.HandleArticleUserIdToUserName(Arrays.asList(article), usersOfIdNameList);
 
-        itTechDto.setPithinessList(pithinessArticleList);
         itTechDto.setArticle(article);
         itTechDto.setArticleCommentList(articleCommentList);
 
         return itTechDto;
     }
+
+    @RequestMapping(value = "getITArticlePithinessList",method = RequestMethod.POST)
+    @ResponseBody
+    public Object getITArticlePithinessList(@RequestBody QueryDto queryDto) {
+        List<Article> pithinessList = articleService.getSimpleList(queryDto);
+        pithinessList =doFilterITTechList(pithinessList);
+        return pithinessList;
+    }
+
+
 
 
     @RequestMapping(value = "getSimpleList",method = RequestMethod.POST)

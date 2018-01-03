@@ -12,11 +12,6 @@ import java.util.List;
 public class ITTechDto {
 
     /**
-     * 简洁文章列表
-     */
-    private List<Article> pithinessList;
-
-    /**
      * 默认展示文章列表的一个详情
      */
     private Article article;
@@ -25,14 +20,6 @@ public class ITTechDto {
      * 详情文章评论列表
      */
     private List<Comment> articleCommentList;
-
-    public List<Article> getPithinessList() {
-        return pithinessList;
-    }
-
-    public void setPithinessList(List<Article> pithinessList) {
-        this.pithinessList = pithinessList;
-    }
 
     public Article getArticle() {
         return article;
