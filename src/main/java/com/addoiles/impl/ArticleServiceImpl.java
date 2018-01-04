@@ -46,6 +46,7 @@ public class ArticleServiceImpl implements ArticleService {
 
         articleIdList.forEach(articleId -> {
             String articleJson = redisService.get(OilRedisConstant.OIL_WEBSITE + articleId);
+
             if (StringUtils.isEmpty(articleJson)) {
                 Article byBusinessId = articleMapper.getByBusinessId(articleId);
                 articleJson = JsonUtils.toJson(byBusinessId);

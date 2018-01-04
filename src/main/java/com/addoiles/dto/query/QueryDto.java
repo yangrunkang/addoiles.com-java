@@ -44,6 +44,11 @@ public class QueryDto {
      */
     private Integer articleType;
 
+    /**
+     * 问题类型 0-编程语言 1-开发问题 2-缓存技术 3-操作系统 4-学习
+     */
+    private Integer questionType;
+
 
     public Page getPage() {
         return page;
@@ -83,5 +88,13 @@ public class QueryDto {
 
     public void setArticleType(Integer articleType) {
         this.articleType = articleType;
+    }
+
+    public Integer getQuestionType() {
+        return questionType;
+    }
+
+    public void setQuestionType(Integer questionType) {
+        this.questionType = questionType;
     }
 }

@@ -6,12 +6,13 @@
         <result column="user_id" jdbcType="VARCHAR" property="userId"/>
         <result column="question_id" jdbcType="VARCHAR" property="questionId"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="type" jdbcType="INTEGER" property="type"/>
         <result column="delete_status" jdbcType="INTEGER" property="deleteStatus"/>
         <result column="create_time" jdbcType="INTEGER" property="createTime"/>
     </resultMap>
 
     <sql id="Base_Column_List">
-    id, user_id, question_id, content, delete_status,create_time
+    id, user_id, question_id, content,type, delete_status,create_time
   </sql>
 
     <select id="getByBusinessId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -26,8 +27,18 @@
         <include refid="Base_Column_List"/>
         from question
         where delete_status = 0
+        <if test="queryDto.questionType != null">
+            and type = #{queryDto.questionType}
+        </if>
         order by create_time desc
         limit #{queryDto.page.pageNo},#{queryDto.page.pageSize}
+    </select>
+
+    <select id="getAllQuestions" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from question
+        where delete_status = 0
     </select>
 
     <select id="getSimpleList" resultMap="BaseResultMap">
@@ -39,25 +50,16 @@
         order by create_time desc
     </select>
 
-    <select id="getByUserId" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from question
-        where delete_status = 0
-        and user_id = #{userId,jdbcType=VARCHAR} and delete_status = 0
-        order by create_time desc
-    </select>
-
     <delete id="delete" parameterType="java.lang.String">
     update  question set delete_status = 1
     where question_id = #{questionId,jdbcType=VARCHAR}
   </delete>
 
     <insert id="insert" parameterType="com.addoiles.entity.Question">
-    insert into question (id, user_id,question_id,content,delete_status,
+    insert into question (id, user_id,question_id,content,type,delete_status,
       create_time)
     values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR},#{questionId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
-     #{deleteStatus,jdbcType=INTEGER},
+     #{type,jdbcType=INTEGER},#{deleteStatus,jdbcType=INTEGER},
       #{createTime,jdbcType=INTEGER})
   </insert>
 

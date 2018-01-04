@@ -19,6 +19,11 @@ public class OilRedisConstant {
     private static final String REDIS_ENV = "DEV.";
 
     /**
+     * 缓存完整内容KEY标志
+     */
+//    private static final String TOTAL = "TOTAL.";
+
+    /**
      * redis key 前缀
      */
     public static String OIL_WEBSITE = REDIS_ENV +"com.addoiles.wwww.";

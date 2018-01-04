@@ -1,6 +1,13 @@
 package com.addoiles.entity;
 
-
+/**
+ * 评论
+ * <p>All rights Reserved, Designed By HQYG.</p>
+ * @Copyright    Copyright(C) 2017.
+ * @Company      HQYG.
+ * @author       Yangrunkang
+ * @CreateDate   2018/1/4 18:09
+ */
 public class Comment {
     private Integer id;
 

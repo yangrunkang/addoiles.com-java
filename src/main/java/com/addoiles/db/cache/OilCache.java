@@ -1,9 +1,11 @@
 package com.addoiles.db.cache;
 
 import com.addoiles.db.dao.ArticleMapper;
+import com.addoiles.db.dao.QuestionMapper;
 import com.addoiles.db.redis.OilRedisConstant;
 import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.entity.Article;
+import com.addoiles.entity.Question;
 import com.addoiles.util.JsonUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Component;
@@ -30,22 +32,27 @@ public class OilCache {
     @Resource
     private RedisService redisService;
 
+    @Resource
+    private QuestionMapper questionMapper;
+
 
     /**
      * 缓存所有文章
      */
     private void cacheAllArticles() {
 
-        this.initRedis();
+        this.delRedisKeys();
 
         this.cacheArticle();
+
+        this.cacheQuestion();
 
     }
 
     /**
-     * 初始化redis
+     * 清楚redis所有key
      */
-    private void initRedis(){
+    private void delRedisKeys() {
         redisService.deleteKeys(OilRedisConstant.OIL_WEBSITE + "*");
     }
 
@@ -57,8 +64,22 @@ public class OilCache {
         if (CollectionUtils.isEmpty(allArticles)) {
             return;
         }
-        allArticles.forEach(article ->
-                redisService.set(OilRedisConstant.OIL_WEBSITE + article.getArticleId(), JsonUtils.toJson(article))
+        allArticles.forEach(article -> {
+            //缓存完整内容
+            redisService.set(OilRedisConstant.OIL_WEBSITE + article.getArticleId(), JsonUtils.toJson(article));
+        });
+    }
+
+    /**
+     * 缓存所有问题
+     */
+    private void cacheQuestion() {
+        List<Question> allQuestions = questionMapper.getAllQuestions();
+        if (CollectionUtils.isEmpty(allQuestions)) {
+            return;
+        }
+        allQuestions.forEach(question ->
+                redisService.set(OilRedisConstant.OIL_WEBSITE + question.getQuestionId(), JsonUtils.toJson(question))
         );
     }
 }
