@@ -9,7 +9,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-        id, nav_name, nav_router, nav_icon, is_start
+        id, nav_name, nav_router, nav_icon, is_start,sort
     </sql>
 
     <select id="getList" resultMap="BaseResultMap">
@@ -17,6 +17,7 @@
         <include refid="Base_Column_List"/>
         from nav_settings
         where is_start = 0
+        order by sort asc
     </select>
 
 </mapper>
