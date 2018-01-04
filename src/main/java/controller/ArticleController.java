@@ -62,33 +62,34 @@ public class ArticleController extends BaseController {
         if (CollectionUtils.isEmpty(articleList)) {
             //在页面上显示空
             return articleDtoList;
-        } else {
-            //处理userId转userName
-            ServiceUtil.HandleArticleUserIdToUserName(articleList, usersOfIdNameList);
-            articleList.forEach(article -> {
-                List<Comment> commentList = commentService.getCommentListByTargetId(article.getArticleId());
-                if (!CollectionUtils.isEmpty(commentList)) {
-                    ExperienceDto articleDto = new ExperienceDto();
-                    articleDto.setArticle(article);
-                    //处理userId转userName
-                    ServiceUtil.HandleCommentUserIdToUserName(commentList, usersOfIdNameList);
-                    articleDto.setCommentList(commentList);
-                    articleDtoList.add(articleDto);
-                } else {
-                    ExperienceDto articleDto = new ExperienceDto();
-                    articleDto.setArticle(article);
-                    articleDto.setCommentList(new ArrayList<>());
-                    articleDtoList.add(articleDto);
-                }
-                //设定评分
-                Integer rates = article.getRates();
-                Integer rateCount = article.getRateCount();
-                if (rateCount > 0) {
-                    article.setRates(rates / rateCount > 5 ? 5 : rates / rateCount);
-                }
-
-            });
         }
+
+        //处理userId转userName
+        ServiceUtil.HandleArticleUserIdToUserName(articleList, usersOfIdNameList);
+        articleList.forEach(article -> {
+            List<Comment> commentList = commentService.getCommentListByTargetId(article.getArticleId());
+            if (!CollectionUtils.isEmpty(commentList)) {
+                ExperienceDto articleDto = new ExperienceDto();
+                articleDto.setArticle(article);
+                //处理userId转userName
+                ServiceUtil.HandleCommentUserIdToUserName(commentList, usersOfIdNameList);
+                articleDto.setCommentList(commentList);
+                articleDtoList.add(articleDto);
+            } else {
+                ExperienceDto articleDto = new ExperienceDto();
+                articleDto.setArticle(article);
+                articleDto.setCommentList(new ArrayList<>());
+                articleDtoList.add(articleDto);
+            }
+            //设定评分
+            Integer rates = article.getRates();
+            Integer rateCount = article.getRateCount();
+            if (rateCount > 0) {
+                article.setRates(rates / rateCount > 5 ? 5 : rates / rateCount);
+            }
+
+        });
+
         return articleDtoList;
     }
 
