@@ -9,6 +9,12 @@ import java.util.UUID;
  */
 public class OilUtils {
 
+    private static ThreadLocal<Integer> integerThreadLocal = new ThreadLocal<>();
+
+    static{
+        integerThreadLocal.set(2);
+    }
+
     /**
      * 生成ID
      *
@@ -62,10 +68,32 @@ public class OilUtils {
         return result;
     }
 
-
     public static void main(String[] args) {//允许明文密码长度47
-        String encrypt = OilUtils.encrypt("asfavklzxhfiashf90y389462*%^&*%&423124456HJKKLG");
-        System.out.println(encrypt.length());
+//        String encrypt = OilUtils.encrypt("asfavklzxhfiashf90y389462*%^&*%&423124456HJKKLG");
+//        System.out.println(encrypt.length());
+        System.out.println(OilUtils.getPartContent("23142323142323"));
     }
+
+    private static String handleHtmlToNormalWords() {
+
+        return null;
+    }
+
+    private static String getPartContent(String content) {
+        String partContent;
+        if (content.length() < 50) {
+            partContent = content;
+            integerThreadLocal.set(2);
+            return partContent;
+        }
+
+        //可以会采用递归
+        String substring = content.substring(0, content.length() / integerThreadLocal.get());
+        integerThreadLocal.set(integerThreadLocal.get() + 1);
+        getPartContent(substring);
+
+        return null;
+    }
+
 
 }
