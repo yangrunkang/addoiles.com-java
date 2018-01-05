@@ -1,6 +1,8 @@
 package com.addoiles.util;
 
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Description:
@@ -9,11 +11,15 @@ import java.util.UUID;
  */
 public class OilUtils {
 
-    private static ThreadLocal<Integer> integerThreadLocal = new ThreadLocal<>();
+    /**
+     * 整除起始值
+     */
+    private static Integer index = 2;
 
-    static{
-        integerThreadLocal.set(2);
-    }
+    /**
+     * 内容长度小于50不分割
+     */
+    private static Integer CONTENT_LENGTH = 100;
 
     /**
      * 生成ID
@@ -69,30 +75,41 @@ public class OilUtils {
     }
 
     public static void main(String[] args) {//允许明文密码长度47
-//        String encrypt = OilUtils.encrypt("asfavklzxhfiashf90y389462*%^&*%&423124456HJKKLG");
-//        System.out.println(encrypt.length());
-        System.out.println(OilUtils.getPartContent("23142323142323"));
+
     }
 
-    private static String handleHtmlToNormalWords() {
-
-        return null;
+    /**
+     * 正则表达式预编译 提高匹配速度
+     */
+    private static Pattern pattern = Pattern.compile("<([a-zA-Z]+)[^<>]*>(.*?)</\\1>");
+    private static String handleHtmlToNormalWords(String content) {
+        Matcher m = pattern.matcher(content);
+        if (m.find()) {
+            content = content.replaceAll("<([a-zA-Z]+)[^<>]*>(.*?)</\\1>", "$2");
+            content = handleHtmlToNormalWords(content);
+        }
+        return content;
     }
 
+    /**
+     * 获取部分内容
+     * @param content
+     * @return
+     */
     private static String getPartContent(String content) {
         String partContent;
-        if (content.length() < 50) {
+        if (content.length() < CONTENT_LENGTH) {
             partContent = content;
-            integerThreadLocal.set(2);
+            index = 2;
             return partContent;
         }
 
-        //可以会采用递归
-        String substring = content.substring(0, content.length() / integerThreadLocal.get());
-        integerThreadLocal.set(integerThreadLocal.get() + 1);
-        getPartContent(substring);
 
-        return null;
+        String substring = content.substring(0, content.length() / index);
+        index += 1;
+
+        //递归
+        return OilUtils.getPartContent(substring).concat("....");
     }
 
 
