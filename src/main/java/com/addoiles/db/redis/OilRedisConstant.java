@@ -33,4 +33,9 @@ public class OilRedisConstant {
      */
     public static String USERS_ID_NAME_LIST = OIL_WEBSITE + "users.ids.names.list";
 
+    /**
+     * 导航栏
+     */
+    public static String NAV_LIST = OIL_WEBSITE + "nav.list";
+
 }

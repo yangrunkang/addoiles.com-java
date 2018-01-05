@@ -1,5 +1,6 @@
 package service;
 
+import com.addoiles.entity.NavSettings;
 import com.addoiles.entity.User;
 
 import java.util.List;
@@ -38,5 +39,8 @@ public interface OilRedisService {
      * @return
      */
     String getVerifyCodeByEmail(String email);
+
+
+    List<NavSettings> getNavList();
 
 }

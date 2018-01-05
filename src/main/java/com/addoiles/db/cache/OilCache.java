@@ -1,10 +1,13 @@
 package com.addoiles.db.cache;
 
 import com.addoiles.db.dao.ArticleMapper;
+import com.addoiles.db.dao.NavSettingsMapper;
 import com.addoiles.db.dao.QuestionMapper;
 import com.addoiles.db.redis.OilRedisConstant;
+import com.addoiles.db.redis.dto.NavDto;
 import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.entity.Article;
+import com.addoiles.entity.NavSettings;
 import com.addoiles.entity.Question;
 import com.addoiles.util.JsonUtils;
 import org.apache.commons.collections.CollectionUtils;
@@ -35,6 +38,9 @@ public class OilCache {
     @Resource
     private QuestionMapper questionMapper;
 
+    @Resource
+    private NavSettingsMapper navSettingsMapper;
+
 
     /**
      * 缓存所有文章
@@ -46,6 +52,8 @@ public class OilCache {
         this.cacheArticle();
 
         this.cacheQuestion();
+
+        this.cacheNavList();
 
     }
 
@@ -81,5 +89,15 @@ public class OilCache {
         allQuestions.forEach(question ->
                 redisService.set(OilRedisConstant.OIL_WEBSITE + question.getQuestionId(), JsonUtils.toJson(question))
         );
+    }
+
+    /**
+     * 缓存导航栏
+     */
+    private void cacheNavList(){
+        List<NavSettings> list = navSettingsMapper.getList(null);
+        NavDto navDto = new NavDto();
+        navDto.setNavSettings(list);
+        redisService.set(OilRedisConstant.NAV_LIST, JsonUtils.toJson(navDto));
     }
 }

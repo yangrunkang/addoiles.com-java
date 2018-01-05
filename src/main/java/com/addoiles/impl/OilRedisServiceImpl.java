@@ -1,9 +1,12 @@
 package com.addoiles.impl;
 
+import com.addoiles.db.dao.NavSettingsMapper;
 import com.addoiles.db.dao.UserMapper;
 import com.addoiles.db.redis.OilRedisConstant;
+import com.addoiles.db.redis.dto.NavDto;
 import com.addoiles.db.redis.dto.UserIDNamesDto;
 import com.addoiles.db.redis.inter.RedisService;
+import com.addoiles.entity.NavSettings;
 import com.addoiles.entity.User;
 import com.addoiles.util.JsonUtils;
 import org.slf4j.Logger;
@@ -16,6 +19,7 @@ import service.OilRedisService;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Description:
@@ -36,6 +40,9 @@ public class OilRedisServiceImpl implements OilRedisService {
 
     @Resource
     private RedisService redisService;
+
+    @Resource
+    private NavSettingsMapper navSettingsMapper;
 
     @Override
     public List<User> getUsersIdsNames(Boolean reload) {
@@ -79,5 +86,22 @@ public class OilRedisServiceImpl implements OilRedisService {
         return redisService.get(email);
     }
 
+    @Override
+    public List<NavSettings> getNavList() {
+        List<NavSettings> navSettingsList;
+        NavDto navDto = JsonUtils.fromJson(redisService.get(OilRedisConstant.NAV_LIST), NavDto.class);
+        if(Objects.isNull(navDto)){
+            navSettingsList = navSettingsMapper.getList(null);
+            redisService.delete(OilRedisConstant.NAV_LIST);
 
+            NavDto tmp = new NavDto();
+            tmp.setNavSettings(navSettingsList);
+            redisService.set(OilRedisConstant.NAV_LIST, JsonUtils.toJson(tmp));
+
+            return navSettingsList;
+        }
+        navSettingsList = navDto.getNavSettings();
+
+        return navSettingsList;
+    }
 }
