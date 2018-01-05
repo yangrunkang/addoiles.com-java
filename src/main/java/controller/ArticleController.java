@@ -1,6 +1,8 @@
 package controller;
 
 import com.addoiles.common.enums.DBFieldEnum;
+import com.addoiles.db.redis.OilRedisConstant;
+import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.dto.query.QueryDto;
 import com.addoiles.dto.req.RatesDto;
 import com.addoiles.dto.resp.ExperienceDto;
@@ -9,6 +11,7 @@ import com.addoiles.entity.Article;
 import com.addoiles.entity.Comment;
 import com.addoiles.entity.User;
 import com.addoiles.impl.ServiceUtil;
+import com.addoiles.util.JsonUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -18,7 +21,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import service.ArticleService;
 import service.CommentService;
 import service.OilRedisService;
-import service.UserService;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -30,8 +32,12 @@ import java.util.stream.Collectors;
 import static com.addoiles.common.enums.OilConstant.CONTENT_TOO_LONG;
 
 /**
- *
- * Created by bla on 9/24/2017.
+ * 文章
+ * <p>All rights Reserved, Designed By HQYG.</p>
+ * @Copyright    Copyright(C) 2017.
+ * @Company      HQYG.
+ * @author       Yangrunkang
+ * @CreateDate   9/24/2017
  */
 @Controller
 public class ArticleController extends BaseController {
@@ -43,10 +49,10 @@ public class ArticleController extends BaseController {
     private CommentService commentService;
 
     @Resource
-    private UserService userService;
+    private OilRedisService oilRedisService;
 
     @Resource
-    private OilRedisService oilRedisService;
+    private RedisService redisService;
 
 
 
@@ -222,9 +228,26 @@ public class ArticleController extends BaseController {
     @RequestMapping(value = "updateRates", method = RequestMethod.POST)
     @ResponseBody
     public Object updateRates(@RequestBody RatesDto ratesDto) {
+
+
+
+        Article redisArticle = JsonUtils.fromJson(redisService.get(OilRedisConstant.OIL_WEBSITE + ratesDto.getBusinessId()), Article.class);
+
         Article tmp = new Article();
         tmp.setArticleId(ratesDto.getBusinessId());
-        tmp.setRates(ratesDto.getRate());
+        tmp.setRates(ratesDto.getRate() + redisArticle.getRates());
+        tmp.setRateCount(redisArticle.getRateCount() + 1);
+
+
+
+        redisArticle.setRates(tmp.getRates());
+        redisArticle.setRateCount(tmp.getRateCount());
+
+        redisService.delete(OilRedisConstant.OIL_WEBSITE + redisArticle.getArticleId());
+        redisService.set(OilRedisConstant.OIL_WEBSITE + redisArticle.getArticleId(), JsonUtils.toJson(redisArticle));
+
+
+
         return articleService.update(tmp);
     }
 

@@ -89,21 +89,6 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Integer update(Article article) {
         article.setUpdateTime(TimeUtil.currentTime());
-
-        Article redisArticle = JsonUtils.fromJson(redisService.get(OilRedisConstant.OIL_WEBSITE + article.getArticleId()), Article.class);
-
-        article.setRates(redisArticle.getRates() + article.getRates());
-        article.setRateCount(redisArticle.getRateCount() + 1);
-
-
-
-        redisArticle.setRateCount(redisArticle.getRateCount() + 1);
-        redisArticle.setRates(article.getRates() == null ? 0 :article.getRates());
-
-        redisService.delete(OilRedisConstant.OIL_WEBSITE + article.getArticleId());
-
-        redisService.set(OilRedisConstant.OIL_WEBSITE + article.getArticleId(), JsonUtils.toJson(redisArticle));
-
         return articleMapper.update(article);
     }
 
