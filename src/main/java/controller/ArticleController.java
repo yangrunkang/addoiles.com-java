@@ -108,7 +108,7 @@ public class ArticleController extends BaseController {
         //设定评分
         Integer rates = article.getRates();
         Integer rateCount = article.getRateCount();
-        if (rateCount > 0) {
+        if (Objects.nonNull(rateCount) && rateCount > 0) {
             article.setRates(rates / rateCount > 5 ? 5 : rates / rateCount);
         }
 
@@ -206,6 +206,21 @@ public class ArticleController extends BaseController {
     public Object editArticle(@RequestBody Article article) {
         Integer count;
         try {
+            Article redisArticle = JsonUtils.fromJson(redisService.get(OilRedisConstant.OIL_WEBSITE + article.getArticleId()),
+                    Article.class);
+            if(Objects.isNull(redisArticle)){
+                return -1;
+            }
+
+            redisArticle.setIsHide(article.getIsHide());
+            redisArticle.setDeleteStatus(article.getDeleteStatus());
+            redisArticle.setTitle(article.getTitle());
+            redisArticle.setContent(article.getContent());
+
+            redisService.delete(OilRedisConstant.OIL_WEBSITE + redisArticle.getArticleId());
+            redisService.set(OilRedisConstant.OIL_WEBSITE + redisArticle.getArticleId(), JsonUtils.toJson(redisArticle));
+
+
             count = articleService.update(article);
         } catch (Exception e) {
             count = CONTENT_TOO_LONG;
