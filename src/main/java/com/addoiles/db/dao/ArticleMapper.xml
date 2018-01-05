@@ -106,7 +106,7 @@
 
     <select id="getSimpleList" resultMap="BaseResultMap">
         select
-        article_id,title,is_hide,delete_status,create_time
+        user_id,article_id,title,is_hide,delete_status,create_time,rates
         from article
         <!-- 简化(不包含内容) 除了删除的都显示 -->
         where delete_status != 1
@@ -115,6 +115,9 @@
             and user_id = #{queryDto.userId,jdbcType=VARCHAR}
         </if>
         order by create_time desc
+        <if test="queryDto.page != null">
+            limit #{queryDto.page.pageNo},#{queryDto.page.pageSize}
+        </if>
     </select>
 
 </mapper>

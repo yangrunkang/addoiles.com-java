@@ -90,9 +90,19 @@ public class ArticleServiceImpl implements ArticleService {
     public Integer update(Article article) {
         article.setUpdateTime(TimeUtil.currentTime());
 
-        //todo 评论之后的更新有异常,因为article 只有rate和articleId导致再到redis中是残缺的对象 需要解决
-//        redisService.delete(OilRedisConstant.OIL_WEBSITE + article.getArticleId());
-//        redisService.set(OilRedisConstant.OIL_WEBSITE + article.getArticleId(), JsonUtils.toJson(article));
+        Article redisArticle = JsonUtils.fromJson(redisService.get(OilRedisConstant.OIL_WEBSITE + article.getArticleId()), Article.class);
+
+        article.setRates(redisArticle.getRates() + article.getRates());
+        article.setRateCount(redisArticle.getRateCount() + 1);
+
+
+
+        redisArticle.setRateCount(redisArticle.getRateCount() + 1);
+        redisArticle.setRates(article.getRates() == null ? 0 :article.getRates());
+
+        redisService.delete(OilRedisConstant.OIL_WEBSITE + article.getArticleId());
+
+        redisService.set(OilRedisConstant.OIL_WEBSITE + article.getArticleId(), JsonUtils.toJson(redisArticle));
 
         return articleMapper.update(article);
     }

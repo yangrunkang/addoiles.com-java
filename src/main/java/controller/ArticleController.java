@@ -9,7 +9,6 @@ import com.addoiles.entity.Article;
 import com.addoiles.entity.Comment;
 import com.addoiles.entity.User;
 import com.addoiles.impl.ServiceUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -23,8 +22,9 @@ import service.UserService;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import static com.addoiles.common.enums.OilConstant.CONTENT_TOO_LONG;
@@ -36,61 +36,77 @@ import static com.addoiles.common.enums.OilConstant.CONTENT_TOO_LONG;
 @Controller
 public class ArticleController extends BaseController {
 
-    @Autowired
+    @Resource
     private ArticleService articleService;
 
-    @Autowired
+    @Resource
     private CommentService commentService;
 
-    @Autowired
+    @Resource
     private UserService userService;
 
     @Resource
     private OilRedisService oilRedisService;
 
 
+
+
     @RequestMapping(value = "getExperienceList", method = RequestMethod.POST)
     @ResponseBody
     public Object getExperienceList(@RequestBody QueryDto queryDto) {
-        List<ExperienceDto> articleDtoList = new ArrayList<>();
-
         //use redis
         List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
-        List<Article> articleList = articleService.getList(queryDto);
+        List<Article> articleList = articleService.getSimpleList(queryDto);
 
 
         if (CollectionUtils.isEmpty(articleList)) {
             //在页面上显示空
-            return articleDtoList;
+            return articleList;
         }
+
+        articleList = doFilterArticleSimpleList(articleList);
 
         //处理userId转userName
         ServiceUtil.HandleArticleUserIdToUserName(articleList, usersOfIdNameList);
-        articleList.forEach(article -> {
-            List<Comment> commentList = commentService.getCommentListByTargetId(article.getArticleId());
-            if (!CollectionUtils.isEmpty(commentList)) {
-                ExperienceDto articleDto = new ExperienceDto();
-                articleDto.setArticle(article);
-                //处理userId转userName
-                ServiceUtil.HandleCommentUserIdToUserName(commentList, usersOfIdNameList);
-                articleDto.setCommentList(commentList);
-                articleDtoList.add(articleDto);
-            } else {
-                ExperienceDto articleDto = new ExperienceDto();
-                articleDto.setArticle(article);
-                articleDto.setCommentList(new ArrayList<>());
-                articleDtoList.add(articleDto);
-            }
-            //设定评分
-            Integer rates = article.getRates();
-            Integer rateCount = article.getRateCount();
-            if (rateCount > 0) {
-                article.setRates(rates / rateCount > 5 ? 5 : rates / rateCount);
-            }
 
-        });
+        return articleList;
+    }
 
-        return articleDtoList;
+    @RequestMapping(value = "getExperience", method = RequestMethod.POST)
+    @ResponseBody
+    public Object getExperienceDto(@RequestBody QueryDto queryDto){
+        ExperienceDto experienceDto = new ExperienceDto();
+
+        //use redis
+        List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
+        Article article = articleService.getByBusinessId(queryDto.getBusinessId());
+
+
+        if (Objects.isNull(article)) {
+            //在页面上显示空
+            return experienceDto;
+        }
+
+        //处理userId转userName
+        ServiceUtil.HandleArticleUserIdToUserName(Collections.singletonList(article), usersOfIdNameList);
+        List<Comment> commentList = commentService.getCommentListByTargetId(article.getArticleId());
+        if (!CollectionUtils.isEmpty(commentList)) {
+            experienceDto.setArticle(article);
+            //处理userId转userName
+            ServiceUtil.HandleCommentUserIdToUserName(commentList, usersOfIdNameList);
+            experienceDto.setCommentList(commentList);
+        } else {
+            experienceDto.setArticle(article);
+            experienceDto.setCommentList(new ArrayList<>());
+        }
+        //设定评分
+        Integer rates = article.getRates();
+        Integer rateCount = article.getRateCount();
+        if (rateCount > 0) {
+            article.setRates(rates / rateCount > 5 ? 5 : rates / rateCount);
+        }
+
+        return experienceDto;
     }
 
 
@@ -112,7 +128,7 @@ public class ArticleController extends BaseController {
         //处理评论 userId转userName
         ServiceUtil.HandleCommentUserIdToUserName(articleCommentList, usersOfIdNameList);
         //处理文章 userId转userName
-        ServiceUtil.HandleArticleUserIdToUserName(Arrays.asList(article), usersOfIdNameList);
+        ServiceUtil.HandleArticleUserIdToUserName(Collections.singletonList(article), usersOfIdNameList);
 
         itTechDto.setArticle(article);
         itTechDto.setArticleCommentList(articleCommentList);
@@ -124,7 +140,7 @@ public class ArticleController extends BaseController {
     @ResponseBody
     public Object getITArticlePithinessList(@RequestBody QueryDto queryDto) {
         List<Article> pithinessList = articleService.getSimpleList(queryDto);
-        pithinessList =doFilterITTechList(pithinessList);
+        pithinessList = doFilterArticleSimpleList(pithinessList);
         return pithinessList;
     }
 
@@ -161,7 +177,7 @@ public class ArticleController extends BaseController {
     @ResponseBody
     public Object showMoreITTechArticles(@RequestBody QueryDto queryDto) {
         List<Article> simpleList = articleService.getSimpleList(queryDto);
-        return doFilterITTechList(simpleList);
+        return doFilterArticleSimpleList(simpleList);
     }
 
 
@@ -212,7 +228,7 @@ public class ArticleController extends BaseController {
         return articleService.update(tmp);
     }
 
-    private List<Article> doFilterITTechList(List<Article> simpleList){
+    private List<Article> doFilterArticleSimpleList(List<Article> simpleList){
         simpleList = simpleList.stream()
                 //过滤掉非草稿
                 .filter(article -> article.getDeleteStatus() != DBFieldEnum.ArticleDeleteStatus.DRAFT.getValue())
