@@ -3,6 +3,7 @@ package com.addoiles.impl;
 import com.addoiles.entity.Article;
 import com.addoiles.entity.Comment;
 import com.addoiles.entity.User;
+import org.springframework.util.CollectionUtils;
 
 import java.util.List;
 
@@ -22,6 +23,11 @@ public class ServiceUtil {
     }
 
     public static void HandleArticleUserIdToUserName(List<Article> articleList, List<User> userList) {
+
+        if (CollectionUtils.isEmpty(articleList)) {
+            return;
+        }
+
         articleList.forEach(article -> {
             userList.forEach(user -> {
                 if (article.getUserId().equals(user.getUserId())) {

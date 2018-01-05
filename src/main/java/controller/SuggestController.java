@@ -1,13 +1,14 @@
 package controller;
 
 import com.addoiles.entity.Suggest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.SuggestService;
+
+import javax.annotation.Resource;
 
 /**
  * Created by bla on 10/3/2017.
@@ -16,7 +17,7 @@ import service.SuggestService;
 public class SuggestController extends BaseController {
 
 
-    @Autowired
+    @Resource
     private SuggestService suggestService;
 
 

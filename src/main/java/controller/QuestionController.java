@@ -6,7 +6,6 @@ import com.addoiles.entity.Comment;
 import com.addoiles.entity.Question;
 import com.addoiles.entity.User;
 import com.addoiles.impl.ServiceUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,13 +27,13 @@ import java.util.List;
 @Controller
 public class QuestionController extends BaseController {
 
-    @Autowired
+    @Resource
     private QuestionService questionService;
 
-    @Autowired
+    @Resource
     private CommentService commentService;
 
-    @Autowired
+    @Resource
     private UserService userService;
 
     @Resource
