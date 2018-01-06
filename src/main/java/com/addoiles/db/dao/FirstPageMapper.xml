@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.addoiles.db.dao.FirstPageMapper">
+
+  <resultMap id="BaseResultMap" type="com.addoiles.entity.FirstPage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="show_id" jdbcType="VARCHAR" property="showId" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="content" jdbcType="VARCHAR" property="content" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="delete_status" jdbcType="INTEGER" property="deleteStatus" />
+  </resultMap>
+
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.addoiles.entity.FirstPage">
+    <result column="image" jdbcType="LONGVARCHAR" property="image" />
+  </resultMap>
+
+  <sql id="BaseColumn">
+    id, show_id, title, content, image,type, delete_status
+  </sql>
+
+
+
+  <select id="getList" resultMap="BaseResultMap">
+    select
+    <include refid="BaseColumn"/>
+    from first_page where delete_status = 0
+  </select>
+
+  <insert id="insert" parameterType="com.addoiles.entity.FirstPage">
+    insert into first_page (show_id, title, content, 
+      type, delete_status, image
+      )
+    values (#{showId,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, 
+      #{type,jdbcType=INTEGER}, #{deleteStatus,jdbcType=INTEGER}, #{image,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+
+</mapper>
