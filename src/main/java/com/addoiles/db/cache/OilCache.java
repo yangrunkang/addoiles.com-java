@@ -47,12 +47,16 @@ public class OilCache {
      */
     private void cacheAllArticles() {
 
+        //删除redis key
         this.delRedisKeys();
 
+        //缓存文章
         this.cacheArticle();
 
+        //缓存问题
         this.cacheQuestion();
 
+        //缓存导航栏
         this.cacheNavList();
 
     }
