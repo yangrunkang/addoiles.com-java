@@ -1,8 +1,6 @@
 package controller;
 
 import com.addoiles.common.enums.DBFieldEnum;
-import com.addoiles.db.redis.OilRedisConstant;
-import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.dto.query.QueryDto;
 import com.addoiles.dto.req.RatesDto;
 import com.addoiles.dto.resp.ExperienceDto;
@@ -11,7 +9,6 @@ import com.addoiles.entity.Article;
 import com.addoiles.entity.Comment;
 import com.addoiles.entity.User;
 import com.addoiles.impl.ServiceUtil;
-import com.addoiles.util.JsonUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -50,12 +47,6 @@ public class ArticleController extends BaseController {
 
     @Resource
     private OilRedisService oilRedisService;
-
-    @Resource
-    private RedisService redisService;
-
-
-
 
     @RequestMapping(value = "getExperienceList", method = RequestMethod.POST)
     @ResponseBody
@@ -206,8 +197,7 @@ public class ArticleController extends BaseController {
     public Object editArticle(@RequestBody Article article) {
         Integer count;
         try {
-            Article redisArticle = JsonUtils.fromJson(redisService.get(OilRedisConstant.OIL_WEBSITE + article.getArticleId()),
-                    Article.class);
+            Article redisArticle = oilRedisService.getArticleByArticleId(article.getArticleId());
             if(Objects.isNull(redisArticle)){
                 return -1;
             }
@@ -217,8 +207,7 @@ public class ArticleController extends BaseController {
             redisArticle.setTitle(article.getTitle());
             redisArticle.setContent(article.getContent());
 
-            redisService.delete(OilRedisConstant.OIL_WEBSITE + redisArticle.getArticleId());
-            redisService.set(OilRedisConstant.OIL_WEBSITE + redisArticle.getArticleId(), JsonUtils.toJson(redisArticle));
+            oilRedisService.updateArticle(redisArticle);
 
 
             count = articleService.update(article);
@@ -246,7 +235,7 @@ public class ArticleController extends BaseController {
 
 
 
-        Article redisArticle = JsonUtils.fromJson(redisService.get(OilRedisConstant.OIL_WEBSITE + ratesDto.getBusinessId()), Article.class);
+        Article redisArticle = oilRedisService.getArticleByArticleId(ratesDto.getBusinessId());
 
         Article tmp = new Article();
         tmp.setArticleId(ratesDto.getBusinessId());
@@ -258,8 +247,7 @@ public class ArticleController extends BaseController {
         redisArticle.setRates(tmp.getRates());
         redisArticle.setRateCount(tmp.getRateCount());
 
-        redisService.delete(OilRedisConstant.OIL_WEBSITE + redisArticle.getArticleId());
-        redisService.set(OilRedisConstant.OIL_WEBSITE + redisArticle.getArticleId(), JsonUtils.toJson(redisArticle));
+        oilRedisService.updateArticle(redisArticle);
 
 
 

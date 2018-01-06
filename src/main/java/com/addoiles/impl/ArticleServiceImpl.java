@@ -2,17 +2,14 @@ package com.addoiles.impl;
 
 import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.ArticleMapper;
-import com.addoiles.db.redis.OilRedisConstant;
-import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.dto.query.QueryDto;
 import com.addoiles.entity.Article;
-import com.addoiles.util.JsonUtils;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 import service.ArticleService;
+import service.OilRedisService;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -33,26 +30,19 @@ public class ArticleServiceImpl implements ArticleService {
     private ArticleMapper articleMapper;
 
     @Resource
-    private RedisService redisService;
+    private OilRedisService oilRedisService;
 
     @Override
     public List<Article> getList(QueryDto queryDto) {
         List<Article> articleList = new ArrayList<>(10);
-
+        //根据添加获取文章ID集合
         List<String> articleIdList = articleMapper.getArticleIdList(queryDto);
         if (CollectionUtils.isEmpty(articleIdList)) {
             return articleList;
         }
 
         articleIdList.forEach(articleId -> {
-            String articleJson = redisService.get(OilRedisConstant.OIL_WEBSITE + articleId);
-
-            if (StringUtils.isEmpty(articleJson)) {
-                Article byBusinessId = articleMapper.getByBusinessId(articleId);
-                articleJson = JsonUtils.toJson(byBusinessId);
-            }
-
-            articleList.add(JsonUtils.fromJson(articleJson, Article.class));
+            articleList.add(oilRedisService.getArticleByArticleId(articleId));
         });
 
         return articleList;
@@ -66,22 +56,14 @@ public class ArticleServiceImpl implements ArticleService {
         article.setRateCount(0);
         article.setCreateTime(TimeUtil.currentTime());
 
-        redisService.set(OilRedisConstant.OIL_WEBSITE + article.getArticleId(), JsonUtils.toJson(article));
+        oilRedisService.addArticle(article);
 
         return articleMapper.insert(article);
     }
 
     @Override
     public Article getByBusinessId(String businessId) {
-
-        String articleJson = redisService.get(OilRedisConstant.OIL_WEBSITE + businessId);
-
-        if (StringUtils.isEmpty(articleJson)) {
-            Article byBusinessId = articleMapper.getByBusinessId(businessId);
-            articleJson = JsonUtils.toJson(byBusinessId);
-        }
-
-        return JsonUtils.fromJson(articleJson, Article.class);
+        return oilRedisService.getArticleByArticleId(businessId);
     }
 
 
@@ -96,7 +78,7 @@ public class ArticleServiceImpl implements ArticleService {
     @OilLog
     @Override
     public Integer delete(String articleId) {
-        redisService.delete(OilRedisConstant.OIL_WEBSITE + articleId);
+        oilRedisService.deleteArticleByArticleId(articleId);
         return articleMapper.delete(articleId);
     }
 

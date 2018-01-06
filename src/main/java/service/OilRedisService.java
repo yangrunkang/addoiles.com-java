@@ -1,5 +1,6 @@
 package service;
 
+import com.addoiles.entity.Article;
 import com.addoiles.entity.NavSettings;
 import com.addoiles.entity.User;
 
@@ -40,7 +41,35 @@ public interface OilRedisService {
      */
     String getVerifyCodeByEmail(String email);
 
-
+    /**
+     * 获取导航栏
+     * @return
+     */
     List<NavSettings> getNavList();
+
+    /**
+     * 根据文章id获取文章
+     * @param articleId
+     * @return
+     */
+    Article getArticleByArticleId(String articleId);
+
+    /**
+     * 根据文章id删除文章
+     * @param articleId
+     */
+    void deleteArticleByArticleId(String articleId);
+
+    /**
+     * 添加文章
+     * @param article
+     */
+    void addArticle(Article article);
+
+    /**
+     * 更新文章
+     * @param article
+     */
+    void updateArticle(Article article);
 
 }

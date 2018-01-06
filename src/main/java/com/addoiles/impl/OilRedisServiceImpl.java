@@ -1,11 +1,13 @@
 package com.addoiles.impl;
 
+import com.addoiles.db.dao.ArticleMapper;
 import com.addoiles.db.dao.NavSettingsMapper;
 import com.addoiles.db.dao.UserMapper;
 import com.addoiles.db.redis.OilRedisConstant;
 import com.addoiles.db.redis.dto.NavDto;
 import com.addoiles.db.redis.dto.UserIDNamesDto;
 import com.addoiles.db.redis.inter.RedisService;
+import com.addoiles.entity.Article;
 import com.addoiles.entity.NavSettings;
 import com.addoiles.entity.User;
 import com.addoiles.util.JsonUtils;
@@ -37,6 +39,9 @@ public class OilRedisServiceImpl implements OilRedisService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private ArticleMapper articleMapper;
 
     @Resource
     private RedisService redisService;
@@ -103,5 +108,32 @@ public class OilRedisServiceImpl implements OilRedisService {
         navSettingsList = navDto.getNavSettings();
 
         return navSettingsList;
+    }
+
+
+    @Override
+    public Article getArticleByArticleId(String articleId) {
+        Article article = JsonUtils.fromJson(redisService.get(OilRedisConstant.OIL_WEBSITE + articleId), Article.class);
+        if(Objects.isNull(article)){
+            article = articleMapper.getByBusinessId(articleId);
+            this.addArticle(article);
+        }
+        return article;
+    }
+
+    @Override
+    public void deleteArticleByArticleId(String articleId) {
+        redisService.delete(OilRedisConstant.OIL_WEBSITE + articleId);
+    }
+
+    @Override
+    public void addArticle(Article article) {
+        redisService.set(OilRedisConstant.OIL_WEBSITE + article.getArticleId(), JsonUtils.toJson(article));
+    }
+
+    @Override
+    public void updateArticle(Article article) {
+        this.deleteArticleByArticleId(article.getArticleId());
+        this.addArticle(article);
     }
 }
