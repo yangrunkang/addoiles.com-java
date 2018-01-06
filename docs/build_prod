@@ -6,9 +6,13 @@
 
 3. redis.properties 要改(暂时不改,通过key决定,回家的时候测试,redis不支持windows..)
 
-4. 如果没有写清除程序,要记得清理redis key
+4. 每次开发完,运行清理redis key 程序
 
-5. 要改这个: com.addoiles.db.redis.OilRedisConstant
+5. 要改这个: com.addoiles.db.redis.OilRedisConstant.REDIS_ENV 值 改成 PRD
+
+6. 前端修改网站版本号+日期;更新网站日志
+
+7. 前端请求地址修改
 
 
 
