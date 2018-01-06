@@ -1,10 +1,13 @@
 package controller;
 
+import com.addoiles.db.dao.FirstPageMapper;
 import com.addoiles.db.redis.OilRedisConstant;
 import com.addoiles.db.redis.inter.RedisService;
+import com.addoiles.entity.FirstPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -38,6 +41,21 @@ public class DevController {
         redisService.deleteKeys(OilRedisConstant.OIL_WEBSITE + "*");
         logger.info("------>dev redis data cleaned");
         return "dev redis data cleaned";
+    }
+
+
+    @Resource
+    private FirstPageMapper firstPageMapper;
+
+    /**
+     * 添加首页展示信息
+     * @return
+     */
+    @RequestMapping(value = "addFirstPage",method = RequestMethod.GET)
+    @ResponseBody
+    public Object addFirstPage(@RequestBody FirstPage firstPage){
+        Integer insert = firstPageMapper.insert(firstPage);
+        return "----> addFirstPage result:" + insert;
     }
 
 }
