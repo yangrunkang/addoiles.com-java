@@ -11,8 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import sun.misc.BASE64Encoder;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 
 /**
  * Description: Dev 数据清理
@@ -24,7 +27,7 @@ import javax.annotation.Resource;
  * @CreateDate: 2018/1/6 8:58
  */
 @Controller
-public class DevController {
+public class DevController extends BaseController{
 
     private static Logger logger = LoggerFactory.getLogger(DevController.class);
 
@@ -53,8 +56,16 @@ public class DevController {
      */
     @RequestMapping(value = "addFirstPage",method = RequestMethod.GET)
     @ResponseBody
-    public Object addFirstPage(@RequestBody FirstPage firstPage){
+    public Object addFirstPage(@RequestBody FirstPage firstPage,MultipartFile file) throws IOException {
+        BASE64Encoder encoder = new BASE64Encoder();
+        // 通过base64来转化图片
+        String data = encoder.encode(file.getBytes());
+
         Integer insert = firstPageMapper.insert(firstPage);
+
+
+
+
         return "----> addFirstPage result:" + insert;
     }
 
