@@ -42,7 +42,7 @@ public class ControllerAop {
         try {
             Object proceed = pjp.proceed();
             oilResponse.setData(proceed);
-            logger.info("method:{} ,response:{}", pjp.getSignature().getName(), JsonUtils.toJson(oilResponse));
+//            logger.info("method:{} ,response:{}", pjp.getSignature().getName(), JsonUtils.toJson(oilResponse));
         } catch (Exception exception) {
             if (exception instanceof BusinessException) {
                 oilResponse.setCode(((BusinessException) exception).getCode());
