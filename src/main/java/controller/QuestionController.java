@@ -15,14 +15,18 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import service.CommentService;
 import service.OilRedisService;
 import service.QuestionService;
-import service.UserService;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by bla on 9/24/2017.
+ *  QuestionController
+ * <p>All rights Reserved, Designed By HQYG.</p>
+ * @Copyright    Copyright(C) 2017.
+ * @Company      HQYG.
+ * @author       Yangrunkang
+ * @CreateDate   9/24/2017
  */
 @Controller
 public class QuestionController extends BaseController {
@@ -32,9 +36,6 @@ public class QuestionController extends BaseController {
 
     @Resource
     private CommentService commentService;
-
-    @Resource
-    private UserService userService;
 
     @Resource
     private OilRedisService oilRedisService;
