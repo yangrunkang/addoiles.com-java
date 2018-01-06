@@ -53,6 +53,9 @@ public class MicroContent implements Serializable {
      */
     private Integer createTime;
 
+    /************Not *************/
+    private String userName;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {
@@ -127,5 +130,11 @@ public class MicroContent implements Serializable {
         this.createTime = createTime;
     }
 
+    public String getUserName() {
+        return userName;
+    }
 
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
 }
