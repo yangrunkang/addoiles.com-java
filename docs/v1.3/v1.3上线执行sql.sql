@@ -1,5 +1,5 @@
 -- 导航栏表 增添问答区导航栏数据
-INSERT INTO `addoiles`.`nav_settings` (`nav_name`, `nav_router`, `nav_icon`, `is_start`) VALUES ('论坛', '/OilForm',
+INSERT INTO `addoiles`.`nav_settings` (`nav_name`, `nav_router`, `nav_icon`, `is_start`) VALUES ('论坛', '/OilForum',
                                                                                                  'cube', '0');
 -- 导航栏表 添加排序字段
 alter table `addoiles`.`nav_settings` add `sort` int(2) DEFAULT 0 COMMENT '排序字段 1 最大,排在前面' AFTER `is_start`;
