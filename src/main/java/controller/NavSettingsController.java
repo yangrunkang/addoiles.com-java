@@ -1,5 +1,6 @@
 package controller;
 
+import com.addoiles.util.JsonUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -21,10 +22,15 @@ public class NavSettingsController extends BaseController {
     @Resource
     private OilRedisService oilRedisService;
 
-    @RequestMapping("getNavs")
+    /**
+     * 获取导航栏json串
+     * @apiNote 返回json串,前段就不用处理了List-->json了
+     * @return
+     */
+    @RequestMapping("getNavList")
     @ResponseBody
-    public Object getNavs() {
-        return oilRedisService.getNavList();
+    public Object getNavList() {
+        return JsonUtils.toJson(oilRedisService.getNavList());
     }
 
 
