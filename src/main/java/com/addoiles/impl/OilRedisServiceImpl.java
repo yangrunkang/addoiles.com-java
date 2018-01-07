@@ -1,13 +1,16 @@
 package com.addoiles.impl;
 
 import com.addoiles.db.dao.ArticleMapper;
+import com.addoiles.db.dao.FirstPageMapper;
 import com.addoiles.db.dao.NavSettingsMapper;
 import com.addoiles.db.dao.UserMapper;
 import com.addoiles.db.redis.OilRedisConstant;
+import com.addoiles.db.redis.dto.FirstPageImageDto;
 import com.addoiles.db.redis.dto.NavDto;
 import com.addoiles.db.redis.dto.UserIDNamesDto;
 import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.entity.Article;
+import com.addoiles.entity.FirstPage;
 import com.addoiles.entity.NavSettings;
 import com.addoiles.entity.User;
 import com.addoiles.util.JsonUtils;
@@ -48,6 +51,11 @@ public class OilRedisServiceImpl implements OilRedisService {
 
     @Resource
     private NavSettingsMapper navSettingsMapper;
+
+    @Resource
+    private FirstPageMapper firstPageMapper;
+
+
 
     @Override
     public List<User> getUsersIdsNames(Boolean reload) {
@@ -135,5 +143,27 @@ public class OilRedisServiceImpl implements OilRedisService {
     public void updateArticle(Article article) {
         this.deleteArticleByArticleId(article.getArticleId());
         this.addArticle(article);
+    }
+
+    @Override
+    public List<FirstPage> getFistPageImage() {
+        List<FirstPage>  list;
+        String fisrtPageImageListJson = redisService.get(OilRedisConstant.FIRST_PAGE_IMAGE);
+        if(StringUtils.isEmpty(fisrtPageImageListJson)){
+            list = firstPageMapper.getList(null);
+            FirstPageImageDto firstPageImageDto = new FirstPageImageDto();
+            firstPageImageDto.setFirstPageList(list);
+
+            redisService.set(OilRedisConstant.FIRST_PAGE_IMAGE,JsonUtils.toJson(firstPageImageDto));
+
+            fisrtPageImageListJson = JsonUtils.toJson(firstPageImageDto);
+        }
+        FirstPageImageDto firstPageImageDto = JsonUtils.fromJson(fisrtPageImageListJson, FirstPageImageDto.class);
+
+        if(firstPageImageDto == null){
+            return new ArrayList<>();
+        }
+
+        return firstPageImageDto.getFirstPageList();
     }
 }

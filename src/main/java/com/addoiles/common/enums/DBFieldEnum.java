@@ -260,4 +260,32 @@ public class DBFieldEnum {
     }
 
 
+
+    /**
+     * 首页图片展示
+     */
+    public enum FirstPageDeleteStatus {
+
+        /**
+         * 正常
+         */
+        NORMAL(0),
+
+        /**
+         * 删除
+         */
+        DELETED(1),;
+
+        private final int value;
+
+        FirstPageDeleteStatus(int value) {
+            this.value = value;
+        }
+
+        public int getValue() {
+            return value;
+        }
+    }
+
+
 }

@@ -38,4 +38,9 @@ public class OilRedisConstant {
      */
     public static String NAV_LIST = OIL_WEBSITE + "nav.list";
 
+    /**
+     * 首页图片
+     */
+    public static String FIRST_PAGE_IMAGE = OIL_WEBSITE + "first.page.image";
+
 }

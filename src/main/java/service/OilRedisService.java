@@ -1,6 +1,7 @@
 package service;
 
 import com.addoiles.entity.Article;
+import com.addoiles.entity.FirstPage;
 import com.addoiles.entity.NavSettings;
 import com.addoiles.entity.User;
 
@@ -72,4 +73,8 @@ public interface OilRedisService {
      */
     void updateArticle(Article article);
 
+    /**
+     * 获取首页图片
+     */
+    List<FirstPage> getFistPageImage();
 }

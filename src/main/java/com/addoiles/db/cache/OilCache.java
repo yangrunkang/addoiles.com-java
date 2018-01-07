@@ -1,12 +1,15 @@
 package com.addoiles.db.cache;
 
 import com.addoiles.db.dao.ArticleMapper;
+import com.addoiles.db.dao.FirstPageMapper;
 import com.addoiles.db.dao.NavSettingsMapper;
 import com.addoiles.db.dao.QuestionMapper;
 import com.addoiles.db.redis.OilRedisConstant;
+import com.addoiles.db.redis.dto.FirstPageImageDto;
 import com.addoiles.db.redis.dto.NavDto;
 import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.entity.Article;
+import com.addoiles.entity.FirstPage;
 import com.addoiles.entity.NavSettings;
 import com.addoiles.entity.Question;
 import com.addoiles.util.JsonUtils;
@@ -41,6 +44,9 @@ public class OilCache {
     @Resource
     private NavSettingsMapper navSettingsMapper;
 
+    @Resource
+    private FirstPageMapper firstPageMapper;
+
 
     /**
      * 缓存所有文章
@@ -58,6 +64,9 @@ public class OilCache {
 
         //缓存导航栏
         this.cacheNavList();
+
+        //缓存首页图片
+        this.cacheFirstPageImage();
 
     }
 
@@ -103,5 +112,17 @@ public class OilCache {
         NavDto navDto = new NavDto();
         navDto.setNavSettings(list);
         redisService.set(OilRedisConstant.NAV_LIST, JsonUtils.toJson(navDto));
+    }
+
+    /**
+     * 缓存首页图片
+     */
+    public void cacheFirstPageImage(){
+        List<FirstPage> list = firstPageMapper.getList(null);
+        if(!CollectionUtils.isEmpty(list)){
+            FirstPageImageDto firstPageImageDto = new FirstPageImageDto();
+            firstPageImageDto.setFirstPageList(list);
+            redisService.set(OilRedisConstant.FIRST_PAGE_IMAGE,JsonUtils.toJson(firstPageImageDto));
+        }
     }
 }

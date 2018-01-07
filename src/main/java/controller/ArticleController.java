@@ -7,6 +7,7 @@ import com.addoiles.dto.resp.ExperienceDto;
 import com.addoiles.dto.view.ITTechDto;
 import com.addoiles.entity.Article;
 import com.addoiles.entity.Comment;
+import com.addoiles.entity.FirstPage;
 import com.addoiles.entity.User;
 import com.addoiles.impl.ServiceUtil;
 import org.springframework.stereotype.Controller;
@@ -106,8 +107,6 @@ public class ArticleController extends BaseController {
         return experienceDto;
     }
 
-
-
     @RequestMapping(value = "getITArticleList",method = RequestMethod.POST)
     @ResponseBody
     public Object getITArticleList(@RequestBody QueryDto queryDto) {
@@ -141,9 +140,6 @@ public class ArticleController extends BaseController {
         return pithinessList;
     }
 
-
-
-
     @RequestMapping(value = "getSimpleList",method = RequestMethod.POST)
     @ResponseBody
     public Object getSimpleList(@RequestBody QueryDto queryDto) {
@@ -163,8 +159,6 @@ public class ArticleController extends BaseController {
         return articleService.getByBusinessId(queryDto.getBusinessId());
     }
 
-
-
     /**
      * 展示更多
      *
@@ -176,8 +170,6 @@ public class ArticleController extends BaseController {
         List<Article> simpleList = articleService.getSimpleList(queryDto);
         return doFilterArticleSimpleList(simpleList);
     }
-
-
 
     @RequestMapping("addArticle")
     @ResponseBody
@@ -209,7 +201,6 @@ public class ArticleController extends BaseController {
 
             oilRedisService.updateArticle(redisArticle);
 
-
             count = articleService.update(article);
         } catch (Exception e) {
             count = CONTENT_TOO_LONG;
@@ -233,8 +224,6 @@ public class ArticleController extends BaseController {
     @ResponseBody
     public Object updateRates(@RequestBody RatesDto ratesDto) {
 
-
-
         Article redisArticle = oilRedisService.getArticleByArticleId(ratesDto.getBusinessId());
 
         Article tmp = new Article();
@@ -242,17 +231,25 @@ public class ArticleController extends BaseController {
         tmp.setRates(ratesDto.getRate() + redisArticle.getRates());
         tmp.setRateCount(redisArticle.getRateCount() + 1);
 
-
-
         redisArticle.setRates(tmp.getRates());
         redisArticle.setRateCount(tmp.getRateCount());
 
         oilRedisService.updateArticle(redisArticle);
 
-
-
         return articleService.update(tmp);
     }
+
+    @RequestMapping(value = "getFistPageImage", method = RequestMethod.POST)
+    @ResponseBody
+    public Object getFistPageImage() {
+        List<FirstPage> fistPageImage = oilRedisService.getFistPageImage();
+        if(CollectionUtils.isEmpty(fistPageImage)){
+            return new ArrayList<FirstPage>();
+        }
+        return fistPageImage;
+    }
+
+
 
     private List<Article> doFilterArticleSimpleList(List<Article> simpleList){
         simpleList = simpleList.stream()
