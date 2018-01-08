@@ -19,15 +19,15 @@ end;
 -- 问题表 添加问题类型字段
 alter table `addoiles`.`question` add `type` int(2) DEFAULT 0 COMMENT '问题类型 0-编程语言 1-开发问题 2-缓存技术 3-操作系统 4-学习' AFTER `content`;
 
--- 新增 首页信息展示-运营
-CREATE TABLE `first_page` (
+-- 新增 推荐表-运营
+CREATE TABLE `recommend` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `show_id` varchar(32) NOT NULL COMMENT '展示id',
   `title` varchar(50) NOT NULL COMMENT '标题',
-  `content` varchar(5000) DEFAULT NULL COMMENT '内容描述',
-  `image` longtext NOT NULL COMMENT '图片',
+  `content` varchar(2000) DEFAULT NULL COMMENT '内容描述',
+  `image` varchar(1000) NOT NULL COMMENT '图片',
   `type` int(2) NOT NULL COMMENT '类型 0-电影推荐 1-新书推荐 2-图片分享',
-  `delete_status` int(1) NOT NULL COMMENT '删除状态 0-正常 1-删除',
+  `delete_status` int(1) NOT NULL DEFAULT '0' COMMENT '删除状态 0-正常 1-删除',
+  `create_time` int(11) DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='首页信息展示-运营';
-
