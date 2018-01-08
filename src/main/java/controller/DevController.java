@@ -111,7 +111,13 @@ public class DevController extends BaseController{
     @ResponseBody
     public Object updateImageInfo(@RequestBody Recommend recommend) throws IOException {
 
-        int updatedId = recommendMapper.selectMaxId();
+        int updatedId;
+        if(recommend.getId() == null){
+            updatedId = recommendMapper.selectMaxId();
+        }else{
+            updatedId = recommend.getId();
+        }
+
 
         recommend.setId(updatedId);
 
