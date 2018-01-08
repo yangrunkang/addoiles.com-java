@@ -1,4 +1,6 @@
 
+# 阿里云记得开启端口,并且服务器上防火墙也要配置和重启
+
 #user  nobody;
 worker_processes  1;
 
