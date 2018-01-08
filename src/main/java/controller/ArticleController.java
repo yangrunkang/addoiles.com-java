@@ -5,10 +5,7 @@ import com.addoiles.dto.query.QueryDto;
 import com.addoiles.dto.req.RatesDto;
 import com.addoiles.dto.resp.ExperienceDto;
 import com.addoiles.dto.view.ITTechDto;
-import com.addoiles.entity.Article;
-import com.addoiles.entity.Comment;
-import com.addoiles.entity.FirstPage;
-import com.addoiles.entity.User;
+import com.addoiles.entity.*;
 import com.addoiles.impl.ServiceUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -241,10 +238,10 @@ public class ArticleController extends BaseController {
 
     @RequestMapping(value = "getFistPageImage", method = RequestMethod.POST)
     @ResponseBody
-    public Object getFistPageImage() {
-        List<FirstPage> fistPageImage = oilRedisService.getFistPageImage();
+    public Object getRecommend() {
+        List<Recommend> fistPageImage = oilRedisService.getRecommend();
         if(CollectionUtils.isEmpty(fistPageImage)){
-            return new ArrayList<FirstPage>();
+            return new ArrayList<Recommend>();
         }
         return fistPageImage;
     }

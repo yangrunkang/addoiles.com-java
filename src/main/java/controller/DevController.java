@@ -2,20 +2,22 @@ package controller;
 
 import com.addoiles.common.enums.DBFieldEnum;
 import com.addoiles.db.cache.OilCache;
-import com.addoiles.db.dao.FirstPageMapper;
+import com.addoiles.db.dao.RecommendMapper;
 import com.addoiles.db.redis.OilRedisConstant;
 import com.addoiles.db.redis.inter.RedisService;
-import com.addoiles.entity.FirstPage;
+import com.addoiles.entity.Recommend;
 import com.addoiles.util.OilUtils;
+import com.addoiles.util.TimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import sun.misc.BASE64Encoder;
 
 import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -51,7 +53,7 @@ public class DevController extends BaseController{
 
 
     @Resource
-    private FirstPageMapper firstPageMapper;
+    private RecommendMapper recommendMapper;
 
     /**
      * 添加首页展示信息
@@ -61,24 +63,17 @@ public class DevController extends BaseController{
     @RequestMapping(value = "addFirstPage",method = RequestMethod.POST)
     @ResponseBody
     public Object addFirstPage(@RequestBody MultipartFile file) throws IOException {
-        BASE64Encoder encoder = new BASE64Encoder();
         // 通过base64来转化图片
-        String data = encoder.encode(file.getBytes());
         String fileName = file.getOriginalFilename();
-        String[] split = fileName.split("_");
-        String type = split[0];
-        String title = split[1];
-        String content = split[2];
 
-        FirstPage firstPage = new FirstPage();
-        firstPage.setShowId(OilUtils.generateID());
-        firstPage.setTitle(title);
-        firstPage.setContent(content);
-        firstPage.setImage("data:image/jpg;base64," + data);
-        firstPage.setType(Integer.valueOf(type));
-        firstPage.setDeleteStatus(DBFieldEnum.FirstPageDeleteStatus.NORMAL.getValue());
+        String imagePath = "";
+        Recommend recommend = new Recommend();
+        recommend.setShowId(OilUtils.generateID());
+        recommend.setImage(imagePath + "地址分割符号" + fileName);
+        recommend.setDeleteStatus(DBFieldEnum.FirstPageDeleteStatus.NORMAL.getValue());
+        recommend.setCreateTime(TimeUtil.currentTime());
 
-        Integer insert = firstPageMapper.insert(firstPage);
+        Integer insert = recommendMapper.insert(recommend);
 
         return "----> addFirstPage result:" + insert;
     }

@@ -3,14 +3,9 @@ package com.addoiles.entity;
 import java.io.Serializable;
 
 /**
- *  首页展示
- * <p>All rights Reserved, Designed By HQYG.</p>
- * @Copyright    Copyright(C) 2017.
- * @Company      HQYG.
- * @author       Yangrunkang
- * @CreateDate   2018/1/6 17:44
+ * @author 
  */
-public class FirstPage implements Serializable {
+public class Recommend implements Serializable {
     private Integer id;
 
     /**
@@ -29,6 +24,11 @@ public class FirstPage implements Serializable {
     private String content;
 
     /**
+     * 图片
+     */
+    private String image;
+
+    /**
      * 类型 0-电影推荐 1-新书推荐 2-图片分享
      */
     private Integer type;
@@ -39,9 +39,9 @@ public class FirstPage implements Serializable {
     private Integer deleteStatus;
 
     /**
-     * 图片
+     * 创建时间
      */
-    private String image;
+    private Integer createTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -77,6 +77,14 @@ public class FirstPage implements Serializable {
         this.content = content;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     public Integer getType() {
         return type;
     }
@@ -93,11 +101,11 @@ public class FirstPage implements Serializable {
         this.deleteStatus = deleteStatus;
     }
 
-    public String getImage() {
-        return image;
+    public Integer getCreateTime() {
+        return createTime;
     }
 
-    public void setImage(String image) {
-        this.image = image;
+    public void setCreateTime(Integer createTime) {
+        this.createTime = createTime;
     }
 }

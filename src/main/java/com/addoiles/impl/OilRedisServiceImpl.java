@@ -1,17 +1,17 @@
 package com.addoiles.impl;
 
 import com.addoiles.db.dao.ArticleMapper;
-import com.addoiles.db.dao.FirstPageMapper;
 import com.addoiles.db.dao.NavSettingsMapper;
+import com.addoiles.db.dao.RecommendMapper;
 import com.addoiles.db.dao.UserMapper;
 import com.addoiles.db.redis.OilRedisConstant;
-import com.addoiles.db.redis.dto.FirstPageImageDto;
 import com.addoiles.db.redis.dto.NavDto;
+import com.addoiles.db.redis.dto.RecommendDto;
 import com.addoiles.db.redis.dto.UserIDNamesDto;
 import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.entity.Article;
-import com.addoiles.entity.FirstPage;
 import com.addoiles.entity.NavSettings;
+import com.addoiles.entity.Recommend;
 import com.addoiles.entity.User;
 import com.addoiles.util.JsonUtils;
 import org.slf4j.Logger;
@@ -53,7 +53,7 @@ public class OilRedisServiceImpl implements OilRedisService {
     private NavSettingsMapper navSettingsMapper;
 
     @Resource
-    private FirstPageMapper firstPageMapper;
+    private RecommendMapper recommendMapper;
 
 
 
@@ -146,24 +146,24 @@ public class OilRedisServiceImpl implements OilRedisService {
     }
 
     @Override
-    public List<FirstPage> getFistPageImage() {
-        List<FirstPage>  list;
-        String fisrtPageImageListJson = redisService.get(OilRedisConstant.FIRST_PAGE_IMAGE);
-        if(StringUtils.isEmpty(fisrtPageImageListJson)){
-            list = firstPageMapper.getList(null);
-            FirstPageImageDto firstPageImageDto = new FirstPageImageDto();
-            firstPageImageDto.setFirstPageList(list);
+    public List<Recommend> getRecommend() {
+        List<Recommend>  list;
+        String recommendJson = redisService.get(OilRedisConstant.FIRST_PAGE_IMAGE);
+        if(StringUtils.isEmpty(recommendJson)){
+            list = recommendMapper.getList(null);
+            RecommendDto recommendDto = new RecommendDto();
+            recommendDto.setRecommendList(list);
 
-            redisService.set(OilRedisConstant.FIRST_PAGE_IMAGE,JsonUtils.toJson(firstPageImageDto));
+            redisService.set(OilRedisConstant.FIRST_PAGE_IMAGE,JsonUtils.toJson(recommendDto));
 
-            fisrtPageImageListJson = JsonUtils.toJson(firstPageImageDto);
+            recommendJson = JsonUtils.toJson(recommendDto);
         }
-        FirstPageImageDto firstPageImageDto = JsonUtils.fromJson(fisrtPageImageListJson, FirstPageImageDto.class);
+        RecommendDto firstPageImageDto = JsonUtils.fromJson(recommendJson, RecommendDto.class);
 
         if(firstPageImageDto == null){
             return new ArrayList<>();
         }
 
-        return firstPageImageDto.getFirstPageList();
+        return firstPageImageDto.getRecommendList();
     }
 }

@@ -1,8 +1,8 @@
 package service;
 
 import com.addoiles.entity.Article;
-import com.addoiles.entity.FirstPage;
 import com.addoiles.entity.NavSettings;
+import com.addoiles.entity.Recommend;
 import com.addoiles.entity.User;
 
 import java.util.List;
@@ -76,5 +76,5 @@ public interface OilRedisService {
     /**
      * 获取首页图片
      */
-    List<FirstPage> getFistPageImage();
+    List<Recommend> getRecommend();
 }

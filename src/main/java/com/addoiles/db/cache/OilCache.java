@@ -1,17 +1,17 @@
 package com.addoiles.db.cache;
 
 import com.addoiles.db.dao.ArticleMapper;
-import com.addoiles.db.dao.FirstPageMapper;
 import com.addoiles.db.dao.NavSettingsMapper;
 import com.addoiles.db.dao.QuestionMapper;
+import com.addoiles.db.dao.RecommendMapper;
 import com.addoiles.db.redis.OilRedisConstant;
-import com.addoiles.db.redis.dto.FirstPageImageDto;
 import com.addoiles.db.redis.dto.NavDto;
+import com.addoiles.db.redis.dto.RecommendDto;
 import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.entity.Article;
-import com.addoiles.entity.FirstPage;
 import com.addoiles.entity.NavSettings;
 import com.addoiles.entity.Question;
+import com.addoiles.entity.Recommend;
 import com.addoiles.util.JsonUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Component;
@@ -45,7 +45,7 @@ public class OilCache {
     private NavSettingsMapper navSettingsMapper;
 
     @Resource
-    private FirstPageMapper firstPageMapper;
+    private RecommendMapper recommendMapper;
 
 
     /**
@@ -118,11 +118,11 @@ public class OilCache {
      * 缓存首页图片
      */
     public void cacheFirstPageImage(){
-        List<FirstPage> list = firstPageMapper.getList(null);
+        List<Recommend> list = recommendMapper.getList(null);
         if(!CollectionUtils.isEmpty(list)){
-            FirstPageImageDto firstPageImageDto = new FirstPageImageDto();
-            firstPageImageDto.setFirstPageList(list);
-            redisService.set(OilRedisConstant.FIRST_PAGE_IMAGE,JsonUtils.toJson(firstPageImageDto));
+            RecommendDto recommendDto = new RecommendDto();
+            recommendDto.setRecommendList(list);
+            redisService.set(OilRedisConstant.FIRST_PAGE_IMAGE,JsonUtils.toJson(recommendDto));
         }
     }
 }
