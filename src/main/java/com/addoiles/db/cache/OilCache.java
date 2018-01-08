@@ -1,17 +1,13 @@
 package com.addoiles.db.cache;
 
-import com.addoiles.db.dao.ArticleMapper;
-import com.addoiles.db.dao.NavSettingsMapper;
-import com.addoiles.db.dao.QuestionMapper;
-import com.addoiles.db.dao.RecommendMapper;
+import com.addoiles.db.dao.*;
 import com.addoiles.db.redis.OilRedisConstant;
+import com.addoiles.db.redis.dto.MicroContentDto;
 import com.addoiles.db.redis.dto.NavDto;
 import com.addoiles.db.redis.dto.RecommendDto;
 import com.addoiles.db.redis.inter.RedisService;
-import com.addoiles.entity.Article;
-import com.addoiles.entity.NavSettings;
-import com.addoiles.entity.Question;
-import com.addoiles.entity.Recommend;
+import com.addoiles.dto.query.QueryDto;
+import com.addoiles.entity.*;
 import com.addoiles.util.JsonUtils;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Component;
@@ -47,6 +43,9 @@ public class OilCache {
     @Resource
     private RecommendMapper recommendMapper;
 
+    @Resource
+    private MicroContentMapper microContentMapper;
+
 
     /**
      * 缓存所有文章
@@ -67,6 +66,9 @@ public class OilCache {
 
         //缓存首页图片
         this.cacheFirstPageImage();
+
+        //缓存梦想
+        this.cacheDreams();
 
     }
 
@@ -107,22 +109,39 @@ public class OilCache {
     /**
      * 缓存导航栏
      */
-    private void cacheNavList(){
-        List<NavSettings> list = navSettingsMapper.getList(null);
+    public List<NavSettings> cacheNavList(){
+        List<NavSettings> navSettingsList = navSettingsMapper.getList(null);
         NavDto navDto = new NavDto();
-        navDto.setNavSettings(list);
+        navDto.setNavSettings(navSettingsList);
         redisService.set(OilRedisConstant.NAV_LIST, JsonUtils.toJson(navDto));
+        return navSettingsList;
     }
 
     /**
      * 缓存首页图片
      */
-    public void cacheFirstPageImage(){
-        List<Recommend> list = recommendMapper.getList(null);
-        if(!CollectionUtils.isEmpty(list)){
+    public List<Recommend> cacheFirstPageImage(){
+        List<Recommend> recommendList = recommendMapper.getList(null);
+        if(!CollectionUtils.isEmpty(recommendList)){
             RecommendDto recommendDto = new RecommendDto();
-            recommendDto.setRecommendList(list);
+            recommendDto.setRecommendList(recommendList);
             redisService.set(OilRedisConstant.FIRST_PAGE_IMAGE,JsonUtils.toJson(recommendDto));
         }
+        return recommendList;
+    }
+
+    /**
+     * 缓存梦想
+     */
+    public List<MicroContent> cacheDreams(){
+        QueryDto queryDto = new QueryDto();
+        queryDto.setMicroType(1);
+        List<MicroContent> dreamList = microContentMapper.getList(queryDto);
+        if(!CollectionUtils.isEmpty(dreamList)){
+            MicroContentDto microContentDto = new MicroContentDto();
+            microContentDto.setMicroContentList(dreamList);
+            redisService.set(OilRedisConstant.DREAMS,JsonUtils.toJson(microContentDto));
+        }
+        return dreamList;
     }
 }

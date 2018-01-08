@@ -43,4 +43,9 @@ public class OilRedisConstant {
      */
     public static String FIRST_PAGE_IMAGE = OIL_WEBSITE + "first.page.image";
 
+    /**
+     * 梦想
+     */
+    public static String DREAMS = OIL_WEBSITE + "dreams";
+
 }

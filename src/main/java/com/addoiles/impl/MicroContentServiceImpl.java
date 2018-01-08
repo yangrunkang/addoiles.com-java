@@ -3,6 +3,8 @@ package com.addoiles.impl;
 import com.addoiles.common.annotations.OilLog;
 import com.addoiles.common.enums.DBFieldEnum;
 import com.addoiles.db.dao.MicroContentMapper;
+import com.addoiles.db.eventbus.OilEventBusHandle;
+import com.addoiles.db.eventbus.event.ReCacheDreamsEvent;
 import com.addoiles.dto.query.QueryDto;
 import com.addoiles.entity.MicroContent;
 import com.addoiles.util.OilUtils;
@@ -35,7 +37,14 @@ public class MicroContentServiceImpl implements MicroContentService {
         microContent.setLikes(0);
         microContent.setDeleteStatus(DBFieldEnum.MicroContentDeleteStatus.NORMAL.getValue());
         microContent.setCreateTime(TimeUtil.currentTime());
-        return microContentMapper.insert(microContent);
+
+        int insert = microContentMapper.insert(microContent);
+
+        if(insert > 0 && microContent.getMicroType() - DBFieldEnum.MicroContentType.DREAMS.getValue() == 0){
+            OilEventBusHandle.getInstance().postEvent(new ReCacheDreamsEvent());
+        }
+
+        return insert;
     }
 
     @Override

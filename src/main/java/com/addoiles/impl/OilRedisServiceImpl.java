@@ -1,18 +1,17 @@
 package com.addoiles.impl;
 
+import com.addoiles.db.cache.OilCache;
 import com.addoiles.db.dao.ArticleMapper;
 import com.addoiles.db.dao.NavSettingsMapper;
 import com.addoiles.db.dao.RecommendMapper;
 import com.addoiles.db.dao.UserMapper;
 import com.addoiles.db.redis.OilRedisConstant;
+import com.addoiles.db.redis.dto.MicroContentDto;
 import com.addoiles.db.redis.dto.NavDto;
 import com.addoiles.db.redis.dto.RecommendDto;
 import com.addoiles.db.redis.dto.UserIDNamesDto;
 import com.addoiles.db.redis.inter.RedisService;
-import com.addoiles.entity.Article;
-import com.addoiles.entity.NavSettings;
-import com.addoiles.entity.Recommend;
-import com.addoiles.entity.User;
+import com.addoiles.entity.*;
 import com.addoiles.util.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,6 +53,9 @@ public class OilRedisServiceImpl implements OilRedisService {
 
     @Resource
     private RecommendMapper recommendMapper;
+
+    @Resource
+    private OilCache oilCache;
 
 
 
@@ -104,14 +106,8 @@ public class OilRedisServiceImpl implements OilRedisService {
         List<NavSettings> navSettingsList;
         NavDto navDto = JsonUtils.fromJson(redisService.get(OilRedisConstant.NAV_LIST), NavDto.class);
         if(Objects.isNull(navDto)){
-            navSettingsList = navSettingsMapper.getList(null);
             redisService.delete(OilRedisConstant.NAV_LIST);
-
-            NavDto tmp = new NavDto();
-            tmp.setNavSettings(navSettingsList);
-            redisService.set(OilRedisConstant.NAV_LIST, JsonUtils.toJson(tmp));
-
-            return navSettingsList;
+            return oilCache.cacheNavList();
         }
         navSettingsList = navDto.getNavSettings();
 
@@ -147,23 +143,34 @@ public class OilRedisServiceImpl implements OilRedisService {
 
     @Override
     public List<Recommend> getRecommend() {
-        List<Recommend>  list;
+
         String recommendJson = redisService.get(OilRedisConstant.FIRST_PAGE_IMAGE);
         if(StringUtils.isEmpty(recommendJson)){
-            list = recommendMapper.getList(null);
-            RecommendDto recommendDto = new RecommendDto();
-            recommendDto.setRecommendList(list);
-
-            redisService.set(OilRedisConstant.FIRST_PAGE_IMAGE,JsonUtils.toJson(recommendDto));
-
-            recommendJson = JsonUtils.toJson(recommendDto);
+            redisService.delete(OilRedisConstant.FIRST_PAGE_IMAGE);
+            return oilCache.cacheFirstPageImage();
         }
-        RecommendDto firstPageImageDto = JsonUtils.fromJson(recommendJson, RecommendDto.class);
 
+        RecommendDto firstPageImageDto = JsonUtils.fromJson(recommendJson, RecommendDto.class);
         if(firstPageImageDto == null){
             return new ArrayList<>();
         }
 
         return firstPageImageDto.getRecommendList();
+    }
+
+    @Override
+    public List<MicroContent> getAllDreams() {
+
+        String dreamListJson = redisService.get(OilRedisConstant.DREAMS);
+        if(StringUtils.isEmpty(dreamListJson)){
+            redisService.delete(OilRedisConstant.DREAMS);
+            return oilCache.cacheDreams();
+        }
+
+        MicroContentDto microContentDto = JsonUtils.fromJson(dreamListJson, MicroContentDto.class);
+        if(Objects.isNull(microContentDto)){
+            return new ArrayList<>();
+        }
+        return microContentDto.getMicroContentList();
     }
 }

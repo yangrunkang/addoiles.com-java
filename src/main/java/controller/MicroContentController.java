@@ -53,6 +53,24 @@ public class MicroContentController extends BaseController {
         return microContentList;
     }
 
+    @RequestMapping(value = "getAllDreams", method = RequestMethod.POST)
+    @ResponseBody
+    public Object getAllDreams() {
+
+        List<MicroContent> microContentList = oilRedisService.getAllDreams();
+
+        // 所有梦想 userId 转 userName
+        List<MicroContent> hostList = microContentList.stream()
+                .filter(microContent -> microContent.getMicroType() == DBFieldEnum.MicroContentType.HOTS.getValue())
+                .collect(Collectors.toList());
+        if(!CollectionUtils.isEmpty(hostList)){
+            List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
+            ServiceUtil.HandleMicroContentUserIdToUserName(microContentList, usersOfIdNameList);
+        }
+
+        return microContentList;
+    }
+
 
     @RequestMapping(value = "addMicroContent", method = RequestMethod.POST)
     @ResponseBody

@@ -1,9 +1,6 @@
 package service;
 
-import com.addoiles.entity.Article;
-import com.addoiles.entity.NavSettings;
-import com.addoiles.entity.Recommend;
-import com.addoiles.entity.User;
+import com.addoiles.entity.*;
 
 import java.util.List;
 
@@ -75,6 +72,13 @@ public interface OilRedisService {
 
     /**
      * 获取首页图片
+     * @return
      */
     List<Recommend> getRecommend();
+
+    /**
+     * 获取所有梦想
+     * @return
+     */
+    List<MicroContent> getAllDreams();
 }
