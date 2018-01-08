@@ -13,4 +13,5 @@ import com.addoiles.entity.Recommend;
  */
 public interface RecommendMapper extends BaseService<Recommend>{
 
+    int selectMaxId();
 }

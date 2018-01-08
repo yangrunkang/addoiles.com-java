@@ -16,6 +16,10 @@
     id, show_id, title, content, image, type, delete_status, create_time
   </sql>
 
+  <select id="selectMaxId" resultType="java.lang.Integer">
+    select IFNULL(max(id),0) from recommend;
+  </select>
+
   <select id="getList" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
@@ -32,36 +36,22 @@
       #{createTime,jdbcType=INTEGER})
   </insert>
 
-  <update id="update" parameterType="map">
+  <update id="update" parameterType="com.addoiles.entity.Recommend">
     update recommend
     <set>
-      <if test="record.id != null">
-        id = #{record.id,jdbcType=INTEGER},
+
+      <if test="title != null">
+        title = #{title,jdbcType=VARCHAR},
       </if>
-      <if test="record.showId != null">
-        show_id = #{record.showId,jdbcType=VARCHAR},
+      <if test="content != null">
+        content = #{content,jdbcType=VARCHAR},
       </if>
-      <if test="record.title != null">
-        title = #{record.title,jdbcType=VARCHAR},
-      </if>
-      <if test="record.content != null">
-        content = #{record.content,jdbcType=VARCHAR},
-      </if>
-      <if test="record.image != null">
-        image = #{record.image,jdbcType=VARCHAR},
-      </if>
-      <if test="record.type != null">
-        type = #{record.type,jdbcType=INTEGER},
-      </if>
-      <if test="record.deleteStatus != null">
-        delete_status = #{record.deleteStatus,jdbcType=INTEGER},
-      </if>
-      <if test="record.createTime != null">
-        create_time = #{record.createTime,jdbcType=INTEGER},
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
       </if>
     </set>
-    <!--第二次查找最新的show_id-->
-    where show_id = #{record.showId,jdbcType=VARCHAR}
+    <!--查找最新的id-->
+    where id = #{id,jdbcType=INTEGER}
   </update>
 
 </mapper>

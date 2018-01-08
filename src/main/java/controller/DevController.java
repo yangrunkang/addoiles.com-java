@@ -7,6 +7,7 @@ import com.addoiles.db.redis.OilRedisConstant;
 import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.entity.Recommend;
 import com.addoiles.util.OilUtils;
+import com.addoiles.util.SpringContextUtils;
 import com.addoiles.util.TimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -38,7 +40,11 @@ public class DevController extends BaseController{
     private RedisService redisService;
 
     @Resource
+    private RecommendMapper recommendMapper;
+
+    @Resource
     private OilCache oilCache;
+
     /**
      *  清除开发Redis Key
      * @return
@@ -51,46 +57,104 @@ public class DevController extends BaseController{
         return "dev redis data cleaned";
     }
 
-
-    @Resource
-    private RecommendMapper recommendMapper;
-
     /**
-     * 添加首页展示信息
-     * @param file 这种格式:fileType_fileName_file_desc
+     *  刷新推荐信息
      * @return
      */
-    @RequestMapping(value = "addFirstPage",method = RequestMethod.POST)
+    @RequestMapping(value = "refreshRecommendInfo",method = RequestMethod.GET)
     @ResponseBody
-    public Object addFirstPage(@RequestBody MultipartFile file) throws IOException {
+    public Object refreshRecommendInfo(){
+        redisService.deleteKeys(OilRedisConstant.FIRST_PAGE_IMAGE);
+        logger.info("------>refreshRecommendInfo Ok");
+        oilCache.cacheFirstPageImage();
+        return "refreshRecommendInfo Ok";
+    }
+
+
+
+    /**
+     * 图片上传
+     * @param file
+     * @return
+     */
+    @RequestMapping(value = "uploadImage",method = RequestMethod.POST)
+    @ResponseBody
+    public Object uploadImage(@RequestBody MultipartFile file) throws IOException {
         // 通过base64来转化图片
         String fileName = file.getOriginalFilename();
 
-        String imagePath = "";
+        String userDir = SpringContextUtils.getApplicationContext().getEnvironment().getProperty("user.dir");
+        userDir = userDir.replaceAll("\\\\","/") + "/../vue/src/images";
+
+        logger.info("upload image path:{}",userDir);
+
+        isMkdirs(new File(userDir));
+
+        String imagePath = userDir;
         Recommend recommend = new Recommend();
         recommend.setShowId(OilUtils.generateID());
-        recommend.setImage(imagePath + "地址分割符号" + fileName);
+        recommend.setImage(imagePath + "/" + fileName);
+
+        File imageFile = new File(recommend.getImage());
+        file.transferTo(imageFile);
+        isMakeFile(imageFile);
+
         recommend.setDeleteStatus(DBFieldEnum.FirstPageDeleteStatus.NORMAL.getValue());
         recommend.setCreateTime(TimeUtil.currentTime());
 
         Integer insert = recommendMapper.insert(recommend);
 
-        return "----> addFirstPage result:" + insert;
+        return "图片上传处理成功";
     }
 
-
-    /**
-     *  刷新首页图片
-     * @return
-     */
-    @RequestMapping(value = "refreshFistPageImage",method = RequestMethod.GET)
+    @RequestMapping(value = "updateImageInfo",method = RequestMethod.POST)
     @ResponseBody
-    public Object refreshFistPageImage(){
-        redisService.deleteKeys(OilRedisConstant.FIRST_PAGE_IMAGE);
-        logger.info("------>refreshFistPageImage Ok");
-        oilCache.cacheFirstPageImage();
-        return "refreshFistPageImage Ok";
+    public Object updateImageInfo(@RequestBody Recommend recommend) throws IOException {
+
+        int updatedId = recommendMapper.selectMaxId();
+
+        recommend.setId(updatedId);
+
+        Integer insert = recommendMapper.update(recommend);
+
+        return "更新推荐信息成功:" + insert;
     }
+
+    // 判断文件是否存在
+    public static void isMkdirs(File file) {
+
+        if (file.exists()) {
+            logger.info(file.getPath() + " exists");
+        } else {
+            logger.info(file.getPath() + " not exists, create it ...");
+            try {
+                file.mkdirs();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
+    public static void isMakeFile(File file) {
+
+        if (file.exists()) {
+            logger.info(file.getName() + " exists");
+        } else {
+            logger.info(file.getName() + " not exists, create it ...");
+            try {
+                file.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+    }
+
+
+
+
 
 
 }
