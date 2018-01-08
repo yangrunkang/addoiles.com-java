@@ -23,11 +23,11 @@ alter table `addoiles`.`question` add `type` int(2) DEFAULT 0 COMMENT '问题类
 CREATE TABLE `recommend` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `show_id` varchar(32) NOT NULL COMMENT '展示id',
-  `title` varchar(50) NOT NULL COMMENT '标题',
+  `title` varchar(50) DEFAULT NULL COMMENT '标题',
   `content` varchar(2000) DEFAULT NULL COMMENT '内容描述',
   `image` varchar(1000) NOT NULL COMMENT '图片',
-  `type` int(2) NOT NULL COMMENT '类型 0-电影推荐 1-新书推荐 2-图片分享',
+  `type` int(2) DEFAULT NULL COMMENT '类型 0-电影推荐 1-新书推荐 2-图片分享',
   `delete_status` int(1) NOT NULL DEFAULT '0' COMMENT '删除状态 0-正常 1-删除',
   `create_time` int(11) DEFAULT '0' COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='首页信息展示-运营';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='首页信息展示-运营';
