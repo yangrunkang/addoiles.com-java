@@ -36,16 +36,17 @@ public class MicroContentController extends BaseController {
     @Resource
     private OilRedisService oilRedisService;
 
+    /**
+     * 热门和梦想共用
+     * @param queryDto
+     * @return
+     */
     @RequestMapping(value = "getMicroContentList", method = RequestMethod.POST)
     @ResponseBody
     public Object getMicroContentList(@RequestBody QueryDto queryDto) {
         List<MicroContent> microContentList = microContentService.getList(queryDto);
 
-        // 热门动弹 userId 转 userName
-        List<MicroContent> hostList = microContentList.stream()
-                .filter(microContent -> microContent.getMicroType() == DBFieldEnum.MicroContentType.HOTS.getValue())
-                .collect(Collectors.toList());
-        if(!CollectionUtils.isEmpty(hostList)){
+        if(!CollectionUtils.isEmpty(microContentList)){
             List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
             ServiceUtil.HandleMicroContentUserIdToUserName(microContentList, usersOfIdNameList);
         }
@@ -60,15 +61,15 @@ public class MicroContentController extends BaseController {
         List<MicroContent> microContentList = oilRedisService.getAllDreams();
 
         // 所有梦想 userId 转 userName
-        List<MicroContent> hostList = microContentList.stream()
-                .filter(microContent -> microContent.getMicroType() == DBFieldEnum.MicroContentType.HOTS.getValue())
+        List<MicroContent> dreamList = microContentList.stream()
+                .filter(microContent -> microContent.getMicroType() == DBFieldEnum.MicroContentType.DREAMS.getValue())
                 .collect(Collectors.toList());
-        if(!CollectionUtils.isEmpty(hostList)){
+        if(!CollectionUtils.isEmpty(dreamList)){
             List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
-            ServiceUtil.HandleMicroContentUserIdToUserName(microContentList, usersOfIdNameList);
+            ServiceUtil.HandleMicroContentUserIdToUserName(dreamList, usersOfIdNameList);
         }
 
-        return microContentList;
+        return dreamList;
     }
 
 
