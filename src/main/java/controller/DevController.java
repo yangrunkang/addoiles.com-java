@@ -7,7 +7,7 @@ import com.addoiles.db.redis.OilRedisConstant;
 import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.entity.Recommend;
 import com.addoiles.util.OilUtils;
-import com.addoiles.util.SpringContextUtils;
+import com.addoiles.util.PropertyUtils;
 import com.addoiles.util.TimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -80,31 +80,28 @@ public class DevController extends BaseController{
     @RequestMapping(value = "uploadImage",method = RequestMethod.POST)
     @ResponseBody
     public Object uploadImage(@RequestBody MultipartFile file) throws IOException {
-        // 通过base64来转化图片
+        //获取文件名
         String fileName = file.getOriginalFilename();
 
-        String userDir = SpringContextUtils.getApplicationContext().getEnvironment().getProperty("user.dir");
-        userDir = userDir.replaceAll("\\\\","/") + "/../vue/src/images";
-
-        logger.info("upload image path:{}",userDir);
-
-        isMkdirs(new File(userDir));
-
-        String imagePath = userDir;
-        Recommend recommend = new Recommend();
-        recommend.setShowId(OilUtils.generateID());
-        recommend.setImage(imagePath + "/" + fileName);
-
-        File imageFile = new File(recommend.getImage());
+        //检查是否有配置的文件夹
+        String imagePath = PropertyUtils.getValue("images.address");
+        logger.info("upload image path:{}",imagePath);
+        isMkdirs(new File(imagePath));
+        //写磁盘
+        File imageFile = new File(imagePath + fileName);
+        logger.info("file created path:{}",imagePath+ fileName);
         file.transferTo(imageFile);
         isMakeFile(imageFile);
 
+        //入库
+        String imageUrl = PropertyUtils.getValue("images.url");
+        Recommend recommend = new Recommend();
+        recommend.setShowId(OilUtils.generateID());
+        recommend.setImage(imageUrl + "/" + fileName);
         recommend.setDeleteStatus(DBFieldEnum.FirstPageDeleteStatus.NORMAL.getValue());
         recommend.setCreateTime(TimeUtil.currentTime());
 
-        Integer insert = recommendMapper.insert(recommend);
-
-        return "图片上传处理成功";
+        return recommendMapper.insert(recommend);
     }
 
     @RequestMapping(value = "updateImageInfo",method = RequestMethod.POST)
