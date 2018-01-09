@@ -131,6 +131,11 @@ public class OilRedisServiceImpl implements OilRedisService {
     }
 
     @Override
+    public void deleteArticleByMicroContentId(String microContentId) {
+        redisService.delete(OilRedisConstant.OIL_WEBSITE + microContentId);
+    }
+
+    @Override
     public void addArticle(Article article) {
         redisService.set(OilRedisConstant.OIL_WEBSITE + article.getArticleId(), JsonUtils.toJson(article));
     }

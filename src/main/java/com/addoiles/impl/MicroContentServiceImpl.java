@@ -11,6 +11,7 @@ import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
 import org.springframework.stereotype.Service;
 import service.MicroContentService;
+import service.OilRedisService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -29,6 +30,9 @@ public class MicroContentServiceImpl implements MicroContentService {
 
     @Resource
     private MicroContentMapper microContentMapper;
+
+    @Resource
+    private OilRedisService oilRedisService;
 
     @OilLog
     @Override
@@ -49,6 +53,8 @@ public class MicroContentServiceImpl implements MicroContentService {
 
     @Override
     public Integer delete(String businessId) {
+
+        oilRedisService.deleteArticleByMicroContentId(businessId);
         return microContentMapper.delete(businessId);
     }
 

@@ -54,24 +54,6 @@ public class MicroContentController extends BaseController {
         return microContentList;
     }
 
-    @RequestMapping(value = "getAllDreams", method = RequestMethod.POST)
-    @ResponseBody
-    public Object getAllDreams() {
-
-        List<MicroContent> microContentList = oilRedisService.getAllDreams();
-
-        // 所有梦想 userId 转 userName
-        List<MicroContent> dreamList = microContentList.stream()
-                .filter(microContent -> microContent.getMicroType() == DBFieldEnum.MicroContentType.DREAMS.getValue())
-                .collect(Collectors.toList());
-        if(!CollectionUtils.isEmpty(dreamList)){
-            List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
-            ServiceUtil.HandleMicroContentUserIdToUserName(dreamList, usersOfIdNameList);
-        }
-
-        return dreamList;
-    }
-
 
     @RequestMapping(value = "addMicroContent", method = RequestMethod.POST)
     @ResponseBody

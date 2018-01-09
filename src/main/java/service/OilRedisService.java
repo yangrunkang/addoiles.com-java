@@ -59,6 +59,12 @@ public interface OilRedisService {
     void deleteArticleByArticleId(String articleId);
 
     /**
+     * 根据微内容
+     * @param microContentId
+     */
+    void deleteArticleByMicroContentId(String microContentId);
+
+    /**
      * 添加文章
      * @param article
      */
