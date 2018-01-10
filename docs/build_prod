@@ -1,6 +1,6 @@
 打包注意的地方
 
-1. war包名 不能有 -1.0 后缀,因为addoiles-vue项目请求路径没有 -1.0后缀
+1. war包名后缀根据pom版本来,因为addoiles-vue项目请求路径要响应改下
 
 2. jdbc.properties 库连接记得修改
 
