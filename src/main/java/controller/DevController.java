@@ -52,7 +52,7 @@ public class DevController extends BaseController{
     @RequestMapping(value = "cleanRedisDevData",method = RequestMethod.GET)
     @ResponseBody
     public Object cleanRedisDevData(){
-        redisService.deleteKeys(OilRedisConstant.OIL_WEBSITE + "*");
+        redisService.deleteKeys("DEV." + "*");
         logger.info("------>dev redis data cleaned");
         return "dev redis data cleaned";
     }
