@@ -1,5 +1,5 @@
 打包注意的地方
-
+#################后端修改###################
 1. war包名后缀根据pom版本来,因为addoiles-vue项目请求路径要响应改下
 
 2. jdbc.properties 库连接记得修改
@@ -10,11 +10,12 @@
 
 5. 要改这个: com.addoiles.db.redis.OilRedisConstant.REDIS_ENV 值 改成 PRD
 
-6. 前端修改网站版本号+日期;更新网站日志
+6. 提前执行SQL
 
-7. 前端请求地址修改
+###################前端修改###################
+1. 前端修改网站版本号+日期;更新网站日志
 
-8. 提前执行SQL
+2. 前端请求地址修改
 
 ### 后台打包后启动失败原因可能原因分析
        公寓里面的网速太慢,又因为在包上传的时候我操作了ftp工具导致工具有3-4次的卡顿,
@@ -47,3 +48,21 @@ nginx配置:
     }
 
     修改配置后重启使其生效(如果配置文件在其他地方,-c nginx.conf): /sbin/nginx -s reload
+
+
+######IMPORTANT
+前端打包后的文件要在服务器(eg:nginx)下运行才行!!!!!!!,配置端口和地址即可
+
+nginx 配置:
+
+server {
+        listen       80;
+        server_name  www.addoiles.com;
+
+        location / {
+            root  /usr/services/apache-tomcat-8.5.16/vue/dist/;
+            autoindex on;
+        }
+
+        # 后面什么都不要加
+    }
