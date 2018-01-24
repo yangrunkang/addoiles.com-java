@@ -63,6 +63,8 @@ server {
             root  /usr/services/apache-tomcat-8.5.16/vue/dist/;
             autoindex on;
         }
+        # 配置错误页面 跳转到 location /
+        error_page  500 502 503 504 404 /;
 
         # 后面什么都不要加
     }
