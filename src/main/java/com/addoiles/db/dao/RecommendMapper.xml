@@ -25,6 +25,7 @@
     <include refid="Base_Column_List"/>
     from recommend
     where delete_status = 0
+    order by create_time desc
   </select>
 
   <insert id="insert" parameterType="com.addoiles.entity.Recommend">
