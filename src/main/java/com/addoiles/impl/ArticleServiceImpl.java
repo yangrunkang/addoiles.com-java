@@ -14,6 +14,7 @@ import service.OilRedisService;
 import javax.annotation.Resource;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * <p>All rights Reserved, Designed By HQYG.</p>
@@ -70,6 +71,20 @@ public class ArticleServiceImpl implements ArticleService {
     @OilLog
     @Override
     public Integer update(Article article) {
+        Article redisArticle = oilRedisService.getArticleByArticleId(article.getArticleId());
+        if(Objects.isNull(redisArticle)){
+            return -1;
+        }
+
+        redisArticle.setIsHide(article.getIsHide());
+        redisArticle.setDeleteStatus(article.getDeleteStatus());
+        redisArticle.setTitle(article.getTitle());
+        redisArticle.setContent(article.getContent());
+        redisArticle.setUpdateTime(TimeUtil.currentTime());
+
+        oilRedisService.updateArticle(redisArticle);
+
+
         article.setUpdateTime(TimeUtil.currentTime());
         return articleMapper.update(article);
     }

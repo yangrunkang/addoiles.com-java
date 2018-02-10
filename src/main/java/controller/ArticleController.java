@@ -186,18 +186,6 @@ public class ArticleController extends BaseController {
     public Object editArticle(@RequestBody Article article) {
         Integer count;
         try {
-            Article redisArticle = oilRedisService.getArticleByArticleId(article.getArticleId());
-            if(Objects.isNull(redisArticle)){
-                return -1;
-            }
-
-            redisArticle.setIsHide(article.getIsHide());
-            redisArticle.setDeleteStatus(article.getDeleteStatus());
-            redisArticle.setTitle(article.getTitle());
-            redisArticle.setContent(article.getContent());
-
-            oilRedisService.updateArticle(redisArticle);
-
             count = articleService.update(article);
         } catch (Exception e) {
             count = CONTENT_TOO_LONG;
