@@ -5,6 +5,7 @@ import com.addoiles.dto.query.QueryDto;
 import com.addoiles.dto.req.RatesDto;
 import com.addoiles.dto.resp.ExperienceDto;
 import com.addoiles.dto.view.ITTechDto;
+import com.addoiles.dto.view.SimpleListDto;
 import com.addoiles.entity.*;
 import com.addoiles.impl.ServiceUtil;
 import org.springframework.stereotype.Controller;
@@ -140,7 +141,15 @@ public class ArticleController extends BaseController {
     @RequestMapping(value = "getSimpleList",method = RequestMethod.POST)
     @ResponseBody
     public Object getSimpleList(@RequestBody QueryDto queryDto) {
-        return articleService.getSimpleList(queryDto);
+        SimpleListDto simpleListDto = new SimpleListDto();
+
+        List<Article> articleList = articleService.getSimpleList(queryDto);
+        Integer totalCount = articleService.getTotalCount(queryDto);
+
+        simpleListDto.setArticleList(articleList);
+        simpleListDto.setTotalCount(totalCount);
+
+        return simpleListDto;
     }
 
 

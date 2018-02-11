@@ -58,4 +58,9 @@ public class QuestionServiceImpl implements QuestionService,ManagerService<Quest
     public List<Question> getSimpleList(QueryDto queryDto) {
         return questionMapper.getSimpleList(queryDto);
     }
+
+    @Override
+    public Integer getTotalCount(QueryDto queryDto) {
+        return null;
+    }
 }

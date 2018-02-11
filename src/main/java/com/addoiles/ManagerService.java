@@ -23,4 +23,11 @@ public interface ManagerService<T> {
      */
     List<T> getSimpleList(@Param("queryDto")QueryDto queryDto);
 
+    /**
+     * 获取总数
+     * @param queryDto
+     * @return
+     */
+    Integer getTotalCount(@Param("queryDto")QueryDto queryDto);
+
 }

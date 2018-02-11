@@ -101,4 +101,9 @@ public class ArticleServiceImpl implements ArticleService {
     public List<Article> getSimpleList(QueryDto queryDto) {
         return articleMapper.getSimpleList(queryDto);
     }
+
+    @Override
+    public Integer getTotalCount(QueryDto queryDto) {
+        return articleMapper.getTotalCount(queryDto);
+    }
 }

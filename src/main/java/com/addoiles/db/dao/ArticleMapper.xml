@@ -120,4 +120,16 @@
         </if>
     </select>
 
+    <select id="getTotalCount" resultType="java.lang.Integer">
+        select
+        count(*)
+        from article
+        <!-- 简化(不包含内容) 除了删除的都显示 -->
+        where delete_status != 1
+        and article_type = #{queryDto.articleType,jdbcType=INTEGER}
+        <if test="queryDto.userId != null">
+            and user_id = #{queryDto.userId,jdbcType=VARCHAR}
+        </if>
+    </select>
+
 </mapper>
