@@ -87,4 +87,24 @@ public interface OilRedisService {
      * @return
      */
     List<MicroContent> getAllDreams();
+
+    /**
+     * 设置用户tokenId
+     * @param userId
+     * @param tokenId
+     */
+    void setUserTokenId(String userId,String tokenId);
+
+    /**
+     * 获取用户tokenId
+     * @param userId
+     * @return
+     */
+    String getUserTokenId(String userId);
+
+    /**
+     * 删除用户tokenId
+     * @param userId
+     */
+    void deleteUserTokenId(String userId);
 }

@@ -2,8 +2,6 @@ package com.addoiles.impl;
 
 import com.addoiles.db.cache.OilCache;
 import com.addoiles.db.dao.ArticleMapper;
-import com.addoiles.db.dao.NavSettingsMapper;
-import com.addoiles.db.dao.RecommendMapper;
 import com.addoiles.db.dao.UserMapper;
 import com.addoiles.db.redis.OilRedisConstant;
 import com.addoiles.db.redis.dto.MicroContentDto;
@@ -49,14 +47,7 @@ public class OilRedisServiceImpl implements OilRedisService {
     private RedisService redisService;
 
     @Resource
-    private NavSettingsMapper navSettingsMapper;
-
-    @Resource
-    private RecommendMapper recommendMapper;
-
-    @Resource
     private OilCache oilCache;
-
 
 
     @Override
@@ -66,24 +57,28 @@ public class OilRedisServiceImpl implements OilRedisService {
         String userIdNamesJson = redisService.get(OilRedisConstant.USERS_ID_NAME_LIST);
 
         // userIdNamesJson 为空 或者 reload 为 true
-        if(StringUtils.isEmpty(userIdNamesJson) || reload){
+        if (StringUtils.isEmpty(userIdNamesJson) || reload) {
             //删除
             redisService.delete(OilRedisConstant.USERS_ID_NAME_LIST);
             //重新查库
             UserIDNamesDto userIDNamesDto = new UserIDNamesDto();
-            userIDNamesDto.setUserIdNames(userMapper.getUsersOfIdNameList());
+            userIDNamesDto.setUserIdNameList(userMapper.getUsersOfIdNameList());
             redisService.set(OilRedisConstant.USERS_ID_NAME_LIST, JsonUtils.toJson(userIDNamesDto));
             //重新Get
             userIdNamesJson = redisService.get(OilRedisConstant.USERS_ID_NAME_LIST);
         }
 
-        logger.info("redis key:{},value{}",OilRedisConstant.USERS_ID_NAME_LIST,userIdNamesJson);
+        logger.info("redis key:{},value{}", OilRedisConstant.USERS_ID_NAME_LIST, userIdNamesJson);
 
-        UserIDNamesDto userIDNamesDto = JsonUtils.fromJson(userIdNamesJson,UserIDNamesDto.class);
+        UserIDNamesDto userIDNamesDto = JsonUtils.fromJson(userIdNamesJson, UserIDNamesDto.class);
 
-        List<User> userIdNames = userIDNamesDto.getUserIdNames();
+        if(Objects.isNull(userIDNamesDto)){
+            return new ArrayList<>();
+        }
 
-        if(CollectionUtils.isEmpty(userIdNames)){
+        List<User> userIdNames = userIDNamesDto.getUserIdNameList();
+
+        if (CollectionUtils.isEmpty(userIdNames)) {
             userIdNames = new ArrayList<>();
         }
 
@@ -92,8 +87,8 @@ public class OilRedisServiceImpl implements OilRedisService {
 
     @Override
     public void cacheUserVerifyCode(String email, String code) {
-        redisService.setTTL(email,code,60);
-        logger.info("already cache user verify code,email:{},code:{}",email,code);
+        redisService.setTTL(email, code, 60);
+        logger.info("already cache user verify code,email:{},code:{}", email, code);
     }
 
     @Override
@@ -105,7 +100,7 @@ public class OilRedisServiceImpl implements OilRedisService {
     public List<NavSettings> getNavList() {
         List<NavSettings> navSettingsList;
         NavDto navDto = JsonUtils.fromJson(redisService.get(OilRedisConstant.NAV_LIST), NavDto.class);
-        if(Objects.isNull(navDto)){
+        if (Objects.isNull(navDto)) {
             redisService.delete(OilRedisConstant.NAV_LIST);
             return oilCache.cacheNavList();
         }
@@ -118,7 +113,7 @@ public class OilRedisServiceImpl implements OilRedisService {
     @Override
     public Article getArticleByArticleId(String articleId) {
         Article article = JsonUtils.fromJson(redisService.get(OilRedisConstant.OIL_WEBSITE + articleId), Article.class);
-        if(Objects.isNull(article)){
+        if (Objects.isNull(article)) {
             article = articleMapper.getByBusinessId(articleId);
             this.addArticle(article);
         }
@@ -150,13 +145,13 @@ public class OilRedisServiceImpl implements OilRedisService {
     public List<Recommend> getRecommend() {
 
         String recommendJson = redisService.get(OilRedisConstant.FIRST_PAGE_IMAGE);
-        if(StringUtils.isEmpty(recommendJson)){
+        if (StringUtils.isEmpty(recommendJson)) {
             redisService.delete(OilRedisConstant.FIRST_PAGE_IMAGE);
             return oilCache.cacheFirstPageImage();
         }
 
         RecommendDto firstPageImageDto = JsonUtils.fromJson(recommendJson, RecommendDto.class);
-        if(firstPageImageDto == null){
+        if (firstPageImageDto == null) {
             return new ArrayList<>();
         }
 
@@ -167,15 +162,42 @@ public class OilRedisServiceImpl implements OilRedisService {
     public List<MicroContent> getAllDreams() {
 
         String dreamListJson = redisService.get(OilRedisConstant.DREAMS);
-        if(StringUtils.isEmpty(dreamListJson)){
+        if (StringUtils.isEmpty(dreamListJson)) {
             redisService.delete(OilRedisConstant.DREAMS);
             return oilCache.cacheDreams();
         }
 
         MicroContentDto microContentDto = JsonUtils.fromJson(dreamListJson, MicroContentDto.class);
-        if(Objects.isNull(microContentDto)){
+        if (Objects.isNull(microContentDto)) {
             return new ArrayList<>();
         }
         return microContentDto.getMicroContentList();
+    }
+
+    @Override
+    public void setUserTokenId(String userId, String tokenId) {
+        if(!StringUtils.isEmpty(getUserTokenId(userId))){
+            deleteUserTokenId(getUserTokenIdKey(userId));
+        }
+        redisService.set(getUserTokenIdKey(userId), tokenId);
+    }
+
+    @Override
+    public String getUserTokenId(String userId) {
+        return redisService.get(getUserTokenIdKey(userId));
+    }
+
+    @Override
+    public void deleteUserTokenId(String userId) {
+        redisService.delete(getUserTokenIdKey(userId));
+    }
+
+    /**
+     * 获取用户tokenId key
+     * @param userId
+     * @return
+     */
+    private String getUserTokenIdKey(String userId) {
+        return userId + ":tokenId";
     }
 }

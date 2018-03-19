@@ -24,6 +24,11 @@ public class QueryDto {
     private String userId;
 
     /**
+     * tokenId
+     */
+    private String tokenId;
+
+    /**
      * 业务id
      * 除表id外的实体id,比如User表中的userId,Article表的articleId
      *
@@ -97,4 +102,13 @@ public class QueryDto {
     public void setQuestionType(Integer questionType) {
         this.questionType = questionType;
     }
+
+    public String getTokenId() {
+        return tokenId;
+    }
+
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
+    }
+
 }

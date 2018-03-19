@@ -7,10 +7,21 @@ import java.io.Serializable;
  */
 public class LoginResp implements Serializable {
 
-
+    /**
+     * 用户id
+     */
     private String userId;
 
+    /**
+     * 用户名
+     */
     private String userName;
+
+    /**
+     * tokenId
+     * @return
+     */
+    private String tokenId;
 
 
     public String getUserId() {
@@ -27,5 +38,13 @@ public class LoginResp implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public String getTokenId() {
+        return tokenId;
+    }
+
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
     }
 }

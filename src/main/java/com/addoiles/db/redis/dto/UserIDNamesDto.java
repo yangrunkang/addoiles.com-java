@@ -16,14 +16,13 @@ import java.util.List;
 
 public class UserIDNamesDto {
 
-    private List<User> userIdNames;
+    private List<User> userIdNameList;
 
-    public List<User> getUserIdNames() {
-        return userIdNames;
+    public List<User> getUserIdNameList() {
+        return userIdNameList;
     }
 
-    public void setUserIdNames(List<User> userIdNames) {
-        this.userIdNames = userIdNames;
+    public void setUserIdNameList(List<User> userIdNameList) {
+        this.userIdNameList = userIdNameList;
     }
-
 }

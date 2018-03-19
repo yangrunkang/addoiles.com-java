@@ -4,6 +4,7 @@ import com.addoiles.common.enums.OilConstant;
 import com.addoiles.dto.req.*;
 import com.addoiles.dto.resp.LoginResp;
 import com.addoiles.entity.User;
+import com.addoiles.util.OilUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,6 +39,9 @@ public class UserController extends BaseController {
         if (Objects.nonNull(loginUser)) {
             loginResp.setUserId(loginUser.getUserId());
             loginResp.setUserName(loginUser.getName());
+            //安全验证 tokenId
+            loginResp.setTokenId(OilUtils.generateID());
+            oilRedisService.setUserTokenId(loginUser.getUserId(),loginResp.getTokenId());
         }
 
         return loginResp;
@@ -65,11 +69,7 @@ public class UserController extends BaseController {
     @ResponseBody
     public Object verifyCode(@RequestBody ExistsVerifyCodeReq existsVerifyCodeReq) {
         String verifyCode = oilRedisService.getVerifyCodeByEmail(existsVerifyCodeReq.getEmail());
-
-        if (StringUtils.isEmpty(verifyCode) || !verifyCode.equals(existsVerifyCodeReq.getCode())) {
-            return false;
-        }
-        return true;
+        return !StringUtils.isEmpty(verifyCode) && verifyCode.equals(existsVerifyCodeReq.getCode());
     }
 
 
@@ -83,9 +83,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "checkHasRegister", method = RequestMethod.GET)
     @ResponseBody
     public Object checkHasRegister(String email) {
-        Integer count = userService.checkHasRegister(email);
-        return count;
+        return userService.checkHasRegister(email);
     }
-
 
 }
