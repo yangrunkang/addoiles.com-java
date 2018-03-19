@@ -26,12 +26,12 @@ public class OilRedisConstant {
     /**
      * redis key 前缀
      */
-    public static String OIL_WEBSITE = REDIS_ENV +"com.addoiles.wwww.";
+    public static String OIL_WEBSITE = REDIS_ENV +"addoiles.";
 
     /**
      * 用户ID-用户名 映射集合
      */
-    public static String USERS_ID_NAME_LIST = OIL_WEBSITE + "users.ids.names.list";
+    public static String USERS_ID_NAME_LIST = OIL_WEBSITE + "user.id.name.list";
 
     /**
      * 导航栏
@@ -41,7 +41,7 @@ public class OilRedisConstant {
     /**
      * 首页图片
      */
-    public static String FIRST_PAGE_IMAGE = OIL_WEBSITE + "first.page.image";
+    public static String FIRST_PAGE_IMAGE = OIL_WEBSITE + "recommend.image";
 
     /**
      * 梦想

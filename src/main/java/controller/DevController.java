@@ -123,8 +123,11 @@ public class DevController extends BaseController{
         return "更新推荐信息成功:" + insert;
     }
 
-    // 判断文件是否存在
-    public static void isMkdirs(File file) {
+    /**
+     * 判断文件是否存在
+     * @param file
+     */
+    private static void isMkdirs(File file) {
 
         if (file.exists()) {
             logger.info(file.getPath() + " exists");
@@ -140,7 +143,7 @@ public class DevController extends BaseController{
     }
 
 
-    public static void isMakeFile(File file) {
+    private static void isMakeFile(File file) {
 
         if (file.exists()) {
             logger.info(file.getName() + " exists");

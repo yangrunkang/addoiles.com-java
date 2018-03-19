@@ -10,7 +10,7 @@ import com.addoiles.common.ErrorCode;
  * author:      Yangrunkang
  * Createdate:  2017/7/20 9:36
  */
-public class BusinessException extends RuntimeException {
+public class BusinessException extends RuntimeException{
 
     private static final long serialVersionUID = 8130361585821557354L;
 
@@ -22,42 +22,31 @@ public class BusinessException extends RuntimeException {
     /**
      * 错误信息
      */
-    private String message;
+    private String errorMsg;
 
-    private ErrorCode errorCode;
-
-
-    /**
-     * 业务异常
-     *
-     * @param errorCode 业务错误代码
-     */
     public BusinessException(ErrorCode errorCode) {
         this.code = errorCode.getCode();
-        this.message = errorCode.getMessage();
+        this.errorMsg = errorCode.getMessage();
     }
 
-    public BusinessException(ErrorCode error, String message) {
-        this.code = error.getCode();
-        this.message = message;
-    }
-
-    public BusinessException(Integer code, String message) {
+    public BusinessException(Integer code, String errorMsg) {
         this.code = code;
-        this.message = message;
+        this.errorMsg = errorMsg;
     }
 
     public Integer getCode() {
         return code;
     }
 
-    public String getMessage() {
-        return message;
+    public void setCode(Integer code) {
+        this.code = code;
     }
 
-    public ErrorCode getErrorCode() {
-        return errorCode;
+    public String getErrorMsg() {
+        return errorMsg;
     }
 
-
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
 }

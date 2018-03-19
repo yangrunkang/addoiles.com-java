@@ -1,12 +1,17 @@
 package controller;
 
+import com.addoiles.common.ErrorCode;
 import com.addoiles.common.enums.DBFieldEnum;
 import com.addoiles.dto.query.QueryDto;
 import com.addoiles.dto.req.RatesDto;
 import com.addoiles.dto.resp.ExperienceDto;
 import com.addoiles.dto.view.ITTechDto;
 import com.addoiles.dto.view.SimpleListDto;
-import com.addoiles.entity.*;
+import com.addoiles.entity.Article;
+import com.addoiles.entity.Comment;
+import com.addoiles.entity.Recommend;
+import com.addoiles.entity.User;
+import com.addoiles.exception.BusinessException;
 import com.addoiles.impl.ServiceUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
@@ -77,10 +82,9 @@ public class ArticleController extends BaseController {
         List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
         Article article = articleService.getByBusinessId(queryDto.getBusinessId());
 
-
-        if (Objects.isNull(article)) {
-            //在页面上显示空
-            return experienceDto;
+        if (Objects.isNull(article)
+                || !article.getDeleteStatus().equals(DBFieldEnum.ArticleDeleteStatus.NORMAL.getValue())) {
+            return new BusinessException(ErrorCode.EXPERIENCE_NOT_EXISTS);
         }
 
         //处理userId转userName
@@ -105,13 +109,18 @@ public class ArticleController extends BaseController {
         return experienceDto;
     }
 
-    @RequestMapping(value = "getITArticleList",method = RequestMethod.POST)
+    @RequestMapping(value = "getITArticle",method = RequestMethod.POST)
     @ResponseBody
     public Object getITArticleList(@RequestBody QueryDto queryDto) {
         ITTechDto itTechDto = new ITTechDto();
 
         String businessId = queryDto.getBusinessId();
         Article article = articleService.getByBusinessId(businessId);
+
+        if (Objects.isNull(article)
+                || !article.getDeleteStatus().equals(DBFieldEnum.ArticleDeleteStatus.NORMAL.getValue())) {
+            return new BusinessException(ErrorCode.IT_ARTICLE_NOT_EXISTS);
+        }
 
         List<Comment> articleCommentList = commentService.getCommentListByTargetId(article.getArticleId());
         if (CollectionUtils.isEmpty(articleCommentList)) {
@@ -155,13 +164,20 @@ public class ArticleController extends BaseController {
 
     /**
      * 根据businessId获取文章
+     *
      * @apiNote 编辑器使用
+     * @apiNote 用户管理中心使用
+     *
      * @param queryDto
      * @return
      */
     @RequestMapping(value = "getArticleByBusinessId",method = RequestMethod.POST)
     @ResponseBody
     public Object getArticleByBusinessId(@RequestBody QueryDto queryDto) {
+        if(Objects.isNull(queryDto.getTokenId()) ||
+                !queryDto.getTokenId().equals(oilRedisService.getUserTokenId(queryDto.getUserId()))){
+            return new BusinessException(ErrorCode.ILLEGAL_REQUEST);
+        }
         return articleService.getByBusinessId(queryDto.getBusinessId());
     }
 

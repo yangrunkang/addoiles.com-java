@@ -11,12 +11,16 @@ import com.addoiles.exception.BusinessException;
  * Createdate:  2017/7/20 9:35
  */
 public enum ErrorCode {
-    SUCCESS(0, "success"),
+    SUCCESS(0, "SUCCESS"),
     PARAMETER_ERROR(1, "参数错误"),
     SYSTEM_ERROR(2, "系统异常"),
     LOGIN_FAILED(3, "登录失败"),
     REGISTER_FAILED(4, "注册失败"),
-    LOG_OUT_FAILED(5, "注销失败"),;
+    LOG_OUT_FAILED(5, "注销失败"),
+    ILLEGAL_REQUEST(6, "非法请求"),
+    EXPERIENCE_NOT_EXISTS(7, "该分享不存在"),
+    IT_ARTICLE_NOT_EXISTS(8, "该技术文章不存在"),
+    ;
 
     /**
      * 状态码
