@@ -5,9 +5,14 @@ import com.addoiles.mail.EmailService;
 import com.addoiles.mail.dto.Email;
 import com.addoiles.mail.dto.Receiver;
 import com.addoiles.util.SpringContextUtils;
+import net.coobird.thumbnailator.Thumbnails;
+import net.coobird.thumbnailator.name.Rename;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import service.UserService;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Description:
@@ -15,7 +20,7 @@ import service.UserService;
  * @author Yangrunkang
  * DateTime:  2017/12/7 17:56
  */
-public class OilTest{
+public class OilTest {
 
 
     private static final String[] CONFIG_RESOUCES = new String[]{"application-context.xml"};
@@ -25,13 +30,31 @@ public class OilTest{
     private UserService userService;
 
     public static void main(String[] sf) {
-        startSpring();
-
+//        startSpring();
+        testDeductImgSize();
 //        testRedisGet();
 //        testPub();
 
     }
 
+    /**
+     * 测试压缩图片
+     */
+    public static void testDeductImgSize() {
+        try {
+            Thumbnails.of(new File("D:\\wikipedia_pic\\test_pics.jpg"))
+//                    .size(640, 480)
+                    .scale(0.25f)
+//                    .watermark(Watermark)
+                    .outputQuality(0.8)
+                    .outputFormat("jpg")
+                    .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+            System.out.println("done");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
 
     private static void testSub() {
         StringRedisTemplate redisTemplate = SpringContextUtils.getBean(StringRedisTemplate.class);
@@ -43,12 +66,12 @@ public class OilTest{
     private static void testPub() {
 
         StringRedisTemplate redisTemplate = SpringContextUtils.getBean(StringRedisTemplate.class);
-        redisTemplate.convertAndSend("testChannel","from yrk");
+        redisTemplate.convertAndSend("testChannel", "from yrk");
     }
 
     private static void testRedisGet() {
         RedisService redisService = SpringContextUtils.getBean(RedisService.class);
-        redisService.set("33","asfasd");
+        redisService.set("33", "asfasd");
         String s = redisService.get("33");
         System.out.println(s);
         redisService.delete("33");
