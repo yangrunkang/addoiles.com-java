@@ -1,6 +1,5 @@
 package controller;
 
-import com.addoiles.common.enums.DBFieldEnum;
 import com.addoiles.dto.query.QueryDto;
 import com.addoiles.entity.MicroContent;
 import com.addoiles.entity.User;
@@ -16,7 +15,6 @@ import service.OilRedisService;
 
 import javax.annotation.Resource;
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * 微内容Controller
@@ -41,9 +39,9 @@ public class MicroContentController extends BaseController {
      * @param queryDto
      * @return
      */
-    @RequestMapping(value = "getMicroContentList", method = RequestMethod.POST)
+    @RequestMapping(value = "microContentList", method = RequestMethod.POST)
     @ResponseBody
-    public Object getMicroContentList(@RequestBody QueryDto queryDto) {
+    public Object microContentList(@RequestBody QueryDto queryDto) {
         List<MicroContent> microContentList = microContentService.getList(queryDto);
 
         if(!CollectionUtils.isEmpty(microContentList)){
@@ -62,11 +60,6 @@ public class MicroContentController extends BaseController {
     }
 
 
-    @RequestMapping(value = "deleteMicroContent", method = RequestMethod.POST)
-    @ResponseBody
-    public Object delete(@RequestBody QueryDto queryDto) {
-        return microContentService.delete(queryDto.getBusinessId());
-    }
 
 
 }

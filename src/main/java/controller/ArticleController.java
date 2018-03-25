@@ -6,7 +6,6 @@ import com.addoiles.dto.query.QueryDto;
 import com.addoiles.dto.req.RatesDto;
 import com.addoiles.dto.resp.ExperienceDto;
 import com.addoiles.dto.view.ITTechDto;
-import com.addoiles.dto.view.SimpleListDto;
 import com.addoiles.entity.Article;
 import com.addoiles.entity.Comment;
 import com.addoiles.entity.Recommend;
@@ -147,40 +146,6 @@ public class ArticleController extends BaseController {
         return pithinessList;
     }
 
-    @RequestMapping(value = "getSimpleList",method = RequestMethod.POST)
-    @ResponseBody
-    public Object getSimpleList(@RequestBody QueryDto queryDto) {
-        SimpleListDto simpleListDto = new SimpleListDto();
-
-        List<Article> articleList = articleService.getSimpleList(queryDto);
-        Integer totalCount = articleService.getTotalCount(queryDto);
-
-        simpleListDto.setArticleList(articleList);
-        simpleListDto.setTotalCount(totalCount);
-
-        return simpleListDto;
-    }
-
-
-    /**
-     * 根据businessId获取文章
-     *
-     * @apiNote 编辑器使用
-     * @apiNote 用户管理中心使用
-     *
-     * @param queryDto
-     * @return
-     */
-    @RequestMapping(value = "getArticleByBusinessId",method = RequestMethod.POST)
-    @ResponseBody
-    public Object getArticleByBusinessId(@RequestBody QueryDto queryDto) {
-        if(Objects.isNull(queryDto.getTokenId()) ||
-                !queryDto.getTokenId().equals(oilRedisService.getUserTokenId(queryDto.getUserId()))){
-            return new BusinessException(ErrorCode.ILLEGAL_REQUEST);
-        }
-        return articleService.getByBusinessId(queryDto.getBusinessId());
-    }
-
     /**
      * 展示更多
      *
@@ -216,12 +181,6 @@ public class ArticleController extends BaseController {
             count = CONTENT_TOO_LONG;
         }
         return count;
-    }
-
-    @RequestMapping(value = "deleteArticle", method = RequestMethod.POST)
-    @ResponseBody
-    public Object delete(@RequestBody QueryDto queryDto) {
-        return articleService.delete(queryDto.getBusinessId());
     }
 
     @RequestMapping(value = "getArticlesByArticleId", method = RequestMethod.GET)
