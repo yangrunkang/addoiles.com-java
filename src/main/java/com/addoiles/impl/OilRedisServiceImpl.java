@@ -72,7 +72,7 @@ public class OilRedisServiceImpl implements OilRedisService {
 
         UserIDNamesDto userIDNamesDto = JsonUtils.fromJson(userIdNamesJson, UserIDNamesDto.class);
 
-        if(Objects.isNull(userIDNamesDto)){
+        if (Objects.isNull(userIDNamesDto)) {
             return new ArrayList<>();
         }
 
@@ -176,7 +176,7 @@ public class OilRedisServiceImpl implements OilRedisService {
 
     @Override
     public void setUserTokenId(String userId, String tokenId) {
-        if(!StringUtils.isEmpty(getUserTokenId(userId))){
+        if (!StringUtils.isEmpty(getUserTokenId(userId))) {
             deleteUserTokenId(getUserTokenIdKey(userId));
         }
         redisService.set(getUserTokenIdKey(userId), tokenId);
@@ -184,7 +184,13 @@ public class OilRedisServiceImpl implements OilRedisService {
 
     @Override
     public String getUserTokenId(String userId) {
-        return redisService.get(getUserTokenIdKey(userId));
+        String tokenId = redisService.get(getUserTokenIdKey(userId));
+
+        if(Objects.isNull(tokenId)){
+            return null;
+        }
+
+        return tokenId;
     }
 
     @Override
@@ -194,10 +200,11 @@ public class OilRedisServiceImpl implements OilRedisService {
 
     /**
      * 获取用户tokenId key
+     *
      * @param userId
      * @return
      */
     private String getUserTokenIdKey(String userId) {
-        return userId + ":tokenId";
+        return "tokenId" + userId;
     }
 }

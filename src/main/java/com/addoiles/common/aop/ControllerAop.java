@@ -16,7 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 /**
- * Controller 切面
+ * 网站请求Controller 切面
  * 主要记录入参出餐
  * Created by bla on 9/24/2017.
  */
@@ -42,17 +42,16 @@ public class ControllerAop {
         try {
             Object proceed = pjp.proceed();
             oilResponse.setData(proceed);
-//            logger.info("method:{} ,response:{}", pjp.getSignature().getName(), JsonUtils.toJson(oilResponse));
         } catch (Exception exception) {
             if (exception instanceof BusinessException) {
-                oilResponse.setCode(((BusinessException) exception).getCode());
-                oilResponse.setMessage((exception).getMessage());
-                logger.error("business error:{}", exception);
+                BusinessException businessException = (BusinessException) exception;
+                oilResponse.setCode((businessException.getCode()));
+                oilResponse.setMessage(businessException.getErrorMsg());
+                logger.error("Addoiles Website Business Error:{}", JsonUtils.toJson(oilResponse));
             } else {
                 oilResponse.setErrorCode(ErrorCode.SYSTEM_ERROR);
-                logger.error("system error:{}", exception);
+                logger.error("Addoiles Website System Error:{}", exception);
             }
-
         }
 
         return oilResponse;

@@ -20,6 +20,7 @@ public enum ErrorCode {
     ILLEGAL_REQUEST(6, "非法请求"),
     EXPERIENCE_NOT_EXISTS(7, "该分享不存在"),
     IT_ARTICLE_NOT_EXISTS(8, "该技术文章不存在"),
+    TOKEN_ID_USER_ID_NULL(9, "token_id or user_id is null"),
     ;
 
     /**

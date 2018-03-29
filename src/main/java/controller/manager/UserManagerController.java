@@ -29,7 +29,6 @@ import java.util.List;
  * @Company: HQYG
  * @CreateDate: 2018/3/23 9:28
  */
-// 做个切面 请求掉这个controller的都需要填写tokonId and userId
 @Controller
 public class UserManagerController extends BaseController {
 
