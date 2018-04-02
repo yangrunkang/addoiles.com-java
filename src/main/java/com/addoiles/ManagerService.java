@@ -1,6 +1,6 @@
 package com.addoiles;
 
-import com.addoiles.dto.query.QueryDto;
+import com.addoiles.dto.business.QueryDto;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

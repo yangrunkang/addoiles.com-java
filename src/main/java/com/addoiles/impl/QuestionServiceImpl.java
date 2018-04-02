@@ -3,7 +3,7 @@ package com.addoiles.impl;
 import com.addoiles.ManagerService;
 import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.QuestionMapper;
-import com.addoiles.dto.query.QueryDto;
+import com.addoiles.dto.business.QueryDto;
 import com.addoiles.entity.Question;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;

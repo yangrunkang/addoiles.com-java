@@ -4,7 +4,7 @@ import com.addoiles.common.ErrorCode;
 import com.addoiles.common.annotations.OilLog;
 import com.addoiles.common.enums.AddoilesConstant;
 import com.addoiles.db.dao.UserMapper;
-import com.addoiles.dto.query.QueryDto;
+import com.addoiles.dto.business.QueryDto;
 import com.addoiles.dto.req.LoginReq;
 import com.addoiles.dto.req.RegisterReq;
 import com.addoiles.dto.req.ResetPasswordReq;

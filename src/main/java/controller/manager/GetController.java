@@ -1,29 +1,22 @@
 package controller.manager;
 
-import com.addoiles.dto.query.QueryDto;
+import com.addoiles.dto.business.QueryDto;
 import com.addoiles.dto.view.SimpleListDto;
 import com.addoiles.entity.Article;
-import com.addoiles.entity.MicroContent;
-import com.addoiles.entity.User;
-import com.addoiles.impl.ServiceUtil;
 import controller.BaseController;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.ArticleService;
 import service.MicroContentService;
-import service.OilRedisService;
 
 import javax.annotation.Resource;
 import java.util.List;
 
-import static com.addoiles.common.enums.OilConstant.CONTENT_TOO_LONG;
-
 /**
- * Description: 用户管理Controller 和 组件Controller
+ * Description:查询操作
  * All rights Reserved, Designed By HQYG
  *
  * @author Yangrunkang
@@ -32,27 +25,13 @@ import static com.addoiles.common.enums.OilConstant.CONTENT_TOO_LONG;
  * @CreateDate: 2018/3/23 9:28
  */
 @Controller
-public class UserManagerController extends BaseController {
+public class GetController extends BaseController {
 
     @Resource
     private MicroContentService microContentService;
 
     @Resource
-    private OilRedisService oilRedisService;
-
-    @Resource
     private ArticleService articleService;
-
-    /**
-     * 删除短内容
-     * @param queryDto
-     * @return
-     */
-    @RequestMapping(value = "deleteMicroContent", method = RequestMethod.POST)
-    @ResponseBody
-    public Object deleteMicroContent(@RequestBody QueryDto queryDto) {
-        return microContentService.delete(queryDto.getBusinessId());
-    }
 
     /**
      * 获取短内容
@@ -62,14 +41,7 @@ public class UserManagerController extends BaseController {
     @RequestMapping(value = "getMicroContentList", method = RequestMethod.POST)
     @ResponseBody
     public Object getMicroContentList(@RequestBody QueryDto queryDto) {
-        List<MicroContent> microContentList = microContentService.getList(queryDto);
-
-        if(!CollectionUtils.isEmpty(microContentList)){
-            List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
-            ServiceUtil.HandleMicroContentUserIdToUserName(microContentList, usersOfIdNameList);
-        }
-
-        return microContentList;
+        return microContentService.getList(queryDto);
     }
 
     /**
@@ -87,11 +59,6 @@ public class UserManagerController extends BaseController {
         return articleService.getByBusinessId(queryDto.getBusinessId());
     }
 
-    @RequestMapping(value = "deleteArticle", method = RequestMethod.POST)
-    @ResponseBody
-    public Object deleteArticle(@RequestBody QueryDto queryDto) {
-        return articleService.delete(queryDto.getBusinessId());
-    }
 
     @RequestMapping(value = "getSimpleList",method = RequestMethod.POST)
     @ResponseBody
@@ -107,29 +74,6 @@ public class UserManagerController extends BaseController {
         return simpleListDto;
     }
 
-    @RequestMapping("addArticle")
-    @ResponseBody
-    public Object addArticle(@RequestBody Article article) {
-        Integer count;
-        try {
-            count = articleService.insert(article);
-        } catch (Exception e) {
-            count = CONTENT_TOO_LONG;
-        }
-        return count;
-    }
 
-
-    @RequestMapping("editArticle")
-    @ResponseBody
-    public Object editArticle(@RequestBody Article article) {
-        Integer count;
-        try {
-            count = articleService.update(article);
-        } catch (Exception e) {
-            count = CONTENT_TOO_LONG;
-        }
-        return count;
-    }
 
 }

@@ -6,7 +6,7 @@ import com.addoiles.db.redis.dto.MicroContentDto;
 import com.addoiles.db.redis.dto.NavDto;
 import com.addoiles.db.redis.dto.RecommendDto;
 import com.addoiles.db.redis.inter.RedisService;
-import com.addoiles.dto.query.QueryDto;
+import com.addoiles.dto.business.QueryDto;
 import com.addoiles.entity.*;
 import com.addoiles.util.JsonUtils;
 import org.apache.commons.collections.CollectionUtils;

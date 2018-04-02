@@ -1,6 +1,6 @@
 package controller;
 
-import com.addoiles.dto.query.QueryDto;
+import com.addoiles.dto.business.QueryDto;
 import com.addoiles.dto.view.QuestionAnswerDto;
 import com.addoiles.entity.Comment;
 import com.addoiles.entity.Question;
@@ -72,23 +72,10 @@ public class QuestionController extends BaseController {
         return questionAnswerDtoList;
     }
 
-
-    @RequestMapping(value = "addQuestion", method = RequestMethod.POST)
-    @ResponseBody
-    public Object addQuestion(@RequestBody Question question) {
-        return questionService.insert(question);
-    }
-
     @RequestMapping(value = "getQuestionsByUserId", method = RequestMethod.POST)
     @ResponseBody
     public Object getQuestionsByUserId(@RequestBody QueryDto queryDto) {
         return questionService.getSimpleList(queryDto);
-    }
-
-    @RequestMapping(value = "deleteByQuestionId", method = RequestMethod.POST)
-    @ResponseBody
-    public Object deleteByQuestionId(@RequestBody QueryDto queryDto) {
-        return questionService.delete(queryDto.getBusinessId());
     }
 
 }

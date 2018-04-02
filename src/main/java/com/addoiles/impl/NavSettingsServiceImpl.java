@@ -1,7 +1,7 @@
 package com.addoiles.impl;
 
 import com.addoiles.db.dao.NavSettingsMapper;
-import com.addoiles.dto.query.QueryDto;
+import com.addoiles.dto.business.QueryDto;
 import com.addoiles.entity.NavSettings;
 import org.springframework.stereotype.Service;
 import service.NavSettingsService;

@@ -1,4 +1,4 @@
-package com.addoiles.dto.query;
+package com.addoiles.dto.business;
 
 import com.addoiles.common.Page;
 

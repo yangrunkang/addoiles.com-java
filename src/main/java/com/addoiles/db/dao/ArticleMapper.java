@@ -2,7 +2,7 @@ package com.addoiles.db.dao;
 
 import com.addoiles.BaseService;
 import com.addoiles.ManagerService;
-import com.addoiles.dto.query.QueryDto;
+import com.addoiles.dto.business.QueryDto;
 import com.addoiles.entity.Article;
 import org.apache.ibatis.annotations.Param;
 

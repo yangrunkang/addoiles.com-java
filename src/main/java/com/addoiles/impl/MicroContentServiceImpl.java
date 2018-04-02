@@ -5,11 +5,13 @@ import com.addoiles.common.enums.DBFieldEnum;
 import com.addoiles.db.dao.MicroContentMapper;
 import com.addoiles.db.eventbus.OilEventBusHandle;
 import com.addoiles.db.eventbus.event.ReCacheDreamsEvent;
-import com.addoiles.dto.query.QueryDto;
+import com.addoiles.dto.business.QueryDto;
 import com.addoiles.entity.MicroContent;
+import com.addoiles.entity.User;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
 import service.MicroContentService;
 import service.OilRedisService;
 
@@ -70,7 +72,13 @@ public class MicroContentServiceImpl implements MicroContentService {
 
     @Override
     public List<MicroContent> getList(QueryDto queryDto) {
-        return microContentMapper.getList(queryDto);
+        List<MicroContent> microContentList = microContentMapper.getList(queryDto);
+        if(!CollectionUtils.isEmpty(microContentList)){
+            List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
+            ServiceUtil.HandleMicroContentUserIdToUserName(microContentList, usersOfIdNameList);
+        }
+
+        return microContentList;
     }
 
 

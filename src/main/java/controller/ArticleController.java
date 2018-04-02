@@ -2,8 +2,7 @@ package controller;
 
 import com.addoiles.common.ErrorCode;
 import com.addoiles.common.enums.DBFieldEnum;
-import com.addoiles.dto.query.QueryDto;
-import com.addoiles.dto.req.RatesDto;
+import com.addoiles.dto.business.QueryDto;
 import com.addoiles.dto.resp.ExperienceDto;
 import com.addoiles.dto.view.ITTechDto;
 import com.addoiles.entity.Article;
@@ -162,24 +161,7 @@ public class ArticleController extends BaseController {
         return articleService.getByBusinessId(articleId);
     }
 
-    @RequestMapping(value = "updateRates", method = RequestMethod.POST)
-    @ResponseBody
-    public Object updateRates(@RequestBody RatesDto ratesDto) {
 
-        Article redisArticle = oilRedisService.getArticleByArticleId(ratesDto.getBusinessId());
-
-        Article tmp = new Article();
-        tmp.setArticleId(ratesDto.getBusinessId());
-        tmp.setRates(ratesDto.getRate() + redisArticle.getRates());
-        tmp.setRateCount(redisArticle.getRateCount() + 1);
-
-        redisArticle.setRates(tmp.getRates());
-        redisArticle.setRateCount(tmp.getRateCount());
-
-        oilRedisService.updateArticle(redisArticle);
-
-        return articleService.update(tmp);
-    }
 
     @RequestMapping(value = "getFistPageImage", method = RequestMethod.POST)
     @ResponseBody
@@ -190,7 +172,6 @@ public class ArticleController extends BaseController {
         }
         return fistPageImage;
     }
-
 
 
     private List<Article> doFilterArticleSimpleList(List<Article> simpleList){

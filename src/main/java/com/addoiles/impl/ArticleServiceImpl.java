@@ -2,7 +2,7 @@ package com.addoiles.impl;
 
 import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.ArticleMapper;
-import com.addoiles.dto.query.QueryDto;
+import com.addoiles.dto.business.QueryDto;
 import com.addoiles.entity.Article;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.TimeUtil;

@@ -1,6 +1,6 @@
 package controller;
 
-import com.addoiles.dto.query.QueryDto;
+import com.addoiles.dto.business.QueryDto;
 import com.addoiles.entity.MicroContent;
 import com.addoiles.entity.User;
 import com.addoiles.impl.ServiceUtil;
