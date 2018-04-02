@@ -29,8 +29,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import static com.addoiles.common.enums.OilConstant.CONTENT_TOO_LONG;
-
 /**
  * 文章
  * <p>All rights Reserved, Designed By HQYG.</p>
@@ -156,31 +154,6 @@ public class ArticleController extends BaseController {
     public Object showMoreITTechArticles(@RequestBody QueryDto queryDto) {
         List<Article> simpleList = articleService.getSimpleList(queryDto);
         return doFilterArticleSimpleList(simpleList);
-    }
-
-    @RequestMapping("addArticle")
-    @ResponseBody
-    public Object addArticle(@RequestBody Article article) {
-        Integer count;
-        try {
-            count = articleService.insert(article);
-        } catch (Exception e) {
-            count = CONTENT_TOO_LONG;
-        }
-        return count;
-    }
-
-
-    @RequestMapping("editArticle")
-    @ResponseBody
-    public Object editArticle(@RequestBody Article article) {
-        Integer count;
-        try {
-            count = articleService.update(article);
-        } catch (Exception e) {
-            count = CONTENT_TOO_LONG;
-        }
-        return count;
     }
 
     @RequestMapping(value = "getArticlesByArticleId", method = RequestMethod.GET)

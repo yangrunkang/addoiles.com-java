@@ -20,6 +20,8 @@ import service.OilRedisService;
 import javax.annotation.Resource;
 import java.util.List;
 
+import static com.addoiles.common.enums.OilConstant.CONTENT_TOO_LONG;
+
 /**
  * Description: 用户管理Controller 和 组件Controller
  * All rights Reserved, Designed By HQYG
@@ -103,6 +105,31 @@ public class UserManagerController extends BaseController {
         simpleListDto.setTotalCount(totalCount);
 
         return simpleListDto;
+    }
+
+    @RequestMapping("addArticle")
+    @ResponseBody
+    public Object addArticle(@RequestBody Article article) {
+        Integer count;
+        try {
+            count = articleService.insert(article);
+        } catch (Exception e) {
+            count = CONTENT_TOO_LONG;
+        }
+        return count;
+    }
+
+
+    @RequestMapping("editArticle")
+    @ResponseBody
+    public Object editArticle(@RequestBody Article article) {
+        Integer count;
+        try {
+            count = articleService.update(article);
+        } catch (Exception e) {
+            count = CONTENT_TOO_LONG;
+        }
+        return count;
     }
 
 }
