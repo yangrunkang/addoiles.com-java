@@ -21,6 +21,9 @@ public enum ErrorCode {
     EXPERIENCE_NOT_EXISTS(7, "该分享不存在"),
     IT_ARTICLE_NOT_EXISTS(8, "该技术文章不存在"),
     TOKEN_ID_USER_ID_NULL(9, "token_id or user_id is null"),
+    UPLOAD_FILE_NULL(10, "上传文件为空"),
+    UPLOAD_IMG_FAILED(11, "文件上传错误"),
+    JUST_SUPPORT_IMAGE(12, "仅支持图片格式文件(.jpg|.png,|.gif|.jpeg),请重新选择"),
     ;
 
     /**
