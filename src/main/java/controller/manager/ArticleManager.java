@@ -24,7 +24,7 @@ import static com.addoiles.common.enums.OilConstant.CONTENT_TOO_LONG;
  * @CreateDate: 2018/4/2 19:26
  */
 @Controller
-public class ArticleController extends BaseController{
+public class ArticleManager extends BaseController{
 
     @Resource
     private ArticleService articleService;
