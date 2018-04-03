@@ -40,7 +40,7 @@ public class QuestionController extends BaseController {
     @Resource
     private OilRedisService oilRedisService;
 
-    @RequestMapping(value = "getQuestionAnswerList",method = RequestMethod.POST)
+    @RequestMapping(value = "questionAnswerList",method = RequestMethod.POST)
     @ResponseBody
     public Object getQuestionAnswerList(@RequestBody QueryDto queryDto) {
         List<QuestionAnswerDto> questionAnswerDtoList = new ArrayList<>();
@@ -72,10 +72,5 @@ public class QuestionController extends BaseController {
         return questionAnswerDtoList;
     }
 
-    @RequestMapping(value = "getQuestionsByUserId", method = RequestMethod.POST)
-    @ResponseBody
-    public Object getQuestionsByUserId(@RequestBody QueryDto queryDto) {
-        return questionService.getSimpleList(queryDto);
-    }
 
 }

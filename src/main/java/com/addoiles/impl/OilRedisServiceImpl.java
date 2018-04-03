@@ -115,7 +115,9 @@ public class OilRedisServiceImpl implements OilRedisService {
         Article article = JsonUtils.fromJson(redisService.get(OilRedisConstant.OIL_WEBSITE + articleId), Article.class);
         if (Objects.isNull(article)) {
             article = articleMapper.getByBusinessId(articleId);
-            this.addArticle(article);
+            if(Objects.nonNull(article)){
+                this.addArticle(article);
+            }
         }
         return article;
     }

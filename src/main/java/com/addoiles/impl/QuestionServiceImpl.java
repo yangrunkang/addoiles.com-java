@@ -5,8 +5,6 @@ import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.QuestionMapper;
 import com.addoiles.dto.business.QueryDto;
 import com.addoiles.entity.Question;
-import com.addoiles.util.OilUtils;
-import com.addoiles.util.TimeUtil;
 import org.springframework.stereotype.Service;
 import service.QuestionService;
 
@@ -30,9 +28,6 @@ public class QuestionServiceImpl implements QuestionService,ManagerService<Quest
     @OilLog
     @Override
     public Integer insert(Question question) {
-        question.setQuestionId(OilUtils.generateID());
-        question.setCreateTime(TimeUtil.currentTime());
-        question.setDeleteStatus(0);
         return questionMapper.insert(question);
     }
 

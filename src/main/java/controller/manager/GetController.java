@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import service.ArticleService;
 import service.MicroContentService;
+import service.QuestionService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -33,6 +34,8 @@ public class GetController extends BaseController {
     @Resource
     private ArticleService articleService;
 
+    @Resource
+    private QuestionService questionService;
     /**
      * 获取短内容
      * @param queryDto
@@ -74,6 +77,11 @@ public class GetController extends BaseController {
         return simpleListDto;
     }
 
+    @RequestMapping(value = "getQuestionsByUserId", method = RequestMethod.POST)
+    @ResponseBody
+    public Object getQuestionsByUserId(@RequestBody QueryDto queryDto) {
+        return questionService.getSimpleList(queryDto);
+    }
 
 
 }

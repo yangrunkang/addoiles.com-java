@@ -1,11 +1,14 @@
 package controller.manager;
 
+import com.addoiles.common.enums.DBFieldEnum;
 import com.addoiles.dto.business.QueryDto;
-import com.addoiles.dto.req.RatesDto;
-import com.addoiles.entity.Article;
-import com.addoiles.entity.Comment;
-import com.addoiles.entity.Question;
-import com.addoiles.entity.Suggest;
+import com.addoiles.dto.req.*;
+import com.addoiles.dto.resp.TulingResp;
+import com.addoiles.entity.*;
+import com.addoiles.util.HttpClientUtil;
+import com.addoiles.util.JsonUtils;
+import com.addoiles.util.OilUtils;
+import com.addoiles.util.TimeUtil;
 import controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +18,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import service.*;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Description: 增删改操作
@@ -40,6 +45,9 @@ public class PutController extends BaseController{
     @Resource
     private OilRedisService oilRedisService;
 
+    @Resource
+    private SuggestService suggestService;
+
     /**
      * 删除短内容
      * @param queryDto
@@ -60,12 +68,12 @@ public class PutController extends BaseController{
 
         Article tmp = new Article();
         tmp.setArticleId(ratesDto.getBusinessId());
+        tmp.setUserId(ratesDto.getUserId());
         tmp.setRates(ratesDto.getRate() + redisArticle.getRates());
         tmp.setRateCount(redisArticle.getRateCount() + 1);
 
         redisArticle.setRates(tmp.getRates());
         redisArticle.setRateCount(tmp.getRateCount());
-
         oilRedisService.updateArticle(redisArticle);
 
         return articleService.update(tmp);
@@ -76,7 +84,18 @@ public class PutController extends BaseController{
 
     @RequestMapping(value = "addComment", method = RequestMethod.POST)
     @ResponseBody
-    public Object addComment(@RequestBody Comment comment) {
+    public Object addComment(@RequestBody CommentReq commentReq) {
+
+        Comment comment = new Comment();
+
+        comment.setUserId(commentReq.getUserId());
+        comment.setTargetId(commentReq.getTargetId());
+        comment.setContent(commentReq.getContent());
+
+        comment.setCommitId(OilUtils.generateID());
+        comment.setDeleteStatus(0);
+        comment.setCreateTime(TimeUtil.currentTime());
+
         return commentService.insert(comment);
     }
 
@@ -85,21 +104,64 @@ public class PutController extends BaseController{
     public Object deleteByQuestionId(@RequestBody QueryDto queryDto) {
         return questionService.delete(queryDto.getBusinessId());
     }
+
     @RequestMapping(value = "addQuestion", method = RequestMethod.POST)
     @ResponseBody
-    public Object addQuestion(@RequestBody Question question) {
+    public Object addQuestion(@RequestBody QuestionReq questionReq) {
+
+        Question question = new Question();
+        question.setUserId(questionReq.getUserId());
+        question.setType(questionReq.getType());
+        question.setContent(questionReq.getContent());
+
+
+        question.setQuestionId(OilUtils.generateID());
+        question.setCreateTime(TimeUtil.currentTime());
+        question.setDeleteStatus(0);
         return questionService.insert(question);
     }
 
-
-    @Resource
-    private SuggestService suggestService;
-
-
-    @RequestMapping(value = "suggest", method = RequestMethod.POST)
+    @RequestMapping(value = "addSuggest", method = RequestMethod.POST)
     @ResponseBody
     public Object suggest(@RequestBody Suggest suggest) {
         suggestService.insert(suggest);
         return 0;
     }
+
+    @RequestMapping(value = "addMicroContent", method = RequestMethod.POST)
+    @ResponseBody
+    public Object addMicroContent(@RequestBody MicroContentReq microContentReq) {
+
+        MicroContent microContent = new MicroContent();
+
+        microContent.setUserId(microContentReq.getUserId());
+        microContent.setTitle(microContentReq.getTitle());
+        microContent.setContent(microContentReq.getContent());
+        microContent.setMicroType(microContentReq.getMicroType());
+
+        microContent.setMicroId(OilUtils.generateID());
+        microContent.setLikes(0);
+        microContent.setDeleteStatus(DBFieldEnum.MicroContentDeleteStatus.NORMAL.getValue());
+        microContent.setCreateTime(TimeUtil.currentTime());
+
+        return microContentService.insert(microContent);
+    }
+
+    @RequestMapping("addChat")
+    @ResponseBody
+    public Object chat(@RequestBody TulingReq tulingReq) {
+        Map<String, String> map = new HashMap<>(3);
+        //key传过来的最后一位是错的,我改了,原本是4
+        map.put("key", tulingReq.getKey().substring(0, tulingReq.getKey().length() - 1) + "4");
+        map.put("info", tulingReq.getInfo());
+        map.put("userid", tulingReq.getUserId());
+
+        String response = HttpClientUtil.sendPost(tulingReq.getApi(), map, "utf-8");
+        TulingResp tulingResp = JsonUtils.fromJson(response, TulingResp.class);
+        if (tulingResp.getCode() == 40004) {
+            tulingResp.setText("今天来晚了哦,我每天只能聊天1000次,今天凌晨可以约我");
+        }
+        return tulingResp.getText();
+    }
+
 }

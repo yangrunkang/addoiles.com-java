@@ -17,6 +17,10 @@ public class Suggest {
      */
     private String userId;
 
+    /**
+     * tokenId
+     */
+    private String tokenId;
 
     /**
      * 内容
@@ -45,5 +49,13 @@ public class Suggest {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getTokenId() {
+        return tokenId;
+    }
+
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
     }
 }

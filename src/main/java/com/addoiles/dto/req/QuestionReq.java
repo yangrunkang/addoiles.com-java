@@ -1,19 +1,18 @@
 package com.addoiles.dto.req;
 
 /**
- * Description: 评分Dto
+ * Description: 问题请求
  * All rights Reserved, Designed By HQYG
  *
  * @author Yangrunkang
  * @Copyright: Copyright(C) 2016
  * @Company: HQYG
- * @CreateDate: 2017/12/30 11:13
+ * @CreateDate: 2018/4/3 14:01
  */
-
-public class RatesDto {
+public class QuestionReq {
 
     /**
-     * 用户id
+     * userId
      */
     private String userId;
 
@@ -23,31 +22,14 @@ public class RatesDto {
     private String tokenId;
 
     /**
-     * 业务id
+     * 类型
      */
-    private String businessId;
+    private Integer type;
 
     /**
-     * 平分
+     * 内容
      */
-    private Integer rate;
-
-
-    public String getBusinessId() {
-        return businessId;
-    }
-
-    public void setBusinessId(String businessId) {
-        this.businessId = businessId;
-    }
-
-    public Integer getRate() {
-        return rate;
-    }
-
-    public void setRate(Integer rate) {
-        this.rate = rate;
-    }
+    private String content;
 
     public String getUserId() {
         return userId;
@@ -63,5 +45,21 @@ public class RatesDto {
 
     public void setTokenId(String tokenId) {
         this.tokenId = tokenId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }

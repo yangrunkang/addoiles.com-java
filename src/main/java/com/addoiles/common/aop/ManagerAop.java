@@ -30,9 +30,9 @@ import java.util.Objects;
  */
 @Aspect
 @Component
-public class ManagerControllerAop {
+public class ManagerAop {
 
-    private static final Logger logger = LoggerFactory.getLogger(ManagerControllerAop.class);
+    private static final Logger logger = LoggerFactory.getLogger(ManagerAop.class);
 
     @Resource
     private OilRedisService oilRedisService;
@@ -71,8 +71,10 @@ public class ManagerControllerAop {
 
             logger.info("method：{} , args:{}", joinPoint.getSignature().getName(), JsonUtils.toJson(joinPoint.getArgs()));
         } catch (BusinessException e){
+            logger.error("{}",e);
             throw  e;
         } catch (Exception e){
+            logger.error("{}",e);
             throw new Exception(ErrorCode.SYSTEM_ERROR.getMessage());
         }
     }

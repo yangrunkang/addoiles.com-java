@@ -52,14 +52,4 @@ public class MicroContentController extends BaseController {
         return microContentList;
     }
 
-
-    @RequestMapping(value = "addMicroContent", method = RequestMethod.POST)
-    @ResponseBody
-    public Object addMicroContent(@RequestBody MicroContent microContent) {
-        return microContentService.insert(microContent);
-    }
-
-
-
-
 }

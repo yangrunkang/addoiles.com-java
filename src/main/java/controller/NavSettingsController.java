@@ -27,7 +27,7 @@ public class NavSettingsController extends BaseController {
      * @apiNote 返回json串,前段就不用处理了List-->json了
      * @return
      */
-    @RequestMapping("getNavList")
+    @RequestMapping("navList")
     @ResponseBody
     public Object getNavList() {
         return JsonUtils.toJson(oilRedisService.getNavList());

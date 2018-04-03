@@ -62,6 +62,7 @@
             </if>
         </set>
         where article_id = #{articleId,jdbcType=VARCHAR}
+        and user_id = #{userId,jdbcType=VARCHAR}
     </update>
 
 

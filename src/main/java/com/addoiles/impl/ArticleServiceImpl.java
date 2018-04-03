@@ -1,10 +1,11 @@
 package com.addoiles.impl;
 
+import com.addoiles.common.ErrorCode;
 import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.ArticleMapper;
 import com.addoiles.dto.business.QueryDto;
 import com.addoiles.entity.Article;
-import com.addoiles.util.OilUtils;
+import com.addoiles.exception.BusinessException;
 import com.addoiles.util.TimeUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
@@ -52,13 +53,7 @@ public class ArticleServiceImpl implements ArticleService {
     @OilLog
     @Override
     public Integer insert(Article article) {
-        article.setArticleId(OilUtils.generateID());
-        article.setRates(0);
-        article.setRateCount(0);
-        article.setCreateTime(TimeUtil.currentTime());
-
         oilRedisService.addArticle(article);
-
         return articleMapper.insert(article);
     }
 
@@ -73,7 +68,7 @@ public class ArticleServiceImpl implements ArticleService {
     public Integer update(Article article) {
         Article redisArticle = oilRedisService.getArticleByArticleId(article.getArticleId());
         if(Objects.isNull(redisArticle)){
-            return -1;
+            throw new BusinessException(ErrorCode.EXPERIENCE_NOT_EXISTS);
         }
 
         redisArticle.setIsHide(article.getIsHide());
@@ -84,8 +79,6 @@ public class ArticleServiceImpl implements ArticleService {
 
         oilRedisService.updateArticle(redisArticle);
 
-
-        article.setUpdateTime(TimeUtil.currentTime());
         return articleMapper.update(article);
     }
 

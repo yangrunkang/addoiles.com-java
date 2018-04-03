@@ -1,7 +1,10 @@
 package controller.manager;
 
 import com.addoiles.dto.business.QueryDto;
+import com.addoiles.dto.req.ArticleReq;
 import com.addoiles.entity.Article;
+import com.addoiles.util.OilUtils;
+import com.addoiles.util.TimeUtil;
 import controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,9 +40,25 @@ public class ArticleManager extends BaseController{
 
     @RequestMapping("addArticle")
     @ResponseBody
-    public Object addArticle(@RequestBody Article article) {
+    public Object addArticle(@RequestBody ArticleReq articleReq) {
         Integer count;
         try {
+
+            Article article = new Article();
+
+            article.setUserId(articleReq.getUserId());
+            article.setArticleType(articleReq.getArticleType());
+            article.setTitle(articleReq.getTitle());
+            article.setContent(articleReq.getContent());
+            article.setIsHide(articleReq.getIsHide());
+            article.setDeleteStatus(articleReq.getDeleteStatus());
+
+            article.setArticleId(OilUtils.generateID());
+            article.setRates(0);
+            article.setRateCount(0);
+            article.setCreateTime(TimeUtil.currentTime());
+            article.setUpdateTime(TimeUtil.currentTime());
+
             count = articleService.insert(article);
         } catch (Exception e) {
             count = CONTENT_TOO_LONG;
@@ -49,9 +68,20 @@ public class ArticleManager extends BaseController{
 
     @RequestMapping("editArticle")
     @ResponseBody
-    public Object editArticle(@RequestBody Article article) {
+    public Object editArticle(@RequestBody ArticleReq articleReq) {
         Integer count;
         try {
+
+            Article article = new Article();
+            article.setArticleId(articleReq.getArticleId());
+            article.setUserId(articleReq.getUserId());
+            article.setArticleType(articleReq.getArticleType());
+            article.setTitle(articleReq.getTitle());
+            article.setContent(articleReq.getContent());
+            article.setIsHide(articleReq.getIsHide());
+            article.setDeleteStatus(articleReq.getDeleteStatus());
+            article.setUpdateTime(TimeUtil.currentTime());
+
             count = articleService.update(article);
         } catch (Exception e) {
             count = CONTENT_TOO_LONG;

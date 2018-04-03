@@ -8,23 +8,15 @@ import java.io.Serializable;
  */
 public class TulingReq implements Serializable {
 
-    private TulingReq() {
-    }
-
     private String key;
 
     private String info;
 
-    private String userid;
+    private String userId;
+
+    private String tokenId;
 
     private String api;
-
-    public TulingReq(String key, String info, String userid, String api) {
-        this.key = key;
-        this.info = info;
-        this.userid = userid;
-        this.api = api;
-    }
 
     public String getKey() {
         return key;
@@ -42,12 +34,20 @@ public class TulingReq implements Serializable {
         this.info = info;
     }
 
-    public String getUserid() {
-        return userid;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setUserid(String userid) {
-        this.userid = userid;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getTokenId() {
+        return tokenId;
+    }
+
+    public void setTokenId(String tokenId) {
+        this.tokenId = tokenId;
     }
 
     public String getApi() {

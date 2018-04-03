@@ -48,7 +48,7 @@ public class ArticleController extends BaseController {
     @Resource
     private OilRedisService oilRedisService;
 
-    @RequestMapping(value = "getExperienceList", method = RequestMethod.POST)
+    @RequestMapping(value = "experienceList", method = RequestMethod.POST)
     @ResponseBody
     public Object getExperienceList(@RequestBody QueryDto queryDto) {
         //use redis
@@ -69,13 +69,11 @@ public class ArticleController extends BaseController {
         return articleList;
     }
 
-    @RequestMapping(value = "getExperience", method = RequestMethod.POST)
+    @RequestMapping(value = "experience", method = RequestMethod.POST)
     @ResponseBody
     public Object getExperienceDto(@RequestBody QueryDto queryDto){
         ExperienceDto experienceDto = new ExperienceDto();
 
-        //use redis
-        List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
         Article article = articleService.getByBusinessId(queryDto.getBusinessId());
 
         if (Objects.isNull(article)
@@ -83,6 +81,8 @@ public class ArticleController extends BaseController {
             return new BusinessException(ErrorCode.EXPERIENCE_NOT_EXISTS);
         }
 
+        //use redis
+        List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
         //处理userId转userName
         ServiceUtil.HandleArticleUserIdToUserName(Collections.singletonList(article), usersOfIdNameList);
         List<Comment> commentList = commentService.getCommentListByTargetId(article.getArticleId());
@@ -105,7 +105,7 @@ public class ArticleController extends BaseController {
         return experienceDto;
     }
 
-    @RequestMapping(value = "getITArticle",method = RequestMethod.POST)
+    @RequestMapping(value = "ITArticle",method = RequestMethod.POST)
     @ResponseBody
     public Object getITArticleList(@RequestBody QueryDto queryDto) {
         ITTechDto itTechDto = new ITTechDto();
@@ -135,7 +135,7 @@ public class ArticleController extends BaseController {
         return itTechDto;
     }
 
-    @RequestMapping(value = "getITArticlePithinessList",method = RequestMethod.POST)
+    @RequestMapping(value = "ITPithinessList",method = RequestMethod.POST)
     @ResponseBody
     public Object getITArticlePithinessList(@RequestBody QueryDto queryDto) {
         List<Article> pithinessList = articleService.getSimpleList(queryDto);
@@ -148,22 +148,14 @@ public class ArticleController extends BaseController {
      *
      * @return
      */
-    @RequestMapping("showMoreITTechArticles")
+    @RequestMapping("moreArticles")
     @ResponseBody
     public Object showMoreITTechArticles(@RequestBody QueryDto queryDto) {
         List<Article> simpleList = articleService.getSimpleList(queryDto);
         return doFilterArticleSimpleList(simpleList);
     }
 
-    @RequestMapping(value = "getArticlesByArticleId", method = RequestMethod.GET)
-    @ResponseBody
-    public Object getArticlesByArticleId(String articleId) {
-        return articleService.getByBusinessId(articleId);
-    }
-
-
-
-    @RequestMapping(value = "getFistPageImage", method = RequestMethod.POST)
+    @RequestMapping(value = "recommendList", method = RequestMethod.POST)
     @ResponseBody
     public Object getRecommend() {
         List<Recommend> fistPageImage = oilRedisService.getRecommend();
