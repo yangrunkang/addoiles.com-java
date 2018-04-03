@@ -170,8 +170,8 @@ public class DevController extends BaseController {
         try {
             //压缩图片
             Thumbnails.of(imageFile)
-                    .scale(0.25f)
-                    .outputQuality(0.8)
+                    .scale(1f)
+                    .outputQuality(0.5)
                     .outputFormat("jpg")
                     .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
 
