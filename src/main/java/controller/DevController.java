@@ -56,7 +56,7 @@ public class DevController extends BaseController {
     private static List<String> imgs;
 
     static{
-        imgs = Arrays.asList(".jpg",".png",".gif",".jpeg");
+        imgs = Arrays.asList(".jpg",".png",".gif",".jpeg",".bmp",".x-icon");
     }
 
     /**
@@ -172,7 +172,6 @@ public class DevController extends BaseController {
             Thumbnails.of(imageFile)
                     .scale(1f)
                     .outputQuality(0.5)
-                    .outputFormat("jpg")
                     .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
 
             deleteFile(imageFile);
