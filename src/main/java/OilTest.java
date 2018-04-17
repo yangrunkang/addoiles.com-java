@@ -1,6 +1,8 @@
+import com.addoiles.db.dao.ArticleMapper;
 import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.dto.req.VerificationCodeReq;
 import com.addoiles.dto.resp.LoginResp;
+import com.addoiles.entity.Article;
 import com.addoiles.mail.EmailService;
 import com.addoiles.mail.dto.Email;
 import com.addoiles.mail.dto.Receiver;
@@ -9,10 +11,17 @@ import net.coobird.thumbnailator.Thumbnails;
 import net.coobird.thumbnailator.name.Rename;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.util.CollectionUtils;
 import service.UserService;
+import sun.misc.BASE64Decoder;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Description:
@@ -31,11 +40,49 @@ public class OilTest {
 
     public static void main(String[] sf) {
 //        startSpring();
-        testDeductImgSize();
+//        testDeductImgSize();
 //        testRedisGet();
 //        testPub();
+    }
+
+
+    /**
+     * 将base64位图片转换成img,替换进数据库
+     */
+    public static void replaceBase64ToImg(){
+
+        ArticleMapper articleMapper = SpringContextUtils.getBean(ArticleMapper.class);
+        List<Article> allArticles = articleMapper.getAllArticles();
+        if(!CollectionUtils.isEmpty(allArticles)){
+            allArticles.forEach(article -> {
+                //获取文章内容
+                String content = article.getContent();
+                //提取base64位图片并转换为img link并插入文本
+
+            });
+        }
 
     }
+
+
+    public void findBase64(String articleContnet){
+
+    }
+
+    /**
+     * 把base64图片数据转为本地图片
+     * @param base64ImgData
+     * @param filePath
+     * @throws IOException
+     */
+    public static void convertBase64DataToImage(String base64ImgData,String filePath) throws IOException {
+        BASE64Decoder d = new BASE64Decoder();
+        byte[] bs = d.decodeBuffer(base64ImgData);
+        FileOutputStream os = new FileOutputStream(filePath);
+        os.write(bs);
+        os.close();
+    }
+
 
     /**
      * 测试压缩图片
