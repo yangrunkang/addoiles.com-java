@@ -12,4 +12,6 @@ public interface EmailService {
 
     Boolean sendEmail(Email email);
 
+    void businessEmail(Email email);
+
 }

@@ -125,6 +125,7 @@ public class PutController extends BaseController{
     @ResponseBody
     public Object suggest(@RequestBody Suggest suggest) {
         suggestService.insert(suggest);
+        //todo 异步发送业务邮件同意方法
         return 0;
     }
 

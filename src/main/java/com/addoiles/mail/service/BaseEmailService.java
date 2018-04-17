@@ -39,7 +39,7 @@ public class BaseEmailService {
      * @return
      * @throws Exception
      */
-    private MimeMessage createEmail(Session session, Email email) throws Exception {
+    private MimeMessage createEmail(Session session, Email email,Sender sender) throws Exception {
         // 1. 创建一封邮件
         MimeMessage message = new MimeMessage(session);
 
@@ -67,23 +67,14 @@ public class BaseEmailService {
     public Boolean sendEmail(Email email) throws Exception {
 
         // 1. 创建参数配置, 用于连接邮件服务器的参数配置
-        Properties props = new Properties();                    // 参数配置
-        props.setProperty("mail.transport.protocol", emailConfig.getTransportProtocol());   // 使用的协议（JavaMail规范要求）
-        props.setProperty("mail." + emailConfig.getTransportProtocol() + ".host", emailConfig.getMailHost());   // 发件人的邮箱的 SMTP 服务器地址
-        props.setProperty("mail." + emailConfig.getTransportProtocol() + ".auth", emailConfig.getIsMailAuth());            // 需要请求认证
-
-        props.setProperty("mail." + emailConfig.getTransportProtocol() + ".port", emailConfig.getMailHostPort());
-        props.setProperty("mail." + emailConfig.getTransportProtocol() + ".socketFactory.class", "javax.net.ssl.SSLSocketFactory");
-        props.setProperty("mail." + emailConfig.getTransportProtocol() + ".socketFactory.fallback", "false");
-        props.setProperty("mail." + emailConfig.getTransportProtocol() + ".socketFactory.port", emailConfig.getMailHostPort());
+        Properties properties = getProperties();
 
 
         // 2. 根据配置创建会话对象, 用于和邮件服务器交互
-        Session session = Session.getDefaultInstance(props);
-        session.setDebug(true);                                 // 设置为debug模式, 可以查看详细的发送 log
+        Session session = getSession(properties);
 
         // 3. 创建一封邮件
-        MimeMessage message = createEmail(session, email);
+        MimeMessage message = createEmail(session, email,sender);
 
         // 4. 根据 Session 获取邮件传输对象
         Transport transport = session.getTransport();
@@ -100,6 +91,49 @@ public class BaseEmailService {
 
         return true;
     }
+
+
+    public void sendBusinessEmail(Sender sender,Email email){
+        Properties properties = getProperties();
+
+        Session session = getSession(properties);
+
+        try {
+            MimeMessage mimeMessage = createEmail(session, email, sender);
+            Transport transport = session.getTransport();
+            transport.connect(sender.getEmailAddress(), sender.getAuthorizationCode());
+            transport.sendMessage(mimeMessage, mimeMessage.getAllRecipients());
+            transport.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
+
+    private Properties getProperties(){
+        Properties props = new Properties();                    // 参数配置
+        props.setProperty("mail.transport.protocol", emailConfig.getTransportProtocol());   // 使用的协议（JavaMail规范要求）
+        props.setProperty("mail." + emailConfig.getTransportProtocol() + ".host", emailConfig.getMailHost());   // 发件人的邮箱的 SMTP 服务器地址
+        props.setProperty("mail." + emailConfig.getTransportProtocol() + ".auth", emailConfig.getIsMailAuth());            // 需要请求认证
+
+        props.setProperty("mail." + emailConfig.getTransportProtocol() + ".port", emailConfig.getMailHostPort());
+        props.setProperty("mail." + emailConfig.getTransportProtocol() + ".socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+        props.setProperty("mail." + emailConfig.getTransportProtocol() + ".socketFactory.fallback", "false");
+        props.setProperty("mail." + emailConfig.getTransportProtocol() + ".socketFactory.port", emailConfig.getMailHostPort());
+
+        return props;
+    }
+
+
+    private Session getSession(Properties properties){
+        Session session = Session.getDefaultInstance(properties);
+        session.setDebug(true);// 设置为debug模式, 可以查看详细的发送 log
+        return session;
+    }
+
+
 
     public void setEmailConfig(EmailConfig emailConfig) {
         this.emailConfig = emailConfig;
