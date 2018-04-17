@@ -95,9 +95,7 @@ public class BaseEmailService {
 
     public void sendBusinessEmail(Sender sender,Email email){
         Properties properties = getProperties();
-
         Session session = getSession(properties);
-
         try {
             MimeMessage mimeMessage = createEmail(session, email, sender);
             Transport transport = session.getTransport();
@@ -107,7 +105,6 @@ public class BaseEmailService {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
 

@@ -33,7 +33,7 @@ public class EmailServiceImpl implements EmailService {
 
 
     @Override
-    public void businessEmail(Email email) {
+    public void sendBusinessEmail(Email email) {
         Sender sender = new Sender();
         sender.setAuthorizationCode(PropertyUtils.getValue("business.authCode"));
         sender.setEmailAddress(PropertyUtils.getValue("business.email"));

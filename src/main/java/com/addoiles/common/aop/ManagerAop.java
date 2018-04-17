@@ -2,7 +2,10 @@ package com.addoiles.common.aop;
 
 import com.addoiles.common.ErrorCode;
 import com.addoiles.common.OilResponse;
+import com.addoiles.common.enums.OilConstant;
+import com.addoiles.db.eventbus.OilEventBusHandle;
 import com.addoiles.exception.BusinessException;
+import com.addoiles.mail.dto.Email;
 import com.addoiles.util.JsonUtils;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
@@ -97,6 +100,13 @@ public class ManagerAop {
                 oilResponse.setMessage(exception.getMessage());
                 logger.error("Manager System Error:{}", exception);
             }
+
+            //异步异常通知
+            Email email = new Email();
+            email.setSubject("ManagerAop");
+            email.setContent(exception.getMessage());
+            email.setReceiver(OilConstant.getHostReceiver());
+            OilEventBusHandle.getInstance().postEvent(email);
         }
 
         return oilResponse;

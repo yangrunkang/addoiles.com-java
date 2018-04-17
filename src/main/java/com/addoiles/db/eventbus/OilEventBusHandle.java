@@ -34,8 +34,8 @@ public class OilEventBusHandle {
         Map<String, Object> beans = applicationContext.getBeansWithAnnotation(OilEventListener.class);
 
         beans.values().forEach(bean ->
-                //待蓄状态
-                eventBus.register(bean)
+            //待蓄状态
+            eventBus.register(bean)
         );
     }
 

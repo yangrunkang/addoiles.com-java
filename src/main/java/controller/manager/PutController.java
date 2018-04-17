@@ -1,10 +1,13 @@
 package controller.manager;
 
 import com.addoiles.common.enums.DBFieldEnum;
+import com.addoiles.common.enums.OilConstant;
+import com.addoiles.db.eventbus.OilEventBusHandle;
 import com.addoiles.dto.business.QueryDto;
 import com.addoiles.dto.req.*;
 import com.addoiles.dto.resp.TulingResp;
 import com.addoiles.entity.*;
+import com.addoiles.mail.dto.Email;
 import com.addoiles.util.HttpClientUtil;
 import com.addoiles.util.JsonUtils;
 import com.addoiles.util.OilUtils;
@@ -20,6 +23,7 @@ import service.*;
 import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * Description: 增删改操作
@@ -125,7 +129,12 @@ public class PutController extends BaseController{
     @ResponseBody
     public Object suggest(@RequestBody Suggest suggest) {
         suggestService.insert(suggest);
-        //todo 异步发送业务邮件同意方法
+        //异步发送业务邮件同意方法
+        Email email = new Email();
+        email.setSubject("用户建议");
+        email.setContent(suggest.getContent());
+        email.setReceiver(OilConstant.getHostReceiver());
+        OilEventBusHandle.getInstance().postEvent(email);
         return 0;
     }
 
