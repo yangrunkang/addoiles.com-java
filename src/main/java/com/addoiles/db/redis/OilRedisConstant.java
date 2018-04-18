@@ -1,5 +1,7 @@
 package com.addoiles.db.redis;
 
+import com.addoiles.util.PropertyUtils;
+
 /**
  * Description: 油站Redis常量
  * All rights Reserved, Designed By HQYG
@@ -16,7 +18,7 @@ public class OilRedisConstant {
      * 开发时加上 DEV.
      * 生产是 DEV. 加上 PRD.
      */
-    private static final String REDIS_ENV = "DEV.";
+    private static final String REDIS_ENV = PropertyUtils.getValue("addoiles.env") + ".";
 
     /**
      * 缓存完整内容KEY标志
@@ -26,7 +28,7 @@ public class OilRedisConstant {
     /**
      * redis key 前缀
      */
-    public static String OIL_WEBSITE = REDIS_ENV +"addoiles.";
+    public static String OIL_WEBSITE = REDIS_ENV + "addoiles.";
 
     /**
      * 用户ID-用户名 映射集合

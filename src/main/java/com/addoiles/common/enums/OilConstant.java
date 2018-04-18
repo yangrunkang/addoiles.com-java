@@ -1,6 +1,7 @@
 package com.addoiles.common.enums;
 
 import com.addoiles.mail.dto.Receiver;
+import com.addoiles.util.PropertyUtils;
 
 public class OilConstant {
     //每页数
@@ -17,17 +18,12 @@ public class OilConstant {
     public final static Integer CONTENT_TOO_LONG = 1002;
 
     /**
-     * 业务通知邮件
-     */
-    public final static String HOST_EMAIL = "yangrunkang53@gmail.com";
-
-    /**
      * 获取邮件业务邮件通知接受者
      * @return
      */
     public static Receiver getHostReceiver(){
         Receiver receiver = new Receiver();
-        receiver.setEmailAddress(HOST_EMAIL);
+        receiver.setEmailAddress(PropertyUtils.getValue("business.receiver.email"));
         receiver.setName("master");
         return receiver;
     }

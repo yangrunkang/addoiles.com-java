@@ -1,17 +1,11 @@
 package controller.manager;
 
 import com.addoiles.common.enums.DBFieldEnum;
-import com.addoiles.common.enums.OilConstant;
-import com.addoiles.db.eventbus.OilEventBusHandle;
 import com.addoiles.dto.business.QueryDto;
 import com.addoiles.dto.req.*;
 import com.addoiles.dto.resp.TulingResp;
 import com.addoiles.entity.*;
-import com.addoiles.mail.dto.Email;
-import com.addoiles.util.HttpClientUtil;
-import com.addoiles.util.JsonUtils;
-import com.addoiles.util.OilUtils;
-import com.addoiles.util.TimeUtil;
+import com.addoiles.util.*;
 import controller.BaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,7 +29,7 @@ import java.util.Map;
  * @CreateDate: 2018/4/2 19:16
  */
 @Controller
-public class PutController extends BaseController{
+public class PutController extends BaseController {
 
     @Resource
     private MicroContentService microContentService;
@@ -51,9 +45,12 @@ public class PutController extends BaseController{
 
     @Resource
     private SuggestService suggestService;
+    @Resource
+    private CommentService commentService;
 
     /**
      * 删除短内容
+     *
      * @param queryDto
      * @return
      */
@@ -62,7 +59,6 @@ public class PutController extends BaseController{
     public Object deleteMicroContent(@RequestBody QueryDto queryDto) {
         return microContentService.delete(queryDto.getBusinessId());
     }
-
 
     @RequestMapping(value = "updateRates", method = RequestMethod.POST)
     @ResponseBody
@@ -82,9 +78,6 @@ public class PutController extends BaseController{
 
         return articleService.update(tmp);
     }
-
-    @Resource
-    private CommentService commentService;
 
     @RequestMapping(value = "addComment", method = RequestMethod.POST)
     @ResponseBody
@@ -130,11 +123,7 @@ public class PutController extends BaseController{
     public Object suggest(@RequestBody Suggest suggest) {
         suggestService.insert(suggest);
         //异步发送业务邮件同意方法
-        Email email = new Email();
-        email.setSubject("用户建议");
-        email.setContent(suggest.getContent());
-        email.setReceiver(OilConstant.getHostReceiver());
-        OilEventBusHandle.getInstance().postEvent(email);
+        EmailUtils.businessNotifyEmail("用户建议", "userId:" + suggest.getUserId() + ",suggest:" + suggest.getContent());
         return 0;
     }
 
