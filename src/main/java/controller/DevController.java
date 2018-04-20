@@ -147,7 +147,7 @@ public class DevController extends BaseController {
         }
 
         //获取文件名
-        String fileName = TimeUtil.currentTime() + "_" + file.getOriginalFilename();
+        String fileName = OilUtils.generateID() + "_" + file.getOriginalFilename();
 
         int dotIndex = fileName.lastIndexOf(".");
         String suffix = fileName.substring(dotIndex,fileName.length());
@@ -167,15 +167,14 @@ public class DevController extends BaseController {
         file.transferTo(imageFile);
         isMakeFile(imageFile);
 
-
-        Boolean isToThumbnails = suffix.equalsIgnoreCase(GIF);
-        //不是GIF才压缩
-        if(!isToThumbnails){
+        //是否是gif格式
+        Boolean isGif = suffix.equalsIgnoreCase(GIF);
+        if(!isGif){
             try {
                 //压缩图片
                 Thumbnails.of(imageFile)
                         .scale(1f)
-                        .outputQuality(0.5)
+                        .outputQuality(0.9)
                         .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
 
                 deleteFile(imageFile);
@@ -190,7 +189,12 @@ public class DevController extends BaseController {
         String imageUrl = PropertyUtils.getValue("images.url");
         Recommend recommend = new Recommend();
         recommend.setShowId(OilUtils.generateID());
-        recommend.setImage(imageUrl + "/" + "thumbnail." + fileName);
+        if(!isGif){
+            recommend.setImage(imageUrl + "/" + "thumbnail." + fileName);
+        }else{
+            //gif 不加 "thumbnail." 标志
+            recommend.setImage(imageUrl + "/" + fileName);
+        }
         recommend.setDeleteStatus(DBFieldEnum.FirstPageDeleteStatus.NORMAL.getValue());
         recommend.setCreateTime(TimeUtil.currentTime());
 
