@@ -1,6 +1,5 @@
 package com.addoiles.impl;
 
-import com.addoiles.db.cache.OilCache;
 import com.addoiles.db.dao.ArticleMapper;
 import com.addoiles.db.dao.UserMapper;
 import com.addoiles.db.redis.OilRedisConstant;
@@ -10,6 +9,7 @@ import com.addoiles.db.redis.dto.RecommendDto;
 import com.addoiles.db.redis.dto.UserIDNamesDto;
 import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.entity.*;
+import com.addoiles.sync.CacheListener;
 import com.addoiles.util.JsonUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +47,7 @@ public class OilRedisServiceImpl implements OilRedisService {
     private RedisService redisService;
 
     @Resource
-    private OilCache oilCache;
+    private CacheListener cacheListener;
 
 
     @Override
@@ -102,7 +102,7 @@ public class OilRedisServiceImpl implements OilRedisService {
         NavDto navDto = JsonUtils.fromJson(redisService.get(OilRedisConstant.NAV_LIST), NavDto.class);
         if (Objects.isNull(navDto)) {
             redisService.delete(OilRedisConstant.NAV_LIST);
-            return oilCache.cacheNavList();
+            return cacheListener.cacheNavList(null);
         }
         navSettingsList = navDto.getNavSettings();
 
@@ -149,7 +149,7 @@ public class OilRedisServiceImpl implements OilRedisService {
         String recommendJson = redisService.get(OilRedisConstant.FIRST_PAGE_IMAGE);
         if (StringUtils.isEmpty(recommendJson)) {
             redisService.delete(OilRedisConstant.FIRST_PAGE_IMAGE);
-            return oilCache.cacheFirstPageImage();
+            return cacheListener.cacheFirstPageImage(null);
         }
 
         RecommendDto firstPageImageDto = JsonUtils.fromJson(recommendJson, RecommendDto.class);
@@ -166,7 +166,7 @@ public class OilRedisServiceImpl implements OilRedisService {
         String dreamListJson = redisService.get(OilRedisConstant.DREAMS);
         if (StringUtils.isEmpty(dreamListJson)) {
             redisService.delete(OilRedisConstant.DREAMS);
-            return oilCache.cacheDreams();
+            return cacheListener.cacheDreams(null);
         }
 
         MicroContentDto microContentDto = JsonUtils.fromJson(dreamListJson, MicroContentDto.class);

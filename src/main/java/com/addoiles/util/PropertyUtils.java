@@ -16,6 +16,7 @@ public class PropertyUtils extends PropertyPlaceholderConfigurer {
     public static final Logger logger = LoggerFactory.getLogger(PropertyUtils.class);
     private static Map<String, String> propertyMap;
 
+    @Override
     protected void processProperties(ConfigurableListableBeanFactory beanFactoryToProcess, Properties props) {
         super.processProperties(beanFactoryToProcess, props);
         propertyMap = new HashMap<String, String>();

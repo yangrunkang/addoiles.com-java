@@ -2,12 +2,12 @@ package controller;
 
 import com.addoiles.common.ErrorCode;
 import com.addoiles.common.enums.DBFieldEnum;
-import com.addoiles.db.cache.OilCache;
 import com.addoiles.db.dao.RecommendMapper;
 import com.addoiles.db.redis.OilRedisConstant;
 import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.entity.Recommend;
 import com.addoiles.exception.BusinessException;
+import com.addoiles.sync.CacheListener;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.PropertyUtils;
 import com.addoiles.util.TimeUtil;
@@ -51,7 +51,7 @@ public class DevController extends BaseController {
     private RecommendMapper recommendMapper;
 
     @Resource
-    private OilCache oilCache;
+    private CacheListener cacheListener;
 
     private static List<String> imgs;
 
@@ -128,7 +128,7 @@ public class DevController extends BaseController {
     public Object refreshRecommendInfo() {
         redisService.deleteKeys(OilRedisConstant.FIRST_PAGE_IMAGE);
         logger.info("------>refreshRecommendInfo Ok");
-        oilCache.cacheFirstPageImage();
+        cacheListener.cacheFirstPageImage(null);
         return "refreshRecommendInfo Ok";
     }
 
