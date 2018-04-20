@@ -54,7 +54,7 @@ public class DevController extends BaseController {
     private CacheListener cacheListener;
 
     private static List<String> imgs;
-
+    private static String GIF = ".gif";
     static{
         imgs = Arrays.asList(".jpg",".png",".gif",".jpeg",".bmp",".x-icon");
     }
@@ -167,17 +167,22 @@ public class DevController extends BaseController {
         file.transferTo(imageFile);
         isMakeFile(imageFile);
 
-        try {
-            //压缩图片
-            Thumbnails.of(imageFile)
-                    .scale(1f)
-                    .outputQuality(0.5)
-                    .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
 
-            deleteFile(imageFile);
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new BusinessException(ErrorCode.UPLOAD_IMG_FAILED);
+        Boolean isToThumbnails = suffix.equalsIgnoreCase(GIF);
+        //不是GIF才压缩
+        if(!isToThumbnails){
+            try {
+                //压缩图片
+                Thumbnails.of(imageFile)
+                        .scale(1f)
+                        .outputQuality(0.5)
+                        .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+
+                deleteFile(imageFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new BusinessException(ErrorCode.UPLOAD_IMG_FAILED);
+            }
         }
 
 
