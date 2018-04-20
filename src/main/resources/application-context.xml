@@ -12,8 +12,17 @@
 	         http://www.springframework.org/schema/context/spring-context.xsd
 	         http://www.springframework.org/schema/aop
              http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+
+    <!--指定扫描-->
     <context:component-scan base-package="controller"/>
-    <context:component-scan base-package="com.addoiles"/>
+    <context:component-scan base-package="controller.manager"/>
+    <context:component-scan base-package="com.addoiles.sync"/>
+    <context:component-scan base-package="com.addoiles.mail.service"/>
+    <context:component-scan base-package="com.addoiles.impl"/>
+    <context:component-scan base-package="com.addoiles.db.redis.sub"/>
+    <context:component-scan base-package="com.addoiles.db.redis.impl"/>
+    <context:component-scan base-package="com.addoiles.db.cache"/>
+    <context:component-scan base-package="com.addoiles.common.aop"/>
 
     <!-- 启用Spring对基于@AspectJ aspects的配置支持 -->
     <!-- 激活自动代理功能 -->

@@ -1,4 +1,4 @@
-package com.addoiles.db.eventbus.listeners;
+package com.addoiles.sync;
 
 import com.addoiles.common.annotations.OilEventListener;
 import com.addoiles.db.eventbus.event.AddArticleEvent;
