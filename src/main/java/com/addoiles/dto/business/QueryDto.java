@@ -29,6 +29,12 @@ public class QueryDto {
     private String tokenId;
 
     /**
+     * 排序规则
+     * 1-更新时间倒叙
+     */
+    private Integer sortBy;
+
+    /**
      * 业务id
      * 除表id外的实体id,比如User表中的userId,Article表的articleId
      *
@@ -111,4 +117,11 @@ public class QueryDto {
         this.tokenId = tokenId;
     }
 
+    public Integer getSortBy() {
+        return sortBy;
+    }
+
+    public void setSortBy(Integer sortBy) {
+        this.sortBy = sortBy;
+    }
 }

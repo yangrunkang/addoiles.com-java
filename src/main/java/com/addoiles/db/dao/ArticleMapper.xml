@@ -115,7 +115,12 @@
         <if test="queryDto.userId != null">
             and user_id = #{queryDto.userId,jdbcType=VARCHAR}
         </if>
-        order by create_time desc
+        <if test="queryDto.sortBy == null">
+          order by create_time desc
+        </if>
+        <if test="queryDto.sortBy == 1">
+          order by update_time desc
+        </if>
         <if test="queryDto.page != null">
             limit #{queryDto.page.pageNo},#{queryDto.page.pageSize}
         </if>
