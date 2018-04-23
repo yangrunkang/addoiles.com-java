@@ -43,21 +43,19 @@ import java.util.Objects;
 public class DevController extends BaseController {
 
     private static Logger logger = LoggerFactory.getLogger(DevController.class);
+    private static List<String> imgSuffixList;
+    private static String GIF = ".gif";
+
+    static {
+        imgSuffixList = Arrays.asList(".jpg", ".png", ".gif", ".jpeg", ".bmp", ".x-icon");
+    }
 
     @Resource
     private RedisService redisService;
-
     @Resource
     private RecommendMapper recommendMapper;
-
     @Resource
     private CacheListener cacheListener;
-
-    private static List<String> imgs;
-    private static String GIF = ".gif";
-    static{
-        imgs = Arrays.asList(".jpg",".png",".gif",".jpeg",".bmp",".x-icon");
-    }
 
     /**
      * 判断文件是否存在
@@ -94,14 +92,14 @@ public class DevController extends BaseController {
 
     }
 
-    private static void deleteFile(File file){
+    private static void deleteFile(File file) {
         try {
             if (file.exists()) {
                 file.delete();
             }
         } catch (Exception e) {
             e.printStackTrace();
-            logger.error("delete file error,{}",e);
+            logger.error("delete file error,{}", e);
         }
     }
 
@@ -147,21 +145,21 @@ public class DevController extends BaseController {
         }
 
         //获取文件名
-        String fileName = OilUtils.generateID() + "_" + file.getOriginalFilename();
+        String originalFilename = file.getOriginalFilename();
 
-        int dotIndex = fileName.lastIndexOf(".");
-        String suffix = fileName.substring(dotIndex,fileName.length());
+        int dotIndex = originalFilename.lastIndexOf(".");
+        String suffix = originalFilename.substring(dotIndex, originalFilename.length());
 
-        if(!imgs.contains(suffix)){
+        if (!imgSuffixList.contains(suffix)) {
             throw new BusinessException(ErrorCode.JUST_SUPPORT_IMAGE);
         }
-
 
         //检查是否有配置的文件夹
         String imagePath = PropertyUtils.getValue("images.address");
         logger.info("upload image path:{}", imagePath);
         isMkdirs(new File(imagePath));
-        //写磁盘
+        //写磁盘 fileName系统生成(不用中文)
+        String fileName = OilUtils.generateID() + suffix;
         File imageFile = new File(imagePath + fileName);
         logger.info("file created path:{}", imagePath + fileName);
         file.transferTo(imageFile);
@@ -169,7 +167,7 @@ public class DevController extends BaseController {
 
         //是否是gif格式
         Boolean isGif = suffix.equalsIgnoreCase(GIF);
-        if(!isGif){
+        if (!isGif) {
             try {
                 //压缩图片
                 Thumbnails.of(imageFile)
@@ -189,9 +187,9 @@ public class DevController extends BaseController {
         String imageUrl = PropertyUtils.getValue("images.url");
         Recommend recommend = new Recommend();
         recommend.setShowId(OilUtils.generateID());
-        if(!isGif){
+        if (!isGif) {
             recommend.setImage(imageUrl + "/" + "thumbnail." + fileName);
-        }else{
+        } else {
             //gif 不加 "thumbnail." 标志
             recommend.setImage(imageUrl + "/" + fileName);
         }
