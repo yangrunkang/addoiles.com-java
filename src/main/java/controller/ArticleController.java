@@ -77,8 +77,10 @@ public class ArticleController extends BaseController {
         Article article = articleService.getByBusinessId(queryDto.getBusinessId());
 
         if (Objects.isNull(article)
-                || !article.getDeleteStatus().equals(DBFieldEnum.ArticleDeleteStatus.NORMAL.getValue())) {
-            return new BusinessException(ErrorCode.EXPERIENCE_NOT_EXISTS);
+                || !article.getDeleteStatus().equals(DBFieldEnum.ArticleDeleteStatus.NORMAL.getValue())
+                || !article.getIsHide().equals(DBFieldEnum.ArticleIsHide.NOT_HIDE.getValue())
+                || !article.getArticleType().equals(DBFieldEnum.ArticleType.EXPERIENCE.getValue())) {
+            throw new BusinessException(ErrorCode.EXPERIENCE_NOT_EXISTS);
         }
 
         //use redis
@@ -114,8 +116,10 @@ public class ArticleController extends BaseController {
         Article article = articleService.getByBusinessId(businessId);
 
         if (Objects.isNull(article)
-                || !article.getDeleteStatus().equals(DBFieldEnum.ArticleDeleteStatus.NORMAL.getValue())) {
-            return new BusinessException(ErrorCode.IT_ARTICLE_NOT_EXISTS);
+                || !article.getDeleteStatus().equals(DBFieldEnum.ArticleDeleteStatus.NORMAL.getValue())
+                || !article.getIsHide().equals(DBFieldEnum.ArticleIsHide.NOT_HIDE.getValue())
+                || !article.getArticleType().equals(DBFieldEnum.ArticleType.IT_TECH.getValue())) {
+            throw new BusinessException(ErrorCode.IT_ARTICLE_NOT_EXISTS);
         }
 
         List<Comment> articleCommentList = commentService.getCommentListByTargetId(article.getArticleId());
