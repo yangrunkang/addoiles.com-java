@@ -8,6 +8,7 @@ import com.addoiles.db.redis.inter.RedisService;
 import com.addoiles.entity.Recommend;
 import com.addoiles.exception.BusinessException;
 import com.addoiles.sync.CacheListener;
+import com.addoiles.util.FileUtils;
 import com.addoiles.util.OilUtils;
 import com.addoiles.util.PropertyUtils;
 import com.addoiles.util.TimeUtil;
@@ -57,51 +58,6 @@ public class DevController extends BaseController {
     @Resource
     private CacheListener cacheListener;
 
-    /**
-     * 判断文件是否存在
-     *
-     * @param file
-     */
-    private static void isMkdirs(File file) {
-
-        if (file.exists()) {
-            logger.info(file.getPath() + " exists");
-        } else {
-            logger.info(file.getPath() + " not exists, create it ...");
-            try {
-                file.mkdirs();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    private static void isMakeFile(File file) {
-
-        if (file.exists()) {
-            logger.info(file.getName() + " exists");
-        } else {
-            logger.info(file.getName() + " not exists, create it ...");
-            try {
-                file.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-    }
-
-    private static void deleteFile(File file) {
-        try {
-            if (file.exists()) {
-                file.delete();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-            logger.error("delete file error,{}", e);
-        }
-    }
 
     /**
      * 清除开发Redis Key
@@ -147,43 +103,26 @@ public class DevController extends BaseController {
         //获取文件名
         String originalFilename = file.getOriginalFilename();
 
-        int dotIndex = originalFilename.lastIndexOf(".");
-        String suffix = originalFilename.substring(dotIndex, originalFilename.length());
+        //检验文件后缀
+        String suffix = checkFileSuffix(originalFilename);
 
-        if (!imgSuffixList.contains(suffix)) {
-            throw new BusinessException(ErrorCode.JUST_SUPPORT_IMAGE);
-        }
-
-        //检查是否有配置的文件夹
-        String imagePath = PropertyUtils.getValue("images.address");
-        logger.info("upload image path:{}", imagePath);
-        isMkdirs(new File(imagePath));
-        //写磁盘 fileName系统生成(不用中文)
+        //文件名
         String fileName = OilUtils.generateID() + suffix;
-        File imageFile = new File(imagePath + fileName);
-        logger.info("file created path:{}", imagePath + fileName);
-        file.transferTo(imageFile);
-        isMakeFile(imageFile);
 
-        //是否是gif格式
-        Boolean isGif = suffix.equalsIgnoreCase(GIF);
-        if (!isGif) {
-            try {
-                //压缩图片
-                Thumbnails.of(imageFile)
-                        .scale(1f)
-                        .outputQuality(0.9)
-                        .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+        //创建文件
+        Boolean isGif = mkFile(file, suffix, fileName);
 
-                deleteFile(imageFile);
-            } catch (IOException e) {
-                e.printStackTrace();
-                throw new BusinessException(ErrorCode.UPLOAD_IMG_FAILED);
-            }
+        //保存至数据库
+        Recommend recommend = saveRecommend(fileName, isGif);
+
+        if (recommend == null) {
+            return null;
         }
 
+        return recommend.getImage();
+    }
 
-        //入库
+    private Recommend saveRecommend(String fileName, Boolean isGif) {
         String imageUrl = PropertyUtils.getValue("images.url");
         Recommend recommend = new Recommend();
         recommend.setShowId(OilUtils.generateID());
@@ -201,8 +140,47 @@ public class DevController extends BaseController {
             logger.error("uploadImage error,recommend:{}", recommend);
             return null;
         }
+        return recommend;
+    }
 
-        return recommend.getImage();
+    private String checkFileSuffix(String originalFilename) {
+        int dotIndex = originalFilename.lastIndexOf(".");
+        String suffix = originalFilename.substring(dotIndex, originalFilename.length());
+
+        if (!imgSuffixList.contains(suffix)) {
+            throw new BusinessException(ErrorCode.JUST_SUPPORT_IMAGE);
+        }
+        return suffix;
+    }
+
+    private Boolean mkFile(@RequestBody MultipartFile file, String suffix, String fileName) throws IOException {
+        //检查是否有配置的文件夹
+        String imagePath = PropertyUtils.getValue("images.address");
+        logger.info("upload image path:{}", imagePath);
+        FileUtils.isMkdirs(new File(imagePath));
+        //写磁盘 fileName系统生成(不用中文)
+        File imageFile = new File(imagePath + fileName);
+        logger.info("file created path:{}", imagePath + fileName);
+        file.transferTo(imageFile);
+        FileUtils.isMakeFile(imageFile);
+
+        //是否是gif格式
+        Boolean isGif = suffix.equalsIgnoreCase(GIF);
+        if (!isGif) {
+            try {
+                //压缩图片
+                Thumbnails.of(imageFile)
+                        .scale(1f)
+                        .outputQuality(0.9)
+                        .toFiles(Rename.PREFIX_DOT_THUMBNAIL);
+
+                FileUtils.deleteFile(imageFile);
+            } catch (IOException e) {
+                e.printStackTrace();
+                throw new BusinessException(ErrorCode.UPLOAD_IMG_FAILED);
+            }
+        }
+        return isGif;
     }
 
     @RequestMapping(value = "updateImageInfo", method = RequestMethod.POST)
