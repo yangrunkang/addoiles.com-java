@@ -68,7 +68,7 @@ public class ArticleServiceImpl implements ArticleService {
     public Integer update(Article article) {
         Article redisArticle = oilRedisService.getArticleByArticleId(article.getArticleId());
         if(Objects.isNull(redisArticle)){
-            throw new BusinessException(ErrorCode.EXPERIENCE_NOT_EXISTS);
+            throw new BusinessException(ErrorCode.ARTICLE_NOT_EXISTS);
         }
 
         redisArticle.setIsHide(article.getIsHide());
