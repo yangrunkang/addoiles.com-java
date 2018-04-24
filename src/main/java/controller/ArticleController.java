@@ -1,6 +1,5 @@
 package controller;
 
-import com.addoiles.common.ErrorCode;
 import com.addoiles.common.enums.DBFieldEnum;
 import com.addoiles.dto.business.QueryDto;
 import com.addoiles.dto.resp.ExperienceDto;
@@ -9,8 +8,8 @@ import com.addoiles.entity.Article;
 import com.addoiles.entity.Comment;
 import com.addoiles.entity.Recommend;
 import com.addoiles.entity.User;
-import com.addoiles.exception.BusinessException;
 import com.addoiles.impl.ServiceUtil;
+import com.addoiles.util.BusinessUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,7 +25,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * 文章
@@ -61,7 +59,7 @@ public class ArticleController extends BaseController {
             return articleList;
         }
 
-        articleList = doFilterArticleSimpleList(articleList);
+        articleList = BusinessUtils.doFilterArticleSimpleList(articleList);
 
         //处理userId转userName
         ServiceUtil.HandleArticleUserIdToUserName(articleList, usersOfIdNameList);
@@ -76,12 +74,8 @@ public class ArticleController extends BaseController {
 
         Article article = articleService.getByBusinessId(queryDto.getBusinessId());
 
-        if (Objects.isNull(article)
-                || !article.getDeleteStatus().equals(DBFieldEnum.ArticleDeleteStatus.NORMAL.getValue())
-                || !article.getIsHide().equals(DBFieldEnum.ArticleIsHide.NOT_HIDE.getValue())
-                || !article.getArticleType().equals(DBFieldEnum.ArticleType.EXPERIENCE.getValue())) {
-            throw new BusinessException(ErrorCode.EXPERIENCE_NOT_EXISTS);
-        }
+        //检查文章
+        BusinessUtils.isArticleExists(article,DBFieldEnum.ArticleType.EXPERIENCE);
 
         //use redis
         List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
@@ -115,12 +109,8 @@ public class ArticleController extends BaseController {
         String businessId = queryDto.getBusinessId();
         Article article = articleService.getByBusinessId(businessId);
 
-        if (Objects.isNull(article)
-                || !article.getDeleteStatus().equals(DBFieldEnum.ArticleDeleteStatus.NORMAL.getValue())
-                || !article.getIsHide().equals(DBFieldEnum.ArticleIsHide.NOT_HIDE.getValue())
-                || !article.getArticleType().equals(DBFieldEnum.ArticleType.IT_TECH.getValue())) {
-            throw new BusinessException(ErrorCode.IT_ARTICLE_NOT_EXISTS);
-        }
+        //检查文章
+        BusinessUtils.isArticleExists(article,DBFieldEnum.ArticleType.IT_TECH);
 
         List<Comment> articleCommentList = commentService.getCommentListByTargetId(article.getArticleId());
         if (CollectionUtils.isEmpty(articleCommentList)) {
@@ -143,7 +133,7 @@ public class ArticleController extends BaseController {
     @ResponseBody
     public Object getITArticlePithinessList(@RequestBody QueryDto queryDto) {
         List<Article> pithinessList = articleService.getSimpleList(queryDto);
-        pithinessList = doFilterArticleSimpleList(pithinessList);
+        pithinessList = BusinessUtils.doFilterArticleSimpleList(pithinessList);
         return pithinessList;
     }
 
@@ -156,7 +146,7 @@ public class ArticleController extends BaseController {
     @ResponseBody
     public Object showMoreITTechArticles(@RequestBody QueryDto queryDto) {
         List<Article> simpleList = articleService.getSimpleList(queryDto);
-        return doFilterArticleSimpleList(simpleList);
+        return BusinessUtils.doFilterArticleSimpleList(simpleList);
     }
 
     @RequestMapping(value = "recommendList", method = RequestMethod.POST)
@@ -167,17 +157,6 @@ public class ArticleController extends BaseController {
             return new ArrayList<Recommend>();
         }
         return fistPageImage;
-    }
-
-
-    private List<Article> doFilterArticleSimpleList(List<Article> simpleList){
-        simpleList = simpleList.stream()
-                //过滤掉非草稿
-                .filter(article -> article.getDeleteStatus() != DBFieldEnum.ArticleDeleteStatus.DRAFT.getValue())
-                //过滤掉非隐藏的
-                .filter(article -> article.getIsHide() != DBFieldEnum.ArticleIsHide.HIDE.getValue())
-                .collect(Collectors.toList());
-        return simpleList;
     }
 
 }
