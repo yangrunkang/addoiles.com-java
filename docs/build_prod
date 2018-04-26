@@ -41,7 +41,9 @@ nginx配置:
         #charset koi8-r;
         #access_log  logs/host.access.log  main;
 
-        location /images {
+        #location /images {
+        #允许以符合下面正则表达式的请求访问过来
+        location ~* \.(gif|jpg|png|jpeg|bmp|x-icon)$ {
             root  /usr/services/;
             autoindex on;
         }
