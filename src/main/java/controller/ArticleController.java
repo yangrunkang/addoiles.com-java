@@ -29,10 +29,11 @@ import java.util.Objects;
 /**
  * 文章
  * <p>All rights Reserved, Designed By HQYG.</p>
- * @Copyright    Copyright(C) 2017.
- * @Company      HQYG.
- * @author       Yangrunkang
- * @CreateDate   9/24/2017
+ *
+ * @author Yangrunkang
+ * @Copyright Copyright(C) 2017.
+ * @Company HQYG.
+ * @CreateDate 9/24/2017
  */
 @Controller
 public class ArticleController extends BaseController {
@@ -49,17 +50,15 @@ public class ArticleController extends BaseController {
     @RequestMapping(value = "experienceList", method = RequestMethod.POST)
     @ResponseBody
     public Object getExperienceList(@RequestBody QueryDto queryDto) {
-        //use redis
-        List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
-        List<Article> articleList = articleService.getSimpleList(queryDto);
 
+        List<Article> articleList = articleService.getArticleList(queryDto);
 
         if (CollectionUtils.isEmpty(articleList)) {
             //在页面上显示空
             return articleList;
         }
-
-        articleList = BusinessUtils.doFilterArticleSimpleList(articleList);
+        //use redis
+        List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
 
         //处理userId转userName
         ServiceUtil.HandleArticleUserIdToUserName(articleList, usersOfIdNameList);
@@ -69,13 +68,13 @@ public class ArticleController extends BaseController {
 
     @RequestMapping(value = "experience", method = RequestMethod.POST)
     @ResponseBody
-    public Object getExperienceDto(@RequestBody QueryDto queryDto){
+    public Object getExperience(@RequestBody QueryDto queryDto) {
         ExperienceDto experienceDto = new ExperienceDto();
 
         Article article = articleService.getByBusinessId(queryDto.getBusinessId());
 
         //检查文章
-        BusinessUtils.isArticleExists(article,DBFieldEnum.ArticleType.EXPERIENCE);
+        BusinessUtils.isArticleExists(article, DBFieldEnum.ArticleType.EXPERIENCE);
 
         //use redis
         List<User> usersOfIdNameList = oilRedisService.getUsersIdsNames(false);
@@ -101,16 +100,16 @@ public class ArticleController extends BaseController {
         return experienceDto;
     }
 
-    @RequestMapping(value = "ITArticle",method = RequestMethod.POST)
+    @RequestMapping(value = "ITArticle", method = RequestMethod.POST)
     @ResponseBody
-    public Object getITArticleList(@RequestBody QueryDto queryDto) {
+    public Object getITArticle(@RequestBody QueryDto queryDto) {
         ITTechDto itTechDto = new ITTechDto();
 
         String businessId = queryDto.getBusinessId();
         Article article = articleService.getByBusinessId(businessId);
 
         //检查文章
-        BusinessUtils.isArticleExists(article,DBFieldEnum.ArticleType.IT_TECH);
+        BusinessUtils.isArticleExists(article, DBFieldEnum.ArticleType.IT_TECH);
 
         List<Comment> articleCommentList = commentService.getCommentListByTargetId(article.getArticleId());
         if (CollectionUtils.isEmpty(articleCommentList)) {
@@ -129,12 +128,10 @@ public class ArticleController extends BaseController {
         return itTechDto;
     }
 
-    @RequestMapping(value = "ITPithinessList",method = RequestMethod.POST)
+    @RequestMapping(value = "ITPithinessList", method = RequestMethod.POST)
     @ResponseBody
     public Object getITArticlePithinessList(@RequestBody QueryDto queryDto) {
-        List<Article> pithinessList = articleService.getSimpleList(queryDto);
-        pithinessList = BusinessUtils.doFilterArticleSimpleList(pithinessList);
-        return pithinessList;
+        return articleService.getArticleList(queryDto);
     }
 
     /**
@@ -145,15 +142,14 @@ public class ArticleController extends BaseController {
     @RequestMapping("moreArticles")
     @ResponseBody
     public Object showMoreITTechArticles(@RequestBody QueryDto queryDto) {
-        List<Article> simpleList = articleService.getSimpleList(queryDto);
-        return BusinessUtils.doFilterArticleSimpleList(simpleList);
+        return articleService.getArticleList(queryDto);
     }
 
     @RequestMapping(value = "recommendList", method = RequestMethod.POST)
     @ResponseBody
     public Object getRecommend() {
         List<Recommend> fistPageImage = oilRedisService.getRecommend();
-        if(CollectionUtils.isEmpty(fistPageImage)){
+        if (CollectionUtils.isEmpty(fistPageImage)) {
             return new ArrayList<Recommend>();
         }
         return fistPageImage;

@@ -11,6 +11,11 @@ import java.util.List;
 
 public interface ArticleMapper extends BaseService<Article>,ManagerService<Article> {
 
+    /**
+     * 获取文章列表
+     * @apiNote 网站 (不和任何状态相关，保证页面显示10条数据)
+     */
+    List<Article> getArticleList(@Param("queryDto")QueryDto queryDto);
 
     /**
      * 获取所有文章
