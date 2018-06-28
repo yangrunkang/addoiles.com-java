@@ -86,4 +86,11 @@ public class UserController extends BaseController {
         return userService.checkHasRegister(email);
     }
 
+
+    @RequestMapping(value = "userLatestActivity",method = RequestMethod.POST)
+    @ResponseBody
+    public Object userLatestActivity(@RequestBody UserLatestActivityReq userLatestActivityReq){
+        return null;
+    }
+
 }

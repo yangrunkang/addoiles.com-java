@@ -23,4 +23,8 @@ public interface ArticleService extends BaseService<Article>,ManagerService<Arti
      */
     List<Article> getArticleList(@Param("queryDto")QueryDto queryDto);
 
+    /**
+     * 根据用户id获取最新文章
+     */
+    List<Article> getLatestArticleByUserId(@Param("userId")String userId);
 }
