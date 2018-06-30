@@ -3,6 +3,7 @@ package com.addoiles.impl;
 import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.SuggestMapper;
 import com.addoiles.dto.business.QueryDto;
+import com.addoiles.dto.req.LatestReq;
 import com.addoiles.entity.Suggest;
 import org.springframework.stereotype.Service;
 import service.SuggestService;
@@ -45,5 +46,10 @@ public class SuggestServiceImpl implements SuggestService {
         return null;
     }
 
-
+    @Override
+    public List<Suggest> getLatest(LatestReq latestReq) {
+        QueryDto queryDto = new QueryDto();
+        queryDto.setUserId(latestReq.getUserId());
+        return suggestMapper.getLatest(queryDto);
+    }
 }

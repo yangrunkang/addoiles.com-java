@@ -12,4 +12,10 @@
         values (#{id,jdbcType=INTEGER}, #{userId,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR})
     </insert>
 
+    <select id="getLatest" resultMap="BaseResultMap">
+        select
+            id,user_id,content
+        from suggest where user_id = #{queryDto.userId,jdbcType=VARCHAR}
+    </select>
+
 </mapper>

@@ -11,7 +11,7 @@ import java.io.Serializable;
  * @Company: HQYG
  * @CreateDate: 2018/6/28 14:44
  */
-public class UserLatestActivityReq implements Serializable {
+public class LatestReq implements Serializable {
 
     /**
      * 用户id

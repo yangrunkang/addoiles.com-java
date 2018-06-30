@@ -30,4 +30,10 @@ public interface ArticleMapper extends BaseService<Article>,ManagerService<Artic
      * @return
      */
     List<String> getArticleIdList(@Param("queryDto")QueryDto queryDto);
+
+    /**
+     * 获取最新活动列表
+     * @return
+     */
+    List<Article> getLatestList(@Param("queryDto")QueryDto queryDto);
 }

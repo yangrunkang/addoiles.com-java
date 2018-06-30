@@ -4,7 +4,10 @@ import com.addoiles.ManagerService;
 import com.addoiles.common.annotations.OilLog;
 import com.addoiles.db.dao.QuestionMapper;
 import com.addoiles.dto.business.QueryDto;
+import com.addoiles.dto.req.LatestReq;
 import com.addoiles.entity.Question;
+import org.springframework.data.redis.core.query.QueryUtils;
+import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.stereotype.Service;
 import service.QuestionService;
 
@@ -31,8 +34,6 @@ public class QuestionServiceImpl implements QuestionService,ManagerService<Quest
         return questionMapper.insert(question);
     }
 
-
-
     @OilLog
     @Override
     public Integer delete(String questionId) {
@@ -57,5 +58,12 @@ public class QuestionServiceImpl implements QuestionService,ManagerService<Quest
     @Override
     public Integer getTotalCount(QueryDto queryDto) {
         return null;
+    }
+
+    @Override
+    public List<Question> getLatest(LatestReq latestReq) {
+        QueryDto queryDto = new QueryDto();
+        queryDto.setUserId(latestReq.getUserId());
+        return questionMapper.getLatestList(queryDto);
     }
 }

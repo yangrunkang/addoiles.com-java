@@ -1,4 +1,4 @@
-package com.addoiles.dto.view;
+package com.addoiles.dto.resp;
 
 import com.addoiles.entity.*;
 
@@ -14,7 +14,7 @@ import java.util.List;
  * @Company: HQYG
  * @CreateDate: 2018/6/28 14:45
  */
-public class UserLatestActivityDto implements Serializable {
+public class LatestResp implements Serializable {
 
     /**
      * 文章列表
@@ -36,10 +36,6 @@ public class UserLatestActivityDto implements Serializable {
      */
     private List<Question> questionList;
 
-    /**
-     * 评论列表
-     */
-    private List<Comment> commentList;
 
     public List<Article> getArticleList() {
         return articleList;
@@ -73,11 +69,4 @@ public class UserLatestActivityDto implements Serializable {
         this.questionList = questionList;
     }
 
-    public List<Comment> getCommentList() {
-        return commentList;
-    }
-
-    public void setCommentList(List<Comment> commentList) {
-        this.commentList = commentList;
-    }
 }

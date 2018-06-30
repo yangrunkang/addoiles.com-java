@@ -1,9 +1,12 @@
 package com.addoiles.impl;
 
 import com.addoiles.common.ErrorCode;
+import com.addoiles.common.Page;
 import com.addoiles.common.annotations.OilLog;
+import com.addoiles.common.enums.DBFieldEnum;
 import com.addoiles.db.dao.ArticleMapper;
 import com.addoiles.dto.business.QueryDto;
+import com.addoiles.dto.req.LatestReq;
 import com.addoiles.entity.Article;
 import com.addoiles.exception.BusinessException;
 import com.addoiles.util.TimeUtil;
@@ -11,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 import service.ArticleService;
 import service.OilRedisService;
+import sun.security.krb5.internal.LastReq;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
@@ -103,5 +107,25 @@ public class ArticleServiceImpl implements ArticleService {
     @Override
     public Integer getTotalCount(QueryDto queryDto) {
         return articleMapper.getTotalCount(queryDto);
+    }
+
+    @Override
+    public List<Article> getLatest(LatestReq latestReq) {
+        //查询对象
+        QueryDto queryDto = new QueryDto();
+        queryDto.setUserId(latestReq.getUserId());
+        //获取经历文章
+        queryDto.setArticleType(DBFieldEnum.ArticleType.EXPERIENCE.getValue());
+        List<Article> experienceList = articleMapper.getLatestList(queryDto);
+        //获取分享文章
+        queryDto.setArticleType(DBFieldEnum.ArticleType.IT_TECH.getValue());
+        List<Article> itTechList = articleMapper.getLatestList(queryDto);
+
+        //集合
+        List<Article> articleList = new ArrayList<>();
+        articleList.addAll(experienceList);
+        articleList.addAll(itTechList);
+
+        return articleList;
     }
 }

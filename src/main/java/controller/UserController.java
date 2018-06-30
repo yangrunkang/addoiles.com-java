@@ -2,7 +2,9 @@ package controller;
 
 import com.addoiles.common.enums.OilConstant;
 import com.addoiles.dto.req.*;
+import com.addoiles.dto.resp.LatestResp;
 import com.addoiles.dto.resp.LoginResp;
+import com.addoiles.entity.Suggest;
 import com.addoiles.entity.User;
 import com.addoiles.util.OilUtils;
 import org.springframework.stereotype.Controller;
@@ -11,8 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import service.OilRedisService;
-import service.UserService;
+import service.*;
 
 import javax.annotation.Resource;
 import java.util.Objects;
@@ -26,6 +27,18 @@ public class UserController extends BaseController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private ArticleService articleService;
+
+    @Resource
+    private MicroContentService microContentService;
+
+    @Resource
+    private SuggestService suggestService;
+
+    @Resource
+    private QuestionService questionService;
 
     @Resource
     private OilRedisService oilRedisService;
@@ -87,10 +100,16 @@ public class UserController extends BaseController {
     }
 
 
-    @RequestMapping(value = "userLatestActivity",method = RequestMethod.POST)
+    @RequestMapping(value = "userLatest",method = RequestMethod.POST)
     @ResponseBody
-    public Object userLatestActivity(@RequestBody UserLatestActivityReq userLatestActivityReq){
-        return null;
+    public Object userLatestActivity(@RequestBody LatestReq latestReq){
+
+        LatestResp latestResp = new LatestResp();
+        latestResp.setArticleList(articleService.getLatest(latestReq));
+        latestResp.setMicroContentList(microContentService.getLatest(latestReq));
+        latestResp.setQuestionList(questionService.getLatest(latestReq));
+
+        return latestResp;
     }
 
 }
