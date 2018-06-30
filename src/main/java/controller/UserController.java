@@ -99,17 +99,4 @@ public class UserController extends BaseController {
         return userService.checkHasRegister(email);
     }
 
-
-    @RequestMapping(value = "userLatest",method = RequestMethod.POST)
-    @ResponseBody
-    public Object userLatestActivity(@RequestBody LatestReq latestReq){
-
-        LatestResp latestResp = new LatestResp();
-        latestResp.setArticleList(articleService.getLatest(latestReq));
-        latestResp.setMicroContentList(microContentService.getLatest(latestReq));
-        latestResp.setQuestionList(questionService.getLatest(latestReq));
-
-        return latestResp;
-    }
-
 }

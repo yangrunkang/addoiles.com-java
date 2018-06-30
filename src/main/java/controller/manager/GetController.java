@@ -1,6 +1,8 @@
 package controller.manager;
 
 import com.addoiles.dto.business.QueryDto;
+import com.addoiles.dto.req.LatestReq;
+import com.addoiles.dto.resp.LatestResp;
 import com.addoiles.dto.view.SimpleListDto;
 import com.addoiles.entity.Article;
 import controller.BaseController;
@@ -81,6 +83,18 @@ public class GetController extends BaseController {
     @ResponseBody
     public Object getQuestionsByUserId(@RequestBody QueryDto queryDto) {
         return questionService.getSimpleList(queryDto);
+    }
+
+    @RequestMapping(value = "getUserLatest",method = RequestMethod.POST)
+    @ResponseBody
+    public Object userLatestActivity(@RequestBody LatestReq latestReq){
+
+        LatestResp latestResp = new LatestResp();
+        latestResp.setArticleList(articleService.getLatest(latestReq));
+        latestResp.setMicroContentList(microContentService.getLatest(latestReq));
+        latestResp.setQuestionList(questionService.getLatest(latestReq));
+
+        return latestResp;
     }
 
 
