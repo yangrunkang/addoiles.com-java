@@ -1,7 +1,12 @@
 package com.addoiles.db.dao;
 
+import com.addoiles.dto.business.QueryDto;
 import com.addoiles.entity.MicroContent;
 import com.addoiles.BaseService;
+import org.apache.ibatis.annotations.Param;
+import redis.clients.jedis.BinaryClient;
+
+import java.util.List;
 
 /**
  * 微内容Mapper
@@ -13,6 +18,11 @@ import com.addoiles.BaseService;
  */
 public interface MicroContentMapper extends BaseService<MicroContent> {
 
-
+    /**
+     * 获取最近微内容列表
+     * @param queryDto
+     * @return
+     */
+    List<MicroContent> getLatestList(@Param("queryDto")QueryDto queryDto);
 
 }

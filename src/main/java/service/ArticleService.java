@@ -3,6 +3,7 @@ package service;
 import com.addoiles.BaseService;
 import com.addoiles.ManagerService;
 import com.addoiles.dto.business.QueryDto;
+import com.addoiles.dto.req.LatestReq;
 import com.addoiles.entity.Article;
 import org.apache.ibatis.annotations.Param;
 
@@ -23,4 +24,8 @@ public interface ArticleService extends BaseService<Article>,ManagerService<Arti
      */
     List<Article> getArticleList(@Param("queryDto")QueryDto queryDto);
 
+    /**
+     * 最新文章
+     */
+    List<Article> getLatest(LatestReq latestReq);
 }

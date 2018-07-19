@@ -1,11 +1,14 @@
 package com.addoiles.impl;
 
+import com.addoiles.common.Page;
 import com.addoiles.common.annotations.OilLog;
 import com.addoiles.common.enums.DBFieldEnum;
 import com.addoiles.db.dao.MicroContentMapper;
 import com.addoiles.db.eventbus.OilEventBusHandle;
 import com.addoiles.db.eventbus.event.ReCacheDreamsEvent;
 import com.addoiles.dto.business.QueryDto;
+import com.addoiles.dto.req.LatestReq;
+import com.addoiles.entity.Article;
 import com.addoiles.entity.MicroContent;
 import com.addoiles.entity.User;
 import com.addoiles.util.OilUtils;
@@ -16,6 +19,7 @@ import service.MicroContentService;
 import service.OilRedisService;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -81,5 +85,27 @@ public class MicroContentServiceImpl implements MicroContentService {
         return microContentList;
     }
 
+    @Override
+    public List<MicroContent> getLatest(LatestReq latestReq) {
+        //分页
+        Page page = new Page();
+        page.setPageNo(1);
+        page.setPageSize(2);
+        //查询对象
+        QueryDto queryDto = new QueryDto();
+        queryDto.setPage(page);
+        queryDto.setUserId(latestReq.getUserId());
+        //获取梦想
+        queryDto.setMicroType(DBFieldEnum.MicroContentType.DREAMS.getValue());
+        List<MicroContent> dreamsList = microContentMapper.getLatestList(queryDto);
+        //获取动弹
+        queryDto.setMicroType(DBFieldEnum.MicroContentType.HOTS.getValue());
+        List<MicroContent> hotsList = microContentMapper.getLatestList(queryDto);
 
+        //集合
+        List<MicroContent> microContentList = new ArrayList<>();
+        microContentList.addAll(dreamsList);
+        microContentList.addAll(hotsList);
+        return microContentList;
+    }
 }
