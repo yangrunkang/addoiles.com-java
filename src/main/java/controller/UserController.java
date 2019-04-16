@@ -2,9 +2,7 @@ package controller;
 
 import com.addoiles.common.enums.OilConstant;
 import com.addoiles.dto.req.*;
-import com.addoiles.dto.resp.LatestResp;
 import com.addoiles.dto.resp.LoginResp;
-import com.addoiles.entity.Suggest;
 import com.addoiles.entity.User;
 import com.addoiles.util.OilUtils;
 import org.springframework.stereotype.Controller;
@@ -74,8 +72,7 @@ public class UserController extends BaseController {
     @RequestMapping(value = "sendVerificationCode", method = RequestMethod.POST)
     @ResponseBody
     public Object sendVerificationCode(@RequestBody VerificationCodeReq verificationCodeReq) {
-        userService.sendVerificationCode(verificationCodeReq);
-        return true;
+        return userService.sendVerificationCode(verificationCodeReq);
     }
 
     @RequestMapping(value = "verifyCode", method = RequestMethod.POST)
