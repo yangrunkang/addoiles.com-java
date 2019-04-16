@@ -1,8 +1,6 @@
 package com.addoiles.impl;
 
-import com.addoiles.common.ErrorCode;
 import com.addoiles.common.annotations.OilLog;
-import com.addoiles.common.enums.AddoilesConstant;
 import com.addoiles.db.dao.UserMapper;
 import com.addoiles.dto.business.QueryDto;
 import com.addoiles.dto.req.LoginReq;
@@ -11,11 +9,8 @@ import com.addoiles.dto.req.ResetPasswordReq;
 import com.addoiles.dto.req.VerificationCodeReq;
 import com.addoiles.entity.User;
 import com.addoiles.mail.EmailService;
-import com.addoiles.mail.dto.Email;
-import com.addoiles.mail.dto.Receiver;
 import com.addoiles.util.JsonUtils;
 import com.addoiles.util.OilUtils;
-import com.addoiles.util.PropertyUtils;
 import com.addoiles.util.TimeUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -84,41 +79,41 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer sendVerificationCode(VerificationCodeReq verificationCodeReq) {
-        Email email = new Email();
+//        Email email = new Email();
 
-        String emailTemplate = PropertyUtils.getValue("email.template");
-
+//        String emailTemplate = PropertyUtils.getValue("email.template");
+//
         String verificationCode = OilUtils.generateRandom(6);
+//
+//        if (verificationCodeReq.getType() - AddoilesConstant.EmailType.FORGET_PASSWORD.getType() == 0) {
+//            email.setSubject(AddoilesConstant.EmailType.FORGET_PASSWORD.getDesc());
+//            emailTemplate = emailTemplate
+//                    .replace("${text}", email.getSubject())
+//                    .replace("${code}", "验证码:" + verificationCode)
+//                    .replace("${desc}", "来自 www.addoiles.com 网站");
+//            email.setContent(emailTemplate);
+//        } else if (verificationCodeReq.getType() - AddoilesConstant.EmailType.REGISTER.getType() == 0) {
+//            email.setSubject(AddoilesConstant.EmailType.REGISTER.getDesc());
+//            emailTemplate = emailTemplate
+//                    .replace("${text}", email.getSubject())
+//                    .replace("${code}", "验证码:" + verificationCode)
+//                    .replace("${desc}", "来自 www.addoiles.com 网站");
+//            email.setContent(emailTemplate);
+//        } else {
+//            throw ErrorCode.PARAMETER_ERROR.getException();
+//        }
 
-        if (verificationCodeReq.getType() - AddoilesConstant.EmailType.FORGET_PASSWORD.getType() == 0) {
-            email.setSubject(AddoilesConstant.EmailType.FORGET_PASSWORD.getDesc());
-            emailTemplate = emailTemplate
-                    .replace("${text}", email.getSubject())
-                    .replace("${code}", "验证码:" + verificationCode)
-                    .replace("${desc}", "来自 www.addoiles.com 网站");
-            email.setContent(emailTemplate);
-        } else if (verificationCodeReq.getType() - AddoilesConstant.EmailType.REGISTER.getType() == 0) {
-            email.setSubject(AddoilesConstant.EmailType.REGISTER.getDesc());
-            emailTemplate = emailTemplate
-                    .replace("${text}", email.getSubject())
-                    .replace("${code}", "验证码:" + verificationCode)
-                    .replace("${desc}", "来自 www.addoiles.com 网站");
-            email.setContent(emailTemplate);
-        } else {
-            throw ErrorCode.PARAMETER_ERROR.getException();
-        }
-
-        //放入Redis
+        //放入Redis 缓存60s
         oilRedisService.cacheUserVerifyCode(verificationCodeReq.getEmail(), verificationCode);
 
 
-        Receiver receiver = new Receiver();
-        receiver.setEmailAddress(verificationCodeReq.getEmail());
-        receiver.setName(verificationCodeReq.getEmail());
-
-        email.setReceiver(receiver);
-        emailService.sendEmail(email);
-        return 0;
+//        Receiver receiver = new Receiver();
+//        receiver.setEmailAddress(verificationCodeReq.getEmail());
+//        receiver.setName(verificationCodeReq.getEmail());
+//
+//        email.setReceiver(receiver);
+//        emailService.sendEmail(email);
+        return Integer.valueOf(verificationCode);
     }
 
     @OilLog
