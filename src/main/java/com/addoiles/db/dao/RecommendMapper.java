@@ -3,6 +3,8 @@ package com.addoiles.db.dao;
 import com.addoiles.BaseService;
 import com.addoiles.entity.Recommend;
 
+import java.util.List;
+
 /**
  * 推荐信息
  * <p>All rights Reserved, Designed By HQYG.</p>
@@ -14,4 +16,12 @@ import com.addoiles.entity.Recommend;
 public interface RecommendMapper extends BaseService<Recommend>{
 
     int selectMaxId();
+
+    /**
+     * 获取推荐列表
+     * @return
+     */
+    List<Recommend> getFirstPageImageList();
+
+
 }

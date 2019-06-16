@@ -108,7 +108,7 @@ public class CacheListener {
      */
     @Subscribe
     public List<Recommend> cacheFirstPageImage(CachePageImageEvent cachePageImageEvent){
-        List<Recommend> recommendList = recommendMapper.getList(null);
+        List<Recommend> recommendList = recommendMapper.getFirstPageImageList();
         if(!CollectionUtils.isEmpty(recommendList)){
             RecommendDto recommendDto = new RecommendDto();
             recommendDto.setRecommendList(recommendList);

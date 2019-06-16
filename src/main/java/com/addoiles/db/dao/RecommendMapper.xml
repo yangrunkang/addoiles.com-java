@@ -20,11 +20,11 @@
     select IFNULL(max(id),0) from recommend;
   </select>
 
-  <select id="getList" resultMap="BaseResultMap">
+  <select id="getFirstPageImageList" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>
     from recommend
-    where delete_status = 0
+    where delete_status = 0 and type in (0,1,2)
     order by create_time desc
   </select>
 
