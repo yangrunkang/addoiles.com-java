@@ -1,5 +1,7 @@
 package com.addoiles.common;
 
+import javax.validation.constraints.Max;
+
 /**
  * Created by bla on 9/30/2017.
  */

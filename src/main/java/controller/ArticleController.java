@@ -148,11 +148,11 @@ public class ArticleController extends BaseController {
     @RequestMapping(value = "recommendList", method = RequestMethod.POST)
     @ResponseBody
     public Object getRecommend() {
-        List<Recommend> fistPageImage = oilRedisService.getRecommend();
-        if (CollectionUtils.isEmpty(fistPageImage)) {
+        List<Recommend> fistPageImageList = oilRedisService.getRecommend();
+        if (CollectionUtils.isEmpty(fistPageImageList)) {
             return new ArrayList<Recommend>();
         }
-        return fistPageImage;
+        return fistPageImageList;
     }
 
 }
