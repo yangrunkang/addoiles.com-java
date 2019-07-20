@@ -12,12 +12,6 @@ import org.springframework.context.ApplicationContextAware;
  * @author       Yangrunkang
  * @CreateDate   2017/12/18 17:03
  * spring bean工具类
- *
- * <p>All rights Reserved, Designed By HQYG</p>
- * @Copyright:   Copyright(C) 2016
- * @Company:     HQYG.
- * @author:      zifeng
- * @Createdate:  2016年8月17日下午2:06:57
  */
 public class SpringContextUtils implements ApplicationContextAware{
 

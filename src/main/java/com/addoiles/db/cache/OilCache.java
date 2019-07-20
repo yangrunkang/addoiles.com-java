@@ -31,19 +31,19 @@ public class OilCache implements ApplicationListener<ContextRefreshedEvent> {
         this.delRedisKeys();
 
         //缓存文章
-        OilEventBusHandle.getInstance().postEvent(new CacheArticleEvent());
+//        OilEventBusHandle.getInstance().postEvent(new CacheArticleEvent());
 
         //缓存问题
-        OilEventBusHandle.getInstance().postEvent(new CacheQuestionEvent());
+//        OilEventBusHandle.getInstance().postEvent(new CacheQuestionEvent());
 
         //缓存导航栏
-        OilEventBusHandle.getInstance().postEvent(new CacheNavListEvent());
+//        OilEventBusHandle.getInstance().postEvent(new CacheNavListEvent());
 
         //缓存首页图片
-        OilEventBusHandle.getInstance().postEvent(new CachePageImageEvent());
+//        OilEventBusHandle.getInstance().postEvent(new CachePageImageEvent());
 
         //缓存梦想
-        OilEventBusHandle.getInstance().postEvent(new CacheDreamEvent());
+//        OilEventBusHandle.getInstance().postEvent(new CacheDreamEvent());
     }
 
     /**
